@@ -26,12 +26,38 @@ class OptionTable extends DataManager
 		];
 	}
 
+	public function addOption($idQuestion, $content, $position)
+	{
+		$result = OptionTable::add(array(
+			'ID_QUESTION' => $idQuestion,
+			'CONTENT' => $content,
+			'POSITION' => $position,
+		));
+
+		if ($result->isSuccess())
+		{
+			$id = $result->getId();
+		}
+	}
+
 	public function getAllOptions()
 	{
 		$result = OptionTable::getList(array(
 			'select' => array('ID', 'ID_QUESTION', 'CONTENT', 'POSITION')
 		));
-		$arResult['123456'] = $result ->fetchAll();
-		return $arResult['123456'];
+		$row = $result ->fetchAll();
+		return $row;
+	}
+
+	public function getOptionsForQuestion($idQuestion)
+	{
+		$result = OptionTable::getList(array(
+			'select' => array('ID', 'ID_QUESTION', 'CONTENT', 'POSITION'),
+			'filter' => array(
+				'=ID_QUESTION' => $idQuestion
+			)
+		));
+		$row = $result -> fetchAll();
+		return $row;
 	}
 }

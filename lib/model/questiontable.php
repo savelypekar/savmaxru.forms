@@ -25,4 +25,27 @@ class QuestionTable extends DataManager
 			new IntegerField("POSITION"),
 		];
 	}
+
+	public function addQuestion($type, $content, $position)
+	{
+		$result = QuestionTable::add(array(
+			'TYPE' => $type,
+			'CONTENT' => $content,
+			'POSITION' => $position,
+		));
+
+		if ($result->isSuccess())
+		{
+			$id = $result->getId();
+		}
+	}
+
+	public function getAllQuestions()
+	{
+		$result = QuestionTable::getList(array(
+			'select' => array('ID', 'TYPE', 'CONTENT', 'POSITION')
+		));
+		$row = $result ->fetchAll();
+		return $row;
+	}
 }
