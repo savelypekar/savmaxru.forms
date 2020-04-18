@@ -64,7 +64,54 @@ class AnswerToQuestionTable extends DataManager
 				array_push($resultRows, $row);
 			}
 		}
-
 		return $resultRows;
+	}
+
+	public static function getAnswerByUserId($idUser)
+	{
+		$answerResultTable = new \Savmaxru\Forms\Model\AnswerResultTable();
+		$setAnswer = $answerResultTable->getResultByIdUser($idUser);
+		$setAnswerById = [];
+
+		$result = AnswerToQuestionTable::getList(array(
+			'select' => array('ID', 'ID_QUESTION', 'ID_RESULT', 'CONTENT_ANSWER')
+		));
+		$setAnswerToQuestion = $result ->fetchAll();
+
+		foreach ($setAnswerToQuestion as $answerToQuestion)
+		{
+			foreach ($setAnswer as $answer)
+			{
+				if ($answer['ID_RESULT']==$answerToQuestion["ID_RESULT"])
+				{
+					array_push($setAnswerById, $answerToQuestion);
+				}
+			}
+		}
+		return $setAnswerById;
+	}
+
+	public static function getAnswerByInterviewId($idInterview)
+	{
+		$answerResultTable = new \Savmaxru\Forms\Model\AnswerResultTable();
+		$setAnswer = $answerResultTable->getResultByIdInterview($idInterview);
+		$setAnswerByIdInterview = [];
+
+		$result = AnswerToQuestionTable::getList(array(
+			'select' => array('ID', 'ID_QUESTION', 'ID_RESULT', 'CONTENT_ANSWER')
+		));
+		$setAnswerToQuestion = $result ->fetchAll();
+
+		foreach ($setAnswerToQuestion as $answerToQuestion)
+		{
+			foreach ($setAnswer as $answer)
+			{
+				if ($answer['ID_RESULT']==$answerToQuestion["ID_RESULT"])
+				{
+					array_push($setAnswerByIdInterview, $answerToQuestion);
+				}
+			}
+		}
+		return $setAnswerByIdInterview;
 	}
 }
