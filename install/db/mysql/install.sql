@@ -59,3 +59,12 @@ CREATE TABLE savmaxru_forms_answer_option
 
     PRIMARY KEY(ID)
 );
+
+CREATE TABLE savmaxru_forms_connection_interview_with_question
+(
+    ID int not null auto_increment,
+    ID_INTERVIEW int not null ,
+    ID_QUESTION int not null ,
+
+    PRIMARY KEY(ID)
+);

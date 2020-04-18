@@ -48,4 +48,28 @@ class QuestionTable extends DataManager
 		$row = $result ->fetchAll();
 		return $row;
 	}
+
+	public function getQuestionsForSetIdInterview($idInterview)
+	{
+		$connectionInterviewWithQuestion = new \Savmaxru\Forms\Model\ConnectionInterviewWithQuestionTable();
+		$setIdQuestion = $connectionInterviewWithQuestion->getIdQuestionForIdInterview($idInterview);
+		$questions = [];
+
+		$result = QuestionTable::getList(array(
+			'select' => array('ID', 'TYPE', 'CONTENT', 'POSITION')
+		));
+		$rows = $result ->fetchAll();
+
+		foreach ($rows as $row)
+		{
+			foreach ($setIdQuestion as $idQuestion)
+			{
+				if ($row['ID'] == $idQuestion)
+				{
+					array_push($questions, $row);
+				}
+			}
+		}
+		return $questions;
+	}
 }
