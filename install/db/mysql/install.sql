@@ -45,7 +45,8 @@ CREATE TABLE savmaxru_forms_answer_to_question
 (
     ID int not null auto_increment,
     ID_QUESTION int not null ,
-    IN_RESULT int not null ,
+    ID_RESULT int not null ,
+    CONTENT_ANSWER varchar(255) not null,
 
     PRIMARY KEY(ID)
 );

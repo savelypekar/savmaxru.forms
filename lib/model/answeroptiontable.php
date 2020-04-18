@@ -24,4 +24,45 @@ class AnswerOptionTable extends DataManager
 			new IntegerField("ID_OPTION"),
 		];
 	}
+
+	public static function saveOptionAnswer($idAnswer, $idOption)
+	{
+		$result = AnswerOptionTable::add(array(
+			'ID_ANSWER' => $idAnswer,
+			'ID_OPTION' => $idOption,
+		));
+
+		if ($result->isSuccess())
+		{
+			$id = $result->getId();
+		}
+	}
+
+	public static function getAllAnswer()
+	{
+		$result = AnswerOptionTable::getList(array(
+			'select' => array('ID', 'ID_ANSWER', 'ID_OPTION')
+		));
+		$row = $result ->fetchAll();
+		return $row;
+	}
+
+	public static function getAnswerByIdAnswer($idAnswer)
+	{
+		$resultRows = [];
+		$result = AnswerOptionTable::getList(array(
+			'select' => array('ID', 'ID_ANSWER', 'ID_OPTION')
+		));
+		$rows = $result ->fetchAll();
+
+		foreach ($rows as $row)
+		{
+			if ($row['ID_ANSWER'] == $idAnswer)
+			{
+				array_push($resultRows, $row);
+			}
+		}
+
+		return $resultRows;
+	}
 }

@@ -21,7 +21,50 @@ class AnswerToQuestionTable extends DataManager
 				"autocomplete" => true
 			]),
 			new IntegerField("ID_QUESTION"),
-			new IntegerField("IN_RESULT"),
+			new IntegerField("ID_RESULT"),
+			new StringField("CONTENT_ANSWER"),
 		];
+	}
+
+	public static function saveAnswerToQuestion($idQuestion, $idResult, $contentAnswer)
+	{
+		$result = AnswerToQuestionTable::add(array(
+			'ID_QUESTION' => $idQuestion,
+			'ID_RESULT' => $idResult,
+			'CONTENT_ANSWER' => $contentAnswer,
+		));
+
+		if ($result->isSuccess())
+		{
+			$id = $result->getId();
+		}
+	}
+
+	public static function getAllAnswer()
+	{
+		$result = AnswerToQuestionTable::getList(array(
+			'select' => array('ID', 'ID_QUESTION', 'ID_RESULT', 'CONTENT_ANSWER')
+		));
+		$row = $result ->fetchAll();
+		return $row;
+	}
+
+	public static function getResultByIdQuestion($idQuestion)
+	{
+		$resultRows = [];
+		$result = AnswerToQuestionTable::getList(array(
+			'select' => array('ID', 'ID_QUESTION', 'ID_RESULT', 'CONTENT_ANSWER')
+		));
+		$rows = $result ->fetchAll();
+
+		foreach ($rows as $row)
+		{
+			if ($row['ID_QUESTION'] == $idQuestion)
+			{
+				array_push($resultRows, $row);
+			}
+		}
+
+		return $resultRows;
 	}
 }
