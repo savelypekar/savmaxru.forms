@@ -1,3 +1,5 @@
+this.Savmaxru = this.Savmaxru || {};
+this.Savmaxru.Forms = this.Savmaxru.Forms || {};
 (function (exports,main_core) {
 	'use strict';
 
@@ -28,5 +30,5 @@
 
 	exports.Objectgui = Objectgui;
 
-}((this.Savmaxru = this.Savmaxru || {}),BX));
+}((this.Savmaxru.Forms.GUI = this.Savmaxru.Forms.GUI || {}),BX));
 //# sourceMappingURL=objectgui.bundle.js.map
