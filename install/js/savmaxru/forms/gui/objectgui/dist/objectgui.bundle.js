@@ -1,32 +1,49 @@
+this.Savmaxru = this.Savmaxru || {};
+this.Savmaxru.Forms = this.Savmaxru.Forms || {};
 (function (exports,main_core) {
 	'use strict';
 
-	var Objectgui = /*#__PURE__*/function () {
-	  function Objectgui() {
-	    var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
-	      name: 'Objectgui'
-	    };
-	    babelHelpers.classCallCheck(this, Objectgui);
-	    this.name = options.name;
-	  }
-
-	  babelHelpers.createClass(Objectgui, [{
-	    key: "setName",
-	    value: function setName(name) {
-	      if (main_core.Type.isString(name)) {
-	        this.name = name;
-	      }
-	    }
-	  }, {
-	    key: "getName",
-	    value: function getName() {
-	      return this.name;
+	var ObjectGUI = /*#__PURE__*/function () {
+	  babelHelpers.createClass(ObjectGUI, [{
+	    key: "getHTMLObject",
+	    value: function getHTMLObject(parent, content, className) {
+	      var object = document.createElement('div');
+	      object.className = className;
+	      object.append(content);
+	      parent.appendChild(object);
+	      return object;
 	    }
 	  }]);
-	  return Objectgui;
+
+	  function ObjectGUI() {
+	    var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
+	      parentID: 'body'
+	    };
+	    babelHelpers.classCallCheck(this, ObjectGUI);
+	    var id;
+
+	    if (options.IDManager != null) {
+	      id = options.IDManager.getNextHighestId();
+	    }
+
+	    this.wrapper = this.getHTMLObject(document.getElementById(options.parentID), 'тестовый контент', 'savmaxru-object-wrapper');
+	  }
+
+	  babelHelpers.createClass(ObjectGUI, [{
+	    key: "setContent",
+	    value: function setContent(content) {
+	      this.wrapper.append(content);
+	    }
+	  }, {
+	    key: "remove",
+	    value: function remove() {
+	      this.wrapper.remove();
+	    }
+	  }]);
+	  return ObjectGUI;
 	}();
 
-	exports.Objectgui = Objectgui;
+	exports.ObjectGUI = ObjectGUI;
 
-}((this.Savmaxru = this.Savmaxru || {}),BX));
+}((this.Savmaxru.Forms.GUI = this.Savmaxru.Forms.GUI || {}),BX));
 //# sourceMappingURL=objectgui.bundle.js.map
