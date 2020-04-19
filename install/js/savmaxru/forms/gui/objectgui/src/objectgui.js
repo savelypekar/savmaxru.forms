@@ -1,22 +1,38 @@
 import {Type} from 'main.core';
+import './css/style.css';
 
-export class Objectgui
+export class ObjectGUI
 {
-	constructor(options = {name: 'Objectgui'})
+	getHTMLObject( parent, content, className)
 	{
-		this.name = options.name;
+		let object = document.createElement('div');
+		object.className = className;
+
+		object.append(content);
+		parent.appendChild(object);
+
+		return object;
 	}
 
-	setName(name)
+	constructor(options = { parentID: 'body' })
 	{
-		if (Type.isString(name))
+		let id;
+		if(options.IDManager != null)
 		{
-			this.name = name;
+			id = options.IDManager.getNextHighestId();
 		}
+		this.wrapper = this.getHTMLObject(document.getElementById(options.parentID), 'тестовый контент','savmaxru-object-wrapper')
 	}
 
-	getName()
+	setContent(content)
 	{
-		return this.name;
+		this.wrapper.append(content);
 	}
+
+	remove()
+	{
+		this.wrapper.remove();
+	}
+
+
 }

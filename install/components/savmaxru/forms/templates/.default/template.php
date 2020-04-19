@@ -1,4 +1,4 @@
-<div class="savmaxru-forms-main-container">
+<div class="savmaxru-forms-main-container" id="savmaxru-forms-main-container">
 
 <?php
 $APPLICATION->IncludeComponent(
