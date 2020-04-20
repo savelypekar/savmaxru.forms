@@ -47,6 +47,17 @@ this.Savmaxru.Forms = this.Savmaxru.Forms || {};
 	    //по мере необходимости
 
 	  }, {
+	    key: "include",
+	    value: function include(object) {
+	      this.wrapper.append(object.getHTMLObject());
+	    }
+	  }, {
+	    key: "swapWithAnObject",
+	    value: function swapWithAnObject(object) {
+	      this.include(object);
+	      object.include(this);
+	    }
+	  }, {
 	    key: "getHTMLObject",
 	    value: function getHTMLObject() {
 	      return this.wrapper;
