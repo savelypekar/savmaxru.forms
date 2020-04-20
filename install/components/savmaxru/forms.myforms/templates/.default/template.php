@@ -2,6 +2,7 @@
 \Bitrix\Main\UI\Extension::load('savmaxru.lib.idmanager');
 
 \Bitrix\Main\UI\Extension::load('savmaxru.forms.gui.objectgui');
+\Bitrix\Main\UI\Extension::load('savmaxru.forms.gui.plugins.galleryofobjects');
 ?>
 <?=$arResult['MODE']?>
 <?
@@ -50,56 +51,38 @@ $connectionInterviewWithQuestion = new \Savmaxru\Forms\Model\ConnectionInterview
 \Bitrix\Main\UI\Extension::load('savmaxru.forms.gui.plugins.galleryofobjects');
 ?>
 
-<template id="tmpl">
-	<div class="message">Привет, Мир!</div>
-</template>
-
 <div class="myforms-wrapper" id="savmaxru-myforms-wrapper">
+	<div class="savmaxru-forms-gallery" id="savmaxru-forms-gallery">
 
+	</div>
 </div>
 
 <script type="text/javascript">
 
 	let templates =
 		{
-			'FormElementFormList':'' +
+			'formElementForList':'' +
 			'<div class="savmaxru-form-element-for-list">' +
 				'<div class="savmaxru-forms-h5">' +
-					'Новая форма 1' +
+					'#NAME_FORM#' +
 				'</div>' +
 				'<div class="savmaxru-forms-h4">' +
-					' 10 апреля' +
+					'#DATE_OF_CREATON#' +
 				'</div>' +
 			'</div>',
 		};
 
-	//let Idmanager = new Savmaxru.IDManager();
-	//alert(Idmanager.getNextHighestId());
-	//alert(Idmanager.getNextHighestId());
 
-	//let IDManager = new Savmaxru.Forms.GUI.Plugins.GalleryOfObjects(new Savmaxru.IDManager('savmaxru-myforms'));
 
-	//let id= new Savmaxru.IDManager({namespaceForID: 'savmaxru-myforms'});
-		//new Savmaxru.IDManager('savmaxru-myforms')
+	//ObjectGUI = new Savmaxru.Forms.GUI.ObjectGUI({ parentHTMLObject: document.getElementById('savmaxru-myforms-wrapper') });
 
-	//alert(id.getNextHighestId());
-//
-	//IDManager: new Savmaxru.IDManager({namespaceForID: 'savmaxru-myforms'}
-	let ObjectGUI = new Savmaxru.Forms.GUI.ObjectGUI({ parentID:'savmaxru-myforms-wrapper' });
-	ObjectGUI.setContent(templates['FormElementFormList'],{});
-	//ObjectGUI.remove();
+	//ObjectGUI.addContent(templates['formElementForList'],{});
 
-	//ObjectGui.renderHTML('savmaxru-myforms-wrapper','<div class="test">nnn</div>')
-	//alert(3);
+	let gallery = new Savmaxru.Forms.GUI.Plugins.GalleryOfObjects({
+		templateElement: templates['formElementForList'],
+		wrapperID: "savmaxru-forms-gallery", });
 
-	//alert(Savmaxru.IDManager.getNextHighestId('ss'));
-	//alert(Savmaxru.IDManager.getNextHighestId('ss'));
-	//let example = new Savmaxru.Forms.GUI.Components.Dropdownlist();
-	//{
-	//		templateID: "tmpl",
-	//		parentID: "savmaxru-forms-main-container"
-	//	}
-//alert(1);
+
 </script>
 
-dd
+

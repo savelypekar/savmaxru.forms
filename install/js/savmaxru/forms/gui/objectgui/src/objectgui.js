@@ -3,41 +3,52 @@ import './css/style.css';
 
 export class ObjectGUI
 {
-	createWrapper( parent, content, className)
+	createWrapper( parent, className)
 	{
 		let object = document.createElement('div');
 		object.className = className;
 
-		object.append(content);
 		parent.appendChild(object);
 
 		return object;
 	}
 
-	createContentByTemplate(template,placeholdersValues)
+	constructor(options = { parentHTMLObject: undefined })
 	{
-		let content = template;
+		this.wrapper = this.createWrapper(options.parentHTMLObject,'savmaxru-object-wrapper')
+	}
+
+	setTemplate(template)
+	{
+		this.template = template;
+	}
+
+	addContent(placeholdersValues)
+	{
+		let content = this.template;
+		let newTemplate = this.template;
+
 		for (let placeholder in placeholdersValues)
 		{
-			content = content.replace(placeholder, placeholdersValues[placeholder]);
+			let newContent = content.replace(placeholder, placeholdersValues[placeholder]);
+			newTemplate = newTemplate.replace(placeholder, (placeholdersValues[placeholder]+placeholder));
+			//оставляем место для повторной начинки контентом с помощью дублирования
+			//плейсхолдеров
+			content = newContent;
 		}
-		return content;
+		this.setTemplate(newTemplate);
+		this.wrapper.innerHTML = content;
 	}
+	//лучше переписать на заммену контента
+	//по мере необходимости
 
-	constructor(options = { parentID: 'body' })
+	getHTMLObject()
 	{
-		this.wrapper = this.createWrapper(document.getElementById(options.parentID), 'тестовый контент','savmaxru-object-wrapper')
+		return this.wrapper;
 	}
-
-	setContent(template,placeholdersValues)
-	{
-		this.wrapper.innerHTML = this.createContentByTemplate(template,placeholdersValues);
-	}
-
 	remove()
 	{
 		this.wrapper.remove();
 	}
-
 
 }
