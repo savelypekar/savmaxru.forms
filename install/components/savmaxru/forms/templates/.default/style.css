@@ -1,4 +1,15 @@
+
+@font-face {
+	font-family: Gotham;
+	src: url(fonts/Gotham.ttf);
+}
+
+@font-face {
+	font-family: GothamBold;
+	src: url(fonts/GothamPro.ttf);
+}
+
 .savmaxru-forms-main-container
 {
-	background-color: #a49da6;
+	font-family: GothamBold, Helvetica,sans-serif;
 }
