@@ -2,8 +2,9 @@
 \Bitrix\Main\UI\Extension::load('savmaxru.lib.idmanager');
 
 \Bitrix\Main\UI\Extension::load('savmaxru.forms.gui.objectgui');
+\Bitrix\Main\UI\Extension::load('savmaxru.forms.gui.plugins.galleryofobjects');
 ?>
-<?= $arResult['MODE']?>
+<?=$arResult['MODE']?>
 <?
 $optionTable = new \Savmaxru\Forms\Model\OptionTable();
 $interviewTable = new \Savmaxru\Forms\Model\InterviewTable();
@@ -12,6 +13,9 @@ $answerResultTable = new \Savmaxru\Forms\Model\AnswerResultTable();
 $answerToQuestionTable = new \Savmaxru\Forms\Model\AnswerToQuestionTable();
 $answerOptionTable = new \Savmaxru\Forms\Model\AnswerOptionTable();
 $connectionInterviewWithQuestion = new \Savmaxru\Forms\Model\ConnectionInterviewWithQuestionTable();
+
+
+//alert(this.createContentByTemplate('<div class="#CLASS_NAME#">#CONTENT#</div>',{'#CLASS_NAME#':'тест','#CONTENT#':'обзор'}));
 
 //$result1 = $optionTable->getAllOptions();
 //$result2 = $optionTable->getOptionsForQuestion(1);
@@ -47,42 +51,38 @@ $connectionInterviewWithQuestion = new \Savmaxru\Forms\Model\ConnectionInterview
 \Bitrix\Main\UI\Extension::load('savmaxru.forms.gui.plugins.galleryofobjects');
 ?>
 
-<template id="tmpl">
-	<div class="message">Привет, Мир!</div>
-</template>
-
 <div class="myforms-wrapper" id="savmaxru-myforms-wrapper">
+	<div class="savmaxru-forms-gallery" id="savmaxru-forms-gallery">
 
+	</div>
 </div>
 
 <script type="text/javascript">
 
-	//let Idmanager = new Savmaxru.IDManager();
-	//alert(Idmanager.getNextHighestId());
-	//alert(Idmanager.getNextHighestId());
+	let templates =
+		{
+			'formElementForList':'' +
+			'<div class="savmaxru-form-element-for-list">' +
+				'<div class="savmaxru-forms-h5">' +
+					'#NAME_FORM#' +
+				'</div>' +
+				'<div class="savmaxru-forms-h4">' +
+					'#DATE_OF_CREATON#' +
+				'</div>' +
+			'</div>',
+		};
 
-	//let IDManager = new Savmaxru.Forms.GUI.Plugins.GalleryOfObjects(new Savmaxru.IDManager('savmaxru-myforms'));
 
-	//let id= new Savmaxru.IDManager({namespaceForID: 'savmaxru-myforms'});
-		//new Savmaxru.IDManager('savmaxru-myforms')
 
-	//alert(id.getNextHighestId());
-//
-	//IDManager: new Savmaxru.IDManager({namespaceForID: 'savmaxru-myforms'}
-	let ObjectGUI = new Savmaxru.Forms.GUI.ObjectGUI({ parentID:'savmaxru-myforms-wrapper' });
-	//ObjectGUI.remove();
+	//ObjectGUI = new Savmaxru.Forms.GUI.ObjectGUI({ parentHTMLObject: document.getElementById('savmaxru-myforms-wrapper') });
 
-	//ObjectGui.renderHTML('savmaxru-myforms-wrapper','<div class="test">nnn</div>')
-	//alert(3);
+	//ObjectGUI.addContent(templates['formElementForList'],{});
 
-	//alert(Savmaxru.IDManager.getNextHighestId('ss'));
-	//alert(Savmaxru.IDManager.getNextHighestId('ss'));
-	//let example = new Savmaxru.Forms.GUI.Components.Dropdownlist();
-	//{
-	//		templateID: "tmpl",
-	//		parentID: "savmaxru-forms-main-container"
-	//	}
-//alert(1);
+	let gallery = new Savmaxru.Forms.GUI.Plugins.GalleryOfObjects({
+		templateElement: templates['formElementForList'],
+		wrapperID: "savmaxru-forms-gallery", });
+
+
 </script>
 
-dd
+
