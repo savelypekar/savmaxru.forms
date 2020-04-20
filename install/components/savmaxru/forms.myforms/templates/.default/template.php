@@ -64,13 +64,13 @@ $connectionInterviewWithQuestion = new \Savmaxru\Forms\Model\ConnectionInterview
 		{
 			'FormElementFormList':'' +
 			'<div class="savmaxru-form-element-for-list">' +
-				'<div class="savmaxru-form-element-for-list-name">' +
-					' Новая форма 1 ' +
+				'<div class="savmaxru-forms-h5">' +
+					'Новая форма 1' +
 				'</div>' +
-				'<div class="savmaxru-form-element-for-list-creation-date">' +
+				'<div class="savmaxru-forms-h4">' +
 					' 10 апреля' +
 				'</div>' +
-			'</d/iv>',
+			'</div>',
 		};
 
 	//let Idmanager = new Savmaxru.IDManager();
