@@ -5,13 +5,24 @@ this.Savmaxru.Forms = this.Savmaxru.Forms || {};
 
 	var ObjectGUI = /*#__PURE__*/function () {
 	  babelHelpers.createClass(ObjectGUI, [{
-	    key: "getHTMLObject",
-	    value: function getHTMLObject(parent, content, className) {
+	    key: "createWrapper",
+	    value: function createWrapper(parent, content, className) {
 	      var object = document.createElement('div');
 	      object.className = className;
 	      object.append(content);
 	      parent.appendChild(object);
 	      return object;
+	    }
+	  }, {
+	    key: "createContentByTemplate",
+	    value: function createContentByTemplate(template, placeholdersValues) {
+	      var content = template;
+
+	      for (var placeholder in placeholdersValues) {
+	        content = content.replace(placeholder, placeholdersValues[placeholder]);
+	      }
+
+	      return content;
 	    }
 	  }]);
 
@@ -20,19 +31,13 @@ this.Savmaxru.Forms = this.Savmaxru.Forms || {};
 	      parentID: 'body'
 	    };
 	    babelHelpers.classCallCheck(this, ObjectGUI);
-	    var id;
-
-	    if (options.IDManager != null) {
-	      id = options.IDManager.getNextHighestId();
-	    }
-
-	    this.wrapper = this.getHTMLObject(document.getElementById(options.parentID), 'тестовый контент', 'savmaxru-object-wrapper');
+	    this.wrapper = this.createWrapper(document.getElementById(options.parentID), 'тестовый контент', 'savmaxru-object-wrapper');
 	  }
 
 	  babelHelpers.createClass(ObjectGUI, [{
 	    key: "setContent",
-	    value: function setContent(content) {
-	      this.wrapper.append(content);
+	    value: function setContent(template, placeholdersValues) {
+	      this.wrapper.innerHTML = this.createContentByTemplate(template, placeholdersValues);
 	    }
 	  }, {
 	    key: "remove",

@@ -3,7 +3,7 @@ import './css/style.css';
 
 export class ObjectGUI
 {
-	getHTMLObject( parent, content, className)
+	createWrapper( parent, content, className)
 	{
 		let object = document.createElement('div');
 		object.className = className;
@@ -14,19 +14,24 @@ export class ObjectGUI
 		return object;
 	}
 
-	constructor(options = { parentID: 'body' })
+	createContentByTemplate(template,placeholdersValues)
 	{
-		let id;
-		if(options.IDManager != null)
+		let content = template;
+		for (let placeholder in placeholdersValues)
 		{
-			id = options.IDManager.getNextHighestId();
+			content = content.replace(placeholder, placeholdersValues[placeholder]);
 		}
-		this.wrapper = this.getHTMLObject(document.getElementById(options.parentID), 'тестовый контент','savmaxru-object-wrapper')
+		return content;
 	}
 
-	setContent(content)
+	constructor(options = { parentID: 'body' })
 	{
-		this.wrapper.append(content);
+		this.wrapper = this.createWrapper(document.getElementById(options.parentID), 'тестовый контент','savmaxru-object-wrapper')
+	}
+
+	setContent(template,placeholdersValues)
+	{
+		this.wrapper.innerHTML = this.createContentByTemplate(template,placeholdersValues);
 	}
 
 	remove()

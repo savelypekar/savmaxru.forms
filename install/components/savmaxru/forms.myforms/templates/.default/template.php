@@ -2,6 +2,7 @@
 \Bitrix\Main\UI\Extension::load('savmaxru.lib.idmanager');
 
 \Bitrix\Main\UI\Extension::load('savmaxru.forms.gui.objectgui');
+?>
 <?=$arResult['MODE']?>
 <?
 $optionTable = new \Savmaxru\Forms\Model\OptionTable();
@@ -11,6 +12,9 @@ $answerResultTable = new \Savmaxru\Forms\Model\AnswerResultTable();
 $answerToQuestionTable = new \Savmaxru\Forms\Model\AnswerToQuestionTable();
 $answerOptionTable = new \Savmaxru\Forms\Model\AnswerOptionTable();
 $connectionInterviewWithQuestion = new \Savmaxru\Forms\Model\ConnectionInterviewWithQuestionTable();
+
+
+//alert(this.createContentByTemplate('<div class="#CLASS_NAME#">#CONTENT#</div>',{'#CLASS_NAME#':'тест','#CONTENT#':'обзор'}));
 
 //$result1 = $optionTable->getAllOptions();
 //$result2 = $optionTable->getOptionsForQuestion(1);
@@ -56,6 +60,19 @@ $connectionInterviewWithQuestion = new \Savmaxru\Forms\Model\ConnectionInterview
 
 <script type="text/javascript">
 
+	let templates =
+		{
+			'FormElementFormList':'' +
+			'<div class="savmaxru-form-element-for-list">' +
+				'<div class="savmaxru-form-element-for-list-name">' +
+					' Новая форма 1 ' +
+				'</div>' +
+				'<div class="savmaxru-form-element-for-list-creation-date">' +
+					' 10 апреля' +
+				'</div>' +
+			'</d/iv>',
+		};
+
 	//let Idmanager = new Savmaxru.IDManager();
 	//alert(Idmanager.getNextHighestId());
 	//alert(Idmanager.getNextHighestId());
@@ -69,7 +86,8 @@ $connectionInterviewWithQuestion = new \Savmaxru\Forms\Model\ConnectionInterview
 //
 	//IDManager: new Savmaxru.IDManager({namespaceForID: 'savmaxru-myforms'}
 	let ObjectGUI = new Savmaxru.Forms.GUI.ObjectGUI({ parentID:'savmaxru-myforms-wrapper' });
-	ObjectGUI.remove();
+	ObjectGUI.setContent(templates['FormElementFormList'],{});
+	//ObjectGUI.remove();
 
 	//ObjectGui.renderHTML('savmaxru-myforms-wrapper','<div class="test">nnn</div>')
 	//alert(3);
