@@ -42,6 +42,17 @@ export class ObjectGUI
 	//лучше переписать на заммену контента
 	//по мере необходимости
 
+	include(object)
+	{
+		this.wrapper.append(object.getHTMLObject());
+	}
+
+	swapWithAnObject(object)
+	{
+		this.include(object);
+		object.include(this);
+	}
+
 	getHTMLObject()
 	{
 		return this.wrapper;
