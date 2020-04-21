@@ -46,43 +46,25 @@ $connectionInterviewWithQuestion = new \Savmaxru\Forms\Model\ConnectionInterview
 //$result22 = $connectionInterviewWithQuestion->getAllRows();
 //$result23 = $connectionInterviewWithQuestion->getIdQuestionForIdInterview(5);
 
-//var_dump($result17);
+//var_dump($result4);
 ?>
 \Bitrix\Main\UI\Extension::load('savmaxru.forms.gui.plugins.galleryofobjects');
 ?>
 
-<div class="myforms-wrapper" id="savmaxru-myforms-wrapper">
-	<div class="savmaxru-forms-gallery" id="savmaxru-forms-gallery">
+<script>
+	//alert("Checking the script");
+	//console.log('Checking the script');
 
-	</div>
-</div>
-
-<script type="text/javascript">
-
-	let templates =
-		{
-			'formElementForList':'' +
-			'<div class="savmaxru-form-element-for-list">' +
-				'<div class="savmaxru-forms-h5">' +
-					'#NAME_FORM#' +
-				'</div>' +
-				'<div class="savmaxru-forms-h4">' +
-					'#DATE_OF_CREATON#' +
-				'</div>' +
-			'</div>',
-		};
-
-
-
-	//ObjectGUI = new Savmaxru.Forms.GUI.ObjectGUI({ parentHTMLObject: document.getElementById('savmaxru-myforms-wrapper') });
-
-	//ObjectGUI.addContent(templates['formElementForList'],{});
-
-	let gallery = new Savmaxru.Forms.GUI.Plugins.GalleryOfObjects({
-		templateElement: templates['formElementForList'],
-		wrapperID: "savmaxru-forms-gallery", });
-
-
+	BX.ajax.runComponentAction('savmaxru:forms.myforms', 'loadAllInterview', {
+		mode: 'class'
+		//data: {
+		//	param1: 'asd'
+		//}
+	}).then(function (response) {
+		console.log(response);
+	});
 </script>
+
+
 
 
