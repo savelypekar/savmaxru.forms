@@ -1,14 +1,37 @@
-import {Type} from 'main.core';
+import {Type, Tag} from 'main.core';
 import './css/style.css';
 
 export class ObjectGUI
 {
+	nodes=[];
+
+	setTemplate(template){
+		this.template=template;
+	}
+
+	/*setTemplate2(template)
+	{
+		let placeholder = /#([^# ]+)#/;
+		while(1)
+		{
+			let matches = (placeholder.exec(template));
+			if (matches === null)
+			{
+				break;
+			}
+			let foundKeyword = (placeholder.exec(template))[1];
+			this.nodes[foundKeyword] = document.createElement('div');
+			template = template.replace(placeholder, '<div>${this.nodes['+foundKeyword+']}</div>');
+		}
+	//	Tag.render`template`;
+	}*/
+
 	createWrapper( parent, className)
 	{
 		let object = document.createElement('div');
 		object.className = className;
 
-		parent.appendChild(object);
+		parent.append(object);
 
 		return object;
 	}
@@ -18,16 +41,11 @@ export class ObjectGUI
 		this.wrapper = this.createWrapper(options.parentHTMLObject,'savmaxru-object-wrapper')
 	}
 
-	setTemplate(template)
-	{
-		this.template = template;
-	}
-
 	addContent(placeholdersValues)
 	{
+
 		let content = this.template;
 		let newTemplate = this.template;
-
 		for (let placeholder in placeholdersValues)
 		{
 			let newContent = content.replace(placeholder, placeholdersValues[placeholder]);
@@ -38,9 +56,14 @@ export class ObjectGUI
 		}
 		this.setTemplate(newTemplate);
 		this.wrapper.innerHTML = content;
+
+		//	let textNode = Tag.render`<span class="ui-btn-text">${ObjectGUI2.getHTMLObject()}</span>`;
+		// 		document.getElementById(options.wrapperID).append(textNode);
+		// 		ObjectGUI2.remove();
 	}
 	//лучше переписать на заммену контента
 	//по мере необходимости
+
 
 	include(object)
 	{
