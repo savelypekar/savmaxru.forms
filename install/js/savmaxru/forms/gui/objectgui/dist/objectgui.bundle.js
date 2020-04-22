@@ -5,11 +5,33 @@ this.Savmaxru.Forms = this.Savmaxru.Forms || {};
 
 	var ObjectGUI = /*#__PURE__*/function () {
 	  babelHelpers.createClass(ObjectGUI, [{
+	    key: "setTemplate",
+	    value: function setTemplate(template) {
+	      this.template = template;
+	    }
+	    /*setTemplate2(template)
+	    {
+	    	let placeholder = /#([^# ]+)#/;
+	    	while(1)
+	    	{
+	    		let matches = (placeholder.exec(template));
+	    		if (matches === null)
+	    		{
+	    			break;
+	    		}
+	    		let foundKeyword = (placeholder.exec(template))[1];
+	    		this.nodes[foundKeyword] = document.createElement('div');
+	    		template = template.replace(placeholder, '<div>${this.nodes['+foundKeyword+']}</div>');
+	    	}
+	    //	Tag.render`template`;
+	    }*/
+
+	  }, {
 	    key: "createWrapper",
 	    value: function createWrapper(parent, className) {
 	      var object = document.createElement('div');
 	      object.className = className;
-	      parent.appendChild(object);
+	      parent.append(object);
 	      return object;
 	    }
 	  }]);
@@ -19,15 +41,11 @@ this.Savmaxru.Forms = this.Savmaxru.Forms || {};
 	      parentHTMLObject: undefined
 	    };
 	    babelHelpers.classCallCheck(this, ObjectGUI);
+	    babelHelpers.defineProperty(this, "nodes", []);
 	    this.wrapper = this.createWrapper(options.parentHTMLObject, 'savmaxru-object-wrapper');
 	  }
 
 	  babelHelpers.createClass(ObjectGUI, [{
-	    key: "setTemplate",
-	    value: function setTemplate(template) {
-	      this.template = template;
-	    }
-	  }, {
 	    key: "addContent",
 	    value: function addContent(placeholdersValues) {
 	      var content = this.template;
@@ -42,7 +60,9 @@ this.Savmaxru.Forms = this.Savmaxru.Forms || {};
 	      }
 
 	      this.setTemplate(newTemplate);
-	      this.wrapper.innerHTML = content;
+	      this.wrapper.innerHTML = content; //	let textNode = Tag.render`<span class="ui-btn-text">${ObjectGUI2.getHTMLObject()}</span>`;
+	      // 		document.getElementById(options.wrapperID).append(textNode);
+	      // 		ObjectGUI2.remove();
 	    } //лучше переписать на заммену контента
 	    //по мере необходимости
 
