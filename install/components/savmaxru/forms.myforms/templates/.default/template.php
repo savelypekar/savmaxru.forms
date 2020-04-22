@@ -3,7 +3,7 @@
 \Bitrix\Main\UI\Extension::load('savmaxru.objectgui');
 \Bitrix\Main\UI\Extension::load('savmaxru.myforms');
 ?>
-<?=$arResult['MODE']?>
+<?= 'Страница '.$arResult['MODE']?>
 <?
 $optionTable = new \Savmaxru\Forms\Model\OptionTable();
 $interviewTable = new \Savmaxru\Forms\Model\InterviewTable();
@@ -47,8 +47,7 @@ $connectionInterviewWithQuestion = new \Savmaxru\Forms\Model\ConnectionInterview
 
 //var_dump($result17);
 ?>
-\Bitrix\Main\UI\Extension::load('savmaxru.forms.gui.plugins.galleryofobjects');
-?>
+
 
 <div class="myforms-wrapper" id="savmaxru-forms-myforms-wrapper">
 	<div class="myforms-gallery" id="savmaxru-forms-myforms-gallery">
@@ -59,49 +58,6 @@ $connectionInterviewWithQuestion = new \Savmaxru\Forms\Model\ConnectionInterview
 <script type="text/javascript">
 
 	let myForms = new Savmaxru.MyForms(document.getElementById('savmaxru-forms-myforms-gallery'));
-
-	//myForms = new Savmaxru.ObjectGUI();
-
-	//alert(9);
-	//function getTempal(strings){
-	//	alert(strings);
-	//}
-/*
-	let templates =
-		{
-			'formElementForList':
-			`<div class="savmaxru-form-element-for-list">
-				<div class="savmaxru-forms-h5">
-					{#NAME_FORM#}
-				</div>
-				<div class="savmaxru-forms-h4">
-					#DATE_OF_CREATON#
-				</div>
-			</div>`,
-		};
-
-	let object = document.createElement('div');
-	object.append(9999);
-	document.getElementById('savmaxru-myforms-wrapper').innerHTML=`<div class="savmaxru-form-element-for-list">
-				<div class="savmaxru-forms-h5">
-					${object.innerHTML}
-				</div>
-				<div class="savmaxru-forms-h4">
-					#DATE_OF_CREATON#
-				</div>
-			</div>`;
-	object.innerHTML='777';
-*/
-	//import {Tag} from 'main.core';
-	//ObjectGUI = new Savmaxru.Forms.GUI.ObjectGUI({ parentHTMLObject: document.getElementById('savmaxru-myforms-wrapper') });
-	//ObjectGUI.setTemplate(templates['formElementForList']);
-	//ObjectGUI.addContent({'#NAME_FORM#':'Форма N0','#DATE_OF_CREATON#':'10-го апреля'});
-	//document.getElementById('savmaxru-myforms-wrapper').append(Tag.render`<div>так</div>`);
-
-	//let gallery = new Savmaxru.Forms.GUI.Plugins.GalleryOfObjects();//{
-	//	templateElement: templates['formElementForList'],
-	//	wrapperID: "savmaxru-forms-gallery", });
-
 
 </script>
 

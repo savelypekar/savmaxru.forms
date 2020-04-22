@@ -21,13 +21,20 @@
 
 	    _this.setRootNode(main_core.Tag.render(_templateObject(), _this.addNode("name"), _this.addNode("date")));
 
-	    alert('Èìÿ');
-
-	    _this.includeInNode("name", 'Èìÿ');
-
 	    return _this;
 	  }
 
+	  babelHelpers.createClass(GalleryMenuItem, [{
+	    key: "setDate",
+	    value: function setDate(date) {
+	      this.includeInNode("date", date);
+	    }
+	  }, {
+	    key: "setName",
+	    value: function setName(name) {
+	      this.includeInNode("name", name);
+	    }
+	  }]);
 	  return GalleryMenuItem;
 	}(Savmaxru.ObjectGUI);
 

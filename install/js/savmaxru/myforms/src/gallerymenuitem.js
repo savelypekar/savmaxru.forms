@@ -16,7 +16,15 @@ export class GalleryMenuItem extends Savmaxru.ObjectGUI
 				${ this.addNode("date") }
 			</div>
 		</div>`);
-		alert('Имя');
-		this.includeInNode("name",'Имя');
+	}
+
+	setDate(date)
+	{
+		this.includeInNode("date",date);
+	}
+
+	setName(name)
+	{
+		this.includeInNode("name",name);
 	}
 }
