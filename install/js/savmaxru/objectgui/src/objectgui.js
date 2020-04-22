@@ -6,7 +6,6 @@ export class ObjectGUI
 
 	includeInNode(name,value)
 	{
-
 		this.nodes[name].append(value);
 	}
 
