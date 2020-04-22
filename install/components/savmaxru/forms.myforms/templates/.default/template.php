@@ -17,36 +17,39 @@ $connectionInterviewWithQuestion = new \Savmaxru\Forms\Model\ConnectionInterview
 
 //alert(this.createContentByTemplate('<div class="#CLASS_NAME#">#CONTENT#</div>',{'#CLASS_NAME#':'тест','#CONTENT#':'обзор'}));
 
-//$result1 = $optionTable->getAllOptions();
-//$result2 = $optionTable->getOptionsForQuestion(1);
-//$result3 = $optionTable->addOption(3, 345, 5);
+//$result11 = $optionTable->getAllOptions();
+//$result12 = $optionTable->getOptionsForQuestion(1);
+//$result13 = $optionTable->addOption(3, 345, 5);
 
-//$result4 = $interviewTable->getAllInterviews();
-//$result5 = $interviewTable->addInterview(6, 'title7', '', '',true);
-//$result6 = $questionTable->getAllQuestions();
-//$result7 = $questionTable->addQuestion(3,4,5);
-//$result8 = $questionTable->getQuestionsForSetIdInterview(5);
+//$result21 = $interviewTable->getAllInterviews();
+//$result22 = $interviewTable->addInterview(6, 'title7', '', '',true);
+//$result23 = $interviewTable->getInterviewsByIdAuthor('3');
+//$result24 = $interviewTable->getInterviewsByAmount(1,3);
 
-//$result9 = $answerResultTable->saveAnswerResult(10, 33, 1);
-//$result10 = $answerResultTable->getAllResult();
-//$result11 = $answerResultTable->getResultByIdUser('777');
-//$result12 = $answerResultTable->getResultByIdInterview('666');
+//$result31 = $questionTable->getAllQuestions();
+//$result32 = $questionTable->addQuestion(3,4,5);
+//$result33 = $questionTable->getQuestionsForSetIdInterview(5);
 
-//$result13 = $answerToQuestionTable->saveAnswerToQuestion('1', '3', 'my_content');
-//$result14 = $answerToQuestionTable->getAllAnswer();
-//$result15 = $answerToQuestionTable->getResultByIdQuestion('2');
-//$result16 = $answerToQuestionTable->getAnswerByUserId('2');
-//$result17 = $answerToQuestionTable->getAnswerByInterviewId('33');
+//$result41 = $answerResultTable->saveAnswerResult(10, 33, 1);
+//$result42 = $answerResultTable->getAllResult();
+//$result43 = $answerResultTable->getResultByIdUser('777');
+//$result44 = $answerResultTable->getResultByIdInterview('666');
 
-//$result18 = $answerOptionTable->saveOptionAnswer('3', '79');
-//$result19 = $answerOptionTable->getAllAnswer();
-//$result20 = $answerOptionTable->getAnswerByIdAnswer('3');
+//$result51 = $answerToQuestionTable->saveAnswerToQuestion('1', '3', 'my_content');
+//$result52 = $answerToQuestionTable->getAllAnswer();
+//$result53 = $answerToQuestionTable->getResultByIdQuestion('2');
+//$result54 = $answerToQuestionTable->getAnswerByUserId('2');
+//$result55 = $answerToQuestionTable->getAnswerByInterviewId('33');
 
-//$result21 = $connectionInterviewWithQuestion->addRow(5,7);
-//$result22 = $connectionInterviewWithQuestion->getAllRows();
-//$result23 = $connectionInterviewWithQuestion->getIdQuestionForIdInterview(5);
+//$result61 = $answerOptionTable->saveOptionAnswer('3', '79');
+//$result62 = $answerOptionTable->getAllAnswer();
+//$result63 = $answerOptionTable->getAnswerByIdAnswer('3');
 
-//var_dump($result4);
+//$result71 = $connectionInterviewWithQuestion->addRow(5,7);
+//$result72 = $connectionInterviewWithQuestion->getAllRows();
+//$result73 = $connectionInterviewWithQuestion->getIdQuestionForIdInterview(5);
+
+//var_dump($result24);
 
 //Fill the tables with demo data, uncomment the lines and execute ONE time
 //Table INTERVIEW
@@ -68,7 +71,7 @@ $connectionInterviewWithQuestion = new \Savmaxru\Forms\Model\ConnectionInterview
 ?>
 
 <!--
-Getting mass with all forms
+Get array with all forms
 -->
 <script>
 	//alert("Checking the script");
@@ -76,23 +79,25 @@ Getting mass with all forms
 
 	BX.ajax.runComponentAction('savmaxru:forms.myforms', 'loadAllInterview', {
 		mode: 'class'
-		//data: {
-		//	param1: 'asd'
-		//}
 	}).then(function (response) {
 		console.log(response);
 	});
 </script>
 
 <!--
-Getting mass with all forms
+Get array with interviews by amount
+if you need 11-15 interview,
+need params:
+quantity = '5',
+firstPosition = '11'
 -->
 <script>
-	BX.ajax.runComponentAction('savmaxru:forms.myforms', 'loadInterviewByParams', {
-		mode: 'class'
-		//data: {
-		//	param1: 'asd'
-		//}
+	BX.ajax.runComponentAction('savmaxru:forms.myforms', 'loadInterviewByAmount', {
+		mode: 'class',
+		data: {
+			quantity: '3',
+			firstPosition: '5'
+		}
 	}).then(function (response) {
 		console.log(response);
 	});

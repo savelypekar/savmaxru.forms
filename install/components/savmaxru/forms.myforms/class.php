@@ -52,13 +52,13 @@ class CSavmaxruFormsMyForms extends CBitrixComponent implements Controllerable
 		];
 	}
 
-	public function loadInterviewByParamsAction()
+	public function loadInterviewByAmountAction($quantity, $firstPosition)
 	{
 		$interviewTable = new \Savmaxru\Forms\Model\InterviewTable();
-		//$interviews = $interviewTable->getAllInterviews();
+		$interviews = $interviewTable->getInterviewsByAmount($quantity, $firstPosition);
 
 		return [
-			'INTERVIEWS' => 'testData',
+			'result' => $interviews,
 		];
 	}
 }

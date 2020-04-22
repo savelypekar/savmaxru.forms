@@ -54,4 +54,25 @@ class InterviewTable extends DataManager
 		$row = $result ->fetchAll();
 		return $row;
 	}
+
+	public function getInterviewsByIdAuthor($idAuthor)
+	{
+		$result = InterviewTable::getList(array(
+			'select' => array('ID', 'ID_AUTHOR', 'TITLE', 'DATE_CREATE', 'DATE_EDIT', 'VISIBLE'),
+			'filter' => array('ID_AUTHOR' => $idAuthor)
+		));
+		$row = $result ->fetchAll();
+		return $row;
+	}
+
+	public function getInterviewsByAmount($quantity, $firstPosition)
+	{
+		$result = InterviewTable::getList(array(
+			'select' => array('ID', 'ID_AUTHOR', 'TITLE', 'DATE_CREATE', 'DATE_EDIT', 'VISIBLE'),
+			'limit' => $quantity,
+			'offset' => $firstPosition,
+		));
+		$row = $result ->fetchAll();
+		return $row;
+	}
 }
