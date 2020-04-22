@@ -1,10 +1,9 @@
 <?php
-\Bitrix\Main\UI\Extension::load('savmaxru.lib.idmanager');
 
-\Bitrix\Main\UI\Extension::load('savmaxru.forms.gui.objectgui');
-\Bitrix\Main\UI\Extension::load('savmaxru.forms.gui.plugins.galleryofobjects');
+\Bitrix\Main\UI\Extension::load('savmaxru.objectgui');
+\Bitrix\Main\UI\Extension::load('savmaxru.myforms');
 ?>
-<?=$arResult['MODE']?>
+<?= 'Страница '.$arResult['MODE']?>
 <?
 $optionTable = new \Savmaxru\Forms\Model\OptionTable();
 $interviewTable = new \Savmaxru\Forms\Model\InterviewTable();
@@ -67,9 +66,8 @@ $connectionInterviewWithQuestion = new \Savmaxru\Forms\Model\ConnectionInterview
 //$fill = $interviewTable->addInterview(3, 'Internship Candidate Resume', '', '',true);
 //$fill = $interviewTable->addInterview(3, 'Survey from AnketkaRu site', '', '',true);
 ?>
-\Bitrix\Main\UI\Extension::load('savmaxru.forms.gui.plugins.galleryofobjects');
-?>
 
+<<<<<<< HEAD
 <!--
 Get array with all forms
 -->
@@ -104,6 +102,18 @@ firstPosition = '11'
 </script>
 
 
+=======
+
+<div class="myforms-wrapper" id="savmaxru-forms-myforms-wrapper">
+	<div class="myforms-gallery" id="savmaxru-forms-myforms-gallery">
+
+	</div>
+</div>
+
+<script type="text/javascript">
+
+	let myForms = new Savmaxru.MyForms(document.getElementById('savmaxru-forms-myforms-gallery'));
+>>>>>>> c56b28ee074b9c69c096a326076257ab877ecd0a
 
 
 
