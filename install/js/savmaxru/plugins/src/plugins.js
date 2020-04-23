@@ -1,1 +1,1 @@
-import {./} from 'main.core';
+import {ObjectsGallery} from "./objectsgallery";
