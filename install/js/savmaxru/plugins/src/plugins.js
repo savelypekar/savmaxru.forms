@@ -1,0 +1,1 @@
+import {ObjectsGallery} from "./objectsgallery";
