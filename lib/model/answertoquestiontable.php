@@ -72,19 +72,20 @@ class AnswerToQuestionTable extends DataManager
 		$answerResultTable = new \Savmaxru\Forms\Model\AnswerResultTable();
 		$setAnswer = $answerResultTable->getResultByIdUser($idUser);
 		$setAnswerById = [];
+		$setUniqueId = [];
 
-		$result = AnswerToQuestionTable::getList(array(
-			'select' => array('ID', 'ID_QUESTION', 'ID_RESULT', 'CONTENT_ANSWER')
-		));
-		$setAnswerToQuestion = $result ->fetchAll();
-
-		foreach ($setAnswerToQuestion as $answerToQuestion)
+		foreach ($setAnswer as $answer)
 		{
-			foreach ($setAnswer as $answer)
+			if (!in_array($answer['ID_RESULT'], $setUniqueId))
 			{
-				if ($answer['ID_RESULT']==$answerToQuestion["ID_RESULT"])
-				{
-					array_push($setAnswerById, $answerToQuestion);
+				array_push($setUniqueId, $answer['ID_RESULT']);
+				$result = AnswerToQuestionTable::getList([
+					'select' => ['ID', 'ID_QUESTION', 'ID_RESULT', 'CONTENT_ANSWER'],
+					'filter' => ['ID_RESULT' => $answer['ID_RESULT']],
+				]);
+				$setAnswerToQuestion = $result->fetchAll();
+				if (!empty($setAnswerToQuestion)) {
+					array_push($setAnswerById, $setAnswerToQuestion);
 				}
 			}
 		}
