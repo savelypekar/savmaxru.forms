@@ -75,4 +75,18 @@ class InterviewTable extends DataManager
 		$row = $result ->fetchAll();
 		return $row;
 	}
+
+	public function getInterviewsCurrentUser($quantity, $firstPosition)
+	{
+		global $USER;
+		$idUser = $USER->GetID();
+		$result = InterviewTable::getList([
+			'select' => ['ID', 'ID_AUTHOR', 'TITLE', 'DATE_CREATE', 'DATE_EDIT', 'VISIBLE'],
+			'filter' => ['ID_AUTHOR' => $idUser],
+			'limit' => $quantity,
+			'offset' => $firstPosition,
+		]);
+		$row = $result ->fetchAll();
+		return $row;
+	}
 }
