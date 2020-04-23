@@ -32,13 +32,13 @@ class InterviewTable extends DataManager
 
 	public function addInterview($idAuthor, $title, $dateCreate, $dateEdit, $visible)
 	{
-		$result = InterviewTable::add(array(
+		$result = InterviewTable::add([
 			'ID_AUTHOR' => $idAuthor,
 			'TITLE' => $title,
 			'DATE_CREATE' => $dateCreate,
 			'DATE_EDIT' => $dateEdit,
 			'VISIBLE' => $visible,
-		));
+		]);
 
 		if ($result->isSuccess())
 		{
@@ -48,30 +48,30 @@ class InterviewTable extends DataManager
 
 	public function getAllInterviews()
 	{
-		$result = InterviewTable::getList(array(
-			'select' => array('ID', 'ID_AUTHOR', 'TITLE', 'DATE_CREATE', 'DATE_EDIT', 'VISIBLE')
-		));
+		$result = InterviewTable::getList([
+			'select' => ['ID', 'ID_AUTHOR', 'TITLE', 'DATE_CREATE', 'DATE_EDIT', 'VISIBLE']
+		]);
 		$row = $result ->fetchAll();
 		return $row;
 	}
 
 	public function getInterviewsByIdAuthor($idAuthor)
 	{
-		$result = InterviewTable::getList(array(
-			'select' => array('ID', 'ID_AUTHOR', 'TITLE', 'DATE_CREATE', 'DATE_EDIT', 'VISIBLE'),
-			'filter' => array('ID_AUTHOR' => $idAuthor)
-		));
+		$result = InterviewTable::getList([
+			'select' => ['ID', 'ID_AUTHOR', 'TITLE', 'DATE_CREATE', 'DATE_EDIT', 'VISIBLE'],
+			'filter' => ['ID_AUTHOR' => $idAuthor],
+		]);
 		$row = $result ->fetchAll();
 		return $row;
 	}
 
 	public function getInterviewsByAmount($quantity, $firstPosition)
 	{
-		$result = InterviewTable::getList(array(
-			'select' => array('ID', 'ID_AUTHOR', 'TITLE', 'DATE_CREATE', 'DATE_EDIT', 'VISIBLE'),
+		$result = InterviewTable::getList([
+			'select' => ['ID', 'ID_AUTHOR', 'TITLE', 'DATE_CREATE', 'DATE_EDIT', 'VISIBLE'],
 			'limit' => $quantity,
 			'offset' => $firstPosition,
-		));
+		]);
 		$row = $result ->fetchAll();
 		return $row;
 	}

@@ -28,11 +28,11 @@ class AnswerToQuestionTable extends DataManager
 
 	public static function saveAnswerToQuestion($idQuestion, $idResult, $contentAnswer)
 	{
-		$result = AnswerToQuestionTable::add(array(
+		$result = AnswerToQuestionTable::add([
 			'ID_QUESTION' => $idQuestion,
 			'ID_RESULT' => $idResult,
 			'CONTENT_ANSWER' => $contentAnswer,
-		));
+		]);
 
 		if ($result->isSuccess())
 		{
@@ -42,9 +42,9 @@ class AnswerToQuestionTable extends DataManager
 
 	public static function getAllAnswer()
 	{
-		$result = AnswerToQuestionTable::getList(array(
-			'select' => array('ID', 'ID_QUESTION', 'ID_RESULT', 'CONTENT_ANSWER')
-		));
+		$result = AnswerToQuestionTable::getList([
+			'select' => ['ID', 'ID_QUESTION', 'ID_RESULT', 'CONTENT_ANSWER']
+		]);
 		$row = $result ->fetchAll();
 		return $row;
 	}
@@ -52,9 +52,9 @@ class AnswerToQuestionTable extends DataManager
 	public static function getResultByIdQuestion($idQuestion)
 	{
 		$resultRows = [];
-		$result = AnswerToQuestionTable::getList(array(
-			'select' => array('ID', 'ID_QUESTION', 'ID_RESULT', 'CONTENT_ANSWER')
-		));
+		$result = AnswerToQuestionTable::getList([
+			'select' => ['ID', 'ID_QUESTION', 'ID_RESULT', 'CONTENT_ANSWER']
+		]);
 		$rows = $result ->fetchAll();
 
 		foreach ($rows as $row)
