@@ -1,10 +1,13 @@
 
 .savmaxru-forms .myforms-wrapper
 {
-	box-shadow: 0 2px 6px 0 rgba(0,0,0,.2);
-	padding-top: 5px;
-	padding-bottom: 5px;
-	border-radius: 5px;
+	box-shadow: 0 2px 6px 0 rgba(0,0,0,.15);
+	border-radius: 0 0 2px 2px;
+	border-top: 4px solid #c7c7c7;
+	margin-bottom: 32px;
+	position: relative;
+	padding-bottom: 93px;
+	background-color: rgba(0,0,0,.02);
 }
 
 

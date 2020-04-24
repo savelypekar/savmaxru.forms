@@ -1,0 +1,1 @@
+{"version":3,"file":"plugins.bundle.js","sources":["../src/plugins.js"],"sourcesContent":["import {ObjectsGallery} from \"./objectsgallery\";\n\nexport class Plugins\n{\n\tconstructor()\n\t{\n\n\t\t//let obj = new ObjectsGallery();\n\t}\n}"],"names":["Plugins"],"mappings":";;;;KAEaA,OAAb,GAEC,mBACA;;CAAA;CAGC,CANF;;;;;;;;"}

@@ -1,9 +1,8 @@
-import {Type} from 'main.core';
-
 export class ObjectsGallery
 {
 	constructor()
 	{
+		//let obj = new ObjectsGallery();
 		alert(1900);
 	}
 }

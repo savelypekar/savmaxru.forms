@@ -2,8 +2,9 @@
 
 \Bitrix\Main\UI\Extension::load('savmaxru.objectgui');
 \Bitrix\Main\UI\Extension::load('savmaxru.myforms');
+\Bitrix\Main\UI\Extension::load('savmaxru.guicomponents');
 ?>
-<?= 'Страница '.$arResult['MODE']?>
+
 <?
 $optionTable = new \Savmaxru\Forms\Model\OptionTable();
 $interviewTable = new \Savmaxru\Forms\Model\InterviewTable();
@@ -110,7 +111,15 @@ firstPosition = '11'
 
 <script type="text/javascript">
 
-	let myForms = new Savmaxru.MyForms(document.getElementById('savmaxru-forms-myforms-gallery'));
+	//let myForms = new Savmaxru.MyForms(document.getElementById('savmaxru-forms-myforms-gallery'));
+//let comp = new Savmaxru.GUIcomponents();
+
+	//let dropdownlist = new Savmaxru.GUIComponents();
+	let dropdownlist = Savmaxru.GUIComponents.attachComponent('DropDownList');
+	document.getElementById('savmaxru-forms-myforms-gallery').append(dropdownlist.getHTMLObject());
+
+	let dropdownlist1 = Savmaxru.GUIComponents.attachComponent('DropDownList');
+	document.getElementById('savmaxru-forms-myforms-gallery').append(dropdownlist1.getHTMLObject());
 
 </script>
 

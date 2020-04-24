@@ -9,9 +9,9 @@ export class ObjectGUI
 		this.nodes[name].append(value);
 	}
 
-	addNode(name)
+	addNode(name,type = 'div')
 	{
-		return this.nodes[name] = this.createNode();
+		return this.nodes[name] = this.createNode(type);
 	}
 
 	setRootNode(node)
@@ -30,9 +30,9 @@ export class ObjectGUI
 		return this.wrapper;
 	}
 
-	createNode()
+	createNode(type)
 	{
-		return document.createElement('div');
+		return document.createElement(type);
 	}
 
 	constructor()

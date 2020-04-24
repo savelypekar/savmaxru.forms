@@ -1,4 +1,4 @@
-(function (exports,main_core,savmaxru_objectgui) {
+(function (exports,main_core,savmaxru_objectgui,savmaxru_plugins) {
 	'use strict';
 
 	function _templateObject() {
@@ -40,11 +40,13 @@
 
 	var MyForms = function MyForms(parentContainer) {
 	  babelHelpers.classCallCheck(this, MyForms);
+	  //let gallery = new Savmaxru.Plugins.Plugins.ObjectsGallery();
+	  //let obj = new ObjectsGallery();
 	  var galleryMenuItem = new GalleryMenuItem();
 	  parentContainer.append(galleryMenuItem.getHTMLObject());
 	};
 
 	exports.MyForms = MyForms;
 
-}((this.Savmaxru = this.Savmaxru || {}),BX,BX));
+}((this.Savmaxru = this.Savmaxru || {}),BX,BX,BX));
 //# sourceMappingURL=myforms.bundle.js.map

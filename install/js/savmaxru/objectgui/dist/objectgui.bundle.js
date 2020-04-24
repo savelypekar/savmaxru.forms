@@ -10,7 +10,8 @@
 	  }, {
 	    key: "addNode",
 	    value: function addNode(name) {
-	      return this.nodes[name] = this.createNode();
+	      var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'div';
+	      return this.nodes[name] = this.createNode(type);
 	    }
 	  }, {
 	    key: "setRootNode",
@@ -30,8 +31,8 @@
 	    }
 	  }, {
 	    key: "createNode",
-	    value: function createNode() {
-	      return document.createElement('div');
+	    value: function createNode(type) {
+	      return document.createElement(type);
 	    }
 	  }]);
 
