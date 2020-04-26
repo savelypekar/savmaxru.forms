@@ -28,11 +28,11 @@ class AnswerToQuestionTable extends DataManager
 
 	public static function saveAnswerToQuestion($idQuestion, $idResult, $contentAnswer)
 	{
-		$result = AnswerToQuestionTable::add(array(
+		$result = AnswerToQuestionTable::add([
 			'ID_QUESTION' => $idQuestion,
 			'ID_RESULT' => $idResult,
 			'CONTENT_ANSWER' => $contentAnswer,
-		));
+		]);
 
 		if ($result->isSuccess())
 		{
@@ -42,9 +42,9 @@ class AnswerToQuestionTable extends DataManager
 
 	public static function getAllAnswer()
 	{
-		$result = AnswerToQuestionTable::getList(array(
-			'select' => array('ID', 'ID_QUESTION', 'ID_RESULT', 'CONTENT_ANSWER')
-		));
+		$result = AnswerToQuestionTable::getList([
+			'select' => ['ID', 'ID_QUESTION', 'ID_RESULT', 'CONTENT_ANSWER']
+		]);
 		$row = $result ->fetchAll();
 		return $row;
 	}
@@ -52,9 +52,9 @@ class AnswerToQuestionTable extends DataManager
 	public static function getResultByIdQuestion($idQuestion)
 	{
 		$resultRows = [];
-		$result = AnswerToQuestionTable::getList(array(
-			'select' => array('ID', 'ID_QUESTION', 'ID_RESULT', 'CONTENT_ANSWER')
-		));
+		$result = AnswerToQuestionTable::getList([
+			'select' => ['ID', 'ID_QUESTION', 'ID_RESULT', 'CONTENT_ANSWER']
+		]);
 		$rows = $result ->fetchAll();
 
 		foreach ($rows as $row)
@@ -72,19 +72,20 @@ class AnswerToQuestionTable extends DataManager
 		$answerResultTable = new \Savmaxru\Forms\Model\AnswerResultTable();
 		$setAnswer = $answerResultTable->getResultByIdUser($idUser);
 		$setAnswerById = [];
+		$setUniqueId = [];
 
-		$result = AnswerToQuestionTable::getList(array(
-			'select' => array('ID', 'ID_QUESTION', 'ID_RESULT', 'CONTENT_ANSWER')
-		));
-		$setAnswerToQuestion = $result ->fetchAll();
-
-		foreach ($setAnswerToQuestion as $answerToQuestion)
+		foreach ($setAnswer as $answer)
 		{
-			foreach ($setAnswer as $answer)
+			if (!in_array($answer['ID_RESULT'], $setUniqueId))
 			{
-				if ($answer['ID_RESULT']==$answerToQuestion["ID_RESULT"])
-				{
-					array_push($setAnswerById, $answerToQuestion);
+				array_push($setUniqueId, $answer['ID_RESULT']);
+				$result = AnswerToQuestionTable::getList([
+					'select' => ['ID', 'ID_QUESTION', 'ID_RESULT', 'CONTENT_ANSWER'],
+					'filter' => ['ID_RESULT' => $answer['ID_RESULT']],
+				]);
+				$setAnswerToQuestion = $result->fetchAll();
+				if (!empty($setAnswerToQuestion)) {
+					array_push($setAnswerById, $setAnswerToQuestion);
 				}
 			}
 		}

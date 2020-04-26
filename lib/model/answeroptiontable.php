@@ -49,20 +49,12 @@ class AnswerOptionTable extends DataManager
 
 	public static function getAnswerByIdAnswer($idAnswer)
 	{
-		$resultRows = [];
-		$result = AnswerOptionTable::getList(array(
-			'select' => array('ID', 'ID_ANSWER', 'ID_OPTION')
-		));
+		$result = AnswerOptionTable::getList([
+			'select' => ['ID', 'ID_ANSWER', 'ID_OPTION'],
+			'filter' => ['ID_ANSWER' => $idAnswer],
+		]);
 		$rows = $result ->fetchAll();
 
-		foreach ($rows as $row)
-		{
-			if ($row['ID_ANSWER'] == $idAnswer)
-			{
-				array_push($resultRows, $row);
-			}
-		}
-
-		return $resultRows;
+		return $rows;
 	}
 }

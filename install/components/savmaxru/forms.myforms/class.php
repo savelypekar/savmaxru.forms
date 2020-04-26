@@ -61,4 +61,25 @@ class CSavmaxruFormsMyForms extends CBitrixComponent implements Controllerable
 			'result' => $interviews,
 		];
 	}
+
+	public function loadInterviewCurrentUserAction($quantity, $firstPosition)
+	{
+		$interviewTable = new \Savmaxru\Forms\Model\InterviewTable();
+		$interviews = $interviewTable->getInterviewsCurrentUser($quantity, $firstPosition);
+
+		return [
+			'result' => $interviews,
+		];
+	}
+
+	public function saveInterviewAndQuestionAction($interview, $questions)
+	{
+		$interviewTable = new \Savmaxru\Forms\Model\InterviewTable();
+		$questionTable = new \Savmaxru\Forms\Model\QuestionTable();
+
+		$interviewTable->addInterview($interview[0], $interview[1], $interview[2], $interview[3], $interview[4]);
+		//need add foreach
+		$questionTable->addQuestion($questions[0][0], $questions[0][1], $questions[0][2]);
+		$questionTable->addQuestion($questions[1][0], $questions[1][1], $questions[1][2]);
+	}
 }
