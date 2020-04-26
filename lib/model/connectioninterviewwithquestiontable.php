@@ -49,19 +49,12 @@ class ConnectionInterviewWithQuestionTable extends DataManager
 
 	public function getIdQuestionForIdInterview($idInterview)
 	{
-		$setIdQuestion = [];
 		$result = ConnectionInterviewWithQuestionTable::getList([
-			'select' => ['ID', 'ID_INTERVIEW', 'ID_QUESTION']
+			'select' => ['ID', 'ID_INTERVIEW', 'ID_QUESTION'],
+			'filter' => ['ID_INTERVIEW' => $idInterview],
 		]);
 		$rows = $result ->fetchAll();
 
-		foreach ($rows as $row)
-		{
-			if ($row['ID_INTERVIEW'] == $idInterview)
-			{
-				array_push($setIdQuestion, $row['ID_QUESTION']);
-			}
-		}
-		return $setIdQuestion;
+		return $rows;
 	}
 }
