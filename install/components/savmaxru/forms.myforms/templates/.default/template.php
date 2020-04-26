@@ -190,4 +190,17 @@ Save interview and questions
 		}
 	);
 
+	let dropdownlist3 = Savmaxru.GUIComponents.attachComponent('Button');
+	document.getElementById('savmaxru-forms-myforms-gallery').append(dropdownlist3.getHTMLObject());
+
+	dropdownlist3.build(
+		{
+			'description':'',
+			'options': ['Send form'],
+			'comment': '',
+			'required': '',
+		}
+	);
+
+	//dropdownlist2.getAllElementsOfTheNode('checkboxes');
 </script>

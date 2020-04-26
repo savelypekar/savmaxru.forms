@@ -30,7 +30,6 @@ export class GUIComponent extends Savmaxru.ObjectGUI
 		return this.IDManager.getNextHighestId();
 	}
 
-
 	build(data){
 		this.IDManager = data['IDManager'];
 		this.setDescription(data['description']);
@@ -69,4 +68,8 @@ export class GUIComponent extends Savmaxru.ObjectGUI
 		this.includeInNode("mark",'*');
 	}
 
+	getResult()
+	{
+
+	}
 }
