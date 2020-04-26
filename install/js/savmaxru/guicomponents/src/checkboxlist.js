@@ -7,7 +7,6 @@ export class CheckboxList extends GUIComponent
 	{
 		super();
 		this.setComponent(Tag.render`${this.addNode("checkboxes")}`);
-
 	}
 
 	addOption(option)
@@ -15,9 +14,20 @@ export class CheckboxList extends GUIComponent
 		let newItemID = this.getNextHighestId();
 		this.includeInNode("checkboxes", Tag.render`
 		<div class="checkbox-item">
-			<input type="checkbox" id="${newItemID}" />
+			<input type="checkbox" class="checkbox" id="${newItemID}" />
 			<label for="${newItemID}">${option}</label>
 		</div>`);
+	}
 
+	getResult()
+	{
+		let result = [];
+		let items = this.getAllElementsOfTheNode('checkboxes');
+		for(let i=0; i<items.length; i++)
+		{
+			let item = items[i];
+			let checkbox =  document.querySelectorAll('checkbox');
+			alert(checkbox.checked);
+		}
 	}
 }

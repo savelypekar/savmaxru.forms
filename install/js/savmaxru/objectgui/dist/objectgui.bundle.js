@@ -8,6 +8,18 @@
 	      this.nodes[name].append(value);
 	    }
 	  }, {
+	    key: "getAllElementsOfTheNode",
+	    value: function getAllElementsOfTheNode(name) {
+	      var node = this.nodes[name];
+	      var elements = [];
+
+	      for (var i = 0; i < node.childNodes.length; i++) {
+	        elements.push(node.childNodes[i]);
+	      }
+
+	      return elements;
+	    }
+	  }, {
 	    key: "addNode",
 	    value: function addNode(name) {
 	      var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'div';

@@ -30,9 +30,7 @@
 }
 
 .savmaxru-forms .object-gui {
-	padding-top: 22px;
-	padding-bottom: 22px;
-	padding-left: 50px;
+	padding: 22px 50px;
 	border-bottom: 1px solid #E5E5E5;
 	background-color: white;
 }
@@ -109,4 +107,48 @@ input:disabled + label:before {
 
 .checkboxes :last-child {
 	margin-bottom: 0;
+}
+
+.button
+{
+	display: block;
+	cursor: pointer;
+	text-align: center;
+	width: 200px;
+	margin-left: auto;
+	margin-right: auto;
+	height: 20px;
+	color: black;
+	font-size: 18px;
+	text-decoration: none;
+	-webkit-user-select: none;
+	   -moz-user-select: none;
+	    -ms-user-select: none;
+	        user-select: none;
+	padding-top: 12px;
+	padding-bottom: 16px;
+	outline: none;
+	border: 1px solid rgb(250,172,17);
+	border-radius: 7px;
+	background: rgb(255,212,3) -webkit-gradient(linear, left top, left bottom, from(rgb(255,212,3)), to(rgb(248,157,23)));
+	background: rgb(255,212,3) -o-linear-gradient(rgb(255,212,3), rgb(248,157,23));
+	background: rgb(255,212,3) linear-gradient(rgb(255,212,3), rgb(248,157,23));
+	-webkit-box-shadow: inset 0 -2px 1px rgba(0,0,0,0), inset 0 1px 2px rgba(0,0,0,0), inset 0 0 0 60px rgba(255,255,0,0);
+	        box-shadow: inset 0 -2px 1px rgba(0,0,0,0), inset 0 1px 2px rgba(0,0,0,0), inset 0 0 0 60px rgba(255,255,0,0);
+	-webkit-transition: border-color .2s, -webkit-box-shadow .2s;
+	transition: border-color .2s, -webkit-box-shadow .2s;
+	-o-transition: box-shadow .2s, border-color .2s;
+	transition: box-shadow .2s, border-color .2s;
+	transition: box-shadow .2s, border-color .2s, -webkit-box-shadow .2s;
+}
+
+.button:hover {
+	-webkit-box-shadow: inset 0 -1px 1px rgba(0,0,0,0), inset 0 1px 2px rgba(0,0,0,0), inset 0 0 0 60px rgba(255,255,0,.5);
+	        box-shadow: inset 0 -1px 1px rgba(0,0,0,0), inset 0 1px 2px rgba(0,0,0,0), inset 0 0 0 60px rgba(255,255,0,.5);
+}
+
+.button:active {
+	border-color: rgba(177,159,0,1);
+	-webkit-box-shadow: inset 0 -1px 1px rgba(0,0,0,.1), inset 0 1px 2px rgba(0,0,0,.3), inset 0 0 0 60px rgba(255,255,0,.45);
+	        box-shadow: inset 0 -1px 1px rgba(0,0,0,.1), inset 0 1px 2px rgba(0,0,0,.3), inset 0 0 0 60px rgba(255,255,0,.45);
 }

@@ -89,4 +89,30 @@ class InterviewTable extends DataManager
 		$row = $result ->fetchAll();
 		return $row;
 	}
+
+	public function deleteRow($id)
+	{
+		$result = InterviewTable::delete($id);
+
+		if (!$result->isSuccess())
+		{
+			$error = $result->getErrorMessages();
+		}
+	}
+
+	public function updateRow($id, $idAuthor, $title, $dateCreate, $dateEdit, $visible)
+	{
+		$result = InterviewTable::update($id, [
+				'ID_AUTHOR' => $idAuthor,
+				'TITLE' => $title,
+				'DATE_CREATE' => $dateCreate,
+				'DATE_EDIT' => $dateEdit,
+				'VISIBLE' => $visible,
+		]);
+
+		if ($result->isSuccess())
+		{
+
+		}
+	}
 }

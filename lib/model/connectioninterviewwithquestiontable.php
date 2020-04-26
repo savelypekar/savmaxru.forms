@@ -49,19 +49,35 @@ class ConnectionInterviewWithQuestionTable extends DataManager
 
 	public function getIdQuestionForIdInterview($idInterview)
 	{
-		$setIdQuestion = [];
 		$result = ConnectionInterviewWithQuestionTable::getList([
-			'select' => ['ID', 'ID_INTERVIEW', 'ID_QUESTION']
+			'select' => ['ID', 'ID_INTERVIEW', 'ID_QUESTION'],
+			'filter' => ['ID_INTERVIEW' => $idInterview],
 		]);
 		$rows = $result ->fetchAll();
 
-		foreach ($rows as $row)
+		return $rows;
+	}
+
+	public function deleteRow($id)
+	{
+		$result = ConnectionInterviewWithQuestionTable::delete($id);
+
+		if (!$result->isSuccess())
 		{
-			if ($row['ID_INTERVIEW'] == $idInterview)
-			{
-				array_push($setIdQuestion, $row['ID_QUESTION']);
-			}
+			$error = $result->getErrorMessages();
 		}
-		return $setIdQuestion;
+	}
+
+	public function updateRow($id, $idInterview, $idPosition)
+	{
+		$result = ConnectionInterviewWithQuestionTable::update($id, [
+			'ID_INTERVIEW' => $idInterview,
+			'ID_QUESTION' => $idPosition,
+		]);
+
+		if ($result->isSuccess())
+		{
+
+		}
 	}
 }

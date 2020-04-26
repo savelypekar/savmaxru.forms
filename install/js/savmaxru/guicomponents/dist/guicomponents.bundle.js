@@ -68,6 +68,9 @@
 	    value: function setFieldAsRequired() {
 	      this.includeInNode("mark", '*');
 	    }
+	  }, {
+	    key: "getResult",
+	    value: function getResult() {}
 	  }]);
 	  return GUIComponent;
 	}(Savmaxru.ObjectGUI);
@@ -117,7 +120,7 @@
 	}(GUIComponent);
 
 	function _templateObject2$1() {
-	  var data = babelHelpers.taggedTemplateLiteral(["\n\t\t<div class=\"checkbox-item\">\n\t\t\t<input type=\"checkbox\" id=\"", "\" />\n\t\t\t<label for=\"", "\">", "</label>\n\t\t</div>"]);
+	  var data = babelHelpers.taggedTemplateLiteral(["\n\t\t<div class=\"checkbox-item\">\n\t\t\t<input type=\"checkbox\" class=\"checkbox\" id=\"", "\" />\n\t\t\t<label for=\"", "\">", "</label>\n\t\t</div>"]);
 
 	  _templateObject2$1 = function _templateObject2() {
 	    return data;
@@ -155,8 +158,61 @@
 	      var newItemID = this.getNextHighestId();
 	      this.includeInNode("checkboxes", main_core.Tag.render(_templateObject2$1(), newItemID, newItemID, option));
 	    }
+	  }, {
+	    key: "getResult",
+	    value: function getResult() {
+	      var items = this.getAllElementsOfTheNode('checkboxes');
+
+	      for (var i = 0; i < items.length; i++) {
+	        var item = items[i];
+	        var checkbox = document.querySelectorAll('checkbox');
+	        alert(checkbox.checked);
+	      }
+	    }
 	  }]);
 	  return CheckboxList;
+	}(GUIComponent);
+
+	function _templateObject2$2() {
+	  var data = babelHelpers.taggedTemplateLiteral(["<span>", "</span>"]);
+
+	  _templateObject2$2 = function _templateObject2() {
+	    return data;
+	  };
+
+	  return data;
+	}
+
+	function _templateObject$3() {
+	  var data = babelHelpers.taggedTemplateLiteral(["", ""]);
+
+	  _templateObject$3 = function _templateObject() {
+	    return data;
+	  };
+
+	  return data;
+	}
+	var Button = /*#__PURE__*/function (_GUIComponent) {
+	  babelHelpers.inherits(Button, _GUIComponent);
+
+	  function Button() {
+	    var _this;
+
+	    babelHelpers.classCallCheck(this, Button);
+	    _this = babelHelpers.possibleConstructorReturn(this, babelHelpers.getPrototypeOf(Button).call(this));
+
+	    _this.setComponent(main_core.Tag.render(_templateObject$3(), _this.addNode("button")));
+
+	    return _this;
+	  }
+
+	  babelHelpers.createClass(Button, [{
+	    key: "addOption",
+	    value: function addOption(option) {
+	      this.includeInNode("button", main_core.Tag.render(_templateObject2$2(), option));
+	    }
+	  }]);
+	  return Button;
 	}(GUIComponent);
 
 	var GUIComponents = /*#__PURE__*/function () {
@@ -174,7 +230,8 @@
 	}();
 	babelHelpers.defineProperty(GUIComponents, "componentClasses", {
 	  "DropDownList": DropDownList,
-	  "CheckboxList": CheckboxList
+	  "CheckboxList": CheckboxList,
+	  "Button": Button
 	});
 
 	exports.GUIComponents = GUIComponents;

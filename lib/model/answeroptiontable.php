@@ -57,4 +57,27 @@ class AnswerOptionTable extends DataManager
 
 		return $rows;
 	}
+
+	public function deleteRow($id)
+	{
+		$result = AnswerOptionTable::delete($id);
+
+		if (!$result->isSuccess())
+		{
+			$error = $result->getErrorMessages();
+		}
+	}
+
+	public function updateRow($id, $idAnswer, $idOption)
+	{
+		$result = AnswerOptionTable::update($id, [
+			'ID_ANSWER' => $idAnswer,
+			'ID_OPTION' => $idOption,
+		]);
+
+		if ($result->isSuccess())
+		{
+
+		}
+	}
 }

@@ -9,6 +9,17 @@ export class ObjectGUI
 		this.nodes[name].append(value);
 	}
 
+	getAllElementsOfTheNode(name)
+	{
+		let node = this.nodes[name];
+		let elements = [];
+
+		for (let i = 0; i < node.childNodes.length; i++) {
+			elements.push(node.childNodes[i]);
+		}
+		return elements;
+	}
+
 	addNode(name,type = 'div')
 	{
 		let node = this.createNode(type);
