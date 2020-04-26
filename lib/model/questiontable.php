@@ -74,4 +74,28 @@ class QuestionTable extends DataManager
 
 		return $questions;
 	}
+
+	public function deleteRow($id)
+	{
+		$result = QuestionTable::delete($id);
+
+		if (!$result->isSuccess())
+		{
+			$error = $result->getErrorMessages();
+		}
+	}
+
+	public function updateRow($id, $type, $content, $position)
+	{
+		$result = QuestionTable::update($id, [
+			'TYPE' => $type,
+			'CONTENT' => $content,
+			'POSITION' => $position,
+		]);
+
+		if ($result->isSuccess())
+		{
+
+		}
+	}
 }

@@ -57,4 +57,27 @@ class ConnectionInterviewWithQuestionTable extends DataManager
 
 		return $rows;
 	}
+
+	public function deleteRow($id)
+	{
+		$result = ConnectionInterviewWithQuestionTable::delete($id);
+
+		if (!$result->isSuccess())
+		{
+			$error = $result->getErrorMessages();
+		}
+	}
+
+	public function updateRow($id, $idInterview, $idPosition)
+	{
+		$result = ConnectionInterviewWithQuestionTable::update($id, [
+			'ID_INTERVIEW' => $idInterview,
+			'ID_QUESTION' => $idPosition,
+		]);
+
+		if ($result->isSuccess())
+		{
+
+		}
+	}
 }

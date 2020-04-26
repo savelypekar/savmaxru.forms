@@ -110,4 +110,28 @@ class AnswerToQuestionTable extends DataManager
 		}
 		return $setAnswerByIdInterview;
 	}
+
+	public function deleteRow($id)
+	{
+		$result = AnswerToQuestionTable::delete($id);
+
+		if (!$result->isSuccess())
+		{
+			$error = $result->getErrorMessages();
+		}
+	}
+
+	public function updateRow($id, $idQuestion, $idResult, $contentAnswer)
+	{
+		$result = AnswerToQuestionTable::update($id, [
+			'ID_QUESTION' => $idQuestion,
+			'ID_RESULT' => $idResult,
+			'CONTENT_ANSWER' => $contentAnswer,
+		]);
+
+		if ($result->isSuccess())
+		{
+
+		}
+	}
 }
