@@ -3,10 +3,9 @@ import {Tag} from 'main.core';
 
 export class GUIComponent extends Savmaxru.ObjectGUI
 {
-	constructor()
+	constructor(description,comment)
 	{
 		super();
-
 		this.setRootNode(
 			Tag.render`
 			<div class="object-gui">
@@ -24,6 +23,23 @@ export class GUIComponent extends Savmaxru.ObjectGUI
 				</div>
 			</div>`
 		);
+	}
+
+	getNextHighestId()
+	{
+		return this.IDManager.getNextHighestId();
+	}
+
+
+	build(data){
+		this.IDManager = data['IDManager'];
+		this.setDescription(data['description']);
+		this.setComment(data['comment']);
+		this.addOptions(data['options']);
+		if(data['required'])
+		{
+			this.setFieldAsRequired();
+		}
 	}
 
 	addOptions(options)
@@ -48,7 +64,9 @@ export class GUIComponent extends Savmaxru.ObjectGUI
 		this.includeInNode("comment",comment);
 	}
 
-	setMark(mark){
-		this.includeInNode("mark",mark);
+	setFieldAsRequired()
+	{
+		this.includeInNode("mark",'*');
 	}
+
 }

@@ -13,7 +13,7 @@
 	var GUIComponent = /*#__PURE__*/function (_Savmaxru$ObjectGUI) {
 	  babelHelpers.inherits(GUIComponent, _Savmaxru$ObjectGUI);
 
-	  function GUIComponent() {
+	  function GUIComponent(description, comment) {
 	    var _this;
 
 	    babelHelpers.classCallCheck(this, GUIComponent);
@@ -25,6 +25,23 @@
 	  }
 
 	  babelHelpers.createClass(GUIComponent, [{
+	    key: "getNextHighestId",
+	    value: function getNextHighestId() {
+	      return this.IDManager.getNextHighestId();
+	    }
+	  }, {
+	    key: "build",
+	    value: function build(data) {
+	      this.IDManager = data['IDManager'];
+	      this.setDescription(data['description']);
+	      this.setComment(data['comment']);
+	      this.addOptions(data['options']);
+
+	      if (data['required']) {
+	        this.setFieldAsRequired();
+	      }
+	    }
+	  }, {
 	    key: "addOptions",
 	    value: function addOptions(options) {
 	      for (var i = 0; i < options.length; i++) {
@@ -47,9 +64,9 @@
 	      this.includeInNode("comment", comment);
 	    }
 	  }, {
-	    key: "setMark",
-	    value: function setMark(mark) {
-	      this.includeInNode("mark", mark);
+	    key: "setFieldAsRequired",
+	    value: function setFieldAsRequired() {
+	      this.includeInNode("mark", '*');
 	    }
 	  }]);
 	  return GUIComponent;
@@ -80,23 +97,12 @@
 	  function DropDownList() {
 	    var _this;
 
-	    var description = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'Test';
-	    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : ['Russia', 'USA'];
-	    var comment = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'comment';
 	    babelHelpers.classCallCheck(this, DropDownList);
 	    _this = babelHelpers.possibleConstructorReturn(this, babelHelpers.getPrototypeOf(DropDownList).call(this));
 
 	    _this.setComponent(main_core.Tag.render(_templateObject$1(), _this.addNode("select", 'select')));
 
-	    _this.setDescription(description);
-
-	    _this.setComment(comment);
-
 	    _this.addOption('--');
-
-	    _this.addOptions(options);
-
-	    _this.setMark('*');
 
 	    return _this;
 	  }
@@ -108,6 +114,49 @@
 	    }
 	  }]);
 	  return DropDownList;
+	}(GUIComponent);
+
+	function _templateObject2$1() {
+	  var data = babelHelpers.taggedTemplateLiteral(["\n\t\t<div class=\"checkbox-item\">\n\t\t\t<input type=\"checkbox\" id=\"", "\" />\n\t\t\t<label for=\"", "\">", "</label>\n\t\t</div>"]);
+
+	  _templateObject2$1 = function _templateObject2() {
+	    return data;
+	  };
+
+	  return data;
+	}
+
+	function _templateObject$2() {
+	  var data = babelHelpers.taggedTemplateLiteral(["", ""]);
+
+	  _templateObject$2 = function _templateObject() {
+	    return data;
+	  };
+
+	  return data;
+	}
+	var CheckboxList = /*#__PURE__*/function (_GUIComponent) {
+	  babelHelpers.inherits(CheckboxList, _GUIComponent);
+
+	  function CheckboxList() {
+	    var _this;
+
+	    babelHelpers.classCallCheck(this, CheckboxList);
+	    _this = babelHelpers.possibleConstructorReturn(this, babelHelpers.getPrototypeOf(CheckboxList).call(this));
+
+	    _this.setComponent(main_core.Tag.render(_templateObject$2(), _this.addNode("checkboxes")));
+
+	    return _this;
+	  }
+
+	  babelHelpers.createClass(CheckboxList, [{
+	    key: "addOption",
+	    value: function addOption(option) {
+	      var newItemID = this.getNextHighestId();
+	      this.includeInNode("checkboxes", main_core.Tag.render(_templateObject2$1(), newItemID, newItemID, option));
+	    }
+	  }]);
+	  return CheckboxList;
 	}(GUIComponent);
 
 	var GUIComponents = /*#__PURE__*/function () {
@@ -124,7 +173,8 @@
 	  return GUIComponents;
 	}();
 	babelHelpers.defineProperty(GUIComponents, "componentClasses", {
-	  "DropDownList": DropDownList
+	  "DropDownList": DropDownList,
+	  "CheckboxList": CheckboxList
 	});
 
 	exports.GUIComponents = GUIComponents;

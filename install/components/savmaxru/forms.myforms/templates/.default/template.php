@@ -2,6 +2,7 @@
 
 \Bitrix\Main\UI\Extension::load('savmaxru.objectgui');
 \Bitrix\Main\UI\Extension::load('savmaxru.myforms');
+\Bitrix\Main\UI\Extension::load('savmaxru.idmanager');
 \Bitrix\Main\UI\Extension::load('savmaxru.guicomponents');
 ?>
 
@@ -114,12 +115,39 @@ firstPosition = '11'
 	//let myForms = new Savmaxru.MyForms(document.getElementById('savmaxru-forms-myforms-gallery'));
 //let comp = new Savmaxru.GUIcomponents();
 
+
+
 	//let dropdownlist = new Savmaxru.GUIComponents();
+	let IDManager = new Savmaxru.IDManager('myforms');
+
+
 	let dropdownlist = Savmaxru.GUIComponents.attachComponent('DropDownList');
+	dropdownlist.build(
+		{
+			'description':'Test',
+			'options': ['Russia', 'USA'],
+			'comment': 'comment',
+			'required': true,
+		}
+	);
+
 	document.getElementById('savmaxru-forms-myforms-gallery').append(dropdownlist.getHTMLObject());
 
 	let dropdownlist1 = Savmaxru.GUIComponents.attachComponent('DropDownList');
 	document.getElementById('savmaxru-forms-myforms-gallery').append(dropdownlist1.getHTMLObject());
+
+	let dropdownlist2 = Savmaxru.GUIComponents.attachComponent('CheckboxList');
+	document.getElementById('savmaxru-forms-myforms-gallery').append(dropdownlist2.getHTMLObject());
+
+	dropdownlist2.build(
+		{
+			'description':'Test',
+			'options': ['Russia', 'USA'],
+			'comment': 'comment',
+			'required': true,
+			'IDManager': IDManager,
+		}
+	);
 
 </script>
 

@@ -11,7 +11,11 @@ export class ObjectGUI
 
 	addNode(name,type = 'div')
 	{
-		return this.nodes[name] = this.createNode(type);
+		let node = this.createNode(type);
+		this.nodes[name] = node;
+		node.className = name;
+
+		return node;
 	}
 
 	setRootNode(node)

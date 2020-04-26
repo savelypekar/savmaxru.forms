@@ -11,7 +11,10 @@
 	    key: "addNode",
 	    value: function addNode(name) {
 	      var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'div';
-	      return this.nodes[name] = this.createNode(type);
+	      var node = this.createNode(type);
+	      this.nodes[name] = node;
+	      node.className = name;
+	      return node;
 	    }
 	  }, {
 	    key: "setRootNode",

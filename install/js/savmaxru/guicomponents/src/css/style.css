@@ -54,3 +54,56 @@
 	left: 32px;
 	top: 25px;
 }
+
+
+input[type="checkbox"] {
+	display: none;
+}
+
+
+label:before {
+	content: " ";
+	color: #000;
+	display: inline-block;
+	font: 20px/30px Arial;
+	margin-right: 15px;
+	position: relative;
+	text-align: center;
+	text-indent: 0px;
+	width: 25px;
+	height: 25px;
+	background: #FFF;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	border-image: initial;
+	vertical-align: middle;
+	background-size: cover;
+}
+
+input:checked + label:before {
+	background-image: url("checkbox-mark-checked.png");
+}
+
+input:not(:checked) + label:hover::before {
+	background-image: url("checkbox-mark-over.png");
+}
+
+input:disabled + label:before {
+	background: #eee;
+	color: #aaa;
+}
+
+.savmaxru-forms label {
+	cursor: pointer;
+	margin-right:.3em;
+	color: #263351;
+	font-size: 14px;
+}
+
+.checkbox-item {
+	margin-bottom: 4px;
+}
+
+.checkboxes :last-child {
+	margin-bottom: 0;
+}
