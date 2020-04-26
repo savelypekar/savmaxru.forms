@@ -83,4 +83,34 @@ class CSavmaxruFormsMyForms extends CBitrixComponent implements Controllerable
 			$questionTable->addQuestion($questionItem[0], $questionItem[1], $questionItem[2]);
 		}
 	}
+
+	public function updateInterviewAction()
+	{
+
+	}
+
+	public function updateQuestionAction()
+	{
+
+	}
+
+	public function updateOptionAction()
+	{
+
+	}
+
+	public function deleteInterviewAction()
+	{
+
+	}
+
+	public function deleteQuestionAction()
+	{
+
+	}
+
+	public function deleteOptionAction()
+	{
+
+	}
 }
