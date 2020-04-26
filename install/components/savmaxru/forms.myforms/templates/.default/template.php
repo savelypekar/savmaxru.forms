@@ -29,15 +29,21 @@ $connectionInterviewWithQuestion = new \Savmaxru\Forms\Model\ConnectionInterview
 //$result11 = $optionTable->getAllOptions();
 //$result12 = $optionTable->getOptionsForQuestion(1);
 //$result13 = $optionTable->addOption(3, 345, 5);
+//$result14 = $optionTable->deleteRow(5);
+//$result15 = $optionTable->updateRow(7, 3, 345, 5);
 
 //$result21 = $interviewTable->getAllInterviews();
 //$result22 = $interviewTable->addInterview(6, 'title7', '', '',true);
 //$result23 = $interviewTable->getInterviewsByIdAuthor('3');
 //$result24 = $interviewTable->getInterviewsByAmount(1,3);
+//$result25 = $interviewTable->deleteRow(5);
+//$result26 = $interviewTable->updateRow(7, 6, 'title7', '', '',true);
 
 //$result31 = $questionTable->getAllQuestions();
 //$result32 = $questionTable->addQuestion(3,4,5);
-//$result33 = $questionTable->getQuestionsForSetIdInterview(5);
+//$result33 = $questionTable->getQuestionsForSetIdInterview(1);
+//$result34 = $questionTable->deleteRow(5);
+//$result35 = $questionTable->updateRow(7, 3,4,5);
 
 //$result41 = $answerResultTable->saveAnswerResult(10, 33, 1);
 //$result42 = $answerResultTable->getAllResult();
@@ -46,9 +52,9 @@ $connectionInterviewWithQuestion = new \Savmaxru\Forms\Model\ConnectionInterview
 
 //$result51 = $answerToQuestionTable->saveAnswerToQuestion('1', '3', 'my_content');
 //$result52 = $answerToQuestionTable->getAllAnswer();
-//$result53 = $answerToQuestionTable->getResultByIdQuestion('2');
-//$result54 = $answerToQuestionTable->getAnswerByUserId('2');
-//$result55 = $answerToQuestionTable->getAnswerByInterviewId('33');
+//$result53 = $answerToQuestionTable->getResultByIdQuestion('1');
+//$result54 = $answerToQuestionTable->getAnswerByUserId('1');
+//$result55 = $answerToQuestionTable->getAnswerByInterviewId('4');
 
 //$result61 = $answerOptionTable->saveOptionAnswer('3', '79');
 //$result62 = $answerOptionTable->getAllAnswer();
@@ -56,9 +62,9 @@ $connectionInterviewWithQuestion = new \Savmaxru\Forms\Model\ConnectionInterview
 
 //$result71 = $connectionInterviewWithQuestion->addRow(5,7);
 //$result72 = $connectionInterviewWithQuestion->getAllRows();
-//$result73 = $connectionInterviewWithQuestion->getIdQuestionForIdInterview(5);
+//$result73 = $connectionInterviewWithQuestion->getIdQuestionForIdInterview(2);
 
-//var_dump($result24);
+//var_dump($result53);
 
 //Fill the tables with demo data, uncomment the lines and execute ONE time
 //Table INTERVIEW
@@ -116,7 +122,6 @@ firstPosition = '10' (11-1=10)
 <!--
 Get array with interviews by current user
 by userId
--->
 <script>
 	BX.ajax.runComponentAction('savmaxru:forms.myforms', 'loadInterviewCurrentUser', {
 		mode: 'class',
@@ -128,21 +133,22 @@ by userId
 		console.log(response);
 	});
 </script>
+-->
 
 <!--
 Save interview and questions
--->
 <script>
 	let arQuestions = [['1555', '', ''],['1666', '', '']];
 	BX.ajax.runComponentAction('savmaxru:forms.myforms', 'saveInterviewAndQuestion', {
 		mode: 'class',
 		data: {
 			interview: ['1567', 'text1567', '', '', '1'],
-			//questions: ['1002', '', ''],
 			questions: arQuestions,
 		}
 	});
 </script>
+-->
+
 
 
 <div class="myforms-wrapper" id="savmaxru-forms-myforms-wrapper">

@@ -58,4 +58,28 @@ class OptionTable extends DataManager
 		$row = $result -> fetchAll();
 		return $row;
 	}
+
+	public function deleteRow($id)
+	{
+		$result = OptionTable::delete($id);
+
+		if (!$result->isSuccess())
+		{
+			$error = $result->getErrorMessages();
+		}
+	}
+
+	public function updateRow($id, $idQuestion, $content, $position)
+	{
+		$result = OptionTable::update($id, [
+			'ID_QUESTION' => $idQuestion,
+			'CONTENT' => $content,
+			'POSITION' => $position,
+		]);
+
+		if ($result->isSuccess())
+		{
+
+		}
+	}
 }

@@ -70,4 +70,28 @@ class AnswerResultTable extends DataManager
 
 		return $rows;
 	}
+
+	public function deleteRow($id)
+	{
+		$result = AnswerResultTable::delete($id);
+
+		if (!$result->isSuccess())
+		{
+			$error = $result->getErrorMessages();
+		}
+	}
+
+	public function updateRow($id, $idResult, $idInterview, $idUser)
+	{
+		$result = AnswerResultTable::update($id, [
+			'ID_RESULT' => $idResult,
+			'ID_INTERVIEW' => $idInterview,
+			'ID_USER' => $idUser,
+		]);
+
+		if ($result->isSuccess())
+		{
+
+		}
+	}
 }
