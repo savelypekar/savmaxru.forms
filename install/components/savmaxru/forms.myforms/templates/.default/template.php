@@ -132,17 +132,18 @@ by userId
 <!--
 Save interview and questions
 -->
+
 <script>
 	let arQuestions = [['1555', '', ''],['1666', '', '']];
 	BX.ajax.runComponentAction('savmaxru:forms.myforms', 'saveInterviewAndQuestion', {
 		mode: 'class',
 		data: {
 			interview: ['1567', 'text1567', '', '', '1'],
-			//questions: ['1002', '', ''],
 			questions: arQuestions,
 		}
 	});
 </script>
+
 
 
 <div class="myforms-wrapper" id="savmaxru-forms-myforms-wrapper">

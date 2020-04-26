@@ -78,8 +78,9 @@ class CSavmaxruFormsMyForms extends CBitrixComponent implements Controllerable
 		$questionTable = new \Savmaxru\Forms\Model\QuestionTable();
 
 		$interviewTable->addInterview($interview[0], $interview[1], $interview[2], $interview[3], $interview[4]);
-		//need add foreach
-		$questionTable->addQuestion($questions[0][0], $questions[0][1], $questions[0][2]);
-		$questionTable->addQuestion($questions[1][0], $questions[1][1], $questions[1][2]);
+		foreach ($questions as $questionItem)
+		{
+			$questionTable->addQuestion($questionItem[0], $questionItem[1], $questionItem[2]);
+		}
 	}
 }
