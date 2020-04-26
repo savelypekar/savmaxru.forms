@@ -6,7 +6,15 @@
 \Bitrix\Main\UI\Extension::load('savmaxru.guicomponents');
 ?>
 
+
+<?= 'Страница '.$arResult['MODE']?>
+
+
 <?
+//id user
+//global $USER;
+//echo $USER->GetID();
+
 $optionTable = new \Savmaxru\Forms\Model\OptionTable();
 $interviewTable = new \Savmaxru\Forms\Model\InterviewTable();
 $questionTable = new \Savmaxru\Forms\Model\QuestionTable();
@@ -69,10 +77,9 @@ $connectionInterviewWithQuestion = new \Savmaxru\Forms\Model\ConnectionInterview
 //$fill = $interviewTable->addInterview(3, 'Survey from AnketkaRu site', '', '',true);
 ?>
 
-
 <!--
 Get array with all forms
--->
+
 <script>
 	//alert("Checking the script");
 	//console.log('Checking the script');
@@ -83,14 +90,15 @@ Get array with all forms
 		console.log(response);
 	});
 </script>
+-->
 
 <!--
 Get array with interviews by amount
 if you need 11-15 interview,
 need params:
 quantity = '5',
-firstPosition = '11'
--->
+firstPosition = '10' (11-1=10)
+
 <script>
 	BX.ajax.runComponentAction('savmaxru:forms.myforms', 'loadInterviewByAmount', {
 		mode: 'class',
@@ -100,6 +108,39 @@ firstPosition = '11'
 		}
 	}).then(function (response) {
 		console.log(response);
+	});
+</script>
+-->
+
+
+<!--
+Get array with interviews by current user
+by userId
+-->
+<script>
+	BX.ajax.runComponentAction('savmaxru:forms.myforms', 'loadInterviewCurrentUser', {
+		mode: 'class',
+		data: {
+			quantity: '10',
+			firstPosition: '0'
+		}
+	}).then(function (response) {
+		console.log(response);
+	});
+</script>
+
+<!--
+Save interview and questions
+-->
+<script>
+	let arQuestions = [['1555', '', ''],['1666', '', '']];
+	BX.ajax.runComponentAction('savmaxru:forms.myforms', 'saveInterviewAndQuestion', {
+		mode: 'class',
+		data: {
+			interview: ['1567', 'text1567', '', '', '1'],
+			//questions: ['1002', '', ''],
+			questions: arQuestions,
+		}
 	});
 </script>
 
@@ -150,5 +191,3 @@ firstPosition = '11'
 	);
 
 </script>
-
-

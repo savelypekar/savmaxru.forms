@@ -28,11 +28,11 @@ class OptionTable extends DataManager
 
 	public function addOption($idQuestion, $content, $position)
 	{
-		$result = OptionTable::add(array(
+		$result = OptionTable::add([
 			'ID_QUESTION' => $idQuestion,
 			'CONTENT' => $content,
 			'POSITION' => $position,
-		));
+		]);
 
 		if ($result->isSuccess())
 		{
@@ -42,21 +42,19 @@ class OptionTable extends DataManager
 
 	public function getAllOptions()
 	{
-		$result = OptionTable::getList(array(
-			'select' => array('ID', 'ID_QUESTION', 'CONTENT', 'POSITION')
-		));
+		$result = OptionTable::getList([
+			'select' => ['ID', 'ID_QUESTION', 'CONTENT', 'POSITION']
+		]);
 		$row = $result ->fetchAll();
 		return $row;
 	}
 
 	public function getOptionsForQuestion($idQuestion)
 	{
-		$result = OptionTable::getList(array(
+		$result = OptionTable::getList([
 			'select' => array('ID', 'ID_QUESTION', 'CONTENT', 'POSITION'),
-			'filter' => array(
-				'=ID_QUESTION' => $idQuestion
-			)
-		));
+			'filter' =>['ID_QUESTION' => $idQuestion],
+		]);
 		$row = $result -> fetchAll();
 		return $row;
 	}

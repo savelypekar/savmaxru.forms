@@ -27,10 +27,10 @@ class ConnectionInterviewWithQuestionTable extends DataManager
 
 	public function addRow($idInterview, $idPosition)
 	{
-		$result = ConnectionInterviewWithQuestionTable::add(array(
+		$result = ConnectionInterviewWithQuestionTable::add([
 			'ID_INTERVIEW' => $idInterview,
 			'ID_QUESTION' => $idPosition,
-		));
+		]);
 
 		if ($result->isSuccess())
 		{
@@ -40,9 +40,9 @@ class ConnectionInterviewWithQuestionTable extends DataManager
 
 	public function getAllRows()
 	{
-		$result = ConnectionInterviewWithQuestionTable::getList(array(
-			'select' => array('ID', 'ID_INTERVIEW', 'ID_QUESTION')
-		));
+		$result = ConnectionInterviewWithQuestionTable::getList([
+			'select' => ['ID', 'ID_INTERVIEW', 'ID_QUESTION']
+		]);
 		$rows = $result ->fetchAll();
 		return $rows;
 	}
@@ -50,9 +50,9 @@ class ConnectionInterviewWithQuestionTable extends DataManager
 	public function getIdQuestionForIdInterview($idInterview)
 	{
 		$setIdQuestion = [];
-		$result = ConnectionInterviewWithQuestionTable::getList(array(
-			'select' => array('ID', 'ID_INTERVIEW', 'ID_QUESTION')
-		));
+		$result = ConnectionInterviewWithQuestionTable::getList([
+			'select' => ['ID', 'ID_INTERVIEW', 'ID_QUESTION']
+		]);
 		$rows = $result ->fetchAll();
 
 		foreach ($rows as $row)

@@ -28,11 +28,11 @@ class AnswerResultTable extends DataManager
 
 	public static function saveAnswerResult($idResult, $idInterview, $idUser)
 	{
-		$result = AnswerResultTable::add(array(
+		$result = AnswerResultTable::add([
 			'ID_RESULT' => $idResult,
 			'ID_INTERVIEW' => $idInterview,
 			'ID_USER' => $idUser,
-		));
+		]);
 
 		if ($result->isSuccess())
 		{
@@ -42,48 +42,32 @@ class AnswerResultTable extends DataManager
 
 	public function getAllResult()
 	{
-		$result = AnswerResultTable::getList(array(
-			'select' => array('ID', 'ID_RESULT', 'ID_INTERVIEW', 'ID_USER')
-		));
+		$result = AnswerResultTable::getList([
+			'select' => ['ID', 'ID_RESULT', 'ID_INTERVIEW', 'ID_USER']
+		]);
 		$row = $result ->fetchAll();
 		return $row;
 	}
 
 	public function getResultByIdUser($idUser)
 	{
-		$resultRows = [];
-		$result = AnswerResultTable::getList(array(
-			'select' => array('ID', 'ID_RESULT', 'ID_INTERVIEW', 'ID_USER')
-		));
+		$result = AnswerResultTable::getList([
+			'select' => ['ID', 'ID_RESULT', 'ID_INTERVIEW', 'ID_USER'],
+			'filter' => ['ID_USER' => $idUser],
+		]);
 		$rows = $result ->fetchAll();
 
-		foreach ($rows as $row)
-		{
-			if ($row['ID_USER'] == $idUser)
-			{
-				array_push($resultRows, $row);
-			}
-		}
-
-		return $resultRows;
+		return $rows;
 	}
 
 	public function getResultByIdInterview($idInterview)
 	{
-		$resultRows = [];
-		$result = AnswerResultTable::getList(array(
-			'select' => array('ID', 'ID_RESULT', 'ID_INTERVIEW', 'ID_USER')
-		));
+		$result = AnswerResultTable::getList([
+			'select' => ['ID', 'ID_RESULT', 'ID_INTERVIEW', 'ID_USER'],
+			'filter' => ['ID_INTERVIEW' => $idInterview],
+		]);
 		$rows = $result ->fetchAll();
 
-		foreach ($rows as $row)
-		{
-			if ($row['ID_INTERVIEW'] == $idInterview)
-			{
-				array_push($resultRows, $row);
-			}
-		}
-
-		return $resultRows;
+		return $rows;
 	}
 }

@@ -28,11 +28,11 @@ class QuestionTable extends DataManager
 
 	public function addQuestion($type, $content, $position)
 	{
-		$result = QuestionTable::add(array(
+		$result = QuestionTable::add([
 			'TYPE' => $type,
 			'CONTENT' => $content,
 			'POSITION' => $position,
-		));
+		]);
 
 		if ($result->isSuccess())
 		{
@@ -42,9 +42,9 @@ class QuestionTable extends DataManager
 
 	public function getAllQuestions()
 	{
-		$result = QuestionTable::getList(array(
-			'select' => array('ID', 'TYPE', 'CONTENT', 'POSITION')
-		));
+		$result = QuestionTable::getList([
+			'select' => ['ID', 'TYPE', 'CONTENT', 'POSITION']
+		]);
 		$row = $result ->fetchAll();
 		return $row;
 	}
@@ -55,9 +55,9 @@ class QuestionTable extends DataManager
 		$setIdQuestion = $connectionInterviewWithQuestion->getIdQuestionForIdInterview($idInterview);
 		$questions = [];
 
-		$result = QuestionTable::getList(array(
+		$result = QuestionTable::getList([
 			'select' => array('ID', 'TYPE', 'CONTENT', 'POSITION')
-		));
+		]);
 		$rows = $result ->fetchAll();
 
 		foreach ($rows as $row)
