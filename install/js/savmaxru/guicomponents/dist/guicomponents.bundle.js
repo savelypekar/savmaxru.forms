@@ -161,13 +161,15 @@
 	  }, {
 	    key: "getResult",
 	    value: function getResult() {
+	      var result = [];
 	      var items = this.getAllElementsOfTheNode('checkboxes');
 
 	      for (var i = 0; i < items.length; i++) {
 	        var item = items[i];
-	        var checkbox = document.querySelectorAll('checkbox');
-	        alert(checkbox.checked);
+	        result.push(item.children[0].checked);
 	      }
+
+	      return result;
 	    }
 	  }]);
 	  return CheckboxList;
@@ -196,20 +198,32 @@
 	  babelHelpers.inherits(Button, _GUIComponent);
 
 	  function Button() {
-	    var _this;
+	    var _this2;
 
 	    babelHelpers.classCallCheck(this, Button);
-	    _this = babelHelpers.possibleConstructorReturn(this, babelHelpers.getPrototypeOf(Button).call(this));
+	    _this2 = babelHelpers.possibleConstructorReturn(this, babelHelpers.getPrototypeOf(Button).call(this));
 
-	    _this.setComponent(main_core.Tag.render(_templateObject$3(), _this.addNode("button")));
+	    _this2.setComponent(main_core.Tag.render(_templateObject$3(), _this2.addNode("button")));
 
-	    return _this;
+	    return _this2;
 	  }
 
 	  babelHelpers.createClass(Button, [{
 	    key: "addOption",
 	    value: function addOption(option) {
 	      this.includeInNode("button", main_core.Tag.render(_templateObject2$2(), option));
+	    }
+	  }, {
+	    key: "onDown",
+	    value: function onDown(_function) {
+	      this._function = _function;
+	      var htmlObject = this.getHTMLObject();
+	      htmlObject.dataStructure = this;
+	      this._function = _function;
+
+	      this.getHTMLObject().onclick = function (_this) {
+	        htmlObject.dataStructure._function();
+	      };
 	    }
 	  }]);
 	  return Button;

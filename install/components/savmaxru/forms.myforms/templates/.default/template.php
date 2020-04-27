@@ -208,5 +208,8 @@ Save interview and questions
 		}
 	);
 
+	dropdownlist3.onDown(function(){
+		alert(dropdownlist2.getResult());
+	});
 	//dropdownlist2.getAllElementsOfTheNode('checkboxes');
 </script>

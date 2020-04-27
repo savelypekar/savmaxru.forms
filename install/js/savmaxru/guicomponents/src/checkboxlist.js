@@ -26,8 +26,8 @@ export class CheckboxList extends GUIComponent
 		for(let i=0; i<items.length; i++)
 		{
 			let item = items[i];
-			let checkbox =  document.querySelectorAll('checkbox');
-			alert(checkbox.checked);
+			result.push(item.children[0].checked)
 		}
+		return result;
 	}
 }
