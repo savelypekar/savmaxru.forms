@@ -166,7 +166,9 @@
 
 	      for (var i = 0; i < items.length; i++) {
 	        var item = items[i];
-	        result.push(item.children[0].checked);
+	        var itemInfo = [];
+	        itemInfo[item.children[1].innerHTML] = item.children[0].checked;
+	        result.push(itemInfo);
 	      }
 
 	      return result;
