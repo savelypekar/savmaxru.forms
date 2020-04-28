@@ -137,6 +137,7 @@ by userId
 
 <!--
 Save interview and questions
+
 <script>
 	let arQuestions = [['1555', '', ''],['1666', '', '']];
 	BX.ajax.runComponentAction('savmaxru:forms.myforms', 'saveInterviewAndQuestion', {
@@ -149,6 +150,22 @@ Save interview and questions
 </script>
 -->
 
+<!--
+Save all data
+-->
+<script>
+	let arInterviews = [['12345', 'title1', '', '', '1'],['23456', 'title2', '', '', '1']];
+	let arQuestions = [['1555', 'content1', ''],['type2', 'content2', '']];
+	let arOptions = [['1', 'option1', ''],['2', 'option2', '']];
+	BX.ajax.runComponentAction('savmaxru:forms.myforms', 'saveAllData', {
+		mode: 'class',
+		data: {
+			interviews: arInterviews,
+			questions: arQuestions,
+			options: arOptions,
+		}
+	});
+</script>
 
 
 <div class="myforms-wrapper" id="savmaxru-forms-myforms-wrapper">
