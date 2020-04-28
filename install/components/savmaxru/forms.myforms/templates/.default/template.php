@@ -154,7 +154,7 @@ Save interview and questions
 Save all data
 -->
 <script>
-	let arInterviews = [['12345', 'title1', '', '', '1'],['23456', 'title2', '', '', '1']];
+	let arInterviews = [['12345', 'title1', '1', '1date', '1'],['23', '2', '', '', '1']];
 	let arQuestions = [['1555', 'content1', ''],['type2', 'content2', '']];
 	let arOptions = [['1', 'option1', ''],['2', 'option2', '']];
 	BX.ajax.runComponentAction('savmaxru:forms.myforms', 'saveAllData', {

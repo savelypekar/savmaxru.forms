@@ -24,8 +24,8 @@ class InterviewTable extends DataManager
 			]),
 			new StringField("ID_AUTHOR"),
 			new StringField("TITLE"),
-			new DateField("DATE_CREATE"),
-			new DateField("DATE_EDIT"),
+			new StringField("DATE_CREATE"),
+			new StringField("DATE_EDIT"),
 			new BooleanField("VISIBLE"),
 		];
 	}
