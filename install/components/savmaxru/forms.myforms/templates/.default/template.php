@@ -208,10 +208,21 @@ Save interview and questions
 		}
 	);
 
-	dropdownlist3.onDown(function(){
-		console.log(dropdownlist2.getResult());
-	});
 
+	let dropdownlist4 = Savmaxru.GUIComponents.attachComponent('RadiobuttonList');
+	document.getElementById('savmaxru-forms-myforms-gallery').append(dropdownlist4.getHTMLObject());
+	dropdownlist4.build(
+		{
+			'description':'Test',
+			'options': ['Russia', 'USA'],
+			'comment': 'comment',
+			'required': true,
+			'IDManager': IDManager,
+		}
+	);
+	dropdownlist3.onDown(function(){
+		console.log(dropdownlist4.getResult());
+	});
 
 	//dropdownlist2.getAllElementsOfTheNode('checkboxes');
 </script>
