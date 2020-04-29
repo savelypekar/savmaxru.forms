@@ -54,20 +54,16 @@
 }
 
 
-input[type="checkbox"] {
+/*region CHECKBOX*/
+.savmaxru-forms input[type="checkbox"] {
 	display: none;
 }
 
-
-label:before {
+.savmaxru-forms .checkbox-label:before {
 	content: " ";
-	color: #000;
 	display: inline-block;
-	font: 20px/30px Arial;
 	margin-right: 15px;
 	position: relative;
-	text-align: center;
-	text-indent: 0px;
 	width: 25px;
 	height: 25px;
 	background: #FFF;
@@ -78,35 +74,71 @@ label:before {
 	background-size: cover;
 }
 
-input:checked + label:before {
+.savmaxru-forms input:checked + .checkbox-label:before {
 	background-image: url("checkbox-mark-checked.png");
 }
 
-input:not(:checked) + label:hover::before {
+.savmaxru-forms input:not(:checked) + .checkbox-label:hover::before {
 	background-image: url("checkbox-mark-over.png");
 }
 
-input:disabled + label:before {
-	background: #eee;
-	color: #aaa;
-}
-
-.savmaxru-forms label {
+.savmaxru-forms .checkbox-label {
 	cursor: pointer;
 	margin-right:.3em;
 	color: #263351;
 	font-size: 14px;
 }
 
-.checkbox-item {
+.savmaxru-forms .checkbox-item {
 	margin-bottom: 4px;
 }
 
-.checkboxes :last-child {
+/*endregion*/
+
+.savmaxru-forms .electiveitemslist :last-child {
 	margin-bottom: 0;
 }
 
-.button
+.savmaxru-forms input[type="radio"] {
+	display: none;
+}
+
+.savmaxru-forms .radiobutton-label:before {
+	content: " ";
+	display: inline-block;
+	margin-right: 15px;
+	position: relative;
+	width: 25px;
+	height: 25px;
+	background: #FFF;
+	border: 1px solid #ccc;
+	border-radius: 100px;
+	border-image: initial;
+	vertical-align: middle;
+	background-size: cover;
+}
+
+.savmaxru-forms .radiobutton-label {
+	cursor: pointer;
+	margin-right:.3em;
+	color: #263351;
+	font-size: 14px;
+}
+
+.savmaxru-forms .radiobutton-item {
+	margin-bottom: 4px;
+}
+
+.savmaxru-forms input:checked + .radiobutton-label:before {
+	background-image: url("radiobutton-mark-checked.png");
+}
+
+.savmaxru-forms input:not(:checked) + .radiobutton-label:hover::before {
+	background-image: url("radiobutton-mark-over.png");
+}
+
+/*region BUTTON*/
+.savmaxru-forms .button
 {
 	display: block;
 	cursor: pointer;
@@ -129,11 +161,13 @@ input:disabled + label:before {
 	transition: box-shadow .2s, border-color .2s;
 }
 
-.button:hover {
+.savmaxru-forms .button:hover {
 	box-shadow: inset 0 -1px 1px rgba(0,0,0,0), inset 0 1px 2px rgba(0,0,0,0), inset 0 0 0 60px rgba(255,255,0,.5);
 }
 
-.button:active {
+.savmaxru-forms .button:active {
 	border-color: rgba(177,159,0,1);
 	box-shadow: inset 0 -1px 1px rgba(0,0,0,.1), inset 0 1px 2px rgba(0,0,0,.3), inset 0 0 0 60px rgba(255,255,0,.45);
 }
+/*endregion*/
+

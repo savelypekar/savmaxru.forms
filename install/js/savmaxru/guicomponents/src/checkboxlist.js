@@ -1,23 +1,19 @@
 import {GUIComponent} from "./guicomponent";
 import {Tag} from 'main.core';
+import { ElectiveItemsList } from "./electiveitemslist";
 
-export class CheckboxList extends GUIComponent
+export class CheckboxList extends ElectiveItemsList
 {
-	constructor()
-	{
-		super();
-		this.setComponent(Tag.render`${this.addNode("checkboxes")}`);
-	}
-
 	addOption(option)
 	{
 		let newItemID = this.getNextHighestId();
-		this.includeInNode("checkboxes", Tag.render`
+		this.includeInNode("electiveitemslist", Tag.render`
 		<div class="checkbox-item">
-			<input type="checkbox" class="checkbox" id="${newItemID}" />
-			<label for="${newItemID}">${option}</label>
+			<input type="checkbox" id="${newItemID}" />
+			<label class="checkbox-label" for="${newItemID}">${option}</label>
 		</div>`);
 	}
+<<<<<<< HEAD
 
 	getResult()
 	{
@@ -32,4 +28,6 @@ export class CheckboxList extends GUIComponent
 		}
 		return result;
 	}
+=======
+>>>>>>> objectsGUIextensions
 }

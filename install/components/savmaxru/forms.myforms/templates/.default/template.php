@@ -225,10 +225,28 @@ Save all data
 		}
 	);
 
+
+	let dropdownlist4 = Savmaxru.GUIComponents.attachComponent('RadiobuttonList');
+	document.getElementById('savmaxru-forms-myforms-gallery').append(dropdownlist4.getHTMLObject());
+	dropdownlist4.build(
+		{
+			'description':'Test',
+			'options': ['Russia', 'USA'],
+			'comment': 'comment',
+			'required': true,
+			'IDManager': IDManager,
+		}
+	);
 	dropdownlist3.onDown(function(){
+<<<<<<< HEAD
 		console.log(dropdownlist2.getResult());
 	});
 
 
+=======
+		console.log(dropdownlist4.getResult());
+	});
+
+>>>>>>> objectsGUIextensions
 	//dropdownlist2.getAllElementsOfTheNode('checkboxes');
 </script>
