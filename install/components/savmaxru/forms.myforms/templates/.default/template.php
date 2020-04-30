@@ -179,7 +179,6 @@ Save interview and questions
 
 <!--
 Save all data
--->
 <script>
 	let arInterviews = [['12345', 'title1', '1', '1date', '1'],['23', '2', '', '', '1']];
 	let arQuestions = [['1555', 'content1', ''],['type2', 'content2', '']];
@@ -193,6 +192,7 @@ Save all data
 		}
 	});
 </script>
+-->
 
 
 <div class="myforms-wrapper" id="savmaxru-forms-myforms-wrapper">
