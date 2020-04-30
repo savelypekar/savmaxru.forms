@@ -224,5 +224,26 @@ Save interview and questions
 		console.log(dropdownlist4.getResult());
 	});
 
+	let dropdownlist5 = Savmaxru.GUIComponents.attachComponent('Heading');
+	dropdownlist5.build(
+		{
+			'options': ['Заголовок'],
+		}
+	);
+	document.getElementById('savmaxru-forms-myforms-gallery').append(dropdownlist5.getHTMLObject());
+
+	let dropdownlist6 = Savmaxru.GUIComponents.attachComponent('SingleLineTextBox');
+	document.getElementById('savmaxru-forms-myforms-gallery').append(dropdownlist6.getHTMLObject());
+
+	dropdownlist6.build(
+		{
+			'description':'Test',
+			'options': ['Russia', 'USA'],
+			'comment': 'comment',
+			'required': true,
+			'IDManager': IDManager,
+		}
+	);
+
 	//dropdownlist2.getAllElementsOfTheNode('checkboxes');
 </script>

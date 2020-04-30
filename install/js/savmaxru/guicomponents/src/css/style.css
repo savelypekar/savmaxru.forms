@@ -4,14 +4,14 @@
 
 .savmaxru-forms .dropdownlist select {
 	display: block;
-	width: 380px;
-	padding: .75rem 2.5rem .75rem 1rem;
+	width: 480px;
+	padding: .75rem 0 .75rem 1rem;
 	background: none;
 	border: 1px solid #ccc;
 	border-radius: 3px;
 	appearance: none;
 	font-family: inherit;
-	font-size: 1rem;
+	font-size: 1.3rem;
 	color: #444;
 }
 
@@ -99,6 +99,7 @@
 	margin-bottom: 0;
 }
 
+/*region RADIOBUTTON*/
 .savmaxru-forms input[type="radio"] {
 	display: none;
 }
@@ -136,6 +137,7 @@
 .savmaxru-forms input:not(:checked) + .radiobutton-label:hover::before {
 	background-image: url("radiobutton-mark-over.png");
 }
+/*endregion*/
 
 /*region BUTTON*/
 .savmaxru-forms .button
@@ -171,3 +173,22 @@
 }
 /*endregion*/
 
+.savmaxru-forms .heading-item
+{
+	color: #304c62;
+	text-align: center;
+	font-size: 18px;
+}
+
+.savmaxru-forms .textbox{
+	display: block;
+	width: calc(480px - 2.5rem - 1rem - 2*1px);
+	padding: .75rem 2.5rem .75rem 1rem;
+	background: none;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	appearance: none;
+	font-family: inherit;
+	font-size: 1.3rem;
+	color: #444;
+}

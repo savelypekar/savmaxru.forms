@@ -55,12 +55,18 @@ export class GUIComponent extends Savmaxru.ObjectGUI
 
 	setDescription(description)
 	{
-		this.includeInNode("description",description);
+		if(description!== undefined)
+		{
+			this.includeInNode("description",description);
+		}
 	}
 
 	setComment(comment)
 	{
-		this.includeInNode("comment",comment);
+		if(comment!== undefined)
+		{
+			this.includeInNode("comment",comment);
+		}
 	}
 
 	setFieldAsRequired()

@@ -2,6 +2,9 @@ import {DropDownList} from "./dropdownlist";
 import {CheckboxList} from "./checkboxlist";
 import {RadiobuttonList} from "./radiobuttonlist";
 import {Button} from "./button";
+import {Heading} from "./heading";
+import {SingleLineTextBox} from "./ singlelinetextbox";
+
 import './css/style.css'
 
 export class GUIComponents
@@ -11,6 +14,8 @@ export class GUIComponents
 		"CheckboxList": CheckboxList,
 		"Button": Button,
 		"RadiobuttonList" : RadiobuttonList,
+		"Heading" : Heading,
+		"SingleLineTextBox" : SingleLineTextBox,
 	};
 
 	static attachComponent(name)
