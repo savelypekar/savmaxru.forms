@@ -220,9 +220,7 @@ Save interview and questions
 			'IDManager': IDManager,
 		}
 	);
-	dropdownlist3.onDown(function(){
-		console.log(dropdownlist4.getResult());
-	});
+
 
 	let dropdownlist5 = Savmaxru.GUIComponents.attachComponent('Heading');
 	dropdownlist5.build(
@@ -237,13 +235,15 @@ Save interview and questions
 
 	dropdownlist6.build(
 		{
-			'description':'Test',
-			'options': ['Russia', 'USA'],
+			'description':'wwTest',
 			'comment': 'comment',
-			'required': true,
-			'IDManager': IDManager,
 		}
 	);
+	;
+	dropdownlist3.onDown(function(){
+		console.log(dropdownlist6.getResult());
+	});
+
 
 	//dropdownlist2.getAllElementsOfTheNode('checkboxes');
 </script>

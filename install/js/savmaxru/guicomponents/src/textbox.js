@@ -6,5 +6,6 @@ export class TextBox extends GUIComponent
 	constructor()
 	{
 		super();
+		this.setComponent(Tag.render`${this.addNode("textbox")}`);
 	}
 }
