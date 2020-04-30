@@ -25,11 +25,11 @@ class ConnectionInterviewWithQuestionTable extends DataManager
 		];
 	}
 
-	public function addRow($idInterview, $idPosition)
+	public function addRow($idInterview, $idQuestion)
 	{
 		$result = ConnectionInterviewWithQuestionTable::add([
 			'ID_INTERVIEW' => $idInterview,
-			'ID_QUESTION' => $idPosition,
+			'ID_QUESTION' => $idQuestion,
 		]);
 
 		if ($result->isSuccess())
