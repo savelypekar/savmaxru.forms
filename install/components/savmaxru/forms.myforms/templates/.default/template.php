@@ -81,6 +81,33 @@ $connectionInterviewWithQuestion = new \Savmaxru\Forms\Model\ConnectionInterview
 //$fill = $interviewTable->addInterview(3, 'Security Testing in Programming', '', '',true);
 //$fill = $interviewTable->addInterview(3, 'Internship Candidate Resume', '', '',true);
 //$fill = $interviewTable->addInterview(3, 'Survey from AnketkaRu site', '', '',true);
+
+//BETA INTERVIEW
+/*
+$fill = $interviewTable->addInterview(1, 'Security Testing', '30.04..2020', '',true);
+
+$fill = $questionTable->addQuestion('checkbox','Do you agree to receive notifications?',1);
+$fill = $questionTable->addQuestion('radiobtn','Enter your gender',2);
+$fill = $questionTable->addQuestion('list','Level of your education?',3);
+$fill = $questionTable->addQuestion('input','Enter your name',4);
+$fill = $questionTable->addQuestion('textarea','Leave your wishes here',5);
+
+$fill = $optionTable->addOption(1, 'Yes', 1);
+$fill = $optionTable->addOption(1, 'No', 2);
+$fill = $optionTable->addOption(2, 'Male', 1);
+$fill = $optionTable->addOption(2, 'Female', 2);
+$fill = $optionTable->addOption(3, 'Associate Level ', 1);
+$fill = $optionTable->addOption(3, 'Bachelor', 2);
+$fill = $optionTable->addOption(3, 'Master of Arts', 3);
+$fill = $optionTable->addOption(3, 'Doctorate', 4);
+
+$fill = $connectionInterviewWithQuestion->addRow(1,1);
+$fill = $connectionInterviewWithQuestion->addRow(1,2);
+$fill = $connectionInterviewWithQuestion->addRow(1,3);
+$fill = $connectionInterviewWithQuestion->addRow(1,4);
+$fill = $connectionInterviewWithQuestion->addRow(1,5);
+*/
+//END BETA INTERVIEW
 ?>
 
 <!--
@@ -174,6 +201,8 @@ Save all data
 	</div>
 </div>
 
+
+<!--
 <script type="text/javascript">
 
 	//let myForms = new Savmaxru.MyForms(document.getElementById('savmaxru-forms-myforms-gallery'));
@@ -277,3 +306,4 @@ Save all data
 >>>>>>> objectsGUIextensions
 	//dropdownlist2.getAllElementsOfTheNode('checkboxes');
 </script>
+-->
