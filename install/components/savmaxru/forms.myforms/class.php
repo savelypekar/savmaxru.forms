@@ -90,6 +90,8 @@ class CSavmaxruFormsMyForms extends CBitrixComponent implements Controllerable
 		$questionTable = new \Savmaxru\Forms\Model\QuestionTable();
 		$optionTable = new \Savmaxru\Forms\Model\OptionTable();
 
+		$lastIdInterview = $interviewTable->getMaxIDKey();
+		$lastIdQuestion = $questionTable->getMaxIDKey();
 		foreach ($interviews as $interviewItem)
 		{
 			$interviewTable->addInterview($interviewItem[0], $interviewItem[1], $interviewItem[2], $interviewItem[3], $interviewItem[4]);
@@ -100,6 +102,7 @@ class CSavmaxruFormsMyForms extends CBitrixComponent implements Controllerable
 		}
 		foreach ($options as $optionItem)
 		{
+			$optionItem[0] = $optionItem[0] + $lastIdQuestion;
 			$optionTable->addOption($optionItem[0], $optionItem[1], $optionItem[2]);
 		}
 	}

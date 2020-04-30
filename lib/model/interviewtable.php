@@ -115,4 +115,13 @@ class InterviewTable extends DataManager
 
 		}
 	}
+
+	public function getMaxIDKey()
+	{
+		$result = InterviewTable::getList([
+			'select' => ['ID'],
+		]);
+		$maxIDKey = max($result ->fetchAll());
+		return $maxIDKey;
+	}
 }
