@@ -1,4 +1,3 @@
-import {ObjectGUI} from "savmaxru.objectgui";
 import { GUIComponent } from "./guicomponent";
 import {Tag} from 'main.core';
 

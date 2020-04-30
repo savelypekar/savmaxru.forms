@@ -237,7 +237,28 @@ Save all data
 			'IDManager': IDManager,
 		}
 	);
+
+
+	let dropdownlist5 = Savmaxru.GUIComponents.attachComponent('Heading');
+	dropdownlist5.build(
+		{
+			'options': ['Заголовок'],
+		}
+	);
+	document.getElementById('savmaxru-forms-myforms-gallery').append(dropdownlist5.getHTMLObject());
+
+	let dropdownlist6 = Savmaxru.GUIComponents.attachComponent('SingleLineTextBox');
+	document.getElementById('savmaxru-forms-myforms-gallery').append(dropdownlist6.getHTMLObject());
+
+	dropdownlist6.build(
+		{
+			'description':'wwTest',
+			'comment': 'comment',
+		}
+	);
+	;
 	dropdownlist3.onDown(function(){
+<<<<<<< HEAD
 <<<<<<< HEAD
 		console.log(dropdownlist2.getResult());
 	});
@@ -246,6 +267,12 @@ Save all data
 =======
 		console.log(dropdownlist4.getResult());
 	});
+
+>>>>>>> objectsGUIextensions
+=======
+		console.log(dropdownlist6.getResult());
+	});
+
 
 >>>>>>> objectsGUIextensions
 	//dropdownlist2.getAllElementsOfTheNode('checkboxes');

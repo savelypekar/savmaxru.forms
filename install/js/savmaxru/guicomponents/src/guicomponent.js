@@ -30,7 +30,8 @@ export class GUIComponent extends Savmaxru.ObjectGUI
 		return this.IDManager.getNextHighestId();
 	}
 
-	build(data){
+	build(data)
+	{
 		this.IDManager = data['IDManager'];
 		this.setDescription(data['description']);
 		this.setComment(data['comment']);
@@ -43,8 +44,12 @@ export class GUIComponent extends Savmaxru.ObjectGUI
 
 	addOptions(options)
 	{
-		for(let i = 0; i<options.length; i++){
-			this.addOption(options[i]);
+		if(options !== undefined)
+		{
+			for(let i = 0; i<options.length; i++)
+			{
+				this.addOption(options[i]);
+			}
 		}
 	}
 
@@ -55,12 +60,18 @@ export class GUIComponent extends Savmaxru.ObjectGUI
 
 	setDescription(description)
 	{
-		this.includeInNode("description",description);
+		if(description !== undefined)
+		{
+			this.includeInNode("description",description);
+		}
 	}
 
 	setComment(comment)
 	{
-		this.includeInNode("comment",comment);
+		if(comment !== undefined)
+		{
+			this.includeInNode("comment",comment);
+		}
 	}
 
 	setFieldAsRequired()
