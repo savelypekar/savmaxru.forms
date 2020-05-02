@@ -11,29 +11,9 @@ use Bitrix\Main\Localization\Loc;
 
 class CSavmaxruFormsMyForms extends CBitrixComponent implements Controllerable
 {
-	private $modeNames = [
-		"result" =>'result-list',
-		'' => 'form-list',
-	];
-
-	private function getModeName()
-	{
-		$modeName = $this->modeNames[$this->arParams['MODE']];
-		if($modeName === null)
-		{
-			$modeName = $this->modeNames[''];
-		}
-
-		return $modeName;
-	}
 
 	public function executeComponent()
 	{
-		$this->arResult = [
-			'MODE' => $this->getModeName(),
-			'URL' => $this->arParams['URL'],
-		];
-
 		$this->includeComponentTemplate();
 	}
 

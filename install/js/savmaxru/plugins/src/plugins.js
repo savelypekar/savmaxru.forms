@@ -2,9 +2,12 @@ import {ObjectsGallery} from "./objectsgallery";
 
 export class Plugins
 {
-	constructor()
-	{
+	static pluginClasses = {
+		"ObjectsGallery": ObjectsGallery,
+	};
 
-		//let obj = new ObjectsGallery();
+	static attachPlugin(name)
+	{
+		return new this.pluginClasses[name]();
 	}
 }

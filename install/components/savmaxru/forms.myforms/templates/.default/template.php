@@ -4,6 +4,7 @@
 \Bitrix\Main\UI\Extension::load('savmaxru.myforms');
 \Bitrix\Main\UI\Extension::load('savmaxru.idmanager');
 \Bitrix\Main\UI\Extension::load('savmaxru.guicomponents');
+\Bitrix\Main\UI\Extension::load('savmaxru.plugins');
 ?>
 
 
@@ -168,6 +169,7 @@ Save interview and questions
 	let IDManager = new Savmaxru.IDManager('myforms');
 
 
+
 	let dropdownlist = Savmaxru.GUIComponents.attachComponent('DropDownList');
 	dropdownlist.build(
 		{
@@ -247,6 +249,8 @@ Save interview and questions
 	dropdownlist3.onDown(function(){
 		console.log(dropdownlist7.getResult());
 	});
+
+
 
 	//dropdownlist2.getAllElementsOfTheNode('checkboxes');
 </script>
