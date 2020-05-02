@@ -239,11 +239,14 @@ Save interview and questions
 			'comment': 'comment',
 		}
 	);
-	;
-	dropdownlist3.onDown(function(){
-		console.log(dropdownlist6.getResult());
-	});
 
+
+	let dropdownlist7 = Savmaxru.GUIComponents.attachComponent('MultiLineTextBox');
+	document.getElementById('savmaxru-forms-myforms-gallery').append(dropdownlist7.getHTMLObject());
+
+	dropdownlist3.onDown(function(){
+		console.log(dropdownlist7.getResult());
+	});
 
 	//dropdownlist2.getAllElementsOfTheNode('checkboxes');
 </script>
