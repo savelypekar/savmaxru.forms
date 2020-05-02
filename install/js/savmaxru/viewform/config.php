@@ -5,11 +5,12 @@ if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true)
 }
 
 return [
-	'css' => 'dist/plugins.bundle.css',
-	'js' => 'dist/plugins.bundle.js',
+	'css' => 'dist/viewform.bundle.css',
+	'js' => 'dist/viewform.bundle.js',
 	'rel' => [
-		'savmaxru.objectgui',
 		'main.core',
+		'savmaxru.objectgui',
+		'savmaxru.plugins',
 	],
 	'skip_core' => false,
 ];

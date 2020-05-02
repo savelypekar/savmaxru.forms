@@ -6,8 +6,8 @@ export class Plugins
 		"ObjectsGallery": ObjectsGallery,
 	};
 
-	static attachPlugin(name)
+	static attachPlugin(name,argument)
 	{
-		return new this.pluginClasses[name]();
+		return new this.pluginClasses[name](argument);
 	}
 }
