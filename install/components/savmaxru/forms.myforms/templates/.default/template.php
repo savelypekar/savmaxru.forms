@@ -4,6 +4,7 @@
 \Bitrix\Main\UI\Extension::load('savmaxru.myforms');
 \Bitrix\Main\UI\Extension::load('savmaxru.idmanager');
 \Bitrix\Main\UI\Extension::load('savmaxru.guicomponents');
+\Bitrix\Main\UI\Extension::load('savmaxru.plugins');
 ?>
 
 
@@ -205,16 +206,16 @@ Save all data
 </div>
 
 
-<!--
 <script type="text/javascript">
 
 	//let myForms = new Savmaxru.MyForms(document.getElementById('savmaxru-forms-myforms-gallery'));
-//let comp = new Savmaxru.GUIcomponents();
+	//let comp = new Savmaxru.GUIcomponents();
 
 
 
 	//let dropdownlist = new Savmaxru.GUIComponents();
 	let IDManager = new Savmaxru.IDManager('myforms');
+
 
 
 	let dropdownlist = Savmaxru.GUIComponents.attachComponent('DropDownList');
@@ -288,25 +289,16 @@ Save all data
 			'comment': 'comment',
 		}
 	);
-	;
+
+
+	let dropdownlist7 = Savmaxru.GUIComponents.attachComponent('MultiLineTextBox');
+	document.getElementById('savmaxru-forms-myforms-gallery').append(dropdownlist7.getHTMLObject());
+
 	dropdownlist3.onDown(function(){
-<<<<<<< HEAD
-<<<<<<< HEAD
-		console.log(dropdownlist2.getResult());
+		console.log(dropdownlist7.getResult());
 	});
 
 
-=======
-		console.log(dropdownlist4.getResult());
-	});
 
->>>>>>> objectsGUIextensions
-=======
-		console.log(dropdownlist6.getResult());
-	});
-
-
->>>>>>> objectsGUIextensions
 	//dropdownlist2.getAllElementsOfTheNode('checkboxes');
 </script>
--->

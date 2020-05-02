@@ -52,6 +52,6 @@ export class ObjectGUI
 
 	constructor()
 	{
-		this.wrapper = this.createNode();
+		this.wrapper = this.createNode('div');
 	}
 }

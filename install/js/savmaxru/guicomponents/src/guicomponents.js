@@ -3,7 +3,8 @@ import {CheckboxList} from "./checkboxlist";
 import {RadiobuttonList} from "./radiobuttonlist";
 import {Button} from "./button";
 import {Heading} from "./heading";
-import {SingleLineTextBox} from "./ singlelinetextbox";
+import {Singlelinetextbox} from "./singlelinetextbox";
+import {MultiLineTextBox} from "./multilinetextbox";
 
 import './css/style.css'
 
@@ -15,7 +16,8 @@ export class GUIComponents
 		"Button": Button,
 		"RadiobuttonList" : RadiobuttonList,
 		"Heading" : Heading,
-		"SingleLineTextBox" : SingleLineTextBox,
+		"SingleLineTextBox" : Singlelinetextbox,
+		"MultiLineTextBox" : MultiLineTextBox,
 	};
 
 	static attachComponent(name)

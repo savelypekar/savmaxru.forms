@@ -54,7 +54,7 @@
 	  function ObjectGUI() {
 	    babelHelpers.classCallCheck(this, ObjectGUI);
 	    babelHelpers.defineProperty(this, "nodes", []);
-	    this.wrapper = this.createNode();
+	    this.wrapper = this.createNode('div');
 	  }
 
 	  return ObjectGUI;

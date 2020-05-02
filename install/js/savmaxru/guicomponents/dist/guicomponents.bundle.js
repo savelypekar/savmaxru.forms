@@ -44,8 +44,10 @@
 	  }, {
 	    key: "addOptions",
 	    value: function addOptions(options) {
-	      for (var i = 0; i < options.length; i++) {
-	        this.addOption(options[i]);
+	      if (options !== undefined) {
+	        for (var i = 0; i < options.length; i++) {
+	          this.addOption(options[i]);
+	        }
 	      }
 	    }
 	  }, {
@@ -56,12 +58,16 @@
 	  }, {
 	    key: "setDescription",
 	    value: function setDescription(description) {
-	      this.includeInNode("description", description);
+	      if (description !== undefined) {
+	        this.includeInNode("description", description);
+	      }
 	    }
 	  }, {
 	    key: "setComment",
 	    value: function setComment(comment) {
-	      this.includeInNode("comment", comment);
+	      if (comment !== undefined) {
+	        this.includeInNode("comment", comment);
+	      }
 	    }
 	  }, {
 	    key: "setFieldAsRequired",
@@ -119,16 +125,6 @@
 	  return DropDownList;
 	}(GUIComponent);
 
-	function _templateObject2$1() {
-	  var data = babelHelpers.taggedTemplateLiteral(["\n\t\t<div class=\"checkbox-item\">\n\t\t\t<input type=\"checkbox\" class=\"checkbox\" id=\"", "\" />\n\t\t\t<label for=\"", "\">", "</label>\n\t\t</div>"]);
-
-	  _templateObject2$1 = function _templateObject2() {
-	    return data;
-	  };
-
-	  return data;
-	}
-
 	function _templateObject$2() {
 	  var data = babelHelpers.taggedTemplateLiteral(["", ""]);
 
@@ -138,31 +134,25 @@
 
 	  return data;
 	}
-	var CheckboxList = /*#__PURE__*/function (_GUIComponent) {
-	  babelHelpers.inherits(CheckboxList, _GUIComponent);
+	var ElectiveItemsList = /*#__PURE__*/function (_GUIComponent) {
+	  babelHelpers.inherits(ElectiveItemsList, _GUIComponent);
 
-	  function CheckboxList() {
+	  function ElectiveItemsList() {
 	    var _this;
 
-	    babelHelpers.classCallCheck(this, CheckboxList);
-	    _this = babelHelpers.possibleConstructorReturn(this, babelHelpers.getPrototypeOf(CheckboxList).call(this));
+	    babelHelpers.classCallCheck(this, ElectiveItemsList);
+	    _this = babelHelpers.possibleConstructorReturn(this, babelHelpers.getPrototypeOf(ElectiveItemsList).call(this));
 
-	    _this.setComponent(main_core.Tag.render(_templateObject$2(), _this.addNode("checkboxes")));
+	    _this.setComponent(main_core.Tag.render(_templateObject$2(), _this.addNode("electiveitemslist")));
 
 	    return _this;
 	  }
 
-	  babelHelpers.createClass(CheckboxList, [{
-	    key: "addOption",
-	    value: function addOption(option) {
-	      var newItemID = this.getNextHighestId();
-	      this.includeInNode("checkboxes", main_core.Tag.render(_templateObject2$1(), newItemID, newItemID, option));
-	    }
-	  }, {
+	  babelHelpers.createClass(ElectiveItemsList, [{
 	    key: "getResult",
 	    value: function getResult() {
 	      var result = [];
-	      var items = this.getAllElementsOfTheNode('checkboxes');
+	      var items = this.getAllElementsOfTheNode('electiveitemslist');
 
 	      for (var i = 0; i < items.length; i++) {
 	        var item = items[i];
@@ -174,23 +164,81 @@
 	      return result;
 	    }
 	  }]);
-	  return CheckboxList;
+	  return ElectiveItemsList;
 	}(GUIComponent);
 
-	function _templateObject2$2() {
+	function _templateObject$3() {
+	  var data = babelHelpers.taggedTemplateLiteral(["\n\t\t<div class=\"checkbox-item\">\n\t\t\t<input type=\"checkbox\" id=\"", "\" />\n\t\t\t<label class=\"checkbox-label\" for=\"", "\">", "</label>\n\t\t</div>"]);
+
+	  _templateObject$3 = function _templateObject() {
+	    return data;
+	  };
+
+	  return data;
+	}
+	var CheckboxList = /*#__PURE__*/function (_ElectiveItemsList) {
+	  babelHelpers.inherits(CheckboxList, _ElectiveItemsList);
+
+	  function CheckboxList() {
+	    babelHelpers.classCallCheck(this, CheckboxList);
+	    return babelHelpers.possibleConstructorReturn(this, babelHelpers.getPrototypeOf(CheckboxList).apply(this, arguments));
+	  }
+
+	  babelHelpers.createClass(CheckboxList, [{
+	    key: "addOption",
+	    value: function addOption(option) {
+	      var newItemID = this.getNextHighestId();
+	      this.includeInNode("electiveitemslist", main_core.Tag.render(_templateObject$3(), newItemID, newItemID, option));
+	    }
+	  }]);
+	  return CheckboxList;
+	}(ElectiveItemsList);
+
+	function _templateObject$4() {
+	  var data = babelHelpers.taggedTemplateLiteral(["\n\t\t<div class=\"radiobutton-item\">\n\t\t\t<input type=\"radio\" id=\"", "\" name=\"", "\">\n  \t\t\t<label class=\"radiobutton-label\" for=\"", "\">", "</label>\n\t\t</div>"]);
+
+	  _templateObject$4 = function _templateObject() {
+	    return data;
+	  };
+
+	  return data;
+	}
+	var RadiobuttonList = /*#__PURE__*/function (_ElectiveItemsList) {
+	  babelHelpers.inherits(RadiobuttonList, _ElectiveItemsList);
+
+	  function RadiobuttonList() {
+	    babelHelpers.classCallCheck(this, RadiobuttonList);
+	    return babelHelpers.possibleConstructorReturn(this, babelHelpers.getPrototypeOf(RadiobuttonList).apply(this, arguments));
+	  }
+
+	  babelHelpers.createClass(RadiobuttonList, [{
+	    key: "addOption",
+	    value: function addOption(option) {
+	      if (this.listName === undefined) {
+	        this.listName = this.getNextHighestId();
+	      }
+
+	      var newItemID = this.getNextHighestId();
+	      this.includeInNode("electiveitemslist", main_core.Tag.render(_templateObject$4(), newItemID, this.listName, newItemID, option));
+	    }
+	  }]);
+	  return RadiobuttonList;
+	}(ElectiveItemsList);
+
+	function _templateObject2$1() {
 	  var data = babelHelpers.taggedTemplateLiteral(["<span>", "</span>"]);
 
-	  _templateObject2$2 = function _templateObject2() {
+	  _templateObject2$1 = function _templateObject2() {
 	    return data;
 	  };
 
 	  return data;
 	}
 
-	function _templateObject$3() {
+	function _templateObject$5() {
 	  var data = babelHelpers.taggedTemplateLiteral(["", ""]);
 
-	  _templateObject$3 = function _templateObject() {
+	  _templateObject$5 = function _templateObject() {
 	    return data;
 	  };
 
@@ -205,7 +253,7 @@
 	    babelHelpers.classCallCheck(this, Button);
 	    _this2 = babelHelpers.possibleConstructorReturn(this, babelHelpers.getPrototypeOf(Button).call(this));
 
-	    _this2.setComponent(main_core.Tag.render(_templateObject$3(), _this2.addNode("button")));
+	    _this2.setComponent(main_core.Tag.render(_templateObject$5(), _this2.addNode("button")));
 
 	    return _this2;
 	  }
@@ -213,7 +261,7 @@
 	  babelHelpers.createClass(Button, [{
 	    key: "addOption",
 	    value: function addOption(option) {
-	      this.includeInNode("button", main_core.Tag.render(_templateObject2$2(), option));
+	      this.includeInNode("button", main_core.Tag.render(_templateObject2$1(), option));
 	    }
 	  }, {
 	    key: "onDown",
@@ -231,6 +279,142 @@
 	  return Button;
 	}(GUIComponent);
 
+	function _templateObject2$2() {
+	  var data = babelHelpers.taggedTemplateLiteral(["<div class=\"heading-item\">", "</div>"]);
+
+	  _templateObject2$2 = function _templateObject2() {
+	    return data;
+	  };
+
+	  return data;
+	}
+
+	function _templateObject$6() {
+	  var data = babelHelpers.taggedTemplateLiteral(["", ""]);
+
+	  _templateObject$6 = function _templateObject() {
+	    return data;
+	  };
+
+	  return data;
+	}
+	var Heading = /*#__PURE__*/function (_GUIComponent) {
+	  babelHelpers.inherits(Heading, _GUIComponent);
+
+	  function Heading() {
+	    var _this;
+
+	    babelHelpers.classCallCheck(this, Heading);
+	    _this = babelHelpers.possibleConstructorReturn(this, babelHelpers.getPrototypeOf(Heading).call(this));
+
+	    _this.setComponent(main_core.Tag.render(_templateObject$6(), _this.addNode("heading")));
+
+	    return _this;
+	  }
+
+	  babelHelpers.createClass(Heading, [{
+	    key: "addOption",
+	    value: function addOption(option) {
+	      this.includeInNode("heading", main_core.Tag.render(_templateObject2$2(), option));
+	    }
+	  }]);
+	  return Heading;
+	}(GUIComponent);
+
+	function _templateObject$7() {
+	  var data = babelHelpers.taggedTemplateLiteral(["", ""]);
+
+	  _templateObject$7 = function _templateObject() {
+	    return data;
+	  };
+
+	  return data;
+	}
+	var TextBox = /*#__PURE__*/function (_GUIComponent) {
+	  babelHelpers.inherits(TextBox, _GUIComponent);
+
+	  function TextBox() {
+	    var _this;
+
+	    babelHelpers.classCallCheck(this, TextBox);
+	    _this = babelHelpers.possibleConstructorReturn(this, babelHelpers.getPrototypeOf(TextBox).call(this));
+
+	    _this.setComponent(main_core.Tag.render(_templateObject$7(), _this.addNode("textbox")));
+
+	    return _this;
+	  }
+
+	  babelHelpers.createClass(TextBox, [{
+	    key: "getResult",
+	    value: function getResult() {
+	      var result = [];
+	      var items = this.getAllElementsOfTheNode('textbox');
+
+	      for (var i = 0; i < items.length; i++) {
+	        var item = items[i];
+	        var itemInfo = [];
+	        itemInfo["Value" + i] = item.value;
+	        result.push(itemInfo);
+	      }
+
+	      return result;
+	    }
+	  }]);
+	  return TextBox;
+	}(GUIComponent);
+
+	function _templateObject$8() {
+	  var data = babelHelpers.taggedTemplateLiteral(["<input class=\"textbox-singleline\" type=\"text\">"]);
+
+	  _templateObject$8 = function _templateObject() {
+	    return data;
+	  };
+
+	  return data;
+	}
+	var Singlelinetextbox = /*#__PURE__*/function (_TextBox) {
+	  babelHelpers.inherits(Singlelinetextbox, _TextBox);
+
+	  function Singlelinetextbox() {
+	    var _this;
+
+	    babelHelpers.classCallCheck(this, Singlelinetextbox);
+	    _this = babelHelpers.possibleConstructorReturn(this, babelHelpers.getPrototypeOf(Singlelinetextbox).call(this));
+
+	    _this.includeInNode("textbox", main_core.Tag.render(_templateObject$8()));
+
+	    return _this;
+	  }
+
+	  return Singlelinetextbox;
+	}(TextBox);
+
+	function _templateObject$9() {
+	  var data = babelHelpers.taggedTemplateLiteral(["<textarea class=\"textbox-singleline\"></textarea>"]);
+
+	  _templateObject$9 = function _templateObject() {
+	    return data;
+	  };
+
+	  return data;
+	}
+	var MultiLineTextBox = /*#__PURE__*/function (_TextBox) {
+	  babelHelpers.inherits(MultiLineTextBox, _TextBox);
+
+	  function MultiLineTextBox() {
+	    var _this;
+
+	    babelHelpers.classCallCheck(this, MultiLineTextBox);
+	    _this = babelHelpers.possibleConstructorReturn(this, babelHelpers.getPrototypeOf(MultiLineTextBox).call(this));
+
+	    _this.includeInNode("textbox", main_core.Tag.render(_templateObject$9()));
+
+	    return _this;
+	  }
+
+	  return MultiLineTextBox;
+	}(TextBox);
+
 	var GUIComponents = /*#__PURE__*/function () {
 	  function GUIComponents() {
 	    babelHelpers.classCallCheck(this, GUIComponents);
@@ -247,7 +431,11 @@
 	babelHelpers.defineProperty(GUIComponents, "componentClasses", {
 	  "DropDownList": DropDownList,
 	  "CheckboxList": CheckboxList,
-	  "Button": Button
+	  "Button": Button,
+	  "RadiobuttonList": RadiobuttonList,
+	  "Heading": Heading,
+	  "SingleLineTextBox": Singlelinetextbox,
+	  "MultiLineTextBox": MultiLineTextBox
 	});
 
 	exports.GUIComponents = GUIComponents;

@@ -12,6 +12,8 @@ class CSavmaxruFormsRouter extends CBitrixComponent
 		"edit" =>'edit',
 		"result" =>'resultlist',
 		'' => 'myforms',
+		'view' => 'viewform',
+		'viewform' => 'viewform',
 	];
 
 	private function getModeName()

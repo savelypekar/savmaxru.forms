@@ -1,5 +1,4 @@
 import {GalleryMenuItem} from "./gallerymenuitem";
-import {Plugins} from 'savmaxru.plugins';
 
 export class MyForms
 {
@@ -7,7 +6,8 @@ export class MyForms
 	{
 		//let gallery = new Savmaxru.Plugins.Plugins.ObjectsGallery();
 		//let obj = new ObjectsGallery();
-		let galleryMenuItem = new GalleryMenuItem();
-		parentContainer.append(galleryMenuItem.getHTMLObject());
+
+		//let galleryMenuItem = new GalleryMenuItem();
+		//parentContainer.append(galleryMenuItem.getHTMLObject());
 	}
 }

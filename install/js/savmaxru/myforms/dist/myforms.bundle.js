@@ -1,49 +1,23 @@
 (function (exports,main_core,savmaxru_objectgui,savmaxru_plugins) {
 	'use strict';
 
-	function _templateObject() {
-	  var data = babelHelpers.taggedTemplateLiteral(["<div class=\"savmaxru-form-element-for-list\">\n\t\t\t<div class=\"savmaxru-forms-h5\">\n\t\t\t\t", "\n\t\t\t</div>\n\t\t\t<div class=\"savmaxru-forms-h4\">\n\t\t\t\t", "\n\t\t\t</div>\n\t\t</div>"]);
-
-	  _templateObject = function _templateObject() {
-	    return data;
-	  };
-
-	  return data;
-	}
 	var GalleryMenuItem = /*#__PURE__*/function (_Savmaxru$ObjectGUI) {
 	  babelHelpers.inherits(GalleryMenuItem, _Savmaxru$ObjectGUI);
 
 	  function GalleryMenuItem() {
-	    var _this;
-
 	    babelHelpers.classCallCheck(this, GalleryMenuItem);
-	    _this = babelHelpers.possibleConstructorReturn(this, babelHelpers.getPrototypeOf(GalleryMenuItem).call(this));
-
-	    _this.setRootNode(main_core.Tag.render(_templateObject(), _this.addNode("name"), _this.addNode("date")));
-
-	    return _this;
+	    return babelHelpers.possibleConstructorReturn(this, babelHelpers.getPrototypeOf(GalleryMenuItem).call(this));
 	  }
 
-	  babelHelpers.createClass(GalleryMenuItem, [{
-	    key: "setDate",
-	    value: function setDate(date) {
-	      this.includeInNode("date", date);
-	    }
-	  }, {
-	    key: "setName",
-	    value: function setName(name) {
-	      this.includeInNode("name", name);
-	    }
-	  }]);
 	  return GalleryMenuItem;
 	}(Savmaxru.ObjectGUI);
 
-	var MyForms = function MyForms(parentContainer) {
-	  babelHelpers.classCallCheck(this, MyForms);
-	  //let gallery = new Savmaxru.Plugins.Plugins.ObjectsGallery();
+	var MyForms = function MyForms(parentContainer) {//let gallery = new Savmaxru.Plugins.Plugins.ObjectsGallery();
 	  //let obj = new ObjectsGallery();
-	  var galleryMenuItem = new GalleryMenuItem();
-	  parentContainer.append(galleryMenuItem.getHTMLObject());
+	  //let galleryMenuItem = new GalleryMenuItem();
+	  //parentContainer.append(galleryMenuItem.getHTMLObject());
+
+	  babelHelpers.classCallCheck(this, MyForms);
 	};
 
 	exports.MyForms = MyForms;

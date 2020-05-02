@@ -1,10 +1,4 @@
 import { GUIComponent } from "./guicomponent";
-<<<<<<< HEAD
-
-export class RadiobuttonList extends GUIComponent
-{
-
-=======
 import {Tag} from 'main.core';
 import { ElectiveItemsList } from "./electiveitemslist";
 
@@ -22,5 +16,4 @@ export class RadiobuttonList extends ElectiveItemsList
   			<label class="radiobutton-label" for="${newItemID}">${option}</label>
 		</div>`);
 	}
->>>>>>> objectsGUIextensions
 }

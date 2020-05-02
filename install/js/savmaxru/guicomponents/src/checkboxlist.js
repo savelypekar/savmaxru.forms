@@ -13,21 +13,4 @@ export class CheckboxList extends ElectiveItemsList
 			<label class="checkbox-label" for="${newItemID}">${option}</label>
 		</div>`);
 	}
-<<<<<<< HEAD
-
-	getResult()
-	{
-		let result = [];
-		let items = this.getAllElementsOfTheNode('checkboxes');
-		for(let i=0; i<items.length; i++)
-		{
-			let item = items[i];
-			let itemInfo = [];
-			itemInfo[item.children[1].innerHTML] = item.children[0].checked;
-			result.push(itemInfo)
-		}
-		return result;
-	}
-=======
->>>>>>> objectsGUIextensions
 }
