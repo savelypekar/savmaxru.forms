@@ -29,6 +29,11 @@
 	      return node;
 	    }
 	  }, {
+	    key: "getRootNode",
+	    value: function getRootNode() {
+	      return this.node;
+	    }
+	  }, {
 	    key: "setRootNode",
 	    value: function setRootNode(node) {
 	      this.wrapper.append(node);

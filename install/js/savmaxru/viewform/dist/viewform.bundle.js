@@ -1,4 +1,4 @@
-(function (exports,main_core,savmaxru_objectgui,savmaxru_plugins) {
+(function (exports,main_core,savmaxru_objectgui,savmaxru_plugins,savmaxru_guicomponents) {
 	'use strict';
 
 	function _templateObject() {
@@ -22,13 +22,15 @@
 	    _this.setRootNode(main_core.Tag.render(_templateObject(), _this.addNode("viewform-wrapper")));
 
 	    var configGallery = {
-	      "galleryClassCSS": "viewform-gallery"
+	      "galleryClassCSS": "viewform-gallery",
+	      "objectsFactory": Savmaxru.GUIComponents
 	    };
-	    _this.gallery = Savmaxru.Plugins.attachPlugin("ObjectsGallery", configGallery);
+	    var gallery = Savmaxru.Plugins.attachPlugin("ObjectsGallery", configGallery);
+	    _this.gallery = gallery;
 
 	    _this.includeInNode("viewform-wrapper", _this.gallery.getHTMLObject());
 
-	    _this.gallery.loadGroupObject();
+	    gallery.createFactoryObject("DropDownList"); //this.gallery.loadGroupObject();
 
 	    return _this;
 	  }
@@ -38,5 +40,5 @@
 
 	exports.ViewForm = ViewForm;
 
-}((this.Savmaxru = this.Savmaxru || {}),BX,BX,BX));
+}((this.Savmaxru = this.Savmaxru || {}),BX,BX,BX,BX));
 //# sourceMappingURL=viewform.bundle.js.map

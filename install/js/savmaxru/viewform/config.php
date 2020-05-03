@@ -11,6 +11,7 @@ return [
 		'main.core',
 		'savmaxru.objectgui',
 		'savmaxru.plugins',
+		'savmaxru.guicomponents',
 	],
 	'skip_core' => false,
 ];

@@ -5,17 +5,31 @@ export class ObjectsGallery extends Savmaxru.ObjectGUI
 {
 	constructor(config = {
 		"galleryClassCSS": "standard-gallery",
-
+		"objectClassCSS" : "standard-object",
+		"objectsFactory": undefined,
 	})
 	{
+		alert(config);
 		super();
 		this.setRootNode(
 			Tag.render`${this.addNode(config["galleryClassCSS"])}`
 		);
-		//this.includeInNode("gallery",Tag.render`<div></div>`);
-		//let obj = new ObjectsGallery();
+		this.objectsFactory = config["objectsFactory"];
+
 	}
-	push()
+
+	createFactoryObject(name)
+	{	let object = this.objectsFactory.attach(name).getHTMLObject();
+		this.push(object);
+		return object;
+	}
+
+	push(object)
+	{
+		this.getRootNode().append(object);
+	}
+
+	createObject()
 	{
 
 	}
@@ -32,4 +46,6 @@ export class ObjectsGallery extends Savmaxru.ObjectGUI
 			console.log(response);
 		});
 	}
+
+
 }

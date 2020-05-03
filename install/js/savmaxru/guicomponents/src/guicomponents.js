@@ -24,4 +24,10 @@ export class GUIComponents
 	{
 		return new this.componentClasses[name]();
 	}
+
+	static attach(name)
+	{
+		alert(name+"ы");
+		return new this.componentClasses[name]();
+	}
 }

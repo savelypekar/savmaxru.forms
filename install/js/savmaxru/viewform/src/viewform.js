@@ -4,6 +4,7 @@ import {Type} from 'main.core';
 import {ObjectGUI} from "savmaxru.objectgui";
 import {Tag} from 'main.core';
 import {Plugins} from 'savmaxru.plugins';
+import {GUIComponents} from 'savmaxru.guicomponents';
 
 export class ViewForm extends Savmaxru.ObjectGUI
 {
@@ -17,11 +18,18 @@ export class ViewForm extends Savmaxru.ObjectGUI
 
 		let configGallery = {
 			"galleryClassCSS": "viewform-gallery",
+			"objectsFactory": Savmaxru.GUIComponents,
 		};
 
-		this.gallery = Savmaxru.Plugins.attachPlugin("ObjectsGallery",configGallery);
+
+		let gallery = Savmaxru.Plugins.attachPlugin("ObjectsGallery",configGallery);
+		this.gallery = gallery;
 		this.includeInNode("viewform-wrapper", this.gallery.getHTMLObject());
 
-		this.gallery.loadGroupObject();
+		gallery.createFactoryObject("DropDownList");
+
+		//this.gallery.loadGroupObject();
 	}
+
+
 }

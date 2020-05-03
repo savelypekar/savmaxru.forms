@@ -17,21 +17,35 @@
 	    var _this;
 
 	    var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
-	      "galleryClassCSS": "standard-gallery"
+	      "galleryClassCSS": "standard-gallery",
+	      "objectClassCSS": "standard-object",
+	      "objectsFactory": undefined
 	    };
 	    babelHelpers.classCallCheck(this, ObjectsGallery);
+	    alert(config);
 	    _this = babelHelpers.possibleConstructorReturn(this, babelHelpers.getPrototypeOf(ObjectsGallery).call(this));
 
-	    _this.setRootNode(main_core.Tag.render(_templateObject(), _this.addNode(config["galleryClassCSS"]))); //this.includeInNode("gallery",Tag.render`<div></div>`);
-	    //let obj = new ObjectsGallery();
+	    _this.setRootNode(main_core.Tag.render(_templateObject(), _this.addNode(config["galleryClassCSS"])));
 
-
+	    _this.objectsFactory = config["objectsFactory"];
 	    return _this;
 	  }
 
 	  babelHelpers.createClass(ObjectsGallery, [{
+	    key: "createFactoryObject",
+	    value: function createFactoryObject(name) {
+	      var object = this.objectsFactory.attach(name).getHTMLObject();
+	      this.push(object);
+	      return object;
+	    }
+	  }, {
 	    key: "push",
-	    value: function push() {}
+	    value: function push(object) {
+	      this.getRootNode().append(object);
+	    }
+	  }, {
+	    key: "createObject",
+	    value: function createObject() {}
 	  }, {
 	    key: "loadGroupObject",
 	    value: function loadGroupObject() {
