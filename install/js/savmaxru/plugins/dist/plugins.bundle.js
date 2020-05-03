@@ -22,8 +22,8 @@
 	      "objectsFactory": undefined
 	    };
 	    babelHelpers.classCallCheck(this, ObjectsGallery);
-	    alert(config);
 	    _this = babelHelpers.possibleConstructorReturn(this, babelHelpers.getPrototypeOf(ObjectsGallery).call(this));
+	    babelHelpers.defineProperty(babelHelpers.assertThisInitialized(_this), "objects", []);
 
 	    _this.setRootNode(main_core.Tag.render(_templateObject(), _this.addNode(config["galleryClassCSS"])));
 
@@ -32,16 +32,37 @@
 	  }
 
 	  babelHelpers.createClass(ObjectsGallery, [{
+	    key: "getResult",
+	    value: function getResult() {
+	      var resultGallery = [];
+	      var objects = this.objects;
+
+	      for (var i = 0; i < objects.length; i++) {
+	        var object = objects[i];
+	        var objectResult = object.getResult();
+
+	        if (objectResult !== false) {
+	          resultGallery.push(objectResult);
+	        }
+	      }
+
+	      return resultGallery;
+	    }
+	  }, {
+	    key: "getChanges",
+	    value: function getChanges() {}
+	  }, {
 	    key: "createFactoryObject",
 	    value: function createFactoryObject(name) {
-	      var object = this.objectsFactory.attach(name).getHTMLObject();
+	      var object = this.objectsFactory.attach(name);
 	      this.push(object);
 	      return object;
 	    }
 	  }, {
 	    key: "push",
 	    value: function push(object) {
-	      this.getRootNode().append(object);
+	      this.objects.push(object);
+	      this.getRootNode().append(object.getHTMLObject());
 	    }
 	  }, {
 	    key: "createObject",

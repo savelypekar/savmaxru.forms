@@ -27,7 +27,6 @@ export class GUIComponents
 
 	static attach(name)
 	{
-		alert(name+"ы");
 		return new this.componentClasses[name]();
 	}
 }

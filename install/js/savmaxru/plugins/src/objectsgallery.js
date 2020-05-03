@@ -3,30 +3,51 @@ import {Tag} from 'main.core';
 
 export class ObjectsGallery extends Savmaxru.ObjectGUI
 {
+	objects=[];
+
 	constructor(config = {
 		"galleryClassCSS": "standard-gallery",
 		"objectClassCSS" : "standard-object",
 		"objectsFactory": undefined,
 	})
 	{
-		alert(config);
 		super();
 		this.setRootNode(
 			Tag.render`${this.addNode(config["galleryClassCSS"])}`
 		);
 		this.objectsFactory = config["objectsFactory"];
+	}
+
+	getResult()
+	{
+		let resultGallery=[];
+		let objects = this.objects;
+		for(let i=0; i<objects.length; i++)
+		{
+			let object = objects[i];
+			let objectResult = object.getResult();
+			if(objectResult !== false)
+			{
+				resultGallery.push(objectResult);
+			}
+		}
+		return resultGallery;
+	}
+
+	getChanges()
+	{
 
 	}
 
 	createFactoryObject(name)
-	{	let object = this.objectsFactory.attach(name).getHTMLObject();
+	{	let object = this.objectsFactory.attach(name);
 		this.push(object);
 		return object;
 	}
 
 	push(object)
-	{
-		this.getRootNode().append(object);
+	{	this.objects.push(object);
+		this.getRootNode().append(object.getHTMLObject());
 	}
 
 	createObject()

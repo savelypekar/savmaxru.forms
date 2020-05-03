@@ -12,6 +12,7 @@ return [
 		'savmaxru.objectgui',
 		'savmaxru.plugins',
 		'savmaxru.guicomponents',
+		'savmaxru.idmanager',
 	],
 	'skip_core' => false,
 ];

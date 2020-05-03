@@ -81,6 +81,6 @@ export class GUIComponent extends Savmaxru.ObjectGUI
 
 	getResult()
 	{
-
+		return false;
 	}
 }
