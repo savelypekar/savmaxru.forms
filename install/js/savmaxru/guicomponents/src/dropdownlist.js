@@ -19,4 +19,9 @@ export class DropDownList extends GUIComponent
 	{
 		this.includeInNode("select",Tag.render`<option>${option}</option>`);
 	}
+
+	getResult()
+	{
+		//return this.getRootNode().options.selectedIndex;
+	}
 }

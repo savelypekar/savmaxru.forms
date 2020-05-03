@@ -13,7 +13,7 @@
 	var GUIComponent = /*#__PURE__*/function (_Savmaxru$ObjectGUI) {
 	  babelHelpers.inherits(GUIComponent, _Savmaxru$ObjectGUI);
 
-	  function GUIComponent(description, comment) {
+	  function GUIComponent() {
 	    var _this;
 
 	    babelHelpers.classCallCheck(this, GUIComponent);
@@ -76,7 +76,9 @@
 	    }
 	  }, {
 	    key: "getResult",
-	    value: function getResult() {}
+	    value: function getResult() {
+	      return false;
+	    }
 	  }]);
 	  return GUIComponent;
 	}(Savmaxru.ObjectGUI);
@@ -120,6 +122,10 @@
 	    key: "addOption",
 	    value: function addOption(option) {
 	      this.includeInNode("select", main_core.Tag.render(_templateObject2(), option));
+	    }
+	  }, {
+	    key: "getResult",
+	    value: function getResult() {//return this.getRootNode().options.selectedIndex;
 	    }
 	  }]);
 	  return DropDownList;
@@ -423,6 +429,11 @@
 	  babelHelpers.createClass(GUIComponents, null, [{
 	    key: "attachComponent",
 	    value: function attachComponent(name) {
+	      return new this.componentClasses[name]();
+	    }
+	  }, {
+	    key: "attach",
+	    value: function attach(name) {
 	      return new this.componentClasses[name]();
 	    }
 	  }]);

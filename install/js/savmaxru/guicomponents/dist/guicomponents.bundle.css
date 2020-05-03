@@ -33,6 +33,7 @@
 	padding: 22px 50px;
 	border-bottom: 1px solid #E5E5E5;
 	background-color: white;
+	position: relative;
 }
 
 .savmaxru-forms .object-gui .field-description {

@@ -25,8 +25,12 @@ export class ObjectGUI
 		let node = this.createNode(type);
 		this.nodes[name] = node;
 		node.className = name;
-
 		return node;
+	}
+
+	getRootNode()
+	{
+		return this.node;
 	}
 
 	setRootNode(node)

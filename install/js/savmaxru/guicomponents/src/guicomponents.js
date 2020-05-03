@@ -24,4 +24,9 @@ export class GUIComponents
 	{
 		return new this.componentClasses[name]();
 	}
+
+	static attach(name)
+	{
+		return new this.componentClasses[name]();
+	}
 }

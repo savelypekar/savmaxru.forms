@@ -3,7 +3,7 @@ import {Tag} from 'main.core';
 
 export class GUIComponent extends Savmaxru.ObjectGUI
 {
-	constructor(description,comment)
+	constructor()
 	{
 		super();
 		this.setRootNode(
@@ -81,6 +81,6 @@ export class GUIComponent extends Savmaxru.ObjectGUI
 
 	getResult()
 	{
-
+		return false;
 	}
 }
