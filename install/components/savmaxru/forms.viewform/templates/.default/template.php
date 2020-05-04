@@ -9,6 +9,7 @@ $answerToQuestionTable = new \Savmaxru\Forms\Model\AnswerToQuestionTable();
 $answerOptionTable = new \Savmaxru\Forms\Model\AnswerOptionTable();
 $connectionInterviewWithQuestion = new \Savmaxru\Forms\Model\ConnectionInterviewWithQuestionTable();
 
+
 //$result41 = $answerResultTable->saveAnswerResult(10, 36, 1);
 //echo $result41;
 ?>
@@ -19,10 +20,10 @@ $connectionInterviewWithQuestion = new \Savmaxru\Forms\Model\ConnectionInterview
 
 <!--
 Save all result
--->
+
 <script>
 	let result = {
-			ID: 123,
+			ID: 125,
 			questions: [
 				{
 					ID: 11215,
@@ -50,5 +51,23 @@ Save all result
 			result: result,
 		}
 	});
-	console.log(result);
+	//console.log(result);
 </script>
+-->
+
+
+<!--
+Get the whole form by id
+
+<script>
+	let idInterview = '3';
+	BX.ajax.runComponentAction('savmaxru:forms.viewform', 'sendInterviewStructure', {
+		mode: 'class',
+		data: {
+			idInterview: idInterview,
+		}
+	}).then(function (response) {
+		console.log(response);
+	});
+</script>
+-->
