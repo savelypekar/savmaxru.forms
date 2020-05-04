@@ -124,4 +124,14 @@ class InterviewTable extends DataManager
 		$maxIDKey = max($result ->fetchAll());
 		return $maxIDKey;
 	}
+
+	public function getInterviewsById($id)
+	{
+		$result = InterviewTable::getList([
+			'select' => ['ID', 'ID_AUTHOR', 'TITLE', 'DATE_CREATE', 'DATE_EDIT', 'VISIBLE'],
+			'filter' => ['ID' => $id],
+		]);
+		$row = $result ->fetchAll();
+		return $row;
+	}
 }
