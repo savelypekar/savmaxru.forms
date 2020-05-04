@@ -22,16 +22,14 @@ class AnswerToQuestionTable extends DataManager
 			]),
 			new IntegerField("ID_QUESTION"),
 			new IntegerField("ID_RESULT"),
-			new StringField("CONTENT_ANSWER"),
 		];
 	}
 
-	public static function saveAnswerToQuestion($idQuestion, $idResult, $contentAnswer)
+	public static function saveAnswerToQuestion($idQuestion, $idResult)
 	{
 		$result = AnswerToQuestionTable::add([
 			'ID_QUESTION' => $idQuestion,
 			'ID_RESULT' => $idResult,
-			'CONTENT_ANSWER' => $contentAnswer,
 		]);
 
 		if ($result->isSuccess())
@@ -43,7 +41,7 @@ class AnswerToQuestionTable extends DataManager
 	public static function getAllAnswer()
 	{
 		$result = AnswerToQuestionTable::getList([
-			'select' => ['ID', 'ID_QUESTION', 'ID_RESULT', 'CONTENT_ANSWER']
+			'select' => ['ID', 'ID_QUESTION', 'ID_RESULT']
 		]);
 		$row = $result ->fetchAll();
 		return $row;
@@ -52,7 +50,7 @@ class AnswerToQuestionTable extends DataManager
 	public static function getResultByIdQuestion($idQuestion)
 	{
 		$result = AnswerToQuestionTable::getList([
-			'select' => ['ID', 'ID_QUESTION', 'ID_RESULT', 'CONTENT_ANSWER'],
+			'select' => ['ID', 'ID_QUESTION', 'ID_RESULT'],
 			'filter' => ['ID_QUESTION' => $idQuestion],
 		]);
 		$rows = $result ->fetchAll();
@@ -73,7 +71,7 @@ class AnswerToQuestionTable extends DataManager
 			{
 				array_push($setUniqueId, $answer['ID_RESULT']);
 				$result = AnswerToQuestionTable::getList([
-					'select' => ['ID', 'ID_QUESTION', 'ID_RESULT', 'CONTENT_ANSWER'],
+					'select' => ['ID', 'ID_QUESTION', 'ID_RESULT'],
 					'filter' => ['ID_RESULT' => $answer['ID_RESULT']],
 				]);
 				$setAnswerToQuestion = $result->fetchAll();
@@ -99,7 +97,7 @@ class AnswerToQuestionTable extends DataManager
 				array_push($setUniqueId, $answer['ID_RESULT']);
 
 				$result = AnswerToQuestionTable::getList(array(
-					'select' => array('ID', 'ID_QUESTION', 'ID_RESULT', 'CONTENT_ANSWER'),
+					'select' => array('ID', 'ID_QUESTION', 'ID_RESULT'),
 					'filter' => ['ID_RESULT' => $answer['ID_RESULT']],
 				));
 				$setAnswerToQuestion = $result->fetchAll();
@@ -121,12 +119,11 @@ class AnswerToQuestionTable extends DataManager
 		}
 	}
 
-	public function updateRow($id, $idQuestion, $idResult, $contentAnswer)
+	public function updateRow($id, $idQuestion, $idResult)
 	{
 		$result = AnswerToQuestionTable::update($id, [
 			'ID_QUESTION' => $idQuestion,
 			'ID_RESULT' => $idResult,
-			'CONTENT_ANSWER' => $contentAnswer,
 		]);
 
 		if ($result->isSuccess())

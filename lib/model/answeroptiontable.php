@@ -22,14 +22,16 @@ class AnswerOptionTable extends DataManager
 			]),
 			new IntegerField("ID_ANSWER"),
 			new IntegerField("ID_OPTION"),
+			new StringField("CONTENT"),
 		];
 	}
 
-	public static function saveOptionAnswer($idAnswer, $idOption)
+	public static function saveOptionAnswer($idAnswer, $idOption, $content)
 	{
 		$result = AnswerOptionTable::add(array(
 			'ID_ANSWER' => $idAnswer,
 			'ID_OPTION' => $idOption,
+			'CONTENT' => $content,
 		));
 
 		if ($result->isSuccess())
@@ -41,7 +43,7 @@ class AnswerOptionTable extends DataManager
 	public static function getAllAnswer()
 	{
 		$result = AnswerOptionTable::getList(array(
-			'select' => array('ID', 'ID_ANSWER', 'ID_OPTION')
+			'select' => array('ID', 'ID_ANSWER', 'ID_OPTION', 'CONTENT')
 		));
 		$row = $result ->fetchAll();
 		return $row;
@@ -50,7 +52,7 @@ class AnswerOptionTable extends DataManager
 	public static function getAnswerByIdAnswer($idAnswer)
 	{
 		$result = AnswerOptionTable::getList([
-			'select' => ['ID', 'ID_ANSWER', 'ID_OPTION'],
+			'select' => ['ID', 'ID_ANSWER', 'ID_OPTION', 'CONTENT'],
 			'filter' => ['ID_ANSWER' => $idAnswer],
 		]);
 		$rows = $result ->fetchAll();
