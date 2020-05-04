@@ -16,8 +16,12 @@ export class ElectiveItemsList extends GUIComponent
 		for(let i=0; i<items.length; i++)
 		{
 			let item = items[i];
+			let option = item.children[0];
+
 			let itemInfo = [];
-			itemInfo[item.children[1].innerHTML] = item.children[0].checked;
+			itemInfo["value"] = option.checked;
+			itemInfo["index"] = option.value;
+			//itemInfo[item.children[1].innerHTML] = item.children[0].checked;
 			result.push(itemInfo)
 		}
 		return result;

@@ -4,7 +4,7 @@ import { ElectiveItemsList } from "./electiveitemslist";
 
 export class RadiobuttonList extends ElectiveItemsList
 {
-	addOption(option)
+	addOption(option,index)
 	{
 		if(this.listName === undefined) {
 			this.listName = this.getNextHighestId();
@@ -12,7 +12,7 @@ export class RadiobuttonList extends ElectiveItemsList
 		let newItemID = this.getNextHighestId();
 		this.includeInNode("electiveitemslist", Tag.render`
 		<div class="radiobutton-item">
-			<input type="radio" id="${newItemID}" name="${this.listName}">
+			<input type="radio" value="${index}" id="${newItemID}" name="${this.listName}">
   			<label class="radiobutton-label" for="${newItemID}">${option}</label>
 		</div>`);
 	}

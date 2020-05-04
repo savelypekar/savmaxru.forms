@@ -13,13 +13,13 @@ export class TextBox extends GUIComponent
 	{
 		let result = [];
 		let items = this.getAllElementsOfTheNode('textbox');
-		for(let i=0; i < items.length; i++)
-		{
-			let item = items[i];
-			let itemInfo = [];
-			itemInfo["Value"+i] = item.value;
-			result.push(itemInfo);
-		}
+		let item = items[0];
+
+		let itemInfo = [];
+		itemInfo["index"] = 0;
+		itemInfo["value"] = item.value;
+		result.push(itemInfo);
+
 		return result;
 	}
 }
