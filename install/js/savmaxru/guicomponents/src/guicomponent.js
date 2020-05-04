@@ -48,7 +48,7 @@ export class GUIComponent extends Savmaxru.ObjectGUI
 		{
 			for(let i = 0; i<options.length; i++)
 			{
-				this.addOption(options[i]);
+				this.addOption(options[i],i);
 			}
 		}
 	}

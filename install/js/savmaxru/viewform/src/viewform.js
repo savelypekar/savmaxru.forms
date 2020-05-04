@@ -24,7 +24,6 @@ export class ViewForm extends Savmaxru.ObjectGUI
 			"objectsFactory": Savmaxru.GUIComponents,
 		};
 
-
 		let gallery = Savmaxru.Plugins.attachPlugin("ObjectsGallery",configGallery);
 		this.gallery = gallery;
 		this.includeInNode("viewform-wrapper", this.gallery.getHTMLObject());

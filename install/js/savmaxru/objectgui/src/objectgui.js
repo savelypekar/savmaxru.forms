@@ -20,6 +20,11 @@ export class ObjectGUI
 		return elements;
 	}
 
+	getNode(name)
+	{
+		return this.nodes[name];
+	}
+
 	addNode(name,type = 'div')
 	{
 		let node = this.createNode(type);
