@@ -74,7 +74,7 @@ Get the whole form by id
 
 <!--
 Save structure interview with question and option
--->
+
 <script>
 	let result = {
 			//ID: 615,
@@ -140,3 +140,4 @@ Save structure interview with question and option
 	});
 	console.log(result);
 </script>
+-->
