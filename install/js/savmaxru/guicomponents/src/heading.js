@@ -13,4 +13,9 @@ export class Heading extends GUIComponent
 	{
 		this.includeInNode("heading", Tag.render`<div class="heading-item">${option}</div>`);
 	}
+
+	getResult()
+	{
+		return false;
+	}
 }

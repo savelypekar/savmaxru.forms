@@ -7,31 +7,40 @@ export class DropDownList extends GUIComponent
 	{
 		super();
 		this.setComponent(Tag.render`${ this.addNode("dropdownlist",'select') }`);
-
 		this.addOption('--');
 	}
 
-	addOption(option,index)
+	addOption(option)
 	{
-		this.includeInNode("dropdownlist",Tag.render`<option value="${index}">${option}</option>`);
+		let objectHTML = Tag.render`<option>${option}</option>`;
+		objectHTML.getCondition = function()
+		{
+			return this.selected;
+		};
+		this.includeInNode("dropdownlist",objectHTML);
+		return objectHTML;
 	}
-
-	getResult()
+//getSelected
+	/*getResult()
 	{
 		let resultComponent = [];
-		let options = this.getNode("dropdownlist").options;
+		let options = this.getOptions();
+			//this.getNode("dropdownlist").options;
 
 		for(let i=0; i < options.length; i++)
 		{
 			let option = options[i];
+			let optionHTML = option.getObjectHTML();
+			//if(optionHTML.selected)//
 			let result = [];
 
-			result["index"] = option.value;
-			result["value"] = option.selected;
+			result["index"] = option.getID();
+			result["index"] = option.getIndex();
+			result["value"] = optionHTML.selected;
 
 			resultComponent.push(result);
 		}
 		return resultComponent;
-	}
+	}*/
 
 }

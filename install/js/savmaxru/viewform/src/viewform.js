@@ -36,7 +36,13 @@ export class ViewForm extends Savmaxru.ObjectGUI
 			{
 				'ID': 2220,
 				'index': 0,
-				'options': ['Такой вот опрос'],
+				'options': [
+					{
+						index: 1,
+						ID: 121212,
+						value: "Такой вот опрос",
+					}
+				],
 			});
 
 		let obj1 = gallery.createFactoryObject("DropDownList");
@@ -45,10 +51,43 @@ export class ViewForm extends Savmaxru.ObjectGUI
 				'ID': 2221,
 				'index': 1,
 				'description':'Выбери город',
-				'options': ['Калининград', 'Череповец', 'Вологда'],
+				'options': [
+					{
+						index: 0,
+						ID: 121212,
+						value: "Вологда",
+					},
+					{
+						index: 1,
+						ID: 121212,
+						value: "Череповец",
+					},
+					{
+						index: 2,
+						ID: 121212,
+						value: "Калининград",
+					}
+				],
 				'comment': 'вам доставят посылку точно по адресу',
 				'required': true,
 			});
+
+		let obj6 = gallery.createFactoryObject("Button");
+		obj6.build(
+			{
+				'ID': 2226,
+				'index': 6,
+				'options': [
+					{
+						index: 0,
+						ID: 121212,
+						value: "Send Form",
+					},
+				],
+			});
+		obj6.onDown(function(){
+			console.log(gallery.getResult());
+		});
 
 		let obj2 = gallery.createFactoryObject("CheckboxList");
 		obj2.build(
@@ -56,7 +95,23 @@ export class ViewForm extends Savmaxru.ObjectGUI
 				'ID': 2222,
 				'index': 2,
 				'description':'Test',
-				'options': ['Russia', 'USA'],
+				'options': [
+					{
+						index: 0,
+						ID: 121212,
+						value: "Вологда",
+					},
+					{
+						index: 1,
+						ID: 121212,
+						value: "Череповец",
+					},
+					{
+						index: 2,
+						ID: 121212,
+						value: "Калининград",
+					}
+				],
 				'comment': 'comment',
 				'required': true,
 				'IDManager': this.IDManager,
@@ -68,7 +123,23 @@ export class ViewForm extends Savmaxru.ObjectGUI
 				'ID': 2223,
 				'index': 3,
 				'description':'Test',
-				'options': ['Russia', 'USA'],
+				'options': [
+					{
+						index: 0,
+						ID: 121212,
+						value: "Вологда",
+					},
+					{
+						index: 1,
+						ID: 121212,
+						value: "Череповец",
+					},
+					{
+						index: 2,
+						ID: 121212,
+						value: "Калининград",
+					}
+				],
 				'comment': 'comment',
 				'required': true,
 				'IDManager': this.IDManager,
@@ -81,6 +152,7 @@ export class ViewForm extends Savmaxru.ObjectGUI
 				'index': 4,
 				'description':'Test',
 				'comment': 'comment',
+				'options':{},
 			});
 
 		let obj5 = gallery.createFactoryObject("MultiLineTextBox");
@@ -90,23 +162,15 @@ export class ViewForm extends Savmaxru.ObjectGUI
 				'index': 5,
 				'description':'Test',
 				'comment': 'comment',
+				'options':{},
 			});
-
-		let obj6 = gallery.createFactoryObject("Button");
-		obj6.build(
-			{
-				'ID': 2226,
-				'index': 6,
-				'options': ['Send form'],
-			});
-
-		let result = [];
 
 		obj6.onDown(function(){
 			console.log(gallery.getResult());
 		});
 		//gallery.getResult();
-		//this.gallery.loadGroupObject();
+		//this.gallery.loadGroupObject();*/
+
 	}
 
 

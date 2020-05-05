@@ -12,14 +12,15 @@ export class TextBox extends GUIComponent
 	getResult()
 	{
 		let result = [];
+		result["ID"] = this.getID();
+		result["index"] = this.getIndex();
+		result["options"] = [];
+
 		let items = this.getAllElementsOfTheNode('textbox');
 		let item = items[0];
-
-		let itemInfo = [];
-		itemInfo["index"] = 0;
-		itemInfo["value"] = item.value;
-		result.push(itemInfo);
+		result["options"]["userValue"] = item.value;
 
 		return result;
 	}
+
 }

@@ -24,4 +24,9 @@ export class Button extends GUIComponent {
 			htmlObject.dataStructure._function();
 		};
 	}
+
+	getResult()
+	{
+		return false;
+	}
 }

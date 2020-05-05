@@ -25,7 +25,6 @@ export class ObjectsGallery extends Savmaxru.ObjectGUI
 	getResult()
 	{
 		let resultGallery=[];
-
 		let argumentsForResult = this.argumentsForResult;
 		for (let key in argumentsForResult)
 		{
