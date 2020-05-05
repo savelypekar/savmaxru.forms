@@ -4,6 +4,16 @@ export class ObjectGUI
 {
 	nodes=[];
 
+	setId(id)
+	{
+		this.id = id;
+	}
+
+	getId()
+	{
+		return this.id;
+	}
+
 	includeInNode(name,value)
 	{
 		this.nodes[name].append(value);

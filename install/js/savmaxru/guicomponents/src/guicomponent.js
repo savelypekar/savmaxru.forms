@@ -30,12 +30,24 @@ export class GUIComponent extends Savmaxru.ObjectGUI
 		return this.IDManager.getNextHighestId();
 	}
 
+	setIndex(index)
+	{
+		this.index = index;
+	}
+
+	getIndex()
+	{
+		return this.index;
+	}
+
 	build(data)
 	{
 		this.IDManager = data['IDManager'];
 		this.setDescription(data['description']);
 		this.setComment(data['comment']);
 		this.addOptions(data['options']);
+		this.setIndex(data['index']);
+
 		if(data['required'])
 		{
 			this.setFieldAsRequired();

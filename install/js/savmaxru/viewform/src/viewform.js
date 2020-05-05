@@ -22,6 +22,9 @@ export class ViewForm extends Savmaxru.ObjectGUI
 		let configGallery = {
 			"galleryClassCSS": "viewform-gallery",
 			"objectsFactory": Savmaxru.GUIComponents,
+			"argumentsForResult": {
+				'ID': 232323
+			},
 		};
 
 		let gallery = Savmaxru.Plugins.attachPlugin("ObjectsGallery",configGallery);
@@ -31,12 +34,16 @@ export class ViewForm extends Savmaxru.ObjectGUI
 		let obj0 = gallery.createFactoryObject("Heading");
 		obj0.build(
 			{
+				'ID': 2220,
+				'index': 0,
 				'options': ['Такой вот опрос'],
 			});
 
 		let obj1 = gallery.createFactoryObject("DropDownList");
 		obj1.build(
 			{
+				'ID': 2221,
+				'index': 1,
 				'description':'Выбери город',
 				'options': ['Калининград', 'Череповец', 'Вологда'],
 				'comment': 'вам доставят посылку точно по адресу',
@@ -46,6 +53,8 @@ export class ViewForm extends Savmaxru.ObjectGUI
 		let obj2 = gallery.createFactoryObject("CheckboxList");
 		obj2.build(
 			{
+				'ID': 2222,
+				'index': 2,
 				'description':'Test',
 				'options': ['Russia', 'USA'],
 				'comment': 'comment',
@@ -56,6 +65,8 @@ export class ViewForm extends Savmaxru.ObjectGUI
 		let obj3 = gallery.createFactoryObject("RadiobuttonList");
 		obj3.build(
 			{
+				'ID': 2223,
+				'index': 3,
 				'description':'Test',
 				'options': ['Russia', 'USA'],
 				'comment': 'comment',
@@ -66,6 +77,8 @@ export class ViewForm extends Savmaxru.ObjectGUI
 		let obj4 = gallery.createFactoryObject("SingleLineTextBox");
 		obj4.build(
 			{
+				'ID': 2224,
+				'index': 4,
 				'description':'Test',
 				'comment': 'comment',
 			});
@@ -73,6 +86,8 @@ export class ViewForm extends Savmaxru.ObjectGUI
 		let obj5 = gallery.createFactoryObject("MultiLineTextBox");
 		obj5.build(
 			{
+				'ID': 2225,
+				'index': 5,
 				'description':'Test',
 				'comment': 'comment',
 			});
@@ -80,8 +95,12 @@ export class ViewForm extends Savmaxru.ObjectGUI
 		let obj6 = gallery.createFactoryObject("Button");
 		obj6.build(
 			{
+				'ID': 2226,
+				'index': 6,
 				'options': ['Send form'],
 			});
+
+		let result = [];
 
 		obj6.onDown(function(){
 			console.log(gallery.getResult());

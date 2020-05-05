@@ -9,6 +9,9 @@ export class ObjectsGallery extends Savmaxru.ObjectGUI
 		"galleryClassCSS": "standard-gallery",
 		"objectClassCSS" : "standard-object",
 		"objectsFactory": undefined,
+		"argumentsForResult": {
+			'ID': 232323
+		},
 	})
 	{
 		super();
@@ -16,11 +19,20 @@ export class ObjectsGallery extends Savmaxru.ObjectGUI
 			Tag.render`${this.addNode(config["galleryClassCSS"])}`
 		);
 		this.objectsFactory = config["objectsFactory"];
+		this.argumentsForResult = config["argumentsForResult"];
 	}
 
 	getResult()
 	{
 		let resultGallery=[];
+
+		let argumentsForResult = this.argumentsForResult;
+		for (let key in argumentsForResult)
+		{
+			resultGallery[key]= argumentsForResult[key];
+		}
+
+		let questions=[];
 		let objects = this.objects;
 		for(let i=0; i<objects.length; i++)
 		{
@@ -28,9 +40,12 @@ export class ObjectsGallery extends Savmaxru.ObjectGUI
 			let objectResult = object.getResult();
 			if(objectResult !== false)
 			{
-				resultGallery.push(objectResult);
+				questions.push(objectResult);
 			}
 		}
+
+		resultGallery["questions"] = questions;
+		
 		return resultGallery;
 	}
 

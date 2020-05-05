@@ -24,7 +24,10 @@
 
 	    var configGallery = {
 	      "galleryClassCSS": "viewform-gallery",
-	      "objectsFactory": Savmaxru.GUIComponents
+	      "objectsFactory": Savmaxru.GUIComponents,
+	      "argumentsForResult": {
+	        'ID': 232323
+	      }
 	    };
 	    var gallery = Savmaxru.Plugins.attachPlugin("ObjectsGallery", configGallery);
 	    _this.gallery = gallery;
@@ -33,10 +36,14 @@
 
 	    var obj0 = gallery.createFactoryObject("Heading");
 	    obj0.build({
+	      'ID': 2220,
+	      'index': 0,
 	      'options': ['Такой вот опрос']
 	    });
 	    var obj1 = gallery.createFactoryObject("DropDownList");
 	    obj1.build({
+	      'ID': 2221,
+	      'index': 1,
 	      'description': 'Выбери город',
 	      'options': ['Калининград', 'Череповец', 'Вологда'],
 	      'comment': 'вам доставят посылку точно по адресу',
@@ -44,6 +51,8 @@
 	    });
 	    var obj2 = gallery.createFactoryObject("CheckboxList");
 	    obj2.build({
+	      'ID': 2222,
+	      'index': 2,
 	      'description': 'Test',
 	      'options': ['Russia', 'USA'],
 	      'comment': 'comment',
@@ -52,6 +61,8 @@
 	    });
 	    var obj3 = gallery.createFactoryObject("RadiobuttonList");
 	    obj3.build({
+	      'ID': 2223,
+	      'index': 3,
 	      'description': 'Test',
 	      'options': ['Russia', 'USA'],
 	      'comment': 'comment',
@@ -60,16 +71,22 @@
 	    });
 	    var obj4 = gallery.createFactoryObject("SingleLineTextBox");
 	    obj4.build({
+	      'ID': 2224,
+	      'index': 4,
 	      'description': 'Test',
 	      'comment': 'comment'
 	    });
 	    var obj5 = gallery.createFactoryObject("MultiLineTextBox");
 	    obj5.build({
+	      'ID': 2225,
+	      'index': 5,
 	      'description': 'Test',
 	      'comment': 'comment'
 	    });
 	    var obj6 = gallery.createFactoryObject("Button");
 	    obj6.build({
+	      'ID': 2226,
+	      'index': 6,
 	      'options': ['Send form']
 	    });
 	    obj6.onDown(function () {
