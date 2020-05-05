@@ -94,4 +94,14 @@ class AnswerResultTable extends DataManager
 
 		}
 	}
+
+	public function getMaxIdResult()
+	{
+		$result = AnswerResultTable::getList([
+			'select' => ['ID_RESULT'],
+		]);
+		$maxIdResult = max($result ->fetchAll());
+		$result = $maxIdResult['ID_RESULT'];
+		return $result;
+	}
 }

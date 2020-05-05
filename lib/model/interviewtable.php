@@ -24,8 +24,8 @@ class InterviewTable extends DataManager
 			]),
 			new StringField("ID_AUTHOR"),
 			new StringField("TITLE"),
-			new DateField("DATE_CREATE"),
-			new DateField("DATE_EDIT"),
+			new StringField("DATE_CREATE"),
+			new StringField("DATE_EDIT"),
 			new BooleanField("VISIBLE"),
 		];
 	}
@@ -114,5 +114,24 @@ class InterviewTable extends DataManager
 		{
 
 		}
+	}
+
+	public function getMaxIDKey()
+	{
+		$result = InterviewTable::getList([
+			'select' => ['ID'],
+		]);
+		$maxIDKey = max($result ->fetchAll());
+		return $maxIDKey;
+	}
+
+	public function getInterviewsById($id)
+	{
+		$result = InterviewTable::getList([
+			'select' => ['ID', 'ID_AUTHOR', 'TITLE', 'DATE_CREATE', 'DATE_EDIT', 'VISIBLE'],
+			'filter' => ['ID' => $id],
+		]);
+		$row = $result ->fetchAll();
+		return $row;
 	}
 }

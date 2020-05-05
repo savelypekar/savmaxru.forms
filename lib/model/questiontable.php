@@ -98,4 +98,14 @@ class QuestionTable extends DataManager
 
 		}
 	}
+
+	public function getMaxIDKey()
+	{
+		$result = QuestionTable::getList([
+			'select' => ['ID'],
+		]);
+		$maxIDKey = max($result ->fetchAll());
+		$result = $maxIDKey['ID'];
+		return $result;
+	}
 }
