@@ -93,4 +93,39 @@ class CSavmaxruFormsView extends CBitrixComponent implements Controllerable
 			'result' => $result,
 		];
 	}
+
+	//save structure interview with question and option
+	public function saveInterviewStructureAction($result)
+	{
+		$optionTable = new \Savmaxru\Forms\Model\OptionTable();
+		$interviewTable = new \Savmaxru\Forms\Model\InterviewTable();
+		$questionTable = new \Savmaxru\Forms\Model\QuestionTable();
+		$connectionInterviewWithQuestion = new \Savmaxru\Forms\Model\ConnectionInterviewWithQuestionTable();
+
+		global $USER;
+		$idUser = $USER->GetID();
+
+		if ($result["ID"] == 'NEW_FORM') {
+			//create
+			$idInterviewPre = $interviewTable->getMaxIDKey();
+			$interviewTable->addInterview($idUser, $result["title"],'', '', $result["visible"]);
+			$idInterview = $interviewTable->getMaxIDKey();
+			if (!(($idInterviewPre['ID'] + 1) == $idInterview['ID'])) {
+				//error getting id
+			}
+			$idQuestion = $questionTable->getMaxIDKey() + 1;
+			foreach ($result['questions'] as $question)
+			{
+				$questionTable->addQuestion($question['type'], $question['description'], $question['index']);
+				$connectionInterviewWithQuestion->addRow($idInterview['ID'], $idQuestion);
+				foreach ($question['options'] as $option)
+				{
+					$optionTable->addOption($idQuestion, $option['value'], $option['index']);
+				}
+				$idQuestion = $idQuestion + 1;
+			}
+		} else {
+			//edit
+		}
+	}
 }

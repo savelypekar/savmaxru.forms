@@ -67,8 +67,8 @@ $connectionInterviewWithQuestion = new \Savmaxru\Forms\Model\ConnectionInterview
 //$result72 = $connectionInterviewWithQuestion->getAllRows();
 //$result73 = $connectionInterviewWithQuestion->getIdQuestionForIdInterview(2);
 
-//echo $result36;
-//var_dump($result36);
+//echo $result27;
+//var_dump($result27);
 
 //Fill the tables with demo data, uncomment the lines and execute ONE time
 //Table INTERVIEW

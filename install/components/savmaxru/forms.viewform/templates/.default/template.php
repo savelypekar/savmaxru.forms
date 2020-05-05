@@ -71,3 +71,72 @@ Get the whole form by id
 	});
 </script>
 -->
+
+<!--
+Save structure interview with question and option
+-->
+<script>
+	let result = {
+			//ID: 615,
+			ID: 'NEW_FORM',
+			title: 'title',
+			visible: true,
+			questions: [
+				{
+					ID: 232323,
+					index: 1,
+					change: "changed",
+					type: "DropDownList",
+					description: "text in description",
+					comment: "comment",
+					required: true,
+					options: [
+						{
+							ID: 232323,
+							index: 1,
+							value: "Russia",
+							change: "changed",
+						},
+						{
+							ID: 232323,
+							value: "China",
+							index: 2,
+							change: "removed",
+						},
+					],
+				},
+				{
+					index: 3,
+					ID: 232323,
+					type: "MultiLineTextBox",
+					change: "changed",
+					description: "text in description 2",
+					options: [
+						{
+							ID: 232323,
+							index: 1,
+							value: "Spain",
+							change: "changed",
+						},
+						{
+							ID: 232323,
+							value: "Italy",
+							index: 2,
+							change: "removed",
+						},
+					],
+				},
+				{
+					ID: 232323,
+					change: "removed",
+				}
+			]
+	};
+	BX.ajax.runComponentAction('savmaxru:forms.viewform', 'saveInterviewStructure', {
+		mode: 'class',
+		data: {
+			result: result,
+		}
+	});
+	console.log(result);
+</script>
