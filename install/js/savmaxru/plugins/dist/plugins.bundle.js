@@ -19,7 +19,10 @@
 	    var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
 	      "galleryClassCSS": "standard-gallery",
 	      "objectClassCSS": "standard-object",
-	      "objectsFactory": undefined
+	      "objectsFactory": undefined,
+	      "argumentsForResult": {
+	        'ID': 232323
+	      }
 	    };
 	    babelHelpers.classCallCheck(this, ObjectsGallery);
 	    _this = babelHelpers.possibleConstructorReturn(this, babelHelpers.getPrototypeOf(ObjectsGallery).call(this));
@@ -28,6 +31,7 @@
 	    _this.setRootNode(main_core.Tag.render(_templateObject(), _this.addNode(config["galleryClassCSS"])));
 
 	    _this.objectsFactory = config["objectsFactory"];
+	    _this.argumentsForResult = config["argumentsForResult"];
 	    return _this;
 	  }
 
@@ -35,6 +39,13 @@
 	    key: "getResult",
 	    value: function getResult() {
 	      var resultGallery = [];
+	      var argumentsForResult = this.argumentsForResult;
+
+	      for (var key in argumentsForResult) {
+	        resultGallery[key] = argumentsForResult[key];
+	      }
+
+	      var questions = [];
 	      var objects = this.objects;
 
 	      for (var i = 0; i < objects.length; i++) {
@@ -42,10 +53,11 @@
 	        var objectResult = object.getResult();
 
 	        if (objectResult !== false) {
-	          resultGallery.push(objectResult);
+	          questions.push(objectResult);
 	        }
 	      }
 
+	      resultGallery["questions"] = questions;
 	      return resultGallery;
 	    }
 	  }, {

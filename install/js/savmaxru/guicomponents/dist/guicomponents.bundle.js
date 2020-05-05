@@ -1,5 +1,52 @@
-(function (exports,savmaxru_objectgui,main_core) {
+(function (exports,main_core) {
 	'use strict';
+
+	var Option = /*#__PURE__*/function () {
+	  function Option(data) {
+	    babelHelpers.classCallCheck(this, Option);
+	    this.setValue(data['value']);
+	    this.setID(data['ID']);
+	    this.setIndex(data['index']);
+	  }
+
+	  babelHelpers.createClass(Option, [{
+	    key: "setObjectHTML",
+	    value: function setObjectHTML(object) {
+	      this.object = object;
+	    }
+	  }, {
+	    key: "getObjectHTML",
+	    value: function getObjectHTML() {
+	      return this.object;
+	    }
+	  }, {
+	    key: "setValue",
+	    value: function setValue(value) {
+	      this.value = value;
+	    }
+	  }, {
+	    key: "getValue",
+	    value: function getValue() {
+	      return this.value;
+	    }
+	  }, {
+	    key: "setID",
+	    value: function setID(id) {
+	      this.id = id;
+	    }
+	  }, {
+	    key: "getID",
+	    value: function getID() {
+	      return this.id;
+	    }
+	  }, {
+	    key: "setIndex",
+	    value: function setIndex(index) {
+	      this.index = index;
+	    }
+	  }]);
+	  return Option;
+	}();
 
 	function _templateObject() {
 	  var data = babelHelpers.taggedTemplateLiteral(["\n\t\t\t<div class=\"object-gui\">\n\t\t\t\t<div class=\"field-mark\">\n\t\t\t\t\t", "\n\t\t\t\t</div>\n\t\t\t\t<div class=\"field-description\">\n\t\t\t\t\t", "\n\t\t\t\t</div>\n\t\t\t\t<div>\n\t\t\t\t\t", "\n\t\t\t\t</div>\n\t\t\t\t<div class=\"field-comment\">\n\t\t\t\t\t", "\n\t\t\t\t</div>\n\t\t\t</div>"]);
@@ -18,6 +65,7 @@
 
 	    babelHelpers.classCallCheck(this, GUIComponent);
 	    _this = babelHelpers.possibleConstructorReturn(this, babelHelpers.getPrototypeOf(GUIComponent).call(this));
+	    babelHelpers.defineProperty(babelHelpers.assertThisInitialized(_this), "options", []);
 
 	    _this.setRootNode(main_core.Tag.render(_templateObject(), _this.addNode("mark"), _this.addNode("description"), _this.addNode("component"), _this.addNode("comment")));
 
@@ -30,24 +78,51 @@
 	      return this.IDManager.getNextHighestId();
 	    }
 	  }, {
+	    key: "setID",
+	    value: function setID(id) {
+	      this.id = id;
+	    }
+	  }, {
+	    key: "getID",
+	    value: function getID() {
+	      return this.id;
+	    }
+	  }, {
+	    key: "setIndex",
+	    value: function setIndex(index) {
+	      this.index = index;
+	    }
+	  }, {
+	    key: "getIndex",
+	    value: function getIndex() {
+	      return this.index;
+	    }
+	  }, {
 	    key: "build",
 	    value: function build(data) {
 	      this.IDManager = data['IDManager'];
 	      this.setDescription(data['description']);
 	      this.setComment(data['comment']);
 	      this.addOptions(data['options']);
+	      this.setIndex(data['index']);
+	      this.setID(data['ID']);
 
 	      if (data['required']) {
 	        this.setFieldAsRequired();
 	      }
 	    }
 	  }, {
+	    key: "getOptions",
+	    value: function getOptions() {
+	      return this.options;
+	    }
+	  }, {
 	    key: "addOptions",
 	    value: function addOptions(options) {
-	      if (options !== undefined) {
-	        for (var i = 0; i < options.length; i++) {
-	          this.addOption(options[i]);
-	        }
+	      for (var i = 0; i < options.length; i++) {
+	        var option = new Option(options[i]);
+	        option.setObjectHTML(this.addOption(option.getValue()));
+	        this.options.push(option);
 	      }
 	    }
 	  }, {
@@ -77,7 +152,21 @@
 	  }, {
 	    key: "getResult",
 	    value: function getResult() {
-	      return false;
+	      var options = this.getOptions();
+	      var result = [];
+	      result["ID"] = this.getID();
+	      result["index"] = this.getIndex();
+	      result["options"] = [];
+
+	      for (var i = 0; i < options.length; i++) {
+	        var option = options[i];
+
+	        if (option.getObjectHTML().getCondition()) {
+	          result["options"].push(option.getID());
+	        }
+	      }
+
+	      return result;
 	    }
 	  }]);
 	  return GUIComponent;
@@ -94,7 +183,7 @@
 	}
 
 	function _templateObject$1() {
-	  var data = babelHelpers.taggedTemplateLiteral(["\n\t\t\t<div class=\"dropdownlist\">\n\t\t\t\t", "\n\t\t\t</div>"]);
+	  var data = babelHelpers.taggedTemplateLiteral(["", ""]);
 
 	  _templateObject$1 = function _templateObject() {
 	    return data;
@@ -111,7 +200,7 @@
 	    babelHelpers.classCallCheck(this, DropDownList);
 	    _this = babelHelpers.possibleConstructorReturn(this, babelHelpers.getPrototypeOf(DropDownList).call(this));
 
-	    _this.setComponent(main_core.Tag.render(_templateObject$1(), _this.addNode("select", 'select')));
+	    _this.setComponent(main_core.Tag.render(_templateObject$1(), _this.addNode("dropdownlist", 'select')));
 
 	    _this.addOption('--');
 
@@ -121,12 +210,35 @@
 	  babelHelpers.createClass(DropDownList, [{
 	    key: "addOption",
 	    value: function addOption(option) {
-	      this.includeInNode("select", main_core.Tag.render(_templateObject2(), option));
-	    }
-	  }, {
-	    key: "getResult",
-	    value: function getResult() {//return this.getRootNode().options.selectedIndex;
-	    }
+	      var objectHTML = main_core.Tag.render(_templateObject2(), option);
+
+	      objectHTML.getCondition = function () {
+	        return this.selected;
+	      };
+
+	      this.includeInNode("dropdownlist", objectHTML);
+	      return objectHTML;
+	    } //getSelected
+
+	    /*getResult()
+	    {
+	    	let resultComponent = [];
+	    	let options = this.getOptions();
+	    		//this.getNode("dropdownlist").options;
+	    		for(let i=0; i < options.length; i++)
+	    	{
+	    		let option = options[i];
+	    		let optionHTML = option.getObjectHTML();
+	    		//if(optionHTML.selected)//
+	    		let result = [];
+	    			result["index"] = option.getID();
+	    		result["index"] = option.getIndex();
+	    		result["value"] = optionHTML.selected;
+	    			resultComponent.push(result);
+	    	}
+	    	return resultComponent;
+	    }*/
+
 	  }]);
 	  return DropDownList;
 	}(GUIComponent);
@@ -154,27 +266,11 @@
 	    return _this;
 	  }
 
-	  babelHelpers.createClass(ElectiveItemsList, [{
-	    key: "getResult",
-	    value: function getResult() {
-	      var result = [];
-	      var items = this.getAllElementsOfTheNode('electiveitemslist');
-
-	      for (var i = 0; i < items.length; i++) {
-	        var item = items[i];
-	        var itemInfo = [];
-	        itemInfo[item.children[1].innerHTML] = item.children[0].checked;
-	        result.push(itemInfo);
-	      }
-
-	      return result;
-	    }
-	  }]);
 	  return ElectiveItemsList;
 	}(GUIComponent);
 
 	function _templateObject$3() {
-	  var data = babelHelpers.taggedTemplateLiteral(["\n\t\t<div class=\"checkbox-item\">\n\t\t\t<input type=\"checkbox\" id=\"", "\" />\n\t\t\t<label class=\"checkbox-label\" for=\"", "\">", "</label>\n\t\t</div>"]);
+	  var data = babelHelpers.taggedTemplateLiteral(["\n\t\t<div class=\"checkbox-item\">\n\t\t\t<input type=\"checkbox\" value=\"", "\" id=\"", "\" />\n\t\t\t<label class=\"checkbox-label\" for=\"", "\">", "</label>\n\t\t</div>"]);
 
 	  _templateObject$3 = function _templateObject() {
 	    return data;
@@ -192,16 +288,23 @@
 
 	  babelHelpers.createClass(CheckboxList, [{
 	    key: "addOption",
-	    value: function addOption(option) {
+	    value: function addOption(option, index) {
 	      var newItemID = this.getNextHighestId();
-	      this.includeInNode("electiveitemslist", main_core.Tag.render(_templateObject$3(), newItemID, newItemID, option));
+	      var objectHTML = main_core.Tag.render(_templateObject$3(), index, newItemID, newItemID, option);
+
+	      objectHTML.getCondition = function () {
+	        return this.children[0].checked;
+	      };
+
+	      this.includeInNode("electiveitemslist", objectHTML);
+	      return objectHTML;
 	    }
 	  }]);
 	  return CheckboxList;
 	}(ElectiveItemsList);
 
 	function _templateObject$4() {
-	  var data = babelHelpers.taggedTemplateLiteral(["\n\t\t<div class=\"radiobutton-item\">\n\t\t\t<input type=\"radio\" id=\"", "\" name=\"", "\">\n  \t\t\t<label class=\"radiobutton-label\" for=\"", "\">", "</label>\n\t\t</div>"]);
+	  var data = babelHelpers.taggedTemplateLiteral(["\n\t\t<div class=\"radiobutton-item\">\n\t\t\t<input type=\"radio\" value=\"", "\" id=\"", "\" name=\"", "\">\n  \t\t\t<label class=\"radiobutton-label\" for=\"", "\">", "</label>\n\t\t</div>"]);
 
 	  _templateObject$4 = function _templateObject() {
 	    return data;
@@ -219,13 +322,20 @@
 
 	  babelHelpers.createClass(RadiobuttonList, [{
 	    key: "addOption",
-	    value: function addOption(option) {
+	    value: function addOption(option, index) {
 	      if (this.listName === undefined) {
 	        this.listName = this.getNextHighestId();
 	      }
 
 	      var newItemID = this.getNextHighestId();
-	      this.includeInNode("electiveitemslist", main_core.Tag.render(_templateObject$4(), newItemID, this.listName, newItemID, option));
+	      var objectHTML = main_core.Tag.render(_templateObject$4(), index, newItemID, this.listName, newItemID, option);
+
+	      objectHTML.getCondition = function () {
+	        return this.children[0].checked;
+	      };
+
+	      this.includeInNode("electiveitemslist", objectHTML);
+	      return objectHTML;
 	    }
 	  }]);
 	  return RadiobuttonList;
@@ -281,6 +391,11 @@
 	        htmlObject.dataStructure._function();
 	      };
 	    }
+	  }, {
+	    key: "getResult",
+	    value: function getResult() {
+	      return false;
+	    }
 	  }]);
 	  return Button;
 	}(GUIComponent);
@@ -323,6 +438,11 @@
 	    value: function addOption(option) {
 	      this.includeInNode("heading", main_core.Tag.render(_templateObject2$2(), option));
 	    }
+	  }, {
+	    key: "getResult",
+	    value: function getResult() {
+	      return false;
+	    }
 	  }]);
 	  return Heading;
 	}(GUIComponent);
@@ -354,15 +474,12 @@
 	    key: "getResult",
 	    value: function getResult() {
 	      var result = [];
+	      result["ID"] = this.getID();
+	      result["index"] = this.getIndex();
+	      result["options"] = [];
 	      var items = this.getAllElementsOfTheNode('textbox');
-
-	      for (var i = 0; i < items.length; i++) {
-	        var item = items[i];
-	        var itemInfo = [];
-	        itemInfo["Value" + i] = item.value;
-	        result.push(itemInfo);
-	      }
-
+	      var item = items[0];
+	      result["options"]["userValue"] = item.value;
 	      return result;
 	    }
 	  }]);
@@ -451,5 +568,5 @@
 
 	exports.GUIComponents = GUIComponents;
 
-}((this.Savmaxru = this.Savmaxru || {}),BX,BX));
+}((this.Savmaxru = this.Savmaxru || {}),BX));
 //# sourceMappingURL=guicomponents.bundle.js.map

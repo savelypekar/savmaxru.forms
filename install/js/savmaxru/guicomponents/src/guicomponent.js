@@ -1,5 +1,5 @@
-import {ObjectGUI} from "savmaxru.objectgui";
 import {Tag} from 'main.core';
+import {Option} from "./option";
 
 export class GUIComponent extends Savmaxru.ObjectGUI
 {
@@ -30,26 +30,55 @@ export class GUIComponent extends Savmaxru.ObjectGUI
 		return this.IDManager.getNextHighestId();
 	}
 
+	setID(id)
+	{
+		this.id = id;
+	}
+
+	getID()
+	{
+		return this.id;
+	}
+
+	setIndex(index)
+	{
+		this.index = index;
+	}
+
+	getIndex()
+	{
+		return this.index;
+	}
+
 	build(data)
 	{
 		this.IDManager = data['IDManager'];
 		this.setDescription(data['description']);
 		this.setComment(data['comment']);
 		this.addOptions(data['options']);
+		this.setIndex(data['index']);
+		this.setID(data['ID']);
+		
 		if(data['required'])
 		{
 			this.setFieldAsRequired();
 		}
 	}
 
+	options = [];
+
+	getOptions()
+	{
+		return this.options;
+	}
+
 	addOptions(options)
 	{
-		if(options !== undefined)
+		for(let i = 0; i<options.length; i++)
 		{
-			for(let i = 0; i<options.length; i++)
-			{
-				this.addOption(options[i]);
-			}
+			let option = new Option(options[i]);
+			option.setObjectHTML(this.addOption(option.getValue()));
+			this.options.push(option);
 		}
 	}
 
@@ -81,6 +110,20 @@ export class GUIComponent extends Savmaxru.ObjectGUI
 
 	getResult()
 	{
-		return false;
+		let options = this.getOptions();
+		let result = [];
+		result["ID"] = this.getID();
+		result["index"] = this.getIndex();
+		result["options"] = [];
+		for(let i = 0; i < options.length; i++)
+		{
+			let option = options[i];
+			if(option.getObjectHTML().getCondition())
+			{
+				result["options"].push(option.getID());
+			}
+		}
+		return result;
 	}
+
 }

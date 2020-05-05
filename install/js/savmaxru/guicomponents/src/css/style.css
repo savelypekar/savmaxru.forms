@@ -1,8 +1,7 @@
-.savmaxru-forms.dropdownlist {
-	position: relative;
-}
 
-.savmaxru-forms .dropdownlist select {
+
+.savmaxru-forms .dropdownlist {
+	position: relative;
 	display: block;
 	width: 480px;
 	padding: .75rem 0 .75rem 1rem;
@@ -15,7 +14,7 @@
 	color: #444;
 }
 
-.savmaxru-forms .dropdownlist select {
+.savmaxru-forms .dropdownlist {
 	background-image: url('arrow-down.svg');
 	background-size: 5%;
 	background-repeat: no-repeat;
@@ -23,7 +22,7 @@
 	background-position-y: 54%;
 }
 
-.savmaxru-forms .dropdownlist select:hover {
+.savmaxru-forms .dropdownlist:hover {
 	background-image: url('arrow-down-hit.svg');
 }
 
