@@ -34,7 +34,7 @@ $connectionInterviewWithQuestion = new \Savmaxru\Forms\Model\ConnectionInterview
 //$result15 = $optionTable->updateRow(7, 3, 345, 5);
 
 //$result21 = $interviewTable->getAllInterviews();
-//$result22 = $interviewTable->addInterview(6, 'title7', '', '',true);
+$result22 = $interviewTable->addInterview(6, 'title7', '', '',true);
 //$result23 = $interviewTable->getInterviewsByIdAuthor('3');
 //$result24 = $interviewTable->getInterviewsByAmount(1,3);
 //$result25 = $interviewTable->deleteRow(5);
@@ -67,8 +67,8 @@ $connectionInterviewWithQuestion = new \Savmaxru\Forms\Model\ConnectionInterview
 //$result72 = $connectionInterviewWithQuestion->getAllRows();
 //$result73 = $connectionInterviewWithQuestion->getIdQuestionForIdInterview(2);
 
-//echo $result27;
-//var_dump($result27);
+echo $result22;
+//var_dump($result22);
 
 //Fill the tables with demo data, uncomment the lines and execute ONE time
 //Table INTERVIEW
