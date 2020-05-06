@@ -1,4 +1,4 @@
-(function (exports,main_core) {
+(function (exports,savmaxru_objectgui,main_core) {
 	'use strict';
 
 	var Option = /*#__PURE__*/function () {
@@ -568,5 +568,5 @@
 
 	exports.GUIComponents = GUIComponents;
 
-}((this.Savmaxru = this.Savmaxru || {}),BX));
+}((this.Savmaxru = this.Savmaxru || {}),BX,BX));
 //# sourceMappingURL=guicomponents.bundle.js.map

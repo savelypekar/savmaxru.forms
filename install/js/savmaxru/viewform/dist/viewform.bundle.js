@@ -1,4 +1,4 @@
-(function (exports,main_core,savmaxru_objectgui,savmaxru_plugins,savmaxru_guicomponents,savmaxru_idmanager) {
+(function (exports,main_core,savmaxru_objectgui,savmaxru_plugins,savmaxru_guicomponents,savmaxru_idmanager,savmaxru_modalwindow) {
 	'use strict';
 
 	function _templateObject() {
@@ -143,6 +143,10 @@
 	    }); //gallery.getResult();
 	    //this.gallery.loadGroupObject();*/
 
+	    var window = new Savmaxru.ModalWindow();
+
+	    _this.includeInNode("viewform-wrapper", window.getHTMLObject());
+
 	    return _this;
 	  }
 
@@ -151,5 +155,5 @@
 
 	exports.ViewForm = ViewForm;
 
-}((this.Savmaxru = this.Savmaxru || {}),BX,BX,BX,BX,BX));
+}((this.Savmaxru = this.Savmaxru || {}),BX,BX,BX,BX,BX,BX));
 //# sourceMappingURL=viewform.bundle.js.map

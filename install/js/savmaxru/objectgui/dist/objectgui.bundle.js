@@ -29,6 +29,7 @@
 	    value: function addNode(name) {
 	      var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'div';
 	      var node = this.createNode(type);
+	      node.parent = this;
 	      this.nodes[name] = node;
 	      node.className = name;
 	      return node;
@@ -67,6 +68,12 @@
 	    this.wrapper = this.createNode('div');
 	  }
 
+	  babelHelpers.createClass(ObjectGUI, [{
+	    key: "remove",
+	    value: function remove() {
+	      this.wrapper.remove();
+	    }
+	  }]);
 	  return ObjectGUI;
 	}();
 

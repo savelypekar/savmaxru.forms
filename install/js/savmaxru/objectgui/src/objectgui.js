@@ -28,6 +28,7 @@ export class ObjectGUI
 	addNode(name,type = 'div')
 	{
 		let node = this.createNode(type);
+		node.parent = this;
 		this.nodes[name] = node;
 		node.className = name;
 		return node;
@@ -62,5 +63,10 @@ export class ObjectGUI
 	constructor()
 	{
 		this.wrapper = this.createNode('div');
+	}
+
+	remove()
+	{
+		this.wrapper.remove();
 	}
 }

@@ -1,5 +1,6 @@
 import {Tag} from 'main.core';
 import {Option} from "./option";
+import {ObjectGUI} from "savmaxru.objectgui";
 
 export class GUIComponent extends Savmaxru.ObjectGUI
 {

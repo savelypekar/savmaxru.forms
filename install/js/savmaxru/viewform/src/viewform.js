@@ -6,6 +6,8 @@ import {Tag} from 'main.core';
 import {Plugins} from 'savmaxru.plugins';
 import {GUIComponents} from 'savmaxru.guicomponents';
 import {IDManager} from 'savmaxru.idmanager';
+import {ModalWindow} from "savmaxru.modalwindow";
+
 
 export class ViewForm extends Savmaxru.ObjectGUI
 {
@@ -171,6 +173,8 @@ export class ViewForm extends Savmaxru.ObjectGUI
 		//gallery.getResult();
 		//this.gallery.loadGroupObject();*/
 
+		let window = new Savmaxru.ModalWindow();
+		this.includeInNode("viewform-wrapper", window.getHTMLObject());
 	}
 
 

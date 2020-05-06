@@ -13,6 +13,7 @@ return [
 		'savmaxru.plugins',
 		'savmaxru.guicomponents',
 		'savmaxru.idmanager',
+		'savmaxru.modalwindow',
 	],
 	'skip_core' => false,
 ];
