@@ -145,17 +145,23 @@ Save structure interview with question and option
 
 <!--
 Send results by amount
-//Савелий посомтри пожалуйста, здесь тебе точно надо ВСЕ результаты
+-->
 <script>
+	let idInterview = '123';
+	let quantity = '7';
+	let firstPosition = '0';
 	BX.ajax.runComponentAction('savmaxru:forms.viewform', 'sendResults', {
 		mode: 'class',
 		data: {
+			idInterview: idInterview,
+			quantity: quantity,
+			firstPosition: firstPosition,
 		}
 	}).then(function (response) {
 		console.log(response);
 	});
 </script>
--->
+
 
 <!--
 Send ONE result

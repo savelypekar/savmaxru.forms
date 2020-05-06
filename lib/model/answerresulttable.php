@@ -115,4 +115,17 @@ class AnswerResultTable extends DataManager
 		$result = $maxIdResult['ID_RESULT'];
 		return $result;
 	}
+
+	public function getResultByIdInterviewWithAmount($idInterview, $quantity, $firstPosition)
+	{
+		$result = AnswerResultTable::getList([
+			'select' => ['ID', 'ID_RESULT', 'ID_INTERVIEW', 'ID_USER'],
+			'filter' => ['ID_INTERVIEW' => $idInterview],
+			'limit' => $quantity,
+			'offset' => $firstPosition,
+		]);
+		$rows = $result ->fetchAll();
+
+		return $rows;
+	}
 }

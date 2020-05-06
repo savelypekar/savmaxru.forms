@@ -138,12 +138,11 @@ class CSavmaxruFormsView extends CBitrixComponent implements Controllerable
 		}
 	}
 
-	//this functions is not finished
-	public function sendResultsAction()
+	public function sendResultsAction($idInterview, $quantity, $firstPosition)
 	{
 		$answerResultTable = new \Savmaxru\Forms\Model\AnswerResultTable();
 
-		$result = $answerResultTable->getAllResult();
+		$result = $answerResultTable->getResultByIdInterviewWithAmount($idInterview, $quantity, $firstPosition);
 		return [
 			'result' => $result,
 		];
