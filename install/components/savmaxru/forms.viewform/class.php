@@ -35,18 +35,12 @@ class CSavmaxruFormsView extends CBitrixComponent implements Controllerable
 
 		$answerResultTable->saveAnswerResult($idResult, $result["ID"], $idUser);
 
-		foreach ($result["questions"] as $question)
-		{
+		foreach ($result["questions"] as $question) {
 			$answerToQuestionTable->saveAnswerToQuestion($question["ID"], $idResult);
-
-			if (array_key_exists('userValue', $question["options"]))
-			{
+			if (array_key_exists('userValue', $question["options"])) {
 				$answerOptionTable->saveOptionAnswer($question["ID"], 0, $question["options"]["userValue"]);
-			}
-			else
-			{
-				foreach ($question["options"] as $option)
-				{
+			} else {
+				foreach ($question["options"] as $option) {
 					$answerOptionTable->saveOptionAnswer($question["ID"], $option, '');
 				}
 			}
@@ -65,8 +59,7 @@ class CSavmaxruFormsView extends CBitrixComponent implements Controllerable
 
 		$result["ID"] = $interview[0]["ID"];
 		$countQuestion = 1;
-		foreach ($questions as $question)
-		{
+		foreach ($questions as $question) {
 			$result['question'][$countQuestion]['ID'] = $question[0]['ID'];
 			$result['question'][$countQuestion]['index'] = $question[0]['POSITION'];
 			$result['question'][$countQuestion]['type'] = $question[0]['TYPE'];
@@ -78,8 +71,7 @@ class CSavmaxruFormsView extends CBitrixComponent implements Controllerable
 			$options = $optionTable->getOptionsForQuestion($idQuestion);
 
 			$countOption = 1;
-			foreach ($options as $option)
-			{
+			foreach ($options as $option) {
 				$result['question'][$countQuestion]['options'][$countOption]["ID"] = $option["ID"];
 				$result['question'][$countQuestion]['options'][$countOption]["value"] = $option["CONTENT"];
 				$result['question'][$countQuestion]['options'][$countOption]["index"] = $option["POSITION"];
@@ -106,50 +98,42 @@ class CSavmaxruFormsView extends CBitrixComponent implements Controllerable
 		$idUser = $USER->GetID();
 
 		if ($result["ID"] == 'NEW_FORM') {
-			//create
-			$idInterviewPre = $interviewTable->getMaxIDKey();
+			//$idInterviewPre = $interviewTable->getMaxIDKey();
 			$interviewTable->addInterview($idUser, $result["title"],'', '', $result["visible"]);
 			$idInterview = $interviewTable->getMaxIDKey();
-			if (!(($idInterviewPre['ID'] + 1) == $idInterview['ID'])) {
+			//if (!(($idInterviewPre['ID'] + 1) == $idInterview['ID'])) {
 				//error getting id
-			}
+			//}
 			$idQuestion = $questionTable->getMaxIDKey() + 1;
-			foreach ($result['questions'] as $question)
-			{
+			foreach ($result['questions'] as $question) {
 				$questionTable->addQuestion($question['type'], $question['description'], $question['index']);
 				$connectionInterviewWithQuestion->addRow($idInterview['ID'], $idQuestion);
-				foreach ($question['options'] as $option)
-				{
+				foreach ($question['options'] as $option) {
 					$optionTable->addOption($idQuestion, $option['value'], $option['index']);
 				}
 				$idQuestion = $idQuestion + 1;
 			}
 		} else {
-			//edit
-			//$idInterview = $result["ID"];
-			foreach ($result['questions'] as $question)
-			{
-				if ($question['change'] == 'changed')
-				{
-					//change
-					$questionTable->updateRow($question['ID'], $question['type'], $question['description'], $question['index']);
-					foreach ($question['options'] as $option)
-					{
-						if ($option['change'] == 'changed')
-						{
-							$optionTable->updateRow($option['ID'], $question['ID'], $option['value'], $option['index']);
-						}
-						if ($option['change'] == 'removed')
-						{
-							$optionTable->deleteRow($option['ID']);
+			if ($result['change'] == 'changed') {
+				foreach ($result['questions'] as $question) {
+					if ($question['change'] == 'changed') {
+						$questionTable->updateRow($question['ID'], $question['type'], $question['description'], $question['index']);
+						foreach ($question['options'] as $option) {
+							if ($option['change'] == 'changed') {
+								$optionTable->updateRow($option['ID'], $question['ID'], $option['value'], $option['index']);
+							}
+							if ($option['change'] == 'removed') {
+								$optionTable->deleteRow($option['ID']);
+							}
 						}
 					}
+					if ($question['change'] == 'removed') {
+						$questionTable->deleteRow($question['ID']);
+					}
 				}
-				if ($question['change'] == 'removed')
-				{
-					//remove
-					$questionTable->deleteRow($question['ID']);
-				}
+			}
+			if ($result['change'] == 'removed') {
+				$interviewTable->deleteRow($result["ID"]);
 			}
 		}
 	}

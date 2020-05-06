@@ -80,6 +80,7 @@ Save structure interview with question and option
 			ID: 615,
 			//ID: 'NEW_FORM',
 			title: 'title',
+			change: "changed",
 			visible: true,
 			questions: [
 				{

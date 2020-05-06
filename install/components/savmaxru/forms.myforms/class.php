@@ -58,12 +58,12 @@ class CSavmaxruFormsMyForms extends CBitrixComponent implements Controllerable
 		$questionTable = new \Savmaxru\Forms\Model\QuestionTable();
 
 		$interviewTable->addInterview($interview[0], $interview[1], $interview[2], $interview[3], $interview[4]);
-		foreach ($questions as $questionItem)
-		{
+		foreach ($questions as $questionItem) {
 			$questionTable->addQuestion($questionItem[0], $questionItem[1], $questionItem[2]);
 		}
 	}
 
+	//not used now
 	public function saveAllDataAction($interviews, $questions, $options)
 	{
 		$interviewTable = new \Savmaxru\Forms\Model\InterviewTable();
@@ -72,16 +72,13 @@ class CSavmaxruFormsMyForms extends CBitrixComponent implements Controllerable
 
 		$lastIdInterview = $interviewTable->getMaxIDKey();
 		$lastIdQuestion = $questionTable->getMaxIDKey();
-		foreach ($interviews as $interviewItem)
-		{
+		foreach ($interviews as $interviewItem) {
 			$interviewTable->addInterview($interviewItem[0], $interviewItem[1], $interviewItem[2], $interviewItem[3], $interviewItem[4]);
 		}
-		foreach ($questions as $questionItem)
-		{
+		foreach ($questions as $questionItem) {
 			$questionTable->addQuestion($questionItem[0], $questionItem[1], $questionItem[2]);
 		}
-		foreach ($options as $optionItem)
-		{
+		foreach ($options as $optionItem) {
 			$optionItem[0] = $optionItem[0] + $lastIdQuestion;
 			$optionTable->addOption($optionItem[0], $optionItem[1], $optionItem[2]);
 		}
