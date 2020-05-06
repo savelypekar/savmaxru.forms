@@ -126,6 +126,31 @@ class CSavmaxruFormsView extends CBitrixComponent implements Controllerable
 			}
 		} else {
 			//edit
+			//$idInterview = $result["ID"];
+			foreach ($result['questions'] as $question)
+			{
+				if ($question['change'] == 'changed')
+				{
+					//change
+					$questionTable->updateRow($question['ID'], $question['type'], $question['description'], $question['index']);
+					foreach ($question['options'] as $option)
+					{
+						if ($option['change'] == 'changed')
+						{
+							$optionTable->updateRow($option['ID'], $question['ID'], $option['value'], $option['index']);
+						}
+						if ($option['change'] == 'removed')
+						{
+							$optionTable->deleteRow($option['ID']);
+						}
+					}
+				}
+				if ($question['change'] == 'removed')
+				{
+					//remove
+					$questionTable->deleteRow($question['ID']);
+				}
+			}
 		}
 	}
 }

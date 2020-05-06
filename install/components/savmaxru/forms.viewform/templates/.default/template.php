@@ -77,28 +77,28 @@ Save structure interview with question and option
 
 <script>
 	let result = {
-			//ID: 615,
-			ID: 'NEW_FORM',
+			ID: 615,
+			//ID: 'NEW_FORM',
 			title: 'title',
 			visible: true,
 			questions: [
 				{
-					ID: 232323,
+					ID: 83,
 					index: 1,
 					change: "changed",
-					type: "DropDownList",
-					description: "text in description",
+					type: "DropDownList89",
+					description: "text in description89",
 					comment: "comment",
 					required: true,
 					options: [
 						{
-							ID: 232323,
-							index: 1,
+							ID: 59,
+							index: 5,
 							value: "Russia",
 							change: "changed",
 						},
 						{
-							ID: 232323,
+							ID: 58,
 							value: "China",
 							index: 2,
 							change: "removed",
