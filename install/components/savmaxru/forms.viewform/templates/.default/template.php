@@ -145,7 +145,7 @@ Save structure interview with question and option
 
 <!--
 Send results by amount
--->
+
 <script>
 	let idInterview = '123';
 	let quantity = '7';
@@ -161,7 +161,7 @@ Send results by amount
 		console.log(response);
 	});
 </script>
-
+-->
 
 <!--
 Send ONE result
