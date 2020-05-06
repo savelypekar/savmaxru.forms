@@ -142,3 +142,33 @@ Save structure interview with question and option
 	console.log(result);
 </script>
 -->
+
+<!--
+Send results by amount
+//Савелий посомтри пожалуйста, здесь тебе точно надо ВСЕ результаты
+<script>
+	BX.ajax.runComponentAction('savmaxru:forms.viewform', 'sendResults', {
+		mode: 'class',
+		data: {
+		}
+	}).then(function (response) {
+		console.log(response);
+	});
+</script>
+-->
+
+<!--
+Send ONE result
+
+<script>
+	let idResult = '30';
+	BX.ajax.runComponentAction('savmaxru:forms.viewform', 'sendSelectedResult', {
+		mode: 'class',
+		data: {
+			idResult: idResult,
+		}
+	}).then(function (response) {
+		console.log(response);
+	});
+</script>
+-->

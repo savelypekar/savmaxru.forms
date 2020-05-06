@@ -137,4 +137,48 @@ class CSavmaxruFormsView extends CBitrixComponent implements Controllerable
 			}
 		}
 	}
+
+	//this functions is not finished
+	public function sendResultsAction()
+	{
+		$answerResultTable = new \Savmaxru\Forms\Model\AnswerResultTable();
+
+		$result = $answerResultTable->getAllResult();
+		return [
+			'result' => $result,
+		];
+	}
+
+	public function sendSelectedResultAction($idResult)
+	{
+		$answerResultTable = new \Savmaxru\Forms\Model\AnswerResultTable();
+		$answerToQuestionTable = new \Savmaxru\Forms\Model\AnswerToQuestionTable();
+		$answerOptionTable = new \Savmaxru\Forms\Model\AnswerOptionTable();
+
+		$result = [];
+		$answerResult = $answerResultTable->getResultByIdResult($idResult);
+		$result['ID'] = $answerResult[0]['ID'];
+		$result['ID_RESULT'] = $answerResult[0]['ID_RESULT'];
+		$result['ID_INTERVIEW'] = $answerResult[0]['ID_INTERVIEW'];
+		$result['ID_USER'] = $answerResult[0]['ID_USER'];
+		$answers = $answerToQuestionTable->getResultByIdResult($idResult);
+		$countAnswers = 0;
+		foreach ($answers as $answer){
+			$result['answers'][$countAnswers]['ID'] = $answer['ID'];
+			$result['answers'][$countAnswers]['ID_QUESTION'] = $answer['ID_QUESTION'];
+			$result['answers'][$countAnswers]['ID_RESULT'] = $answer['ID_RESULT'];
+			$countOptions = 0;
+			$idAnswer = $answer['ID'];
+			$options = $answerOptionTable->getAnswerByIdAnswer($idAnswer);
+			foreach ($options as $option){
+				$result['answers'][$countAnswers]['options'][$countOptions] = $option;
+				$countOptions = $countOptions + 1;
+			}
+			$countAnswers = $countAnswers + 1;
+		}
+
+		return [
+			'result' => $result,
+		];
+	}
 }
