@@ -1,0 +1,59 @@
+.dropdownlist-ico
+{
+	display: block;
+	background-image: url("dropdownlist-ico.png");
+	width: 140px;
+	height: 140px;
+	background-size: cover;
+}
+
+.checkboxlist-ico
+{
+	display: block;
+	background-image: url("checkboxlist-ico.png");
+	width: 140px;
+	height: 140px;
+	background-size: cover;
+}
+
+.radiobuttonlist-ico
+{
+	display: block;
+	background-image: url("radiobuttonlist-ico.png");
+	width: 140px;
+	height: 140px;
+	background-size: cover;
+}
+
+.singlelinetextbox-ico
+{
+	display: block;
+	background-image: url("singlelinetextbox-ico.png");
+	width: 140px;
+	height: 140px;
+	background-size: cover;
+}
+
+.multilinetextbox-ico
+{
+	display: block;
+	background-image: url("multilinetextbox-ico.png");
+	width: 140px;
+	height: 140px;
+	background-size: cover;
+}
+
+.heading-ico
+{
+	display: block;
+	background-image: url("heading-ico.png");
+	width: 140px;
+	height: 140px;
+	background-size: cover;
+}
+
+.components-selection
+{
+	flex-wrap: wrap;
+	display: flex;
+}

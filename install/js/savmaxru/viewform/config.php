@@ -14,6 +14,7 @@ return [
 		'savmaxru.guicomponents',
 		'savmaxru.idmanager',
 		'savmaxru.modalwindow',
+		'savmaxru.componenteditor',
 	],
 	'skip_core' => false,
 ];

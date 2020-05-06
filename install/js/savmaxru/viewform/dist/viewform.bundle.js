@@ -1,4 +1,4 @@
-(function (exports,main_core,savmaxru_objectgui,savmaxru_plugins,savmaxru_guicomponents,savmaxru_idmanager,savmaxru_modalwindow) {
+(function (exports,main_core,savmaxru_objectgui,savmaxru_plugins,savmaxru_guicomponents,savmaxru_idmanager,savmaxru_modalwindow,savmaxru_componenteditor) {
 	'use strict';
 
 	function _templateObject() {
@@ -78,6 +78,20 @@
 	    obj6.onDown(function () {
 	      console.log(gallery.getResult());
 	    });
+	    var obj8 = gallery.createFactoryObject("Button");
+	    obj8.build({
+	      'ID': 2226,
+	      'index': 6,
+	      'options': [{
+	        index: 0,
+	        ID: 121212,
+	        value: "Add component"
+	      }]
+	    });
+	    var ComponentEditor = new Savmaxru.ComponentEditor(_this.getNode("viewform-wrapper"));
+	    obj8.onDown(function () {
+	      ComponentEditor.create();
+	    });
 	    var obj2 = gallery.createFactoryObject("CheckboxList");
 	    obj2.build({
 	      'ID': 2222,
@@ -143,10 +157,6 @@
 	    }); //gallery.getResult();
 	    //this.gallery.loadGroupObject();*/
 
-	    var window = new Savmaxru.ModalWindow();
-
-	    _this.includeInNode("viewform-wrapper", window.getHTMLObject());
-
 	    return _this;
 	  }
 
@@ -155,5 +165,5 @@
 
 	exports.ViewForm = ViewForm;
 
-}((this.Savmaxru = this.Savmaxru || {}),BX,BX,BX,BX,BX,BX));
+}((this.Savmaxru = this.Savmaxru || {}),BX,BX,BX,BX,BX,BX,BX));
 //# sourceMappingURL=viewform.bundle.js.map

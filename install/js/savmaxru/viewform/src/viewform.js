@@ -7,7 +7,7 @@ import {Plugins} from 'savmaxru.plugins';
 import {GUIComponents} from 'savmaxru.guicomponents';
 import {IDManager} from 'savmaxru.idmanager';
 import {ModalWindow} from "savmaxru.modalwindow";
-
+import {ComponentEditor} from "savmaxru.componenteditor";
 
 export class ViewForm extends Savmaxru.ObjectGUI
 {
@@ -91,6 +91,26 @@ export class ViewForm extends Savmaxru.ObjectGUI
 			console.log(gallery.getResult());
 		});
 
+		let obj8 = gallery.createFactoryObject("Button");
+		obj8.build(
+			{
+				'ID': 2226,
+				'index': 6,
+				'options': [
+					{
+						index: 0,
+						ID: 121212,
+						value: "Add component",
+					},
+				],
+			});
+
+		let ComponentEditor = new Savmaxru.ComponentEditor(this.getNode("viewform-wrapper"));
+
+		obj8.onDown(function(){
+			ComponentEditor.create();
+		});
+
 		let obj2 = gallery.createFactoryObject("CheckboxList");
 		obj2.build(
 			{
@@ -172,9 +192,6 @@ export class ViewForm extends Savmaxru.ObjectGUI
 		});
 		//gallery.getResult();
 		//this.gallery.loadGroupObject();*/
-
-		let window = new Savmaxru.ModalWindow();
-		this.includeInNode("viewform-wrapper", window.getHTMLObject());
 	}
 
 
