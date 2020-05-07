@@ -28,11 +28,11 @@ export class ComponentEditor
 			</div>
 			<div class="btn-type-ico">
 				<div class="checkboxlist-ico"></div>
-				<span>Выбор несскольких вариантов ответа</span>
+				<span>Несколько вариантов ответа</span>
 			</div>
 			<div class="btn-type-ico">
 				<div class="radiobuttonlist-ico"></div>
-				<span>Выбор одного варинта ответа</span>
+				<span>Один варинта ответа</span>
 			</div>
 			<div class="btn-type-ico">
 				<div class="singlelinetextbox-ico"></div>
