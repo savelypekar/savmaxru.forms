@@ -115,5 +115,5 @@
 
 	exports.Plugins = Plugins;
 
-}((this.Savmaxru = this.Savmaxru || {}),BX,BX));
+}((this.Savmaxru = this.Savmaxru || {}),Savmaxru,BX));
 //# sourceMappingURL=plugins.bundle.js.map

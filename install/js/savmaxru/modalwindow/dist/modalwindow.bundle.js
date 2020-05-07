@@ -41,5 +41,5 @@
 
 	exports.ModalWindow = ModalWindow;
 
-}((this.Savmaxru = this.Savmaxru || {}),BX,BX));
+}((this.Savmaxru = this.Savmaxru || {}),Savmaxru,BX));
 //# sourceMappingURL=modalwindow.bundle.js.map

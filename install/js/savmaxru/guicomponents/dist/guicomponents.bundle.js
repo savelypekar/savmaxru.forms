@@ -568,5 +568,5 @@
 
 	exports.GUIComponents = GUIComponents;
 
-}((this.Savmaxru = this.Savmaxru || {}),BX,BX));
+}((this.Savmaxru = this.Savmaxru || {}),Savmaxru,BX));
 //# sourceMappingURL=guicomponents.bundle.js.map

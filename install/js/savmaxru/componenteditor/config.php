@@ -8,8 +8,9 @@ return [
 	'css' => 'dist/componenteditor.bundle.css',
 	'js' => 'dist/componenteditor.bundle.js',
 	'rel' => [
-		'main.core',
 		'savmaxru.modalwindow',
+		'main.core',
+		'savmaxru.objectgui',
 	],
 	'skip_core' => false,
 ];

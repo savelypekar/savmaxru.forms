@@ -165,5 +165,5 @@
 
 	exports.ViewForm = ViewForm;
 
-}((this.Savmaxru = this.Savmaxru || {}),BX,BX,BX,BX,BX,BX,BX));
+}((this.Savmaxru = this.Savmaxru || {}),BX,Savmaxru,Savmaxru,Savmaxru,Savmaxru,Savmaxru,Savmaxru));
 //# sourceMappingURL=viewform.bundle.js.map
