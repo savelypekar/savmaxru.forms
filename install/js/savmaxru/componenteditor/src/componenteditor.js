@@ -6,9 +6,15 @@ import {TypeButton} from "./typebutton";
 
 export class ComponentEditor
 {
-	constructor(parent)
+
+	types = [
+		"DropDownList","CheckboxList","RadiobuttonList", "Heading" , "SingleLineTextBox", "MultiLineTextBox",
+	];
+
+	constructor(parent,galleryOfObjects)
 	{
 		this.parent = parent;
+		this.galleryOfObjects = galleryOfObjects;
 	}
 
 	openWindow()
@@ -21,9 +27,19 @@ export class ComponentEditor
 	{
 		this.openWindow();
 		let selectingAComponent = Tag.render`<div class="components-selection"></div>`;
-		let button = new TypeButton();
-		selectingAComponent.append(button.getHTMLObject());
 
+		for(let i=0; i<this.types.length; i++)
+		{
+			let button = new TypeButton(this.types[i],this);
+			selectingAComponent.append(button.getHTMLObject());
+		}
 		this.window.setContent(selectingAComponent);
+		this.selectingAComponentMenu = selectingAComponent;
+	}
+
+	addComponent(name)
+	{
+		this.galleryOfObjects.createFactoryObject(name);
+		this.selectingAComponentMenu.remove();
 	}
 }

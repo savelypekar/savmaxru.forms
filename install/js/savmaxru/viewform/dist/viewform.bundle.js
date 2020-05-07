@@ -1,4 +1,4 @@
-(function (exports,main_core,savmaxru_objectgui,savmaxru_plugins,savmaxru_guicomponents,savmaxru_idmanager,savmaxru_modalwindow,savmaxru_componenteditor) {
+(function (exports,main_core,savmaxru_objectgui,savmaxru_guicomponents,savmaxru_idmanager,savmaxru_modalwindow,savmaxru_componenteditor,savmaxru_componentsgallery) {
 	'use strict';
 
 	function _templateObject() {
@@ -10,26 +10,25 @@
 
 	  return data;
 	}
-	var ViewForm = /*#__PURE__*/function (_Savmaxru$ObjectGUI) {
-	  babelHelpers.inherits(ViewForm, _Savmaxru$ObjectGUI);
+	var ViewForm = /*#__PURE__*/function (_ObjectGUI) {
+	  babelHelpers.inherits(ViewForm, _ObjectGUI);
 
 	  function ViewForm() {
 	    var _this;
 
 	    babelHelpers.classCallCheck(this, ViewForm);
 	    _this = babelHelpers.possibleConstructorReturn(this, babelHelpers.getPrototypeOf(ViewForm).call(this));
-	    babelHelpers.defineProperty(babelHelpers.assertThisInitialized(_this), "IDManager", new Savmaxru.IDManager('myforms'));
+	    babelHelpers.defineProperty(babelHelpers.assertThisInitialized(_this), "IDManager", new savmaxru_idmanager.IDManager('myforms'));
 
 	    _this.setRootNode(main_core.Tag.render(_templateObject(), _this.addNode("viewform-wrapper")));
-
 	    var configGallery = {
 	      "galleryClassCSS": "viewform-gallery",
-	      "objectsFactory": Savmaxru.GUIComponents,
+	      "objectsFactory": savmaxru_guicomponents.GUIComponents,
 	      "argumentsForResult": {
 	        'ID': 232323
 	      }
 	    };
-	    var gallery = Savmaxru.Plugins.attachPlugin("ObjectsGallery", configGallery);
+	    var gallery = new savmaxru_componentsgallery.ComponentsGallery(configGallery);
 	    _this.gallery = gallery;
 
 	    _this.includeInNode("viewform-wrapper", _this.gallery.getHTMLObject());
@@ -88,7 +87,7 @@
 	        value: "Add component"
 	      }]
 	    });
-	    var ComponentEditor = new Savmaxru.ComponentEditor(_this.getNode("viewform-wrapper"));
+	    var ComponentEditor = new Savmaxru.ComponentEditor(_this.getNode("viewform-wrapper"), gallery);
 	    obj8.onDown(function () {
 	      ComponentEditor.create();
 	    });
@@ -161,7 +160,7 @@
 	  }
 
 	  return ViewForm;
-	}(Savmaxru.ObjectGUI);
+	}(savmaxru_objectgui.ObjectGUI);
 
 	exports.ViewForm = ViewForm;
 

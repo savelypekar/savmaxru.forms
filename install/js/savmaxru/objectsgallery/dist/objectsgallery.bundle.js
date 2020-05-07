@@ -80,6 +80,10 @@
 	    key: "createObject",
 	    value: function createObject() {}
 	  }, {
+	    key: "addObjectsGroup",
+	    value: function addObjectsGroup(data) {//let object =
+	    }
+	  }, {
 	    key: "loadGroupObject",
 	    value: function loadGroupObject() {
 	      BX.ajax.runComponentAction('savmaxru:forms.myforms', 'loadInterviewByAmount', {
@@ -96,24 +100,7 @@
 	  return ObjectsGallery;
 	}(Savmaxru.ObjectGUI);
 
-	var Plugins = /*#__PURE__*/function () {
-	  function Plugins() {
-	    babelHelpers.classCallCheck(this, Plugins);
-	  }
-
-	  babelHelpers.createClass(Plugins, null, [{
-	    key: "attachPlugin",
-	    value: function attachPlugin(name, argument) {
-	      return new this.pluginClasses[name](argument);
-	    }
-	  }]);
-	  return Plugins;
-	}();
-	babelHelpers.defineProperty(Plugins, "pluginClasses", {
-	  "ObjectsGallery": ObjectsGallery
-	});
-
-	exports.Plugins = Plugins;
+	exports.ObjectsGallery = ObjectsGallery;
 
 }((this.Savmaxru = this.Savmaxru || {}),Savmaxru,BX));
-//# sourceMappingURL=plugins.bundle.js.map
+//# sourceMappingURL=objectsgallery.bundle.js.map

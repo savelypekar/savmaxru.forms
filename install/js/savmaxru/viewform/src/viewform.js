@@ -3,15 +3,15 @@ import './css/style.css'
 import {Type} from 'main.core';
 import {ObjectGUI} from "savmaxru.objectgui";
 import {Tag} from 'main.core';
-import {Plugins} from 'savmaxru.plugins';
 import {GUIComponents} from 'savmaxru.guicomponents';
 import {IDManager} from 'savmaxru.idmanager';
 import {ModalWindow} from "savmaxru.modalwindow";
 import {ComponentEditor} from "savmaxru.componenteditor";
+import {ComponentsGallery} from "savmaxru.componentsgallery";
 
-export class ViewForm extends Savmaxru.ObjectGUI
+export class ViewForm extends ObjectGUI
 {
-	IDManager = new Savmaxru.IDManager('myforms');
+	IDManager = new IDManager('myforms');
 
 	constructor()
 	{
@@ -20,16 +20,17 @@ export class ViewForm extends Savmaxru.ObjectGUI
 			Tag.render`
 			${this.addNode("viewform-wrapper")}`
 		);
+w
 
 		let configGallery = {
 			"galleryClassCSS": "viewform-gallery",
-			"objectsFactory": Savmaxru.GUIComponents,
+			"objectsFactory": GUIComponents,
 			"argumentsForResult": {
 				'ID': 232323
 			},
 		};
 
-		let gallery = Savmaxru.Plugins.attachPlugin("ObjectsGallery",configGallery);
+		let gallery = new ComponentsGallery(configGallery);
 		this.gallery = gallery;
 		this.includeInNode("viewform-wrapper", this.gallery.getHTMLObject());
 
@@ -105,7 +106,7 @@ export class ViewForm extends Savmaxru.ObjectGUI
 				],
 			});
 
-		let ComponentEditor = new Savmaxru.ComponentEditor(this.getNode("viewform-wrapper"));
+		let ComponentEditor = new Savmaxru.ComponentEditor(this.getNode("viewform-wrapper"),gallery);
 
 		obj8.onDown(function(){
 			ComponentEditor.create();
@@ -190,6 +191,7 @@ export class ViewForm extends Savmaxru.ObjectGUI
 		obj6.onDown(function(){
 			console.log(gallery.getResult());
 		});
+
 		//gallery.getResult();
 		//this.gallery.loadGroupObject();*/
 	}

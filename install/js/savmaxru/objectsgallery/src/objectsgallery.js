@@ -44,7 +44,7 @@ export class ObjectsGallery extends Savmaxru.ObjectGUI
 		}
 
 		resultGallery["questions"] = questions;
-		
+
 		return resultGallery;
 	}
 
@@ -69,6 +69,11 @@ export class ObjectsGallery extends Savmaxru.ObjectGUI
 
 	}
 
+	addObjectsGroup(data)
+	{
+		//let object =
+	}
+
 	loadGroupObject()
 	{
 		BX.ajax.runComponentAction('savmaxru:forms.myforms', 'loadInterviewByAmount', {
@@ -81,6 +86,4 @@ export class ObjectsGallery extends Savmaxru.ObjectGUI
 			console.log(response);
 		});
 	}
-
-
 }

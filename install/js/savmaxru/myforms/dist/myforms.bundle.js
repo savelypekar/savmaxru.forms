@@ -22,5 +22,5 @@
 
 	exports.MyForms = MyForms;
 
-}((this.Savmaxru = this.Savmaxru || {}),BX,Savmaxru,Savmaxru));
+}((this.Savmaxru = this.Savmaxru || {}),BX,Savmaxru,BX));
 //# sourceMappingURL=myforms.bundle.js.map
