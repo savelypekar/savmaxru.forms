@@ -1,12 +1,13 @@
-(function (exports,savmaxru_objectgui,main_core) {
+(function (exports,savmaxru_objectgui,savmaxru_propertychangemanager,main_core) {
 	'use strict';
 
 	var Option = /*#__PURE__*/function () {
 	  function Option(data) {
 	    babelHelpers.classCallCheck(this, Option);
-	    this.setValue(data['value']);
-	    this.setID(data['ID']);
-	    this.setIndex(data['index']);
+	    savmaxru_propertychangemanager.PropertyChangeManager.connectObject(this);
+	    this.addProperty('value', data['value']);
+	    this.addProperty('ID', data['ID']);
+	    this.addProperty('index', data['index']);
 	  }
 
 	  babelHelpers.createClass(Option, [{
@@ -20,36 +21,42 @@
 	      return this.object;
 	    }
 	  }, {
-	    key: "setValue",
-	    value: function setValue(value) {
-	      this.value = value;
-	    }
-	  }, {
-	    key: "getValue",
-	    value: function getValue() {
-	      return this.value;
-	    }
-	  }, {
-	    key: "setID",
-	    value: function setID(id) {
-	      this.id = id;
-	    }
-	  }, {
-	    key: "getID",
-	    value: function getID() {
-	      return this.id;
-	    }
-	  }, {
 	    key: "setIndex",
 	    value: function setIndex(index) {
 	      this.index = index;
+	    }
+	  }, {
+	    key: "getStructure",
+	    value: function getStructure() {
+	      var result = this.getProperties();
+	      return result;
 	    }
 	  }]);
 	  return Option;
 	}();
 
+	function _templateObject3() {
+	  var data = babelHelpers.taggedTemplateLiteral(["<div class='remove'></div>"]);
+
+	  _templateObject3 = function _templateObject3() {
+	    return data;
+	  };
+
+	  return data;
+	}
+
+	function _templateObject2() {
+	  var data = babelHelpers.taggedTemplateLiteral(["<div class='settings'></div>"]);
+
+	  _templateObject2 = function _templateObject2() {
+	    return data;
+	  };
+
+	  return data;
+	}
+
 	function _templateObject() {
-	  var data = babelHelpers.taggedTemplateLiteral(["\n\t\t\t<div class=\"object-gui\">\n\t\t\t\t<div class=\"field-mark\">\n\t\t\t\t\t", "\n\t\t\t\t</div>\n\t\t\t\t<div class=\"field-description\">\n\t\t\t\t\t", "\n\t\t\t\t</div>\n\t\t\t\t<div>\n\t\t\t\t\t", "\n\t\t\t\t</div>\n\t\t\t\t<div class=\"field-comment\">\n\t\t\t\t\t", "\n\t\t\t\t</div>\n\t\t\t</div>"]);
+	  var data = babelHelpers.taggedTemplateLiteral(["\n\t\t\t<div class=\"object-gui\">\n\t\t\t\t<div class=\"field-mark\">\n\t\t\t\t\t", "\n\t\t\t\t</div>\n\t\t\t\t<div class=\"field-description\">\n\t\t\t\t\t", "\n\t\t\t\t</div>\n\t\t\t\t<div>\n\t\t\t\t\t", "\n\t\t\t\t</div>\n\t\t\t\t<div class=\"field-comment\">\n\t\t\t\t\t", "\n\t\t\t\t</div>\n\t\t\t\t\t", "\n\t\t\t</div>"]);
 
 	  _templateObject = function _templateObject() {
 	    return data;
@@ -57,8 +64,8 @@
 
 	  return data;
 	}
-	var GUIComponent = /*#__PURE__*/function (_Savmaxru$ObjectGUI) {
-	  babelHelpers.inherits(GUIComponent, _Savmaxru$ObjectGUI);
+	var GUIComponent = /*#__PURE__*/function (_ObjectGUI) {
+	  babelHelpers.inherits(GUIComponent, _ObjectGUI);
 
 	  function GUIComponent() {
 	    var _this;
@@ -67,35 +74,70 @@
 	    _this = babelHelpers.possibleConstructorReturn(this, babelHelpers.getPrototypeOf(GUIComponent).call(this));
 	    babelHelpers.defineProperty(babelHelpers.assertThisInitialized(_this), "options", []);
 
-	    _this.setRootNode(main_core.Tag.render(_templateObject(), _this.addNode("mark"), _this.addNode("description"), _this.addNode("component"), _this.addNode("comment")));
+	    _this.setRootNode(main_core.Tag.render(_templateObject(), _this.addNode("mark"), _this.addNode("description"), _this.addNode("component"), _this.addNode("comment"), _this.addNode("edit-panel")));
 
+	    savmaxru_propertychangemanager.PropertyChangeManager.connectObject(babelHelpers.assertThisInitialized(_this));
 	    return _this;
 	  }
 
 	  babelHelpers.createClass(GUIComponent, [{
+	    key: "editComponent",
+	    value: function editComponent() {}
+	  }, {
+	    key: "getStructure",
+	    value: function getStructure() {
+	      var result = this.getProperties();
+	      result["options"] = [];
+	      var options = this.getOptions();
+
+	      for (var i = 0; i < options.length; i++) {
+	        var option = options[i];
+	        result["options"].push(option.getStructure());
+	      }
+
+	      return result;
+	    }
+	  }, {
+	    key: "addEditButton",
+	    value: function addEditButton() {
+	      var object = main_core.Tag.render(_templateObject2());
+	      var editObject = this;
+
+	      object.onclick = function () {
+	        console.log(editObject.getStructure());
+	      };
+
+	      return object;
+	    }
+	  }, {
+	    key: "addRemoveButton",
+	    value: function addRemoveButton() {
+	      var object = main_core.Tag.render(_templateObject3());
+	      return object;
+	    }
+	  }, {
+	    key: "enableEditMode",
+	    value: function enableEditMode() {
+	      var modes = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
+	        "settings": true,
+	        "remove": true
+	      };
+
+	      if (modes["settings"]) {
+	        this.includeInNode("edit-panel", this.addEditButton());
+	      }
+	    }
+	  }, {
+	    key: "getChanges",
+	    value: function getChanges() {
+	      var result = this.getChangedProperties();
+	      result["ID"] = this.getProperty("ID");
+	      return result;
+	    }
+	  }, {
 	    key: "getNextHighestId",
 	    value: function getNextHighestId() {
 	      return this.IDManager.getNextHighestId();
-	    }
-	  }, {
-	    key: "setID",
-	    value: function setID(id) {
-	      this.id = id;
-	    }
-	  }, {
-	    key: "getID",
-	    value: function getID() {
-	      return this.id;
-	    }
-	  }, {
-	    key: "setIndex",
-	    value: function setIndex(index) {
-	      this.index = index;
-	    }
-	  }, {
-	    key: "getIndex",
-	    value: function getIndex() {
-	      return this.index;
 	    }
 	  }, {
 	    key: "build",
@@ -104,8 +146,8 @@
 	      this.setDescription(data['description']);
 	      this.setComment(data['comment']);
 	      this.addOptions(data['options']);
-	      this.setIndex(data['index']);
-	      this.setID(data['ID']);
+	      this.addProperty('ID', data['ID']);
+	      this.addProperty('index', data['index']);
 
 	      if (data['required']) {
 	        this.setFieldAsRequired();
@@ -121,7 +163,7 @@
 	    value: function addOptions(options) {
 	      for (var i = 0; i < options.length; i++) {
 	        var option = new Option(options[i]);
-	        option.setObjectHTML(this.addOption(option.getValue()));
+	        option.setObjectHTML(this.addOption(option.getProperty("value")));
 	        this.options.push(option);
 	      }
 	    }
@@ -154,15 +196,15 @@
 	    value: function getResult() {
 	      var options = this.getOptions();
 	      var result = [];
-	      result["ID"] = this.getID();
-	      result["index"] = this.getIndex();
+	      result["ID"] = this.getProperty("ID");
+	      result["index"] = this.getProperty("index");
 	      result["options"] = [];
 
 	      for (var i = 0; i < options.length; i++) {
 	        var option = options[i];
 
 	        if (option.getObjectHTML().getCondition()) {
-	          result["options"].push(option.getID());
+	          result["options"].push(option.getProperty("ID"));
 	        }
 	      }
 
@@ -170,12 +212,12 @@
 	    }
 	  }]);
 	  return GUIComponent;
-	}(Savmaxru.ObjectGUI);
+	}(savmaxru_objectgui.ObjectGUI);
 
-	function _templateObject2() {
+	function _templateObject2$1() {
 	  var data = babelHelpers.taggedTemplateLiteral(["<option>", "</option>"]);
 
-	  _templateObject2 = function _templateObject2() {
+	  _templateObject2$1 = function _templateObject2() {
 	    return data;
 	  };
 
@@ -210,7 +252,7 @@
 	  babelHelpers.createClass(DropDownList, [{
 	    key: "addOption",
 	    value: function addOption(option) {
-	      var objectHTML = main_core.Tag.render(_templateObject2(), option);
+	      var objectHTML = main_core.Tag.render(_templateObject2$1(), option);
 
 	      objectHTML.getCondition = function () {
 	        return this.selected;
@@ -341,10 +383,10 @@
 	  return RadiobuttonList;
 	}(ElectiveItemsList);
 
-	function _templateObject2$1() {
+	function _templateObject2$2() {
 	  var data = babelHelpers.taggedTemplateLiteral(["<span>", "</span>"]);
 
-	  _templateObject2$1 = function _templateObject2() {
+	  _templateObject2$2 = function _templateObject2() {
 	    return data;
 	  };
 
@@ -377,7 +419,7 @@
 	  babelHelpers.createClass(Button, [{
 	    key: "addOption",
 	    value: function addOption(option) {
-	      this.includeInNode("button", main_core.Tag.render(_templateObject2$1(), option));
+	      this.includeInNode("button", main_core.Tag.render(_templateObject2$2(), option));
 	    }
 	  }, {
 	    key: "onDown",
@@ -400,10 +442,10 @@
 	  return Button;
 	}(GUIComponent);
 
-	function _templateObject2$2() {
+	function _templateObject2$3() {
 	  var data = babelHelpers.taggedTemplateLiteral(["<div class=\"heading-item\">", "</div>"]);
 
-	  _templateObject2$2 = function _templateObject2() {
+	  _templateObject2$3 = function _templateObject2() {
 	    return data;
 	  };
 
@@ -436,7 +478,7 @@
 	  babelHelpers.createClass(Heading, [{
 	    key: "addOption",
 	    value: function addOption(option) {
-	      this.includeInNode("heading", main_core.Tag.render(_templateObject2$2(), option));
+	      this.includeInNode("heading", main_core.Tag.render(_templateObject2$3(), option));
 	    }
 	  }, {
 	    key: "getResult",
@@ -568,5 +610,5 @@
 
 	exports.GUIComponents = GUIComponents;
 
-}((this.Savmaxru = this.Savmaxru || {}),Savmaxru,BX));
+}((this.Savmaxru = this.Savmaxru || {}),Savmaxru,Savmaxru,BX));
 //# sourceMappingURL=guicomponents.bundle.js.map

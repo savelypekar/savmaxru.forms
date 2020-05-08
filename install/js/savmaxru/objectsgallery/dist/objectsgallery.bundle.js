@@ -80,10 +80,6 @@
 	    key: "createObject",
 	    value: function createObject() {}
 	  }, {
-	    key: "addObjectsGroup",
-	    value: function addObjectsGroup(data) {//let object =
-	    }
-	  }, {
 	    key: "loadGroupObject",
 	    value: function loadGroupObject() {
 	      BX.ajax.runComponentAction('savmaxru:forms.myforms', 'loadInterviewByAmount', {

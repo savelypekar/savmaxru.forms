@@ -192,3 +192,48 @@
 	font-size: 1.3rem;
 	color: #444;
 }
+
+.savmaxru-forms .object-gui .edit-panel .settings{
+	width: 36px;
+	height: 36px;
+	background-color: #538bcd;
+	border-radius: 100px;
+	margin: 2px;
+	background-image: url("editor-ico.svg");
+	background-size: 22px;
+	background-repeat: no-repeat;
+	background-position: center center;
+	cursor:pointer;
+	transition: 0.1s;
+
+}
+.savmaxru-forms .object-gui .edit-panel .settings:hover{
+	background-color: #525253;
+	transition: 0.1s;
+}
+.savmaxru-forms .object-gui .edit-panel .remove:hover{
+	background-color: #525253;
+	transition: 0.1s;
+}
+.savmaxru-forms .object-gui .edit-panel .remove{
+	width: 36px;
+	height: 36px;
+	background-color: #fe3636;
+	border-radius: 100px;
+	margin: 2px;
+	background-image: url("delete-ico.svg");
+	background-size: 20px;
+	background-repeat: no-repeat;
+	background-position: center center;
+	cursor:pointer;
+	transition: 0.1s;
+}
+
+
+.savmaxru-forms .object-gui .edit-panel{
+	margin: 6px;
+	display: flex;
+	position: absolute;
+	top: 0;
+	right: 0;
+}

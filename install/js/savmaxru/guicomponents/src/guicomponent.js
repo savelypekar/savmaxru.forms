@@ -1,8 +1,9 @@
 import {Tag} from 'main.core';
 import {Option} from "./option";
 import {ObjectGUI} from "savmaxru.objectgui";
+import {PropertyChangeManager} from "savmaxru.propertychangemanager";
 
-export class GUIComponent extends Savmaxru.ObjectGUI
+export class GUIComponent extends ObjectGUI
 {
 	constructor()
 	{
@@ -22,33 +23,68 @@ export class GUIComponent extends Savmaxru.ObjectGUI
 				<div class="field-comment">
 					${this.addNode("comment")}
 				</div>
+					${this.addNode("edit-panel")}
 			</div>`
 		);
+		PropertyChangeManager.connectObject(this);
+	}
+
+	editComponent()
+	{
+
+	}
+
+	getStructure()
+	{
+		let result = this.getProperties();
+		result["options"] = [];
+
+		let options = this.getOptions();
+		for(let i = 0; i < options.length; i++)
+		{
+			let option = options[i];
+			result["options"].push(option.getStructure());
+		}
+		return result;
+	}
+
+
+	addEditButton()
+	{
+		let object = Tag.render`<div class='settings'></div>`
+		let editObject = this;
+		object.onclick = function() {
+			console.log(editObject.getStructure());
+		};
+		return object;
+	}
+
+	addRemoveButton()
+	{
+		let object = Tag.render`<div class='remove'></div>`
+		return object;
+	}
+
+	enableEditMode(modes= {
+		"settings":true,"remove":true
+	})
+	{
+		if(modes["settings"]){
+			this.includeInNode("edit-panel",this.addEditButton());
+		}
+
+	}
+
+	getChanges()
+	{
+		let result = this.getChangedProperties();
+		result["ID"] = this.getProperty("ID");
+		return result;
 	}
 
 	getNextHighestId()
 	{
 		return this.IDManager.getNextHighestId();
-	}
-
-	setID(id)
-	{
-		this.id = id;
-	}
-
-	getID()
-	{
-		return this.id;
-	}
-
-	setIndex(index)
-	{
-		this.index = index;
-	}
-
-	getIndex()
-	{
-		return this.index;
 	}
 
 	build(data)
@@ -57,8 +93,9 @@ export class GUIComponent extends Savmaxru.ObjectGUI
 		this.setDescription(data['description']);
 		this.setComment(data['comment']);
 		this.addOptions(data['options']);
-		this.setIndex(data['index']);
-		this.setID(data['ID']);
+
+		this.addProperty('ID',data['ID']);
+		this.addProperty('index',data['index']);
 		
 		if(data['required'])
 		{
@@ -78,7 +115,7 @@ export class GUIComponent extends Savmaxru.ObjectGUI
 		for(let i = 0; i<options.length; i++)
 		{
 			let option = new Option(options[i]);
-			option.setObjectHTML(this.addOption(option.getValue()));
+			option.setObjectHTML(this.addOption(option.getProperty("value")));
 			this.options.push(option);
 		}
 	}
@@ -113,15 +150,15 @@ export class GUIComponent extends Savmaxru.ObjectGUI
 	{
 		let options = this.getOptions();
 		let result = [];
-		result["ID"] = this.getID();
-		result["index"] = this.getIndex();
+		result["ID"] = this.getProperty("ID");
+		result["index"] = this.getProperty("index");
 		result["options"] = [];
 		for(let i = 0; i < options.length; i++)
 		{
 			let option = options[i];
 			if(option.getObjectHTML().getCondition())
 			{
-				result["options"].push(option.getID());
+				result["options"].push(option.getProperty("ID"));
 			}
 		}
 		return result;

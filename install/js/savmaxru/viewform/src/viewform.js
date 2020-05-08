@@ -34,7 +34,7 @@ w
 		this.gallery = gallery;
 		this.includeInNode("viewform-wrapper", this.gallery.getHTMLObject());
 
-		let obj0 = gallery.createFactoryObject("Heading");
+		/*let obj0 = gallery.createFactoryObject("Heading");
 		obj0.build(
 			{
 				'ID': 2220,
@@ -191,9 +191,93 @@ w
 		obj6.onDown(function(){
 			console.log(gallery.getResult());
 		});
-
+*/
 		//gallery.getResult();
 		//this.gallery.loadGroupObject();*/
+
+		gallery.addObjectsGroup({
+			ID: 6829,
+			questions: [
+				{
+					ID: 121212,
+					index: 1,
+					type: "DropDownList",
+					description: "Текст вопроса",
+					comment: "Пояснительный комметарий",
+					required: true,
+
+					options: [
+						{
+							index: 1,
+							ID: 121212,
+							value: "Russia",
+						},
+					],
+
+				},{
+					ID: 121212,
+					index: 2,
+					type: "Heading",
+					options: [
+						{
+							index: 1,
+							value: 'Такой вот опрос',
+							ID: 121212,
+						}
+					]
+				},{
+					ID: 121212,
+					index: 3,
+					type: "Button",
+					options: [
+						{
+							ID: 121212,
+							index: 1,
+							value: 'Отправить',
+						}
+					]
+				},{
+					ID: 121212,
+					index: 4,
+					type: "MultiLineTextBox",
+					options: [],
+				}
+			]
+		});
+
+		let obj2 = gallery.createFactoryObject("CheckboxList");
+		obj2.build(
+			{
+				'ID': 2222,
+				'index': 2,
+				'description':'Test',
+				'options': [
+					{
+						index: 0,
+						ID: 121212,
+						value: "Вологда",
+					},
+					{
+						index: 1,
+						ID: 121212,
+						value: "Череповец",
+					},
+					{
+						index: 2,
+						ID: 121212,
+						value: "Калининград",
+					}
+				],
+				'comment': 'comment',
+				'required': true,
+				'IDManager': this.IDManager,
+			});
+			//obj2.rewriteProperty("f",2);
+			obj2.enableEditMode();
+			console.log(obj2.getChanges());
+			console.log("уу");
+			console.log(obj2.getStructure());
+
 	}
 
 
