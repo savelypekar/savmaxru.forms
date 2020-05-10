@@ -47,6 +47,7 @@ $connectionInterviewWithQuestion = new \Savmaxru\Forms\Model\ConnectionInterview
 //$result34 = $questionTable->deleteRow(5);
 //$result35 = $questionTable->updateRow(7, 3,4,5);
 //$result36 = $questionTable->getMaxIDKey();
+$result37 = $questionTable->getTypeByIdQuestion(25);
 
 //$result41 = $answerResultTable->saveAnswerResult(10, 33, 1);
 //$result42 = $answerResultTable->getAllResult();
@@ -66,9 +67,10 @@ $connectionInterviewWithQuestion = new \Savmaxru\Forms\Model\ConnectionInterview
 //$result71 = $connectionInterviewWithQuestion->addRow(5,7);
 //$result72 = $connectionInterviewWithQuestion->getAllRows();
 //$result73 = $connectionInterviewWithQuestion->getIdQuestionForIdInterview(2);
+//$result74 = $connectionInterviewWithQuestion->getIdQuestionForIdInterviewAndIdQuestion(126, 966);
 
-//echo $result22;
-//var_dump($result22);
+//echo $result37;
+//var_dump($result37);
 
 //Fill the tables with demo data, uncomment the lines and execute ONE time
 //Table INTERVIEW

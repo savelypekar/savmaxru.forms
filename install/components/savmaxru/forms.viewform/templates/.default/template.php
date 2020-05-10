@@ -23,24 +23,24 @@ Save all result
 
 <script>
 	let result = {
-			ID: 125,
+			ID: 8001,
 			questions: [
 				{
-					ID: 11215,
+					ID: 9002,
 					options: {
-						'userValue': "Kaliningrad" ,
+						'userValue': "France" ,
 					}
 				},
 				{
-					ID: 11216,
+					ID: 9001,
 					options: {
-						'userValue': "Paris" ,
+						'userValue': "Spain" ,
 					}
 				},
 				{
-					ID: 11217,
+					ID: 9003,
 					options: [
-						6787,2323,
+						612,613,
 					]
 				}
 			]

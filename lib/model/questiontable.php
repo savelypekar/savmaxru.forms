@@ -108,4 +108,14 @@ class QuestionTable extends DataManager
 		$result = $maxIDKey['ID'];
 		return $result;
 	}
+
+	public function getTypeByIdQuestion($idQuestion)
+	{
+		$result = QuestionTable::getList([
+			'select' => ['TYPE'],
+			'filter' => ['ID' => $idQuestion],
+		]);
+		$type = $result ->fetchAll();
+		return $type[0]['TYPE'];
+	}
 }
