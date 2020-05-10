@@ -47,7 +47,7 @@ $connectionInterviewWithQuestion = new \Savmaxru\Forms\Model\ConnectionInterview
 //$result34 = $questionTable->deleteRow(5);
 //$result35 = $questionTable->updateRow(7, 3,4,5);
 //$result36 = $questionTable->getMaxIDKey();
-$result37 = $questionTable->getTypeByIdQuestion(25);
+//$result37 = $questionTable->getTypeByIdQuestion(25);
 
 //$result41 = $answerResultTable->saveAnswerResult(10, 33, 1);
 //$result42 = $answerResultTable->getAllResult();

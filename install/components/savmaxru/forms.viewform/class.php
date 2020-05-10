@@ -141,8 +141,17 @@ class CSavmaxruFormsView extends CBitrixComponent implements Controllerable
 
 	public function validationForSaveInterviewStructure($result)
 	{
+		$whiteListTypesQuestion = [
+			'DropDownList',
+			'CheckboxList',
+			'Button',
+			'RadiobuttonList',
+			'Heading',
+			'Singlelinetextbox',
+			'MultiLineTextBox' ];
 
-
+		$result["title"] = strval($result["title"]);
+		$result["visible"] = boolval($result["visible"]);
 		return $result;
 	}
 
@@ -154,7 +163,6 @@ class CSavmaxruFormsView extends CBitrixComponent implements Controllerable
 		$questionTable = new \Savmaxru\Forms\Model\QuestionTable();
 		$connectionInterviewWithQuestion = new \Savmaxru\Forms\Model\ConnectionInterviewWithQuestionTable();
 
-		//validation
 		//$result = $this->validationForSaveInterviewStructure($result);
 
 		global $USER;
@@ -162,7 +170,8 @@ class CSavmaxruFormsView extends CBitrixComponent implements Controllerable
 
 		if ($result["ID"] == 'NEW_FORM')
 		{
-			$idInterview = $interviewTable->addInterview($idUser, $result["title"],'', '', $result["visible"]);
+			$dateCreate = date('l jS \of F Y h:i:s A');
+			$idInterview = $interviewTable->addInterview($idUser, $result["title"], $dateCreate, '', $result["visible"]);
 			$idQuestion = $questionTable->getMaxIDKey() + 1;
 			foreach ($result['questions'] as $question)
 			{
