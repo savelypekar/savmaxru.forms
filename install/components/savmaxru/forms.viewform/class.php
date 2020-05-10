@@ -21,11 +21,56 @@ class CSavmaxruFormsView extends CBitrixComponent implements Controllerable
 		return array();
 	}
 
+	public function validationForSaveResult($result)
+	{
+		$connectionInterviewWithQuestion = new \Savmaxru\Forms\Model\ConnectionInterviewWithQuestionTable();
+		$questionTable = new \Savmaxru\Forms\Model\QuestionTable();
+
+		$result['ID'] = intval($result["ID"]);
+
+		foreach ($result["questions"] as &$question)
+		{
+			$rows = $connectionInterviewWithQuestion->getIdQuestionForIdInterviewAndIdQuestion($result['ID'], $question['ID']);
+			$typeQuestion = $questionTable->getTypeByIdQuestion($question["ID"]);
+			$countOptions = count($question["options"]);
+
+			if (!empty($rows))
+			{
+				if (!(($countOptions > 1) &&
+					(($typeQuestion == 'RadiobuttonList') ||
+						($typeQuestion == 'Heading') ||
+						($typeQuestion == 'Singlelinetextbox'))))
+				{
+					$question["ID"] = intval($question["ID"]);
+					if (array_key_exists('userValue', $question["options"]))
+					{
+						//$question["options"]["userValue"] = '';
+					}
+					else
+					{
+						foreach ($question["options"] as &$option)
+						{
+							$option = intval($option);
+						}
+					}
+				}
+			}
+			else
+			{
+				$question["ID"] = 0;
+				$question["options"] = [];
+			}
+		}
+		return $result;
+	}
+
 	public function saveResultAction($result)
 	{
 		$answerResultTable = new \Savmaxru\Forms\Model\AnswerResultTable();
 		$answerToQuestionTable = new \Savmaxru\Forms\Model\AnswerToQuestionTable();
 		$answerOptionTable = new \Savmaxru\Forms\Model\AnswerOptionTable();
+
+		$result = $this->validationForSaveResult($result);
 
 		global $USER;
 		$idUser = $USER->GetID();
@@ -37,7 +82,10 @@ class CSavmaxruFormsView extends CBitrixComponent implements Controllerable
 
 		foreach ($result["questions"] as $question)
 		{
-			$answerToQuestionTable->saveAnswerToQuestion($question["ID"], $idResult);
+			if ($question["ID"] > 0)
+			{
+				$answerToQuestionTable->saveAnswerToQuestion($question["ID"], $idResult);
+			}
 			if (array_key_exists('userValue', $question["options"]))
 			{
 				$answerOptionTable->saveOptionAnswer($question["ID"], 0, $question["options"]["userValue"]);
@@ -53,6 +101,7 @@ class CSavmaxruFormsView extends CBitrixComponent implements Controllerable
 	}
 
 	//send interview structure by id
+	//not used now
 	public function sendInterviewStructureAction($idInterview)
 	{
 		$optionTable = new \Savmaxru\Forms\Model\OptionTable();
@@ -90,6 +139,13 @@ class CSavmaxruFormsView extends CBitrixComponent implements Controllerable
 		];
 	}
 
+	public function validationForSaveInterviewStructure($result)
+	{
+
+
+		return $result;
+	}
+
 	//save structure interview with question and option
 	public function saveInterviewStructureAction($result)
 	{
@@ -97,6 +153,9 @@ class CSavmaxruFormsView extends CBitrixComponent implements Controllerable
 		$interviewTable = new \Savmaxru\Forms\Model\InterviewTable();
 		$questionTable = new \Savmaxru\Forms\Model\QuestionTable();
 		$connectionInterviewWithQuestion = new \Savmaxru\Forms\Model\ConnectionInterviewWithQuestionTable();
+
+		//validation
+		//$result = $this->validationForSaveInterviewStructure($result);
 
 		global $USER;
 		$idUser = $USER->GetID();
