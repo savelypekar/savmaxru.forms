@@ -192,16 +192,36 @@ class CSavmaxruFormsView extends CBitrixComponent implements Controllerable
 				{
 					if ($question['change'] == 'changed')
 					{
-						$questionTable->updateRow($question['ID'], $question['type'], $question['description'], $question['index']);
-						foreach ($question['options'] as $option)
+						if (isset($question['ID']))
 						{
-							if ($option['change'] == 'changed')
+							$questionTable->updateRow($question['ID'], $question['type'], $question['description'], $question['index']);
+							foreach ($question['options'] as $option)
 							{
-								$optionTable->updateRow($option['ID'], $question['ID'], $option['value'], $option['index']);
+								if ($option['change'] == 'changed')
+								{
+									if (isset($option['ID']))
+									{
+										$optionTable->updateRow($option['ID'], $question['ID'], $option['value'], $option['index']);
+									}
+									else
+									{
+										$optionTable->addOption($question['ID'], $option['value'], $option['index']);
+									}
+								}
+								if ($option['change'] == 'removed')
+								{
+									$optionTable->deleteRow($option['ID']);
+								}
 							}
-							if ($option['change'] == 'removed')
+						}
+						else
+						{
+							$idQuestion = $questionTable->getMaxIDKey() + 1;
+							$questionTable->addQuestion($question['type'], $question['description'], $question['index']);
+							$connectionInterviewWithQuestion->addRow($result['ID'], $idQuestion);
+							foreach ($question['options'] as $option)
 							{
-								$optionTable->deleteRow($option['ID']);
+								$optionTable->addOption($idQuestion, $option['value'], $option['index']);
 							}
 						}
 					}
