@@ -44,7 +44,7 @@ class CSavmaxruFormsView extends CBitrixComponent implements Controllerable
 					$question["ID"] = intval($question["ID"]);
 					if (array_key_exists('userValue', $question["options"]))
 					{
-						//$question["options"]["userValue"] = '';
+						$question["options"]["userValue"] = strval($question["options"]["userValue"]);
 					}
 					else
 					{
@@ -152,6 +152,23 @@ class CSavmaxruFormsView extends CBitrixComponent implements Controllerable
 
 		$result["title"] = strval($result["title"]);
 		$result["visible"] = boolval($result["visible"]);
+		foreach ($result['questions'] as &$question)
+		{
+			if (in_array($question['type'], $whiteListTypesQuestion))
+			{
+				$question['index'] = intval($question['index']);
+				$question['description'] = strval($question['description']);
+				foreach ($question['options'] as &$option)
+				{
+					$option['index'] = intval($option['index']);
+					$option['value'] = strval($option['value']);
+				}
+			}
+			else
+			{
+				$question['type'] = 'NotValid';
+			}
+		}
 		return $result;
 	}
 
@@ -163,7 +180,7 @@ class CSavmaxruFormsView extends CBitrixComponent implements Controllerable
 		$questionTable = new \Savmaxru\Forms\Model\QuestionTable();
 		$connectionInterviewWithQuestion = new \Savmaxru\Forms\Model\ConnectionInterviewWithQuestionTable();
 
-		//$result = $this->validationForSaveInterviewStructure($result);
+		$result = $this->validationForSaveInterviewStructure($result);
 
 		global $USER;
 		$idUser = $USER->GetID();
@@ -175,13 +192,16 @@ class CSavmaxruFormsView extends CBitrixComponent implements Controllerable
 			$idQuestion = $questionTable->getMaxIDKey() + 1;
 			foreach ($result['questions'] as $question)
 			{
-				$questionTable->addQuestion($question['type'], $question['description'], $question['index']);
-				$connectionInterviewWithQuestion->addRow($idInterview['ID'], $idQuestion);
-				foreach ($question['options'] as $option)
+				if ($question['type'] != 'NotValid')
 				{
-					$optionTable->addOption($idQuestion, $option['value'], $option['index']);
+					$questionTable->addQuestion($question['type'], $question['description'], $question['index']);
+					$connectionInterviewWithQuestion->addRow($idInterview, $idQuestion);
+					foreach ($question['options'] as $option)
+					{
+						$optionTable->addOption($idQuestion, $option['value'], $option['index']);
+					}
+					$idQuestion = $idQuestion + 1;
 				}
-				$idQuestion = $idQuestion + 1;
 			}
 		}
 		else

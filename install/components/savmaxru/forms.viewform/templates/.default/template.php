@@ -74,62 +74,56 @@ Get the whole form by id
 
 <!--
 Save structure interview with question and option
-
+-->
 <script>
 	let result = {
-			ID: 615,
-			//ID: 'NEW_FORM',
-			title: 'title',
-			change: "changed",
+			//ID: 811,
+			ID: 'NEW_FORM',
+			title: 'title new form ',
+			//change: "changed",
 			visible: true,
 			questions: [
 				{
-					ID: 83,
+					ID: 12,
 					index: 1,
-					change: "changed",
-					type: "DropDownList89",
-					description: "text in description89",
-					comment: "comment",
-					required: true,
+					type: "DropDownList1",
+					description: "text in description 000",
+					//comment: "comment",
+					//required: true,
 					options: [
 						{
-							ID: 59,
-							index: 5,
+							ID: 80,
 							value: "Russia",
-							change: "changed",
+							index: 1,
 						},
 						{
-							ID: 58,
+							ID: 81,
 							value: "China",
 							index: 2,
-							change: "removed",
 						},
 					],
 				},
 				{
-					index: 3,
-					ID: 232323,
+					ID: 13,
+					index: 2,
 					type: "MultiLineTextBox",
-					change: "changed",
 					description: "text in description 2",
 					options: [
 						{
-							ID: 232323,
+							ID: 90,
 							index: 1,
 							value: "Spain",
-							change: "changed",
 						},
 						{
-							ID: 232323,
+							ID: 91,
 							value: "Italy",
 							index: 2,
-							change: "removed",
 						},
 					],
 				},
 				{
-					ID: 232323,
-					change: "removed",
+					ID: 14,
+				//	change: "removed",
 				}
 			]
 	};
@@ -141,7 +135,7 @@ Save structure interview with question and option
 	});
 	console.log(result);
 </script>
--->
+
 
 <!--
 Send results by amount
