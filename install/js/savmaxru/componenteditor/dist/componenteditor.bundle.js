@@ -1,4 +1,4 @@
-(function (exports,savmaxru_modalwindow,main_core,savmaxru_objectgui) {
+(function (exports,savmaxru_modalwindow,main_core,savmaxru_objectgui,savmaxru_componentsgallery,savmaxru_idmanager) {
 	'use strict';
 
 	function _templateObject() {
@@ -59,14 +59,19 @@
 	  return data;
 	}
 	var ComponentEditor = /*#__PURE__*/function () {
-	  function ComponentEditor(parent, galleryOfObjects) {
+	  function ComponentEditor(parent) {
 	    babelHelpers.classCallCheck(this, ComponentEditor);
+	    babelHelpers.defineProperty(this, "IDManager", new savmaxru_idmanager.IDManager('editor'));
 	    babelHelpers.defineProperty(this, "types", ["DropDownList", "CheckboxList", "RadiobuttonList", "Heading", "SingleLineTextBox", "MultiLineTextBox"]);
 	    this.parent = parent;
-	    this.galleryOfObjects = galleryOfObjects;
 	  }
 
 	  babelHelpers.createClass(ComponentEditor, [{
+	    key: "setGallery",
+	    value: function setGallery(objectsGallery) {
+	      this.objectsGallery = objectsGallery;
+	    }
+	  }, {
 	    key: "openWindow",
 	    value: function openWindow() {
 	      this.window = new Savmaxru.ModalWindow();
@@ -87,9 +92,179 @@
 	      this.selectingAComponentMenu = selectingAComponent;
 	    }
 	  }, {
+	    key: "runEditor",
+	    value: function runEditor(component) {
+	      this.openWindow();
+	      var componentStructure = component.getStructure();
+	      var configDescription = {
+	        "galleryClassCSS": "editor-description-gallery"
+	      };
+	      var description = new savmaxru_componentsgallery.ComponentsGallery(configDescription);
+	      this.window.setContent(description.getHTMLObject());
+	      var configOption = {
+	        "galleryClassCSS": "editor-option-gallery"
+	      };
+	      var options = new savmaxru_componentsgallery.ComponentsGallery(configOption);
+	      this.window.setContent(options.getHTMLObject());
+	      var configOtherSettings = {
+	        "galleryClassCSS": "editor-other-settings-gallery"
+	      };
+	      var otherSettings = new savmaxru_componentsgallery.ComponentsGallery(configOtherSettings);
+	      this.window.setContent(otherSettings.getHTMLObject());
+	      var type = componentStructure["type"];
+
+	      if (type === "Heading") {
+	        description.addObjectsGroup({
+	          questions: [{
+	            type: "Heading",
+	            options: [{
+	              value: BX.message("QUESTION_EDITING_TITLE")
+	            }]
+	          }, {
+	            ID: "headingText",
+	            description: BX.message("HEADING_TEXT"),
+	            type: "SingleLineTextBox"
+	          }]
+	        });
+	      } else {
+	        description.addObjectsGroup({
+	          questions: [{
+	            type: "Heading",
+	            options: [{
+	              value: BX.message("HEADER_EDITING_TITLE")
+	            }]
+	          }, {
+	            ID: "questionText",
+	            description: BX.message("QUESTION_TEXT"),
+	            type: "MultiLineTextBox"
+	          }, {
+	            ID: "hintToTheQuestion",
+	            description: BX.message("HINT_TO_THE_QUESTION"),
+	            type: "MultiLineTextBox"
+	          }]
+	        });
+	      }
+
+	      otherSettings.addObjectsGroup({
+	        questions: [{
+	          ID: "notAcceptUnanswered",
+	          type: "CheckboxList",
+	          'IDManager': this.IDManager,
+	          options: [{
+	            value: BX.message("NOT_ACCEPT_UNANSWERED")
+	          }]
+	        }]
+	      });
+	      var saveButton = otherSettings.createFactoryObject("Button");
+	      saveButton.build({
+	        'ID': 2226,
+	        'index': 6,
+	        'options': [{
+	          index: 0,
+	          ID: 121212,
+	          value: BX.message("SAVE_FORM")
+	        }]
+	      }); //otherSettings.addObjectsGroup();
+
+	      /*let configGallery = {
+	      	"galleryClassCSS": "editor-gallery",
+	      };
+	      let gallery = new ComponentsGallery(configGallery);
+	      gallery.addObjectsGroup({
+	      	ID: 6829,
+	      	questions: [
+	      	{
+	      			ID: 121212,
+	      			index: 2,
+	      			type: "Heading",
+	      			options: [
+	      				{
+	      					index: 1,
+	      					value: 'Редактирование поля',
+	      					ID: 121212,
+	      				}
+	      			]
+	      		},
+	      		{
+	      			ID: 121212,
+	      			description:'Текст вопроса:',
+	      			index: 4,
+	      			type: "MultiLineTextBox",
+	      			options: [],
+	      		},{
+	      			ID: 121212,
+	      			description:'Подсказка к вопросу',
+	      			index: 4,
+	      			type: "MultiLineTextBox",
+	      			options: [],
+	      		},
+	      		{
+	      			ID: 121212,
+	      			index: 1,
+	      			type: "CheckboxList",
+	      			required: true,
+	      			'IDManager': this.IDManager,
+	      			options: [
+	      				{
+	      					index: 1,
+	      					ID: 121212,
+	      					value: "НЕ принимать без ответа",
+	      				},
+	      			],
+	      			},
+	      	]
+	      });
+	      	let gallery2 = new ComponentsGallery(configGallery);
+	      gallery2.addObjectsGroup({
+	      	ID: 6829,
+	      	questions: [
+	      		{
+	      			ID: 121212,
+	      			index: 2,
+	      			type: "Heading",
+	      			options: [
+	      				{
+	      					index: 1,
+	      					value: 'Редактирование поля',
+	      					ID: 121212,
+	      				}
+	      			]
+	      		},
+	      		{
+	      			ID: 121212,
+	      			description:'Текст вопроса:',
+	      			index: 4,
+	      			type: "MultiLineTextBox",
+	      			options: [],
+	      		},{
+	      			ID: 121212,
+	      			description:'Подсказка к вопросу',
+	      			index: 4,
+	      			type: "MultiLineTextBox",
+	      			options: [],
+	      		},
+	      		{
+	      			ID: 121212,
+	      			index: 1,
+	      			type: "CheckboxList",
+	      			required: true,
+	      			'IDManager': this.IDManager,
+	      			options: [
+	      				{
+	      					index: 1,
+	      					ID: 121212,
+	      					value: "НЕ принимать без ответа",
+	      				},
+	      			],
+	      			},
+	      	]
+	      });
+	      	*/
+	    }
+	  }, {
 	    key: "addComponent",
 	    value: function addComponent(name) {
-	      this.galleryOfObjects.createFactoryObject(name);
+	      this.objectsGallery.createFactoryObject(name);
 	      this.selectingAComponentMenu.remove();
 	    }
 	  }]);
@@ -98,5 +273,5 @@
 
 	exports.ComponentEditor = ComponentEditor;
 
-}((this.Savmaxru = this.Savmaxru || {}),Savmaxru,BX,Savmaxru));
+}((this.Savmaxru = this.Savmaxru || {}),Savmaxru,BX,Savmaxru,Savmaxru,Savmaxru));
 //# sourceMappingURL=componenteditor.bundle.js.map

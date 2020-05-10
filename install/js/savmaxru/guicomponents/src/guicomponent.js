@@ -29,11 +29,6 @@ export class GUIComponent extends ObjectGUI
 		PropertyChangeManager.connectObject(this);
 	}
 
-	editComponent()
-	{
-
-	}
-
 	getStructure()
 	{
 		let result = this.getProperties();
@@ -54,7 +49,7 @@ export class GUIComponent extends ObjectGUI
 		let object = Tag.render`<div class='settings'></div>`
 		let editObject = this;
 		object.onclick = function() {
-			console.log(editObject.getStructure());
+			editObject.getParent().editComponent(editObject);
 		};
 		return object;
 	}
@@ -96,6 +91,7 @@ export class GUIComponent extends ObjectGUI
 
 		this.addProperty('ID',data['ID']);
 		this.addProperty('index',data['index']);
+		this.addProperty('type',data['type']);
 		
 		if(data['required'])
 		{
@@ -112,11 +108,14 @@ export class GUIComponent extends ObjectGUI
 
 	addOptions(options)
 	{
-		for(let i = 0; i<options.length; i++)
+		if(options !== undefined)
 		{
-			let option = new Option(options[i]);
-			option.setObjectHTML(this.addOption(option.getProperty("value")));
-			this.options.push(option);
+			for(let i = 0; i<options.length; i++)
+			{
+				let option = new Option(options[i]);
+				option.setObjectHTML(this.addOption(option.getProperty("value")));
+				this.options.push(option);
+			}
 		}
 	}
 

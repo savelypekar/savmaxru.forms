@@ -105,3 +105,32 @@
 .savmaxru-forms .support-question{
 	display: none;
 }
+
+.savmaxru-forms .editor-description-gallery{
+
+	margin-left: 15px;
+	margin-right: 40px;
+	margin-top: 15px;
+	background-color: white;
+	padding: 10px;
+	border-radius: 20px 20px 0 0;
+}
+
+.savmaxru-forms .editor-other-settings-gallery{
+	margin-left: 15px;
+	margin-right: 40px;
+	background-color: white;
+	padding: 10px;
+	margin-bottom: 15px;
+	border-radius: 0 0 20px 20px;
+}
+
+.savmaxru-forms .editor-other-settings-gallery .object-gui
+{
+	border-bottom:none;
+}
+
+.savmaxru-forms .editor-description-gallery .object-gui
+{
+	border-bottom:none;
+}

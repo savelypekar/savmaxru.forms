@@ -11,6 +11,8 @@ return [
 		'savmaxru.modalwindow',
 		'main.core',
 		'savmaxru.objectgui',
+		'savmaxru.componentsgallery',
+		'savmaxru.idmanager',
 	],
 	'skip_core' => false,
 ];

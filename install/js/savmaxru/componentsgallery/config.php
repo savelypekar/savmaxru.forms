@@ -10,6 +10,7 @@ return [
 	'rel' => [
 		'main.core',
 		'savmaxru.objectsgallery',
+		'savmaxru.guicomponents',
 	],
 	'skip_core' => false,
 ];

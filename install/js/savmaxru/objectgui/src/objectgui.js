@@ -39,6 +39,16 @@ export class ObjectGUI
 		return this.node;
 	}
 
+	setParent(parent)
+	{
+		this.parent = parent;
+	}
+
+	getParent()
+	{
+		return this.parent;
+	}
+
 	setRootNode(node)
 	{
 		this.wrapper.append(node);

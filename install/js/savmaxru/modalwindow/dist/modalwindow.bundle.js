@@ -2,7 +2,7 @@
 	'use strict';
 
 	function _templateObject() {
-	  var data = babelHelpers.taggedTemplateLiteral(["\n\t\t\t<div class=\"modal-background\">\n\t\t\t\t<div class=\"modal-window\">\n\t\t\t\t\t", "\n\t\t\t\t\t", "\n\t\t\t\t</div>\n\t\t\t</div>"]);
+	  var data = babelHelpers.taggedTemplateLiteral(["\n\t\t\t<div class=\"modal-background\">\n\t\t\t\t<div class=\"modal-window\">\n\t\t\t\t\t<div class=\"header\">\n\t\t\t\t\t\t", "\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"content\">\n\t\t\t\t\t\t", "\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>"]);
 
 	  _templateObject = function _templateObject() {
 	    return data;

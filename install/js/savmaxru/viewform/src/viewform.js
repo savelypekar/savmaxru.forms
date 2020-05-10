@@ -3,7 +3,6 @@ import './css/style.css'
 import {Type} from 'main.core';
 import {ObjectGUI} from "savmaxru.objectgui";
 import {Tag} from 'main.core';
-import {GUIComponents} from 'savmaxru.guicomponents';
 import {IDManager} from 'savmaxru.idmanager';
 import {ModalWindow} from "savmaxru.modalwindow";
 import {ComponentEditor} from "savmaxru.componenteditor";
@@ -20,11 +19,12 @@ export class ViewForm extends ObjectGUI
 			Tag.render`
 			${this.addNode("viewform-wrapper")}`
 		);
-w
+
+		let componentEditor = new Savmaxru.ComponentEditor(this.getNode("viewform-wrapper"));
 
 		let configGallery = {
 			"galleryClassCSS": "viewform-gallery",
-			"objectsFactory": GUIComponents,
+			"componentEditor": componentEditor,
 			"argumentsForResult": {
 				'ID': 232323
 			},
@@ -33,6 +33,13 @@ w
 		let gallery = new ComponentsGallery(configGallery);
 		this.gallery = gallery;
 		this.includeInNode("viewform-wrapper", this.gallery.getHTMLObject());
+
+		componentEditor.setGallery(gallery);
+
+		//obj8.onDown(function(){
+		//	ComponentEditor.create();
+		//});
+
 
 		/*let obj0 = gallery.createFactoryObject("Heading");
 		obj0.build(

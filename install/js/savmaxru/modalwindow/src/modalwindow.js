@@ -13,8 +13,12 @@ export class ModalWindow extends Savmaxru.ObjectGUI
 			Tag.render`
 			<div class="modal-background">
 				<div class="modal-window">
-					${closeButton}
-					${this.addNode("body")}
+					<div class="header">
+						${closeButton}
+					</div>
+					<div class="content">
+						${this.addNode("body")}
+					</div>
 				</div>
 			</div>`
 		);

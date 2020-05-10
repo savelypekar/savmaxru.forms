@@ -40,6 +40,16 @@
 	      return this.node;
 	    }
 	  }, {
+	    key: "setParent",
+	    value: function setParent(parent) {
+	      this.parent = parent;
+	    }
+	  }, {
+	    key: "getParent",
+	    value: function getParent() {
+	      return this.parent;
+	    }
+	  }, {
 	    key: "setRootNode",
 	    value: function setRootNode(node) {
 	      this.wrapper.append(node);

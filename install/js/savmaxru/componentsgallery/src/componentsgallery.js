@@ -1,11 +1,19 @@
 import {Type} from 'main.core';
 import {ObjectsGallery} from "savmaxru.objectsgallery";
+import {GUIComponents} from 'savmaxru.guicomponents';
 
 export class ComponentsGallery extends ObjectsGallery
 {
 	constructor(argument)
 	{
+		argument["objectsFactory"] = GUIComponents;
 		super(argument);
+		this.componentEditor = argument['componentEditor'];
+	}
+
+	editComponent(component)
+	{
+		this.componentEditor.runEditor(component);
 	}
 
 	addQuestions(question ={})
@@ -20,7 +28,6 @@ export class ComponentsGallery extends ObjectsGallery
 		let questions = data['questions'];
 		for(let i=0; i<questions.length; i++)
 		{
-			//console.log(questions[i]);
 			this.addQuestions(questions[i]);
 		}
 	}

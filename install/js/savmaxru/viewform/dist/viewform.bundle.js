@@ -1,4 +1,4 @@
-(function (exports,main_core,savmaxru_objectgui,savmaxru_guicomponents,savmaxru_idmanager,savmaxru_modalwindow,savmaxru_componenteditor,savmaxru_componentsgallery) {
+(function (exports,main_core,savmaxru_objectgui,savmaxru_idmanager,savmaxru_modalwindow,savmaxru_componenteditor,savmaxru_componentsgallery) {
 	'use strict';
 
 	function _templateObject() {
@@ -21,9 +21,11 @@
 	    babelHelpers.defineProperty(babelHelpers.assertThisInitialized(_this), "IDManager", new savmaxru_idmanager.IDManager('myforms'));
 
 	    _this.setRootNode(main_core.Tag.render(_templateObject(), _this.addNode("viewform-wrapper")));
+
+	    var componentEditor = new Savmaxru.ComponentEditor(_this.getNode("viewform-wrapper"));
 	    var configGallery = {
 	      "galleryClassCSS": "viewform-gallery",
-	      "objectsFactory": savmaxru_guicomponents.GUIComponents,
+	      "componentEditor": componentEditor,
 	      "argumentsForResult": {
 	        'ID': 232323
 	      }
@@ -32,6 +34,11 @@
 	    _this.gallery = gallery;
 
 	    _this.includeInNode("viewform-wrapper", _this.gallery.getHTMLObject());
+
+	    componentEditor.setGallery(gallery); //obj8.onDown(function(){
+	    //	ComponentEditor.create();
+	    //});
+
 	    /*let obj0 = gallery.createFactoryObject("Heading");
 	    obj0.build(
 	    	{
@@ -183,7 +190,6 @@
 	    //gallery.getResult();
 	    //this.gallery.loadGroupObject();*/
 
-
 	    gallery.addObjectsGroup({
 	      ID: 6829,
 	      questions: [{
@@ -258,5 +264,5 @@
 
 	exports.ViewForm = ViewForm;
 
-}((this.Savmaxru = this.Savmaxru || {}),BX,Savmaxru,Savmaxru,Savmaxru,Savmaxru,Savmaxru,Savmaxru));
+}((this.Savmaxru = this.Savmaxru || {}),BX,Savmaxru,Savmaxru,Savmaxru,Savmaxru,Savmaxru));
 //# sourceMappingURL=viewform.bundle.js.map

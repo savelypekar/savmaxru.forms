@@ -1,15 +1,25 @@
-(function (exports,main_core,savmaxru_objectsgallery) {
+(function (exports,main_core,savmaxru_objectsgallery,savmaxru_guicomponents) {
 	'use strict';
 
 	var ComponentsGallery = /*#__PURE__*/function (_ObjectsGallery) {
 	  babelHelpers.inherits(ComponentsGallery, _ObjectsGallery);
 
 	  function ComponentsGallery(argument) {
+	    var _this;
+
 	    babelHelpers.classCallCheck(this, ComponentsGallery);
-	    return babelHelpers.possibleConstructorReturn(this, babelHelpers.getPrototypeOf(ComponentsGallery).call(this, argument));
+	    argument["objectsFactory"] = savmaxru_guicomponents.GUIComponents;
+	    _this = babelHelpers.possibleConstructorReturn(this, babelHelpers.getPrototypeOf(ComponentsGallery).call(this, argument));
+	    _this.componentEditor = argument['componentEditor'];
+	    return _this;
 	  }
 
 	  babelHelpers.createClass(ComponentsGallery, [{
+	    key: "editComponent",
+	    value: function editComponent(component) {
+	      this.componentEditor.runEditor(component);
+	    }
+	  }, {
 	    key: "addQuestions",
 	    value: function addQuestions() {
 	      var question = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
@@ -23,7 +33,6 @@
 	      var questions = data['questions'];
 
 	      for (var i = 0; i < questions.length; i++) {
-	        //console.log(questions[i]);
 	        this.addQuestions(questions[i]);
 	      }
 	    }
@@ -33,5 +42,5 @@
 
 	exports.ComponentsGallery = ComponentsGallery;
 
-}((this.Savmaxru = this.Savmaxru || {}),BX,Savmaxru));
+}((this.Savmaxru = this.Savmaxru || {}),BX,Savmaxru,Savmaxru));
 //# sourceMappingURL=componentsgallery.bundle.js.map

@@ -10,7 +10,6 @@ return [
 	'rel' => [
 		'main.core',
 		'savmaxru.objectgui',
-		'savmaxru.guicomponents',
 		'savmaxru.idmanager',
 		'savmaxru.modalwindow',
 		'savmaxru.componenteditor',

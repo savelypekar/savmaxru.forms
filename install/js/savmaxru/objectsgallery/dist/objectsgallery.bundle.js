@@ -74,6 +74,11 @@
 	    key: "push",
 	    value: function push(object) {
 	      this.objects.push(object);
+
+	      if (object.setParent !== undefined) {
+	        object.setParent(this);
+	      }
+
 	      this.getRootNode().append(object.getHTMLObject());
 	    }
 	  }, {

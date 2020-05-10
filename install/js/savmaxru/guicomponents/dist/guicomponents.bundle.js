@@ -81,9 +81,6 @@
 	  }
 
 	  babelHelpers.createClass(GUIComponent, [{
-	    key: "editComponent",
-	    value: function editComponent() {}
-	  }, {
 	    key: "getStructure",
 	    value: function getStructure() {
 	      var result = this.getProperties();
@@ -104,7 +101,7 @@
 	      var editObject = this;
 
 	      object.onclick = function () {
-	        console.log(editObject.getStructure());
+	        editObject.getParent().editComponent(editObject);
 	      };
 
 	      return object;
@@ -148,6 +145,7 @@
 	      this.addOptions(data['options']);
 	      this.addProperty('ID', data['ID']);
 	      this.addProperty('index', data['index']);
+	      this.addProperty('type', data['type']);
 
 	      if (data['required']) {
 	        this.setFieldAsRequired();
@@ -161,10 +159,12 @@
 	  }, {
 	    key: "addOptions",
 	    value: function addOptions(options) {
-	      for (var i = 0; i < options.length; i++) {
-	        var option = new Option(options[i]);
-	        option.setObjectHTML(this.addOption(option.getProperty("value")));
-	        this.options.push(option);
+	      if (options !== undefined) {
+	        for (var i = 0; i < options.length; i++) {
+	          var option = new Option(options[i]);
+	          option.setObjectHTML(this.addOption(option.getProperty("value")));
+	          this.options.push(option);
+	        }
 	      }
 	    }
 	  }, {
