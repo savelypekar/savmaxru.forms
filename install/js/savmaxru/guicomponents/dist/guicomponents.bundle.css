@@ -29,7 +29,6 @@
 }
 
 .object-wrapper{
-	overflow: hidden;
 }
 .savmaxru-forms .object-gui {
 
@@ -148,6 +147,85 @@
 /*endregion*/
 
 /*region BUTTON*/
+
+.savmaxru-forms .button{
+	text-align: center;
+	font-weight: 500;
+	color: white;
+	text-decoration: none;
+	padding: .8em 1em calc(.8em + 3px);
+	border-radius: 3px;
+	background: #538bcd;
+	-webkit-box-shadow: 0 -3px #4180cd inset;
+	        box-shadow: 0 -3px #4180cd inset;
+	font-size: 18px;
+	width: 200px;
+	height: 20px;
+	margin-left: auto;
+	margin-right: auto;
+	cursor: pointer;
+	-webkit-transition: .2s;
+	-o-transition: .2s;
+	transition: .2s;
+}
+
+.savmaxru-forms .button:hover{
+	background: #3087cd;
+	-webkit-transition: .2s;
+	-o-transition: .2s;
+	transition: .2s;
+}
+.savmaxru-forms .button:active {
+	background: #538bcd;
+	-webkit-box-shadow: 0 3px #4180cd inset;
+	        box-shadow: 0 3px #4180cd inset;
+	-webkit-transition: .2s;
+	-o-transition: .2s;
+	transition: .2s;
+}
+
+.savmaxru-forms .plus-button{
+	text-align: center;
+	font-weight: 500;
+	color: white;
+	text-decoration: none;
+	border-radius: 100px;
+	background: rgb(64,199,129);
+	-webkit-box-shadow: 0 -3px rgb(53,167,110) inset;
+	        box-shadow: 0 -3px rgb(53,167,110) inset;
+	-webkit-transition: 0.2s;
+	-o-transition: 0.2s;
+	transition: 0.2s;
+	font-size: 18px;
+	width: 50px;
+	height: 50px;
+	margin-left: auto;
+	margin-right: auto;
+	cursor: pointer;
+	background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' height='512' viewBox='0 0 426.667 426.667' width='512'%3E%3Cpath d='M405.332 192H234.668V21.332C234.668 9.559 225.109 0 213.332 0 201.559 0 192 9.559 192 21.332V192H21.332C9.559 192 0 201.559 0 213.332c0 11.777 9.559 21.336 21.332 21.336H192v170.664c0 11.777 9.559 21.336 21.332 21.336 11.777 0 21.336-9.559 21.336-21.336V234.668h170.664c11.777 0 21.336-9.559 21.336-21.336 0-11.773-9.559-21.332-21.336-21.332zm0 0' data-original='%23000000' class='active-path' data-old_color='%23000000' fill='%23FFF'/%3E%3C/svg%3E");
+	background-size: 22px;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+.savmaxru-forms .plus-button:hover{
+	background: rgb(53, 167, 110);
+	background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' height='512' viewBox='0 0 426.667 426.667' width='512'%3E%3Cpath d='M405.332 192H234.668V21.332C234.668 9.559 225.109 0 213.332 0 201.559 0 192 9.559 192 21.332V192H21.332C9.559 192 0 201.559 0 213.332c0 11.777 9.559 21.336 21.332 21.336H192v170.664c0 11.777 9.559 21.336 21.332 21.336 11.777 0 21.336-9.559 21.336-21.336V234.668h170.664c11.777 0 21.336-9.559 21.336-21.336 0-11.773-9.559-21.332-21.336-21.332zm0 0' data-original='%23000000' class='active-path' data-old_color='%23000000' fill='%23FFF'/%3E%3C/svg%3E");
+	background-size: 22px;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+.savmaxru-forms .plus-button:active {
+	background: rgb(33,147,90);
+	-webkit-box-shadow: 0 3px rgb(33,147,90) inset;
+	        box-shadow: 0 3px rgb(33,147,90) inset;
+	background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' height='512' viewBox='0 0 426.667 426.667' width='512'%3E%3Cpath d='M405.332 192H234.668V21.332C234.668 9.559 225.109 0 213.332 0 201.559 0 192 9.559 192 21.332V192H21.332C9.559 192 0 201.559 0 213.332c0 11.777 9.559 21.336 21.332 21.336H192v170.664c0 11.777 9.559 21.336 21.332 21.336 11.777 0 21.336-9.559 21.336-21.336V234.668h170.664c11.777 0 21.336-9.559 21.336-21.336 0-11.773-9.559-21.332-21.336-21.332zm0 0' data-original='%23000000' class='active-path' data-old_color='%23000000' fill='%23FFF'/%3E%3C/svg%3E");
+	background-size: 22px;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+/*
 .savmaxru-forms .button
 {
 	display: block;
@@ -160,37 +238,25 @@
 	color: black;
 	font-size: 18px;
 	text-decoration: none;
-	-webkit-user-select: none;
-	   -moz-user-select: none;
-	    -ms-user-select: none;
-	        user-select: none;
+	user-select: none;
 	padding-top: 12px;
 	padding-bottom: 16px;
 	outline: none;
 	border: 1px solid rgb(250,172,17);
 	border-radius: 7px;
-	background: rgb(255,212,3) -webkit-gradient(linear, left top, left bottom, from(rgb(255,212,3)), to(rgb(248,157,23)));
-	background: rgb(255,212,3) -o-linear-gradient(rgb(255,212,3), rgb(248,157,23));
 	background: rgb(255,212,3) linear-gradient(rgb(255,212,3), rgb(248,157,23));
-	-webkit-box-shadow: inset 0 -2px 1px rgba(0,0,0,0), inset 0 1px 2px rgba(0,0,0,0), inset 0 0 0 60px rgba(255,255,0,0);
-	        box-shadow: inset 0 -2px 1px rgba(0,0,0,0), inset 0 1px 2px rgba(0,0,0,0), inset 0 0 0 60px rgba(255,255,0,0);
-	-webkit-transition: border-color .2s, -webkit-box-shadow .2s;
-	transition: border-color .2s, -webkit-box-shadow .2s;
-	-o-transition: box-shadow .2s, border-color .2s;
+	box-shadow: inset 0 -2px 1px rgba(0,0,0,0), inset 0 1px 2px rgba(0,0,0,0), inset 0 0 0 60px rgba(255,255,0,0);
 	transition: box-shadow .2s, border-color .2s;
-	transition: box-shadow .2s, border-color .2s, -webkit-box-shadow .2s;
 }
 
 .savmaxru-forms .button:hover {
-	-webkit-box-shadow: inset 0 -1px 1px rgba(0,0,0,0), inset 0 1px 2px rgba(0,0,0,0), inset 0 0 0 60px rgba(255,255,0,.5);
-	        box-shadow: inset 0 -1px 1px rgba(0,0,0,0), inset 0 1px 2px rgba(0,0,0,0), inset 0 0 0 60px rgba(255,255,0,.5);
+	box-shadow: inset 0 -1px 1px rgba(0,0,0,0), inset 0 1px 2px rgba(0,0,0,0), inset 0 0 0 60px rgba(255,255,0,.5);
 }
 
 .savmaxru-forms .button:active {
 	border-color: rgba(177,159,0,1);
-	-webkit-box-shadow: inset 0 -1px 1px rgba(0,0,0,.1), inset 0 1px 2px rgba(0,0,0,.3), inset 0 0 0 60px rgba(255,255,0,.45);
-	        box-shadow: inset 0 -1px 1px rgba(0,0,0,.1), inset 0 1px 2px rgba(0,0,0,.3), inset 0 0 0 60px rgba(255,255,0,.45);
-}
+	box-shadow: inset 0 -1px 1px rgba(0,0,0,.1), inset 0 1px 2px rgba(0,0,0,.3), inset 0 0 0 60px rgba(255,255,0,.45);
+}*/
 /*endregion*/
 
 .savmaxru-forms .heading-item

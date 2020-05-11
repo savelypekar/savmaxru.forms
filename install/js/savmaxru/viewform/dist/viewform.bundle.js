@@ -191,6 +191,15 @@
 	    //gallery.getResult();
 	    //this.gallery.loadGroupObject();*/
 
+	    var obj6 = gallery.createFactoryObject("Button");
+	    obj6.build({
+	      'ID': 2226,
+	      'index': 6
+	    });
+	    obj6.setStyle("plus-button");
+	    obj6.onDown(function () {
+	      console.log(gallery.getResult());
+	    });
 	    gallery.addObjectsGroup({
 	      ID: 6829,
 	      questions: [{

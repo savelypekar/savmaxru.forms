@@ -80,6 +80,7 @@ export class ObjectGUI
 	{
 		this.wrapper.style.height = this.wrapper.offsetHeight+'px';
 		this.wrapper.style.transition = '0.3s';
+		this.wrapper.style.overflow = 'hidden';
 		let object = this;
 		setTimeout(function() {
 			object.wrapper.style.height = '0';

@@ -8,6 +8,11 @@ export class Button extends GUIComponent {
 		this.setComponent(Tag.render`${this.addNode("button")}`);
 	}
 
+	setStyle(className)
+	{
+		this.getNode("button").className = className;
+	}
+
 	addOption(option)
 	{
 		this.includeInNode("button",Tag.render`<span>${option}</span>`);

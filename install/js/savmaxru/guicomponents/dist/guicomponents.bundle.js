@@ -433,6 +433,11 @@
 	  }
 
 	  babelHelpers.createClass(Button, [{
+	    key: "setStyle",
+	    value: function setStyle(className) {
+	      this.getNode("button").className = className;
+	    }
+	  }, {
 	    key: "addOption",
 	    value: function addOption(option) {
 	      this.includeInNode("button", main_core.Tag.render(_templateObject2$2(), option));
