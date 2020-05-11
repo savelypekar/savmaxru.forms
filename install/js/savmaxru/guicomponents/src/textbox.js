@@ -23,4 +23,11 @@ export class TextBox extends GUIComponent
 		return result;
 	}
 
+	addOption(option)
+	{
+		let items = this.getAllElementsOfTheNode('textbox');
+		let item = items[0];
+		item.value = option;
+	}
+
 }

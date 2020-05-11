@@ -4,7 +4,7 @@ import { ElectiveItemsList } from "./electiveitemslist";
 
 export class RadiobuttonList extends ElectiveItemsList
 {
-	addOption(option,index)
+	addOption(option)
 	{
 		if(this.listName === undefined) {
 			this.listName = this.getNextHighestId();
@@ -12,7 +12,7 @@ export class RadiobuttonList extends ElectiveItemsList
 		let newItemID = this.getNextHighestId();
 		let objectHTML = Tag.render`
 		<div class="radiobutton-item">
-			<input type="radio" value="${index}" id="${newItemID}" name="${this.listName}">
+			<input type="radio" id="${newItemID}" name="${this.listName}">
   			<label class="radiobutton-label" for="${newItemID}">${option}</label>
 		</div>`;
 		objectHTML.getCondition = function()

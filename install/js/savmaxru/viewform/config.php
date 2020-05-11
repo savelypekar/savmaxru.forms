@@ -10,9 +10,10 @@ return [
 	'rel' => [
 		'main.core',
 		'savmaxru.objectgui',
-		'savmaxru.plugins',
-		'savmaxru.guicomponents',
 		'savmaxru.idmanager',
+		'savmaxru.modalwindow',
+		'savmaxru.componenteditor',
+		'savmaxru.componentsgallery',
 	],
 	'skip_core' => false,
 ];

@@ -28,6 +28,7 @@ export class ObjectGUI
 	addNode(name,type = 'div')
 	{
 		let node = this.createNode(type);
+		node.parent = this;
 		this.nodes[name] = node;
 		node.className = name;
 		return node;
@@ -36,6 +37,16 @@ export class ObjectGUI
 	getRootNode()
 	{
 		return this.node;
+	}
+
+	setParent(parent)
+	{
+		this.parent = parent;
+	}
+
+	getParent()
+	{
+		return this.parent;
 	}
 
 	setRootNode(node)
@@ -62,5 +73,26 @@ export class ObjectGUI
 	constructor()
 	{
 		this.wrapper = this.createNode('div');
+		this.wrapper.className = "object-wrapper";
 	}
+
+	hideAnimHTMLObject()
+	{
+		this.wrapper.style.height = this.wrapper.offsetHeight+'px';
+		this.wrapper.style.transition = '0.3s';
+		this.wrapper.style.overflow = 'hidden';
+		let object = this;
+		setTimeout(function() {
+			object.wrapper.style.height = '0';
+			object.wrapper.style.opacity = '0';
+			setTimeout(function() {
+				object.removeHTMLObject()
+			},300);
+		}, 1);
+	}
+	removeHTMLObject()
+	{
+		this.wrapper.remove();
+	}
+
 }

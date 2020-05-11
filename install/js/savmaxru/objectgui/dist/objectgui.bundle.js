@@ -29,6 +29,7 @@
 	    value: function addNode(name) {
 	      var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'div';
 	      var node = this.createNode(type);
+	      node.parent = this;
 	      this.nodes[name] = node;
 	      node.className = name;
 	      return node;
@@ -37,6 +38,16 @@
 	    key: "getRootNode",
 	    value: function getRootNode() {
 	      return this.node;
+	    }
+	  }, {
+	    key: "setParent",
+	    value: function setParent(parent) {
+	      this.parent = parent;
+	    }
+	  }, {
+	    key: "getParent",
+	    value: function getParent() {
+	      return this.parent;
 	    }
 	  }, {
 	    key: "setRootNode",
@@ -65,8 +76,30 @@
 	    babelHelpers.classCallCheck(this, ObjectGUI);
 	    babelHelpers.defineProperty(this, "nodes", []);
 	    this.wrapper = this.createNode('div');
+	    this.wrapper.className = "object-wrapper";
 	  }
 
+	  babelHelpers.createClass(ObjectGUI, [{
+	    key: "hideAnimHTMLObject",
+	    value: function hideAnimHTMLObject() {
+	      this.wrapper.style.height = this.wrapper.offsetHeight + 'px';
+	      this.wrapper.style.transition = '0.3s';
+	      this.wrapper.style.overflow = 'hidden';
+	      var object = this;
+	      setTimeout(function () {
+	        object.wrapper.style.height = '0';
+	        object.wrapper.style.opacity = '0';
+	        setTimeout(function () {
+	          object.removeHTMLObject();
+	        }, 300);
+	      }, 1);
+	    }
+	  }, {
+	    key: "removeHTMLObject",
+	    value: function removeHTMLObject() {
+	      this.wrapper.remove();
+	    }
+	  }]);
 	  return ObjectGUI;
 	}();
 

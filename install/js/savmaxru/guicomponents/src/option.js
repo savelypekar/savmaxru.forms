@@ -1,10 +1,13 @@
+import {PropertyChangeManager} from "savmaxru.propertychangemanager";
+
 export class Option
 {
 	constructor(data)
 	{
-		this.setValue(data['value']);
-		this.setID(data['ID']);
-		this.setIndex(data['index']);
+		PropertyChangeManager.connectObject(this);
+		this.addProperty('value',data['value']);
+		this.addProperty('ID',data['ID']);
+		this.addProperty('index',data['index']);
 	}
 
 	setObjectHTML(object)
@@ -17,28 +20,14 @@ export class Option
 		return this.object;
 	}
 
-	setValue(value)
-	{
-		this.value = value;
-	}
-
-	getValue()
-	{
-		return this.value;
-	}
-
-	setID(id)
-	{
-		this.id = id;
-	}
-
-	getID()
-	{
-		return this.id;
-	}
-
 	setIndex(index)
 	{
 		this.index = index;
+	}
+
+	getStructure()
+	{
+		let result = this.getProperties();
+		return result;
 	}
 }

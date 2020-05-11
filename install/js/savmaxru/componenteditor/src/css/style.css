@@ -1,0 +1,154 @@
+.savmaxru-forms .dropdownlist-ico
+{
+	display: block;
+	background-image: url("dropdownlist-ico.png");
+	width: 140px;
+	height: 140px;
+	background-size: cover;
+	margin:0 auto;
+
+}
+
+.savmaxru-forms .checkboxlist-ico
+{
+	display: block;
+	background-image: url("checkboxlist-ico.png");
+	width: 140px;
+	height: 140px;
+	background-size: cover;
+	margin:0 auto;
+
+}
+
+.savmaxru-forms .radiobuttonlist-ico
+{
+	display: block;
+	background-image: url("radiobuttonlist-ico.png");
+	width: 140px;
+	height: 140px;
+	background-size: cover;
+	margin:0 auto;
+
+}
+
+.savmaxru-forms .singlelinetextbox-ico
+{
+	display: block;
+	background-image: url("singlelinetextbox-ico.png");
+	width: 140px;
+	height: 140px;
+	background-size: cover;
+	margin:0 auto;
+
+}
+
+.savmaxru-forms .multilinetextbox-ico
+{
+	display: block;
+	background-image: url("multilinetextbox-ico.png");
+	width: 140px;
+	height: 140px;
+	background-size: cover;
+	margin:0 auto;
+
+}
+
+.savmaxru-forms .heading-ico
+{
+	display: block;
+	background-image: url("heading-ico.png");
+	width: 140px;
+	height: 140px;
+	background-size: cover;
+	margin:0 auto;
+
+}
+
+.savmaxru-forms .components-selection
+{
+	width:calc(180px*3 + 7px*3*2 + 7px*2*3);
+	flex-wrap: wrap;
+	display: flex;
+	margin:0 auto;
+}
+
+.savmaxru-forms .btn-type-ico
+{
+	padding: 12px 7px 2px;
+	border-radius: 6px;
+	width: 180px;
+	margin: 8px 7px;
+	transition: .25s;
+	background: white;
+	box-shadow: 0 0 2px 0 rgba(0,0,0,.1), 0 2px 6px 0 rgba(0,0,0,.1);
+	cursor: pointer;
+}
+
+.savmaxru-forms .btn-type-ico:hover
+{
+	margin-top: 5px;
+	margin-bottom: 11px;
+	transition: .15s;
+}
+
+.savmaxru-forms .btn-type-ico span
+{
+	font-size: 14px;
+	display: block;
+	width:100%;
+	text-align: center;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: 500;
+	margin-bottom: 6px;
+}
+
+.savmaxru-forms .support-question{
+	display: none;
+}
+
+
+.savmaxru-forms .editor-options-gallery {
+	margin-left: 15px;
+	margin-right: 40px;
+	background-color: white;
+	padding: 10px;
+}
+.savmaxru-forms .editor-description-gallery{
+
+	margin-left: 15px;
+	margin-right: 40px;
+	margin-top: 15px;
+	background-color: white;
+	padding: 10px;
+	border-radius: 20px 20px 0 0;
+}
+
+.savmaxru-forms .editor-other-settings-gallery{
+	margin-left: 15px;
+	margin-right: 40px;
+	background-color: white;
+	padding: 10px;
+	margin-bottom: 15px;
+	border-radius: 0 0 20px 20px;
+}
+
+.savmaxru-forms .editor-other-settings-gallery .object-gui
+{
+	border-bottom:none;
+}
+
+.savmaxru-forms .editor-options-gallery .object-gui
+{
+	border-bottom:none;
+	height: 35px;
+}
+
+.savmaxru-forms .editor-description-gallery .object-gui
+{
+	border-bottom:none;
+}
+
+.savmaxru-forms .editor-options-gallery .object-gui .edit-panel .remove{
+	margin-top: 27px;
+	margin-right: 70px;
+}

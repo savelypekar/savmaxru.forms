@@ -3,13 +3,14 @@ import './css/style.css'
 import {Type} from 'main.core';
 import {ObjectGUI} from "savmaxru.objectgui";
 import {Tag} from 'main.core';
-import {Plugins} from 'savmaxru.plugins';
-import {GUIComponents} from 'savmaxru.guicomponents';
 import {IDManager} from 'savmaxru.idmanager';
+import {ModalWindow} from "savmaxru.modalwindow";
+import {ComponentEditor} from "savmaxru.componenteditor";
+import {ComponentsGallery} from "savmaxru.componentsgallery";
 
-export class ViewForm extends Savmaxru.ObjectGUI
+export class ViewForm extends ObjectGUI
 {
-	IDManager = new Savmaxru.IDManager('myforms');
+	IDManager = new IDManager('myforms');
 
 	constructor()
 	{
@@ -19,19 +20,29 @@ export class ViewForm extends Savmaxru.ObjectGUI
 			${this.addNode("viewform-wrapper")}`
 		);
 
+		let componentEditor = new Savmaxru.ComponentEditor(this.getNode("viewform-wrapper"));
+
 		let configGallery = {
 			"galleryClassCSS": "viewform-gallery",
-			"objectsFactory": Savmaxru.GUIComponents,
+			"componentEditor": componentEditor,
 			"argumentsForResult": {
 				'ID': 232323
 			},
 		};
 
-		let gallery = Savmaxru.Plugins.attachPlugin("ObjectsGallery",configGallery);
+		let gallery = new ComponentsGallery(configGallery);
 		this.gallery = gallery;
+		gallery.enableEditMode();
 		this.includeInNode("viewform-wrapper", this.gallery.getHTMLObject());
 
-		let obj0 = gallery.createFactoryObject("Heading");
+		componentEditor.setGallery(gallery);
+
+		//obj8.onDown(function(){
+		//	ComponentEditor.create();
+		//});
+
+
+		/*let obj0 = gallery.createFactoryObject("Heading");
 		obj0.build(
 			{
 				'ID': 2220,
@@ -87,6 +98,26 @@ export class ViewForm extends Savmaxru.ObjectGUI
 			});
 		obj6.onDown(function(){
 			console.log(gallery.getResult());
+		});
+
+		let obj8 = gallery.createFactoryObject("Button");
+		obj8.build(
+			{
+				'ID': 2226,
+				'index': 6,
+				'options': [
+					{
+						index: 0,
+						ID: 121212,
+						value: "Add component",
+					},
+				],
+			});
+
+		let ComponentEditor = new Savmaxru.ComponentEditor(this.getNode("viewform-wrapper"),gallery);
+
+		obj8.onDown(function(){
+			ComponentEditor.create();
 		});
 
 		let obj2 = gallery.createFactoryObject("CheckboxList");
@@ -168,8 +199,107 @@ export class ViewForm extends Savmaxru.ObjectGUI
 		obj6.onDown(function(){
 			console.log(gallery.getResult());
 		});
+*/
 		//gallery.getResult();
 		//this.gallery.loadGroupObject();*/
+
+		let obj6 = gallery.createFactoryObject("Button");
+		obj6.build(
+			{
+				'ID': 2226,
+				'index': 6,
+
+			});
+		obj6.setStyle("plus-button");
+		obj6.onDown(function(){
+			console.log(gallery.getResult());
+		});
+
+		gallery.addObjectsGroup({
+			ID: 6829,
+			questions: [
+				{
+					ID: 121212,
+					index: 1,
+					type: "DropDownList",
+					description: "Текст вопроса",
+					comment: "Пояснительный комметарий",
+					required: true,
+
+					options: [
+						{
+							index: 1,
+							ID: 121212,
+							value: "Russia",
+						},
+					],
+
+				},{
+					ID: 121212,
+					index: 2,
+					type: "Heading",
+					options: [
+						{
+							index: 1,
+							value: 'Такой вот опрос',
+							ID: 121212,
+						}
+					]
+				},{
+					ID: 121212,
+					index: 3,
+					type: "Button",
+					options: [
+						{
+							ID: 121212,
+							index: 1,
+							value: 'Отправить',
+						}
+					]
+				},{
+					ID: 121212,
+					index: 4,
+					type: "MultiLineTextBox",
+					options: [],
+				}
+			]
+		});
+
+		let obj2 = gallery.createComponent("CheckboxList");
+		obj2.build(
+			{
+				'ID': 2222,
+				'index': 2,
+				'type': "CheckboxList",
+				'description':'Test',
+				'options': [
+					{
+						index: 0,
+						ID: 121212,
+						value: "Вологда",
+					},
+					{
+						index: 1,
+						ID: 121212,
+						value: "Череповец",
+					},
+					{
+						index: 2,
+						ID: 121212,
+						value: "Калининград",
+					}
+				],
+				'comment': 'comment',
+				'required': true,
+				'IDManager': this.IDManager,
+			});
+
+
+			//obj2.rewriteProperty("f",2);
+
+			//console.log(obj2.getChanges());
+			//console.log("уу");
+			//console.log(obj2.getStructure());
 
 	}
 

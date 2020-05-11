@@ -8,6 +8,8 @@ return [
 	'css' => 'dist/guicomponents.bundle.css',
 	'js' => 'dist/guicomponents.bundle.js',
 	'rel' => [
+		'savmaxru.objectgui',
+		'savmaxru.propertychangemanager',
 		'main.core',
 	],
 	'skip_core' => false,
