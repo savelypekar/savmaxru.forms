@@ -118,6 +118,7 @@ class AnswerResultTable extends DataManager
 
 	public function getResultByIdInterviewWithAmount($idInterview, $quantity, $firstPosition)
 	{
+		$firstPosition = $firstPosition - 1;
 		$result = AnswerResultTable::getList([
 			'select' => ['ID', 'ID_RESULT', 'ID_INTERVIEW', 'ID_USER'],
 			'filter' => ['ID_INTERVIEW' => $idInterview],
