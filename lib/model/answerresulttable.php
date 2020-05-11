@@ -71,6 +71,17 @@ class AnswerResultTable extends DataManager
 		return $rows;
 	}
 
+	public function getResultByIdResult($idResult)
+	{
+		$result = AnswerResultTable::getList([
+			'select' => ['ID', 'ID_RESULT', 'ID_INTERVIEW', 'ID_USER'],
+			'filter' => ['ID_RESULT' => $idResult],
+		]);
+		$rows = $result ->fetchAll();
+
+		return $rows;
+	}
+
 	public function deleteRow($id)
 	{
 		$result = AnswerResultTable::delete($id);
@@ -103,5 +114,18 @@ class AnswerResultTable extends DataManager
 		$maxIdResult = max($result ->fetchAll());
 		$result = $maxIdResult['ID_RESULT'];
 		return $result;
+	}
+
+	public function getResultByIdInterviewWithAmount($idInterview, $quantity, $firstPosition)
+	{
+		$result = AnswerResultTable::getList([
+			'select' => ['ID', 'ID_RESULT', 'ID_INTERVIEW', 'ID_USER'],
+			'filter' => ['ID_INTERVIEW' => $idInterview],
+			'limit' => $quantity,
+			'offset' => $firstPosition,
+		]);
+		$rows = $result ->fetchAll();
+
+		return $rows;
 	}
 }
