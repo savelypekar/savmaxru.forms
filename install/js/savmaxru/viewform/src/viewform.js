@@ -257,6 +257,7 @@ export class ViewForm extends ObjectGUI
 			{
 				'ID': 2222,
 				'index': 2,
+				'type': "CheckboxList",
 				'description':'Test',
 				'options': [
 					{

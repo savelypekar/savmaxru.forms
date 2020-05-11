@@ -44,11 +44,25 @@ export class ComponentEditor
 		this.selectingAComponentMenu = selectingAComponent;
 	}
 
+	buildFieldStructureForEditingOption(optionStructure)
+	{
+		let option = {
+			index: optionStructure["index"],
+			ID: optionStructure["ID"],
+			type: "SingleLineTextBox",
+			options: [
+				{
+					value: optionStructure["value"],
+				},
+			],
+		}
+		return option;
+	}
 
 	runEditor(component)
 	{
 		this.openWindow();
-		let componentStructure = component.getStructure()
+		let componentStructure = component.getStructure();
 
 		let configDescription = {
 			"galleryClassCSS": "editor-description-gallery",
@@ -57,7 +71,7 @@ export class ComponentEditor
 		this.window.setContent(description.getHTMLObject());
 
 		let configOption = {
-			"galleryClassCSS": "editor-option-gallery",
+			"galleryClassCSS": "editor-options-gallery",
 		};
 		let options = new ComponentsGallery(configOption);
 		this.window.setContent(options.getHTMLObject());
@@ -70,34 +84,35 @@ export class ComponentEditor
 
 		let type = componentStructure["type"];
 
-		if(type === "Heading")
-		{
-			description.addObjectsGroup({
-				questions: [{
-					type: "Heading",
-					options: [
-						{
-							value: BX.message("QUESTION_EDITING_TITLE"),
-						}
-					]
-				},{
-					ID: "headingText",
-					description:BX.message("HEADING_TEXT"),
-					type: "SingleLineTextBox",
-				},],
-			},);
+		let titles = {
+			"Heading" :BX.message("HEADER_EDITING_TITLE"),
+			"RadiobuttonList" :BX.message("QUESTION_EDITING_TITLE"),
+			"CheckboxList" :BX.message("QUESTION_EDITING_TITLE"),
+			"MultiLineTextBox" :BX.message("QUESTION_EDITING_TITLE"),
+			"SingleLineTextBox" :BX.message("QUESTION_EDITING_TITLE"),
+			"DropDownList" :BX.message("QUESTION_EDITING_TITLE"),
+			"Button" : BX.message("BUTTON_EDITING_TITLE"),
 		}
-		else
+
+		description.addObjectsGroup({
+
+			questions: [
+				{
+				type: "Heading",
+				options: [
+					{
+						value:titles[type],
+					}
+				],
+				}
+			],
+		});
+
+		if(type !== "Button" && type !== "Heading")
 		{
 			description.addObjectsGroup({
-				questions: [{
-					type: "Heading",
-					options: [
-						{
-							value: BX.message("HEADER_EDITING_TITLE"),
-						}
-					]
-				},{
+				questions: [
+				{
 					ID: "questionText",
 					description:BX.message("QUESTION_TEXT"),
 					type: "MultiLineTextBox",
@@ -107,21 +122,50 @@ export class ComponentEditor
 					type: "MultiLineTextBox",
 				},],
 			},);
+
+			if(type === "CheckboxList" || type === "RadiobuttonList" || type === "DropDownList")
+			{
+				description.addObjectsGroup({
+					questions: [{
+						type: "Heading",
+						comment: BX.message("ANSWER_OPTIONS_COMMENT"),
+						options: [
+							{
+								value:BX.message("ANSWER_OPTIONS"),
+							}
+						],
+					}]
+				});
+			}
+
 		}
 
-		otherSettings.addObjectsGroup({
-			questions: [{
-				ID: "notAcceptUnanswered",
-				type: "CheckboxList",
-				'IDManager': this.IDManager,
-				options: [
-					{
-						value:BX.message("NOT_ACCEPT_UNANSWERED"),
-					},
-				],
+		let questions = [];
+		for(let i=0; i<componentStructure['options'].length; i++)
+		{
+			questions.push(this.buildFieldStructureForEditingOption(componentStructure['options'][i]));
+		}
 
-			},],
+		options.addObjectsGroup({
+			questions,
 		},);
+
+		if(type !== "Button" && type !== "Heading")
+		{
+			otherSettings.addObjectsGroup({
+				questions: [{
+					ID: "notAcceptUnanswered",
+					type: "CheckboxList",
+					'IDManager': this.IDManager,
+					options: [
+						{
+							value:BX.message("NOT_ACCEPT_UNANSWERED"),
+						},
+					],
+
+				},],
+			},);
+		}
 
 		let saveButton = otherSettings.createFactoryObject("Button");
 		saveButton.build(

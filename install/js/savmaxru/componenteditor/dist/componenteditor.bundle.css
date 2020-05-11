@@ -114,6 +114,13 @@
 	display: none;
 }
 
+
+.savmaxru-forms .editor-options-gallery {
+	margin-left: 15px;
+	margin-right: 40px;
+	background-color: white;
+	padding: 10px;
+}
 .savmaxru-forms .editor-description-gallery{
 
 	margin-left: 15px;
@@ -136,6 +143,12 @@
 .savmaxru-forms .editor-other-settings-gallery .object-gui
 {
 	border-bottom:none;
+}
+
+.savmaxru-forms .editor-options-gallery .object-gui
+{
+	border-bottom:none;
+	height: 35px;
 }
 
 .savmaxru-forms .editor-description-gallery .object-gui

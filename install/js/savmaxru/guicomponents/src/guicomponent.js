@@ -67,7 +67,6 @@ export class GUIComponent extends ObjectGUI
 		if(modes["settings"]){
 			this.includeInNode("edit-panel",this.addEditButton());
 		}
-
 	}
 
 	getChanges()

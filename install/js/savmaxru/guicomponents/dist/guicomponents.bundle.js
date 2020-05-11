@@ -346,7 +346,7 @@
 	}(ElectiveItemsList);
 
 	function _templateObject$4() {
-	  var data = babelHelpers.taggedTemplateLiteral(["\n\t\t<div class=\"radiobutton-item\">\n\t\t\t<input type=\"radio\" value=\"", "\" id=\"", "\" name=\"", "\">\n  \t\t\t<label class=\"radiobutton-label\" for=\"", "\">", "</label>\n\t\t</div>"]);
+	  var data = babelHelpers.taggedTemplateLiteral(["\n\t\t<div class=\"radiobutton-item\">\n\t\t\t<input type=\"radio\" id=\"", "\" name=\"", "\">\n  \t\t\t<label class=\"radiobutton-label\" for=\"", "\">", "</label>\n\t\t</div>"]);
 
 	  _templateObject$4 = function _templateObject() {
 	    return data;
@@ -364,13 +364,13 @@
 
 	  babelHelpers.createClass(RadiobuttonList, [{
 	    key: "addOption",
-	    value: function addOption(option, index) {
+	    value: function addOption(option) {
 	      if (this.listName === undefined) {
 	        this.listName = this.getNextHighestId();
 	      }
 
 	      var newItemID = this.getNextHighestId();
-	      var objectHTML = main_core.Tag.render(_templateObject$4(), index, newItemID, this.listName, newItemID, option);
+	      var objectHTML = main_core.Tag.render(_templateObject$4(), newItemID, this.listName, newItemID, option);
 
 	      objectHTML.getCondition = function () {
 	        return this.children[0].checked;
@@ -523,6 +523,13 @@
 	      var item = items[0];
 	      result["options"]["userValue"] = item.value;
 	      return result;
+	    }
+	  }, {
+	    key: "addOption",
+	    value: function addOption(option) {
+	      var items = this.getAllElementsOfTheNode('textbox');
+	      var item = items[0];
+	      item.value = option;
 	    }
 	  }]);
 	  return TextBox;

@@ -92,6 +92,19 @@
 	      this.selectingAComponentMenu = selectingAComponent;
 	    }
 	  }, {
+	    key: "buildFieldStructureForEditingOption",
+	    value: function buildFieldStructureForEditingOption(optionStructure) {
+	      var option = {
+	        index: optionStructure["index"],
+	        ID: optionStructure["ID"],
+	        type: "SingleLineTextBox",
+	        options: [{
+	          value: optionStructure["value"]
+	        }]
+	      };
+	      return option;
+	    }
+	  }, {
 	    key: "runEditor",
 	    value: function runEditor(component) {
 	      this.openWindow();
@@ -102,7 +115,7 @@
 	      var description = new savmaxru_componentsgallery.ComponentsGallery(configDescription);
 	      this.window.setContent(description.getHTMLObject());
 	      var configOption = {
-	        "galleryClassCSS": "editor-option-gallery"
+	        "galleryClassCSS": "editor-options-gallery"
 	      };
 	      var options = new savmaxru_componentsgallery.ComponentsGallery(configOption);
 	      this.window.setContent(options.getHTMLObject());
@@ -112,28 +125,27 @@
 	      var otherSettings = new savmaxru_componentsgallery.ComponentsGallery(configOtherSettings);
 	      this.window.setContent(otherSettings.getHTMLObject());
 	      var type = componentStructure["type"];
-
-	      if (type === "Heading") {
-	        description.addObjectsGroup({
-	          questions: [{
-	            type: "Heading",
-	            options: [{
-	              value: BX.message("QUESTION_EDITING_TITLE")
-	            }]
-	          }, {
-	            ID: "headingText",
-	            description: BX.message("HEADING_TEXT"),
-	            type: "SingleLineTextBox"
+	      var titles = {
+	        "Heading": BX.message("HEADER_EDITING_TITLE"),
+	        "RadiobuttonList": BX.message("QUESTION_EDITING_TITLE"),
+	        "CheckboxList": BX.message("QUESTION_EDITING_TITLE"),
+	        "MultiLineTextBox": BX.message("QUESTION_EDITING_TITLE"),
+	        "SingleLineTextBox": BX.message("QUESTION_EDITING_TITLE"),
+	        "DropDownList": BX.message("QUESTION_EDITING_TITLE"),
+	        "Button": BX.message("BUTTON_EDITING_TITLE")
+	      };
+	      description.addObjectsGroup({
+	        questions: [{
+	          type: "Heading",
+	          options: [{
+	            value: titles[type]
 	          }]
-	        });
-	      } else {
+	        }]
+	      });
+
+	      if (type !== "Button" && type !== "Heading") {
 	        description.addObjectsGroup({
 	          questions: [{
-	            type: "Heading",
-	            options: [{
-	              value: BX.message("HEADER_EDITING_TITLE")
-	            }]
-	          }, {
 	            ID: "questionText",
 	            description: BX.message("QUESTION_TEXT"),
 	            type: "MultiLineTextBox"
@@ -143,18 +155,43 @@
 	            type: "MultiLineTextBox"
 	          }]
 	        });
+
+	        if (type === "CheckboxList" || type === "RadiobuttonList" || type === "DropDownList") {
+	          description.addObjectsGroup({
+	            questions: [{
+	              type: "Heading",
+	              comment: BX.message("ANSWER_OPTIONS_COMMENT"),
+	              options: [{
+	                value: BX.message("ANSWER_OPTIONS")
+	              }]
+	            }]
+	          });
+	        }
 	      }
 
-	      otherSettings.addObjectsGroup({
-	        questions: [{
-	          ID: "notAcceptUnanswered",
-	          type: "CheckboxList",
-	          'IDManager': this.IDManager,
-	          options: [{
-	            value: BX.message("NOT_ACCEPT_UNANSWERED")
-	          }]
-	        }]
+	      var questions = [];
+
+	      for (var i = 0; i < componentStructure['options'].length; i++) {
+	        questions.push(this.buildFieldStructureForEditingOption(componentStructure['options'][i]));
+	      }
+
+	      options.addObjectsGroup({
+	        questions: questions
 	      });
+
+	      if (type !== "Button" && type !== "Heading") {
+	        otherSettings.addObjectsGroup({
+	          questions: [{
+	            ID: "notAcceptUnanswered",
+	            type: "CheckboxList",
+	            'IDManager': this.IDManager,
+	            options: [{
+	              value: BX.message("NOT_ACCEPT_UNANSWERED")
+	            }]
+	          }]
+	        });
+	      }
+
 	      var saveButton = otherSettings.createFactoryObject("Button");
 	      saveButton.build({
 	        'ID': 2226,

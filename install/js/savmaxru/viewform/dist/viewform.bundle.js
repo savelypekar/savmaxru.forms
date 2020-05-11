@@ -233,6 +233,7 @@
 	    obj2.build({
 	      'ID': 2222,
 	      'index': 2,
+	      'type': "CheckboxList",
 	      'description': 'Test',
 	      'options': [{
 	        index: 0,
