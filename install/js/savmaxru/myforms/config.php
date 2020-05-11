@@ -8,9 +8,10 @@ return [
 	'css' => 'dist/myforms.bundle.css',
 	'js' => 'dist/myforms.bundle.js',
 	'rel' => [
-		'main.core',
 		'savmaxru.objectgui',
-		'savmaxru.plugins',
+		'savmaxru.objectsgallery',
+		'savmaxru.menuitemform',
+		'main.core',
 	],
 	'skip_core' => false,
 ];

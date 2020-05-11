@@ -75,6 +75,9 @@ export class ComponentEditor
 		};
 		let options = new ComponentsGallery(configOption);
 		this.window.setContent(options.getHTMLObject());
+		options.enableEditMode({
+			"remove":true
+		});
 
 		let configOtherSettings = {
 			"galleryClassCSS": "editor-other-settings-gallery",
@@ -152,6 +155,14 @@ export class ComponentEditor
 
 		if(type !== "Button" && type !== "Heading")
 		{
+			if(type !== "SingleLineTextBox" && type !== "MultiLineTextBox")
+			{
+				let add = otherSettings.createComponent("Button");
+				add.setStyle("plus-button");
+				add.onDown(function(){
+					options.createComponent("SingleLineTextBox");
+				});
+			}
 			otherSettings.addObjectsGroup({
 				questions: [{
 					ID: "notAcceptUnanswered",

@@ -94,4 +94,5 @@ export class ObjectGUI
 	{
 		this.wrapper.remove();
 	}
+
 }

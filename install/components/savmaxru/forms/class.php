@@ -9,7 +9,9 @@ use Bitrix\Main\Localization\Loc;
 class CSavmaxruFormsRouter extends CBitrixComponent
 {
 	private $modeNames = [
-		"edit" =>'edit',
+		"results"=>'results',
+		"edit" =>'editor',
+		"editor" =>'editor',
 		"result" =>'resultlist',
 		'' => 'myforms',
 		'view' => 'viewform',

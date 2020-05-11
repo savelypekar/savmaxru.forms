@@ -119,6 +119,9 @@
 	      };
 	      var options = new savmaxru_componentsgallery.ComponentsGallery(configOption);
 	      this.window.setContent(options.getHTMLObject());
+	      options.enableEditMode({
+	        "remove": true
+	      });
 	      var configOtherSettings = {
 	        "galleryClassCSS": "editor-other-settings-gallery"
 	      };
@@ -180,6 +183,14 @@
 	      });
 
 	      if (type !== "Button" && type !== "Heading") {
+	        if (type !== "SingleLineTextBox" && type !== "MultiLineTextBox") {
+	          var add = otherSettings.createComponent("Button");
+	          add.setStyle("plus-button");
+	          add.onDown(function () {
+	            options.createComponent("SingleLineTextBox");
+	          });
+	        }
+
 	        otherSettings.addObjectsGroup({
 	          questions: [{
 	            ID: "notAcceptUnanswered",
