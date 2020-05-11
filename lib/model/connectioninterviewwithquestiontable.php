@@ -80,4 +80,15 @@ class ConnectionInterviewWithQuestionTable extends DataManager
 
 		}
 	}
+
+	public function getIdQuestionForIdInterviewAndIdQuestion($idInterview, $idQuestion)
+	{
+		$result = ConnectionInterviewWithQuestionTable::getList([
+			'select' => ['ID', 'ID_INTERVIEW', 'ID_QUESTION'],
+			'filter' => ['ID_INTERVIEW' => $idInterview, 'ID_QUESTION' => $idQuestion],
+		]);
+		$rows = $result ->fetchAll();
+
+		return $rows;
+	}
 }

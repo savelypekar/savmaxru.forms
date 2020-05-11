@@ -58,6 +58,17 @@ class AnswerToQuestionTable extends DataManager
 		return $rows;
 	}
 
+	public static function getResultByIdResult($idResult)
+	{
+		$result = AnswerToQuestionTable::getList([
+			'select' => ['ID', 'ID_QUESTION', 'ID_RESULT'],
+			'filter' => ['ID_RESULT' => $idResult],
+		]);
+		$rows = $result ->fetchAll();
+
+		return $rows;
+	}
+
 	public static function getAnswerByUserId($idUser)
 	{
 		$answerResultTable = new \Savmaxru\Forms\Model\AnswerResultTable();

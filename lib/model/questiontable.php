@@ -85,13 +85,9 @@ class QuestionTable extends DataManager
 		}
 	}
 
-	public function updateRow($id, $type, $content, $position)
+	public function updateRow($id, $data)
 	{
-		$result = QuestionTable::update($id, [
-			'TYPE' => $type,
-			'CONTENT' => $content,
-			'POSITION' => $position,
-		]);
+		$result = QuestionTable::update($id, $data);
 
 		if ($result->isSuccess())
 		{
@@ -107,5 +103,15 @@ class QuestionTable extends DataManager
 		$maxIDKey = max($result ->fetchAll());
 		$result = $maxIDKey['ID'];
 		return $result;
+	}
+
+	public function getTypeByIdQuestion($idQuestion)
+	{
+		$result = QuestionTable::getList([
+			'select' => ['TYPE'],
+			'filter' => ['ID' => $idQuestion],
+		]);
+		$type = $result ->fetchAll();
+		return $type[0]['TYPE'];
 	}
 }
