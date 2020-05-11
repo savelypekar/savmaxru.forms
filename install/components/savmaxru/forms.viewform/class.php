@@ -214,14 +214,14 @@ class CSavmaxruFormsView extends CBitrixComponent implements Controllerable
 					{
 						if (isset($question['ID']))
 						{
-							$questionTable->updateRow($question['ID'], $question['type'], $question['description'], $question['index']);
+							$questionTable->updateRow($question['ID'], $question);
 							foreach ($question['options'] as $option)
 							{
 								if ($option['change'] == 'changed')
 								{
 									if (isset($option['ID']))
 									{
-										$optionTable->updateRow($option['ID'], $question['ID'], $option['value'], $option['index']);
+										$optionTable->updateRow($option['ID'], $option);
 									}
 									else
 									{

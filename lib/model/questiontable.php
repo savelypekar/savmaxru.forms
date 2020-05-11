@@ -85,13 +85,9 @@ class QuestionTable extends DataManager
 		}
 	}
 
-	public function updateRow($id, $type, $content, $position)
+	public function updateRow($id, $data)
 	{
-		$result = QuestionTable::update($id, [
-			'TYPE' => $type,
-			'CONTENT' => $content,
-			'POSITION' => $position,
-		]);
+		$result = QuestionTable::update($id, $data);
 
 		if ($result->isSuccess())
 		{

@@ -69,13 +69,9 @@ class OptionTable extends DataManager
 		}
 	}
 
-	public function updateRow($id, $idQuestion, $content, $position)
+	public function updateRow($id, $data)
 	{
-		$result = OptionTable::update($id, [
-			'ID_QUESTION' => $idQuestion,
-			'CONTENT' => $content,
-			'POSITION' => $position,
-		]);
+		$result = OptionTable::update($id, $data);
 
 		if ($result->isSuccess())
 		{

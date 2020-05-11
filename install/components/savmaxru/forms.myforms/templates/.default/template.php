@@ -29,23 +29,24 @@ $connectionInterviewWithQuestion = new \Savmaxru\Forms\Model\ConnectionInterview
 
 //$result11 = $optionTable->getAllOptions();
 //$result12 = $optionTable->getOptionsForQuestion(1);
-//$result13 = $optionTable->addOption(3, 345, 5);
+//$result13 = $optionTable->addOption(15, 44, 5);
 //$result14 = $optionTable->deleteRow(5);
-//$result15 = $optionTable->updateRow(7, 3, 345, 5);
+//$data = ['CONTENT' => '47',];
+//$result15 = $optionTable->updateRow(83, $data);
 
 //$result21 = $interviewTable->getAllInterviews();
 //$result22 = $interviewTable->addInterview(6, 'title7', '', '',true);
 //$result23 = $interviewTable->getInterviewsByIdAuthor('3');
 //$result24 = $interviewTable->getInterviewsByAmount(1,3);
 //$result25 = $interviewTable->deleteRow(5);
-//$result26 = $interviewTable->updateRow(7, 6, 'title7', '', '',true);
+//$result26 = $interviewTable->updateRow(7, $data);
 //$result27 = $interviewTable->getMaxIDKey();
 
 //$result31 = $questionTable->getAllQuestions();
 //$result32 = $questionTable->addQuestion(3,4,5);
 //$result33 = $questionTable->getQuestionsForSetIdInterview(1);
 //$result34 = $questionTable->deleteRow(5);
-//$result35 = $questionTable->updateRow(7, 3,4,5);
+//$result35 = $questionTable->updateRow(7, $data);
 //$result36 = $questionTable->getMaxIDKey();
 //$result37 = $questionTable->getTypeByIdQuestion(25);
 

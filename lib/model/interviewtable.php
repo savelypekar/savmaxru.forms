@@ -101,15 +101,9 @@ class InterviewTable extends DataManager
 		}
 	}
 
-	public function updateRow($id, $idAuthor, $title, $dateCreate, $dateEdit, $visible)
+	public function updateRow($id, $data)
 	{
-		$result = InterviewTable::update($id, [
-				'ID_AUTHOR' => $idAuthor,
-				'TITLE' => $title,
-				'DATE_CREATE' => $dateCreate,
-				'DATE_EDIT' => $dateEdit,
-				'VISIBLE' => $visible,
-		]);
+		$result = InterviewTable::update($id, $data);
 
 		if ($result->isSuccess())
 		{
