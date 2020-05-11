@@ -24,7 +24,7 @@
 	    _this.setRootNode(main_core.Tag.render(_templateObject(), closeButton, _this.addNode("body")));
 
 	    closeButton.onclick = function () {
-	      this.parent.remove();
+	      this.parent.hideAnimHTMLObject();
 	    };
 
 	    return _this;

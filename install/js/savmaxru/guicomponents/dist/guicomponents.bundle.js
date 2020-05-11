@@ -107,9 +107,21 @@
 	      return object;
 	    }
 	  }, {
+	    key: "remove",
+	    value: function remove() {
+	      this.removeHTMLObject();
+	      this.rewriteProperty("change", "removed");
+	    }
+	  }, {
 	    key: "addRemoveButton",
 	    value: function addRemoveButton() {
 	      var object = main_core.Tag.render(_templateObject3());
+	      var editObject = this;
+
+	      object.onclick = function () {
+	        editObject.hideAnimHTMLObject();
+	      };
+
 	      return object;
 	    }
 	  }, {
@@ -122,6 +134,10 @@
 
 	      if (modes["settings"]) {
 	        this.includeInNode("edit-panel", this.addEditButton());
+	      }
+
+	      if (modes["remove"] && this.getProperty('type') !== 'Button') {
+	        this.includeInNode("edit-panel", this.addRemoveButton());
 	      }
 	    }
 	  }, {

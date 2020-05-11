@@ -76,11 +76,26 @@
 	    babelHelpers.classCallCheck(this, ObjectGUI);
 	    babelHelpers.defineProperty(this, "nodes", []);
 	    this.wrapper = this.createNode('div');
+	    this.wrapper.className = "object-wrapper";
 	  }
 
 	  babelHelpers.createClass(ObjectGUI, [{
-	    key: "remove",
-	    value: function remove() {
+	    key: "hideAnimHTMLObject",
+	    value: function hideAnimHTMLObject() {
+	      this.wrapper.style.height = this.wrapper.offsetHeight + 'px';
+	      this.wrapper.style.transition = '0.3s';
+	      var object = this;
+	      setTimeout(function () {
+	        object.wrapper.style.height = '0';
+	        object.wrapper.style.opacity = '0';
+	        setTimeout(function () {
+	          object.removeHTMLObject();
+	        }, 300);
+	      }, 1);
+	    }
+	  }, {
+	    key: "removeHTMLObject",
+	    value: function removeHTMLObject() {
 	      this.wrapper.remove();
 	    }
 	  }]);

@@ -24,7 +24,7 @@ export class ModalWindow extends Savmaxru.ObjectGUI
 		);
 		closeButton.onclick = function()
 		{
-			this.parent.remove();
+			this.parent.hideAnimHTMLObject();
 		}
 	}
 

@@ -192,7 +192,7 @@
 	        });
 	      }
 
-	      var saveButton = otherSettings.createFactoryObject("Button");
+	      var saveButton = otherSettings.createComponent("Button");
 	      saveButton.build({
 	        'ID': 2226,
 	        'index': 6,
@@ -301,7 +301,7 @@
 	  }, {
 	    key: "addComponent",
 	    value: function addComponent(name) {
-	      this.objectsGallery.createFactoryObject(name);
+	      this.objectsGallery.createComponent(name);
 	      this.selectingAComponentMenu.remove();
 	    }
 	  }]);

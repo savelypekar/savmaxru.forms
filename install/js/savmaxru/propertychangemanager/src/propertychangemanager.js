@@ -16,7 +16,7 @@ export class PropertyChangeManager
 		{
 			this.changes[name] = true;
 			this.properties[name] = value;
-			if(this.properties["change"] !== "changed" )
+			if(this.properties["change"] !== "changed" && this.properties["change"] !== "removed")
 			{
 				this.rewriteProperty("change","changed");
 			}

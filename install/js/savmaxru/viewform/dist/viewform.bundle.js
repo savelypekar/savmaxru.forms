@@ -32,6 +32,7 @@
 	    };
 	    var gallery = new savmaxru_componentsgallery.ComponentsGallery(configGallery);
 	    _this.gallery = gallery;
+	    gallery.enableEditMode();
 
 	    _this.includeInNode("viewform-wrapper", _this.gallery.getHTMLObject());
 
@@ -229,7 +230,7 @@
 	        options: []
 	      }]
 	    });
-	    var obj2 = gallery.createFactoryObject("CheckboxList");
+	    var obj2 = gallery.createComponent("CheckboxList");
 	    obj2.build({
 	      'ID': 2222,
 	      'index': 2,
@@ -252,11 +253,10 @@
 	      'required': true,
 	      'IDManager': _this.IDManager
 	    }); //obj2.rewriteProperty("f",2);
+	    //console.log(obj2.getChanges());
+	    //console.log("уу");
+	    //console.log(obj2.getStructure());
 
-	    obj2.enableEditMode();
-	    console.log(obj2.getChanges());
-	    console.log("уу");
-	    console.log(obj2.getStructure());
 	    return _this;
 	  }
 

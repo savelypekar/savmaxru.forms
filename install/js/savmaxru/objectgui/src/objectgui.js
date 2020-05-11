@@ -73,9 +73,23 @@ export class ObjectGUI
 	constructor()
 	{
 		this.wrapper = this.createNode('div');
+		this.wrapper.className = "object-wrapper";
 	}
 
-	remove()
+	hideAnimHTMLObject()
+	{
+		this.wrapper.style.height = this.wrapper.offsetHeight+'px';
+		this.wrapper.style.transition = '0.3s';
+		let object = this;
+		setTimeout(function() {
+			object.wrapper.style.height = '0';
+			object.wrapper.style.opacity = '0';
+			setTimeout(function() {
+				object.removeHTMLObject()
+			},300);
+		}, 1);
+	}
+	removeHTMLObject()
 	{
 		this.wrapper.remove();
 	}

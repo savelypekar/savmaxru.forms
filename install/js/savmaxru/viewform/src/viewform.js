@@ -32,6 +32,7 @@ export class ViewForm extends ObjectGUI
 
 		let gallery = new ComponentsGallery(configGallery);
 		this.gallery = gallery;
+		gallery.enableEditMode();
 		this.includeInNode("viewform-wrapper", this.gallery.getHTMLObject());
 
 		componentEditor.setGallery(gallery);
@@ -252,7 +253,7 @@ export class ViewForm extends ObjectGUI
 			]
 		});
 
-		let obj2 = gallery.createFactoryObject("CheckboxList");
+		let obj2 = gallery.createComponent("CheckboxList");
 		obj2.build(
 			{
 				'ID': 2222,
@@ -280,11 +281,13 @@ export class ViewForm extends ObjectGUI
 				'required': true,
 				'IDManager': this.IDManager,
 			});
+
+
 			//obj2.rewriteProperty("f",2);
-			obj2.enableEditMode();
-			console.log(obj2.getChanges());
-			console.log("уу");
-			console.log(obj2.getStructure());
+
+			//console.log(obj2.getChanges());
+			//console.log("уу");
+			//console.log(obj2.getStructure());
 
 	}
 

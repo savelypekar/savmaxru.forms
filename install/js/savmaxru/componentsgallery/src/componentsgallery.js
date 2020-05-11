@@ -20,7 +20,16 @@ export class ComponentsGallery extends ObjectsGallery
 	{
 		let component = this.createFactoryObject(question['type']);
 		component.build(question);
-		component.enableEditMode();
+		component.enableEditMode(this.editMode);
+	}
+
+	editMode = [];
+
+	enableEditMode(modes= {
+		"settings":true,"remove":true
+	})
+	{
+		this.editMode = modes;
 	}
 
 	addObjectsGroup(data)
@@ -30,6 +39,13 @@ export class ComponentsGallery extends ObjectsGallery
 		{
 			this.addQuestions(questions[i]);
 		}
+	}
+
+	createComponent(name)
+	{
+		let object = this.createFactoryObject(name);
+		object.enableEditMode(this.editMode);
+		return object;
 	}
 
 }

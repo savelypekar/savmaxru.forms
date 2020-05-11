@@ -167,7 +167,7 @@ export class ComponentEditor
 			},);
 		}
 
-		let saveButton = otherSettings.createFactoryObject("Button");
+		let saveButton = otherSettings.createComponent("Button");
 		saveButton.build(
 			{
 				'ID': 2226,
@@ -287,7 +287,7 @@ export class ComponentEditor
 
 	addComponent(name)
 	{
-		this.objectsGallery.createFactoryObject(name);
+		this.objectsGallery.createComponent(name);
 		this.selectingAComponentMenu.remove();
 	}
 }

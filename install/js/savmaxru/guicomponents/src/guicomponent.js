@@ -46,7 +46,7 @@ export class GUIComponent extends ObjectGUI
 
 	addEditButton()
 	{
-		let object = Tag.render`<div class='settings'></div>`
+		let object = Tag.render`<div class='settings'></div>`;
 		let editObject = this;
 		object.onclick = function() {
 			editObject.getParent().editComponent(editObject);
@@ -54,9 +54,19 @@ export class GUIComponent extends ObjectGUI
 		return object;
 	}
 
+	remove()
+	{
+		this.removeHTMLObject();
+		this.rewriteProperty("change","removed");
+	}
+
 	addRemoveButton()
 	{
 		let object = Tag.render`<div class='remove'></div>`
+		let editObject = this;
+		object.onclick = function() {
+			editObject.hideAnimHTMLObject();
+		};
 		return object;
 	}
 
@@ -66,6 +76,9 @@ export class GUIComponent extends ObjectGUI
 	{
 		if(modes["settings"]){
 			this.includeInNode("edit-panel",this.addEditButton());
+		}
+		if(modes["remove"] && this.getProperty('type') !== 'Button'){
+			this.includeInNode("edit-panel",this.addRemoveButton());
 		}
 	}
 
