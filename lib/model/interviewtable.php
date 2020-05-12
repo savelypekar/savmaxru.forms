@@ -68,6 +68,7 @@ class InterviewTable extends DataManager
 
 	public function getInterviewsByAmount($quantity, $firstPosition)
 	{
+		$firstPosition = $firstPosition - 1;
 		$result = InterviewTable::getList([
 			'select' => ['ID', 'ID_AUTHOR', 'TITLE', 'DATE_CREATE', 'DATE_EDIT', 'VISIBLE'],
 			'limit' => $quantity,
@@ -80,6 +81,7 @@ class InterviewTable extends DataManager
 	public function getInterviewsCurrentUser($quantity, $firstPosition)
 	{
 		global $USER;
+		$firstPosition = $firstPosition - 1;
 		$idUser = $USER->GetID();
 		$result = InterviewTable::getList([
 			'select' => ['ID', 'ID_AUTHOR', 'TITLE', 'DATE_CREATE', 'DATE_EDIT', 'VISIBLE'],

@@ -20,4 +20,123 @@ class CSavmaxruEditor extends CBitrixComponent implements Controllerable
 	{
 		return array();
 	}
+
+	public function validationForSaveInterviewStructure($result)
+	{
+		$whiteListTypesQuestion = [
+			'DropDownList',
+			'CheckboxList',
+			'Button',
+			'RadiobuttonList',
+			'Heading',
+			'Singlelinetextbox',
+			'MultiLineTextBox' ];
+
+		$result["title"] = strval($result["title"]);
+		$result["visible"] = boolval($result["visible"]);
+		foreach ($result['questions'] as &$question)
+		{
+			if (in_array($question['type'], $whiteListTypesQuestion))
+			{
+				$question['index'] = intval($question['index']);
+				$question['description'] = strval($question['description']);
+				foreach ($question['options'] as &$option)
+				{
+					$option['index'] = intval($option['index']);
+					$option['value'] = strval($option['value']);
+				}
+			}
+			else
+			{
+				$question['type'] = 'NotValid';
+			}
+		}
+		return $result;
+	}
+
+	//save structure interview with question and option
+	public function saveInterviewStructureAction($result)
+	{
+		$optionTable = new \Savmaxru\Forms\Model\OptionTable();
+		$interviewTable = new \Savmaxru\Forms\Model\InterviewTable();
+		$questionTable = new \Savmaxru\Forms\Model\QuestionTable();
+		$connectionInterviewWithQuestion = new \Savmaxru\Forms\Model\ConnectionInterviewWithQuestionTable();
+
+		$result = $this->validationForSaveInterviewStructure($result);
+
+		global $USER;
+		$idUser = $USER->GetID();
+
+		if ($result["ID"] == 'NEW_FORM')
+		{
+			$dateCreate = date('l jS \of F Y h:i:s A');
+			$idInterview = $interviewTable->addInterview($idUser, $result["title"], $dateCreate, '', $result["visible"]);
+			$idQuestion = $questionTable->getMaxIDKey() + 1;
+			foreach ($result['questions'] as $question)
+			{
+				if ($question['type'] != 'NotValid')
+				{
+					$questionTable->addQuestion($question['type'], $question['description'], $question['index']);
+					$connectionInterviewWithQuestion->addRow($idInterview, $idQuestion);
+					foreach ($question['options'] as $option)
+					{
+						$optionTable->addOption($idQuestion, $option['value'], $option['index']);
+					}
+					$idQuestion = $idQuestion + 1;
+				}
+			}
+		}
+		else
+		{
+			if ($result['change'] == 'changed')
+			{
+				foreach ($result['questions'] as $question)
+				{
+					if ($question['change'] == 'changed')
+					{
+						if (isset($question['ID']))
+						{
+							$questionTable->updateRow($question['ID'], $question);
+							foreach ($question['options'] as $option)
+							{
+								if ($option['change'] == 'changed')
+								{
+									if (isset($option['ID']))
+									{
+										$optionTable->updateRow($option['ID'], $option);
+									}
+									else
+									{
+										$optionTable->addOption($question['ID'], $option['value'], $option['index']);
+									}
+								}
+								if ($option['change'] == 'removed')
+								{
+									$optionTable->deleteRow($option['ID']);
+								}
+							}
+						}
+						else
+						{
+							$idQuestion = $questionTable->getMaxIDKey() + 1;
+							$questionTable->addQuestion($question['type'], $question['description'], $question['index']);
+							$connectionInterviewWithQuestion->addRow($result['ID'], $idQuestion);
+							foreach ($question['options'] as $option)
+							{
+								$optionTable->addOption($idQuestion, $option['value'], $option['index']);
+							}
+						}
+					}
+					if ($question['change'] == 'removed')
+					{
+						$questionTable->deleteRow($question['ID']);
+					}
+				}
+			}
+			if ($result['change'] == 'removed')
+			{
+				$interviewTable->deleteRow($result["ID"]);
+			}
+		}
+	}
 }
