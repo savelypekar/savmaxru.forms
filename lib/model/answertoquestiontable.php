@@ -82,16 +82,15 @@ class AnswerToQuestionTable extends DataManager
 			if (!in_array($answer['ID_RESULT'], $setUniqueId))
 			{
 				array_push($setUniqueId, $answer['ID_RESULT']);
-				$result = AnswerToQuestionTable::getList([
-					'select' => ['ID', 'ID_QUESTION', 'ID_RESULT'],
-					'filter' => ['ID_RESULT' => $answer['ID_RESULT']],
-				]);
-				$setAnswerToQuestion = $result->fetchAll();
-				if (!empty($setAnswerToQuestion)) {
-					array_push($setAnswerById, $setAnswerToQuestion);
-				}
 			}
 		}
+
+		$result = AnswerToQuestionTable::getList([
+			'select' => ['ID', 'ID_QUESTION', 'ID_RESULT'],
+			'filter' => ['ID_RESULT' => $setUniqueId],
+		]);
+		$setAnswerById = $result->fetchAll();
+
 		return $setAnswerById;
 	}
 
@@ -107,17 +106,15 @@ class AnswerToQuestionTable extends DataManager
 			if (!in_array($answer['ID_RESULT'], $setUniqueId))
 			{
 				array_push($setUniqueId, $answer['ID_RESULT']);
-
-				$result = AnswerToQuestionTable::getList(array(
-					'select' => array('ID', 'ID_QUESTION', 'ID_RESULT'),
-					'filter' => ['ID_RESULT' => $answer['ID_RESULT']],
-				));
-				$setAnswerToQuestion = $result->fetchAll();
-				if (!empty($setAnswerToQuestion)) {
-					array_push($setAnswerByIdInterview, $setAnswerToQuestion);
-				}
 			}
 		}
+
+		$result = AnswerToQuestionTable::getList(array(
+			'select' => array('ID', 'ID_QUESTION', 'ID_RESULT'),
+			'filter' => ['ID_RESULT' => $setUniqueId],
+		));
+		$setAnswerByIdInterview = $result->fetchAll();
+
 		return $setAnswerByIdInterview;
 	}
 
