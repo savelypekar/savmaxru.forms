@@ -61,6 +61,7 @@ class CSavmaxruEditor extends CBitrixComponent implements Controllerable
 		$interviewTable = new \Savmaxru\Forms\Model\InterviewTable();
 		$questionTable = new \Savmaxru\Forms\Model\QuestionTable();
 		$connectionInterviewWithQuestion = new \Savmaxru\Forms\Model\ConnectionInterviewWithQuestionTable();
+		$dateInfoTable = new \Savmaxru\Forms\Model\DateInfoTable();
 
 		$result = $this->validationForSaveInterviewStructure($result);
 
@@ -69,8 +70,15 @@ class CSavmaxruEditor extends CBitrixComponent implements Controllerable
 
 		if ($result["ID"] == 'NEW_FORM')
 		{
-			$dateCreate = date('l jS \of F Y h:i:s A');
-			$idInterview = $interviewTable->addInterview($idUser, $result["title"], $dateCreate, '', $result["visible"]);
+			$dateInfo = [
+				'TYPE_OBJECT' => 'InterviewStructure',
+				'YEAR_CREATE' => date('o'),
+				'MONTH_CREATE' => date('F'),
+				'DAY_CREATE' => date('j'),
+				'TIME_CREATE' => date('G:i:s'),
+			];
+			$idDate = $dateInfoTable->saveDate($dateInfo);
+			$idInterview = $interviewTable->addInterview($idUser, $result["title"], $idDate, '', $result["visible"]);
 			$idQuestion = $questionTable->getMaxIDKey() + 1;
 			foreach ($result['questions'] as $question)
 			{
@@ -90,6 +98,13 @@ class CSavmaxruEditor extends CBitrixComponent implements Controllerable
 		{
 			if ($result['change'] == 'changed')
 			{
+				$dateInfo = [
+					'YEAR_CHANGE' => date('o'),
+					'MONTH_CHANGE' => date('F'),
+					'DAY_CHANGE' => date('j'),
+					'TIME_CHANGE' => date('G:i:s'),
+				];
+				$dateInfoTable->updateRow($result['dateCreate'], $dateInfo);
 				foreach ($result['questions'] as $question)
 				{
 					if ($question['change'] == 'changed')
