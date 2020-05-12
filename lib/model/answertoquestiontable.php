@@ -35,6 +35,7 @@ class AnswerToQuestionTable extends DataManager
 		if ($result->isSuccess())
 		{
 			$id = $result->getId();
+			return $id;
 		}
 	}
 
@@ -127,6 +128,7 @@ class AnswerToQuestionTable extends DataManager
 		if (!$result->isSuccess())
 		{
 			$error = $result->getErrorMessages();
+			return $error;
 		}
 	}
 
@@ -139,7 +141,7 @@ class AnswerToQuestionTable extends DataManager
 
 		if ($result->isSuccess())
 		{
-
+			return true;
 		}
 	}
 }

@@ -35,6 +35,7 @@ class ConnectionInterviewWithQuestionTable extends DataManager
 		if ($result->isSuccess())
 		{
 			$id = $result->getId();
+			return $id;
 		}
 	}
 
@@ -65,6 +66,7 @@ class ConnectionInterviewWithQuestionTable extends DataManager
 		if (!$result->isSuccess())
 		{
 			$error = $result->getErrorMessages();
+			return $error;
 		}
 	}
 
@@ -77,7 +79,7 @@ class ConnectionInterviewWithQuestionTable extends DataManager
 
 		if ($result->isSuccess())
 		{
-
+			return true;
 		}
 	}
 

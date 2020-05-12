@@ -37,6 +37,7 @@ class QuestionTable extends DataManager
 		if ($result->isSuccess())
 		{
 			$id = $result->getId();
+			return $id;
 		}
 	}
 
@@ -82,6 +83,7 @@ class QuestionTable extends DataManager
 		if (!$result->isSuccess())
 		{
 			$error = $result->getErrorMessages();
+			return $error;
 		}
 	}
 
@@ -91,7 +93,7 @@ class QuestionTable extends DataManager
 
 		if ($result->isSuccess())
 		{
-
+			return true;
 		}
 	}
 
