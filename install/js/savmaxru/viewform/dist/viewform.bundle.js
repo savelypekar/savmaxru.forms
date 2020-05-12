@@ -32,7 +32,6 @@
 	    };
 	    var gallery = new savmaxru_componentsgallery.ComponentsGallery(configGallery);
 	    _this.gallery = gallery;
-	    gallery.enableEditMode();
 
 	    _this.includeInNode("viewform-wrapper", _this.gallery.getHTMLObject());
 

@@ -48,8 +48,11 @@
 	    }
 	  }, {
 	    key: "createComponent",
-	    value: function createComponent(name) {
-	      var object = this.createFactoryObject(name);
+	    value: function createComponent(type) {
+	      var object = this.createFactoryObject(type);
+	      object.build({
+	        'type': type
+	      });
 	      object.enableEditMode(this.editMode);
 	      return object;
 	    }

@@ -14,11 +14,11 @@
 	  babelHelpers.inherits(TypeButton, _ObjectGUI);
 
 	  function TypeButton(type, parent) {
-	    var _this2;
+	    var _this;
 
 	    babelHelpers.classCallCheck(this, TypeButton);
-	    _this2 = babelHelpers.possibleConstructorReturn(this, babelHelpers.getPrototypeOf(TypeButton).call(this));
-	    babelHelpers.defineProperty(babelHelpers.assertThisInitialized(_this2), "typesDescription", {
+	    _this = babelHelpers.possibleConstructorReturn(this, babelHelpers.getPrototypeOf(TypeButton).call(this));
+	    babelHelpers.defineProperty(babelHelpers.assertThisInitialized(_this), "typesDescription", {
 	      "DropDownList": "DROPDOWN_LIST",
 	      "CheckboxList": "CHECKBOX_LIST",
 	      "RadiobuttonList": "RADIOBUTTON_LIST",
@@ -26,7 +26,7 @@
 	      "SingleLineTextBox": "SINGLELINE_TEXTBOX",
 	      "MultiLineTextBox": "MULTILINE_TEXTBOX"
 	    });
-	    babelHelpers.defineProperty(babelHelpers.assertThisInitialized(_this2), "typesIcon", {
+	    babelHelpers.defineProperty(babelHelpers.assertThisInitialized(_this), "typesIcon", {
 	      "DropDownList": "dropdownlist-ico",
 	      "CheckboxList": "checkboxlist-ico",
 	      "RadiobuttonList": "radiobuttonlist-ico",
@@ -35,13 +35,13 @@
 	      "MultiLineTextBox": "multilinetextbox-ico"
 	    });
 
-	    _this2.setRootNode(main_core.Tag.render(_templateObject(), _this2.typesIcon[type], BX.message(_this2.typesDescription[type])));
+	    _this.setRootNode(main_core.Tag.render(_templateObject(), _this.typesIcon[type], BX.message(_this.typesDescription[type])));
 
-	    _this2.getHTMLObject().onclick = function (_this) {
+	    _this.getHTMLObject().onclick = function () {
 	      parent.addComponent(type);
 	    };
 
-	    return _this2;
+	    return _this;
 	  }
 
 	  return TypeButton;
@@ -78,8 +78,8 @@
 	      this.parent.append(this.window.getHTMLObject());
 	    }
 	  }, {
-	    key: "create",
-	    value: function create() {
+	    key: "runCreator",
+	    value: function runCreator() {
 	      this.openWindow();
 	      var selectingAComponent = main_core.Tag.render(_templateObject$1());
 
@@ -107,7 +107,12 @@
 	  }, {
 	    key: "runEditor",
 	    value: function runEditor(component) {
-	      this.openWindow();
+	      var runWindow = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+
+	      if (runWindow) {
+	        this.openWindow();
+	      }
+
 	      var componentStructure = component.getStructure();
 	      var configDescription = {
 	        "galleryClassCSS": "editor-description-gallery"
@@ -311,8 +316,8 @@
 	    }
 	  }, {
 	    key: "addComponent",
-	    value: function addComponent(name) {
-	      this.objectsGallery.createComponent(name);
+	    value: function addComponent(type) {
+	      this.runEditor(this.objectsGallery.createComponent(type), false);
 	      this.selectingAComponentMenu.remove();
 	    }
 	  }]);

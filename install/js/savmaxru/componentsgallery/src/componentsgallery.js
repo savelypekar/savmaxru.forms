@@ -41,9 +41,13 @@ export class ComponentsGallery extends ObjectsGallery
 		}
 	}
 
-	createComponent(name)
+	createComponent(type)
 	{
-		let object = this.createFactoryObject(name);
+		let object = this.createFactoryObject(type);
+		object.build(
+		{
+			'type':type,
+		});
 		object.enableEditMode(this.editMode);
 		return object;
 	}

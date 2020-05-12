@@ -1,11 +1,11 @@
 <div class="savmaxru-forms" id="savmaxru-forms">
-
 <?php
+
 $APPLICATION->IncludeComponent(
-	'savmaxru:forms.'.$arResult['MODE'],
+	'savmaxru:forms.'.$arResult['REGIME'],
 	'.default',
 	[
-		'URL' => $arResult['URL'],
+		'ID' => $arResult['ID'],
 	]
 );
 ?>

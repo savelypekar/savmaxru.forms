@@ -30,7 +30,7 @@ export class ComponentEditor
 		this.parent.append(this.window.getHTMLObject());
 	}
 
-	create()
+	runCreator()
 	{
 		this.openWindow();
 		let selectingAComponent = Tag.render`<div class="components-selection"></div>`;
@@ -59,9 +59,12 @@ export class ComponentEditor
 		return option;
 	}
 
-	runEditor(component)
+	runEditor(component,runWindow = true)
 	{
-		this.openWindow();
+		if(runWindow)
+		{
+			this.openWindow();
+		}
 		let componentStructure = component.getStructure();
 
 		let configDescription = {
@@ -295,10 +298,9 @@ export class ComponentEditor
 	*/
 	}
 
-
-	addComponent(name)
+	addComponent(type)
 	{
-		this.objectsGallery.createComponent(name);
+		this.runEditor(this.objectsGallery.createComponent(type),false);
 		this.selectingAComponentMenu.remove();
 	}
 }

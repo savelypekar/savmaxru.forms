@@ -1,7 +1,7 @@
 import {ObjectGUI} from "savmaxru.objectgui";
 import {Tag} from 'main.core';
 
-export class ObjectsGallery extends Savmaxru.ObjectGUI
+export class ObjectsGallery extends ObjectGUI
 {
 	objects=[];
 
@@ -77,14 +77,6 @@ export class ObjectsGallery extends Savmaxru.ObjectGUI
 
 	loadGroupObject()
 	{
-		BX.ajax.runComponentAction('savmaxru:forms.myforms', 'loadInterviewByAmount', {
-			mode: 'class',
-			data: {
-				quantity: '3',
-				firstPosition: '5'
-			}
-		}).then(function (response) {
-			console.log(response);
-		});
+
 	}
 }

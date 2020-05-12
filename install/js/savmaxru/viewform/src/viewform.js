@@ -11,7 +11,6 @@ import {ComponentsGallery} from "savmaxru.componentsgallery";
 export class ViewForm extends ObjectGUI
 {
 	IDManager = new IDManager('myforms');
-
 	constructor()
 	{
 		super();
@@ -32,7 +31,7 @@ export class ViewForm extends ObjectGUI
 
 		let gallery = new ComponentsGallery(configGallery);
 		this.gallery = gallery;
-		gallery.enableEditMode();
+
 		this.includeInNode("viewform-wrapper", this.gallery.getHTMLObject());
 
 		componentEditor.setGallery(gallery);
