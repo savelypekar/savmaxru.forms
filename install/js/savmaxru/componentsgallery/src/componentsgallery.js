@@ -1,6 +1,7 @@
 import {Type} from 'main.core';
 import {ObjectsGallery} from "savmaxru.objectsgallery";
 import {GUIComponents} from 'savmaxru.guicomponents';
+import {IDManager} from 'savmaxru.idmanager';
 
 export class ComponentsGallery extends ObjectsGallery
 {
@@ -35,6 +36,7 @@ export class ComponentsGallery extends ObjectsGallery
 	addObjectsGroup(data)
 	{
 		let questions = data['questions'];
+
 		for(let i=0; i<questions.length; i++)
 		{
 			this.addQuestions(questions[i]);
@@ -50,6 +52,48 @@ export class ComponentsGallery extends ObjectsGallery
 		});
 		object.enableEditMode(this.editMode);
 		return object;
+	}
+
+	getResult()
+	{
+		let resultGallery=[];
+		let argumentsForResult = this.argumentsForResult;
+		for (let key in argumentsForResult)
+		{
+			resultGallery[key]= argumentsForResult[key];
+		}
+		let questions=[];
+		let objects = this.objects;
+		for(let i=0; i<objects.length; i++)
+		{
+			let object = objects[i];
+			let objectResult = object.getResult();
+			if(objectResult !== false)
+			{
+				questions.push(objectResult);
+			}
+		}
+		resultGallery["questions"] = questions;
+		return resultGallery;
+	}
+
+	getChanges()
+	{	let chacngesGallery=[];
+
+		let questions=[];
+		let objects = this.objects;
+		console.log("getChanges");
+		for(let i=0; i<objects.length; i++)
+		{
+			let object = objects[i];
+			let objectResult = object.getChanges();
+			if(objectResult !== {})
+			{
+				questions.push(objectResult);
+			}
+		}
+		chacngesGallery["questions"] = questions;
+		return chacngesGallery;
 	}
 
 }

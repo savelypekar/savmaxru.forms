@@ -11,9 +11,20 @@
 	  }
 
 	  babelHelpers.createClass(Option, [{
+	    key: "remove",
+	    value: function remove() {
+	      this.rewriteProperty('change', 'removed');
+	      this.getObjectHTML().remove();
+	    }
+	  }, {
 	    key: "setObjectHTML",
 	    value: function setObjectHTML(object) {
 	      this.object = object;
+	    }
+	  }, {
+	    key: "refreshHTML",
+	    value: function refreshHTML() {
+	      this.getObjectHTML().setValue(this.getProperty('value'));
 	    }
 	  }, {
 	    key: "getObjectHTML",
@@ -24,6 +35,11 @@
 	    key: "setIndex",
 	    value: function setIndex(index) {
 	      this.index = index;
+	    }
+	  }, {
+	    key: "getHTMLValue",
+	    value: function getHTMLValue() {
+	      return this.getObjectHTML().getValue();
 	    }
 	  }, {
 	    key: "getStructure",
@@ -110,7 +126,6 @@
 	    key: "remove",
 	    value: function remove() {
 	      this.removeHTMLObject();
-	      this.rewriteProperty("change", "removed");
 	    }
 	  }, {
 	    key: "addRemoveButton",
@@ -119,6 +134,7 @@
 	      var editObject = this;
 
 	      object.onclick = function () {
+	        editObject.rewriteProperty("change", "removed");
 	        editObject.hideAnimHTMLObject();
 	      };
 
@@ -212,8 +228,8 @@
 	    value: function getResult() {
 	      var options = this.getOptions();
 	      var result = [];
-	      result["ID"] = this.getProperty("ID");
-	      result["index"] = this.getProperty("index");
+	      result["ID"] = this.getProperty("ID"); //result["index"] = this.getProperty("index");
+
 	      result["options"] = [];
 
 	      for (var i = 0; i < options.length; i++) {
@@ -328,7 +344,7 @@
 	}(GUIComponent);
 
 	function _templateObject$3() {
-	  var data = babelHelpers.taggedTemplateLiteral(["\n\t\t<div class=\"checkbox-item\">\n\t\t\t<input type=\"checkbox\" value=\"", "\" id=\"", "\" />\n\t\t\t<label class=\"checkbox-label\" for=\"", "\">", "</label>\n\t\t</div>"]);
+	  var data = babelHelpers.taggedTemplateLiteral(["\n\t\t<div class=\"checkbox-item\">\n\t\t\t<input type=\"checkbox\" id=\"", "\" />\n\t\t\t<label class=\"checkbox-label\" for=\"", "\">", "</label>\n\t\t</div>"]);
 
 	  _templateObject$3 = function _templateObject() {
 	    return data;
@@ -346,14 +362,20 @@
 
 	  babelHelpers.createClass(CheckboxList, [{
 	    key: "addOption",
-	    value: function addOption(option, index) {
+	    value: function addOption(option) {
 	      var newItemID = this.getNextHighestId();
-	      var objectHTML = main_core.Tag.render(_templateObject$3(), index, newItemID, newItemID, option);
+	      var valueField = this.addNode("value", 'span');
+	      var objectHTML = main_core.Tag.render(_templateObject$3(), newItemID, newItemID, valueField);
 
 	      objectHTML.getCondition = function () {
 	        return this.children[0].checked;
 	      };
 
+	      objectHTML.setValue = function (value) {
+	        valueField.innerHTML = value;
+	      };
+
+	      objectHTML.setValue(option);
 	      this.includeInNode("electiveitemslist", objectHTML);
 	      return objectHTML;
 	    }
@@ -536,9 +558,10 @@
 	  babelHelpers.createClass(TextBox, [{
 	    key: "getResult",
 	    value: function getResult() {
+	      var options = this.getOptions();
 	      var result = [];
-	      result["ID"] = this.getID();
-	      result["index"] = this.getIndex();
+	      result["ID"] = this.getProperty("ID"); //result["index"] = this.getProperty("index");
+
 	      result["options"] = [];
 	      var items = this.getAllElementsOfTheNode('textbox');
 	      var item = items[0];
@@ -546,11 +569,22 @@
 	      return result;
 	    }
 	  }, {
+	    key: "getHTMLValue",
+	    value: function getHTMLValue() {
+	      return this.getOptions()[0].getHTMLValue();
+	    }
+	  }, {
 	    key: "addOption",
 	    value: function addOption(option) {
 	      var items = this.getAllElementsOfTheNode('textbox');
-	      var item = items[0];
-	      item.value = option;
+	      var objectHTML = items[0];
+	      objectHTML.value = option;
+
+	      objectHTML.getValue = function () {
+	        return this.value;
+	      };
+
+	      return objectHTML;
 	    }
 	  }]);
 	  return TextBox;

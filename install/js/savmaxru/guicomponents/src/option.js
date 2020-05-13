@@ -10,9 +10,20 @@ export class Option
 		this.addProperty('index',data['index']);
 	}
 
+	remove()
+	{
+		this.rewriteProperty('change','removed');
+		this.getObjectHTML().remove();
+	}
+
 	setObjectHTML(object)
 	{
 		this.object = object;
+	}
+
+	refreshHTML()
+	{
+		this.getObjectHTML().setValue(this.getProperty('value'));
 	}
 
 	getObjectHTML()
@@ -23,6 +34,11 @@ export class Option
 	setIndex(index)
 	{
 		this.index = index;
+	}
+
+	getHTMLValue()
+	{
+		return this.getObjectHTML().getValue();
 	}
 
 	getStructure()

@@ -20,6 +20,11 @@ export class IDManager
 
 	getNextHighestId()
 	{
-		return (this.namespaceForID+'_'+(this.currentID++));
+		let separator = '_';
+		if(this.namespaceForID === "")
+		{
+			separator = "";
+		}
+		return (this.namespaceForID+separator+(this.currentID++));
 	}
 }

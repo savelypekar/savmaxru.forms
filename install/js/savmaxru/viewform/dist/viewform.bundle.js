@@ -32,6 +32,7 @@
 	    };
 	    var gallery = new savmaxru_componentsgallery.ComponentsGallery(configGallery);
 	    _this.gallery = gallery;
+	    gallery.enableEditMode();
 
 	    _this.includeInNode("viewform-wrapper", _this.gallery.getHTMLObject());
 
@@ -196,9 +197,6 @@
 	      'index': 6
 	    });
 	    obj6.setStyle("plus-button");
-	    obj6.onDown(function () {
-	      console.log(gallery.getResult());
-	    });
 	    gallery.addObjectsGroup({
 	      ID: 6829,
 	      questions: [{
@@ -260,6 +258,20 @@
 	      'comment': 'comment',
 	      'required': true,
 	      'IDManager': _this.IDManager
+	    });
+	    var obj8 = gallery.createFactoryObject("Button");
+	    obj8.build({
+	      'ID': 2226,
+	      'index': 6,
+	      'options': [{
+	        index: 0,
+	        ID: 121212,
+	        value: "Add component"
+	      }]
+	    });
+	    obj8.onDown(function () {
+	      //console.log(gallery.getResult());
+	      console.log(gallery.getChanges());
 	    }); //obj2.rewriteProperty("f",2);
 	    //console.log(obj2.getChanges());
 	    //console.log("уу");

@@ -11,9 +11,10 @@ export class TextBox extends GUIComponent
 
 	getResult()
 	{
+		let options = this.getOptions();
 		let result = [];
-		result["ID"] = this.getID();
-		result["index"] = this.getIndex();
+		result["ID"] = this.getProperty("ID");
+		//result["index"] = this.getProperty("index");
 		result["options"] = [];
 
 		let items = this.getAllElementsOfTheNode('textbox');
@@ -23,11 +24,22 @@ export class TextBox extends GUIComponent
 		return result;
 	}
 
+	getHTMLValue()
+	{
+		return this.getOptions()[0].getHTMLValue();
+	}
+
 	addOption(option)
 	{
 		let items = this.getAllElementsOfTheNode('textbox');
-		let item = items[0];
-		item.value = option;
-	}
+		let objectHTML = items[0];
+		objectHTML.value = option;
 
+		objectHTML.getValue = function()
+		{
+			return this.value;
+		}
+
+		return objectHTML;
+	}
 }

@@ -59,6 +59,42 @@ export class ComponentEditor
 		return option;
 	}
 
+	applyChanges(component,description,optionsGallery,otherSettings)
+	{
+		let objects = optionsGallery.getObjects();
+		for(let i=0; i<objects.length; i++)
+		{
+			let object = objects[i];
+
+			let newValue = object.getHTMLValue();
+			let modifiableOption = object.getProperty('modifiableOption');
+
+			if(modifiableOption !== undefined)
+			{
+				let savedValue = modifiableOption.getProperty('value');
+				if(object.getProperty('change') === 'removed')
+				{
+					modifiableOption.remove();
+				}
+				else if(newValue !== savedValue)
+				{
+					modifiableOption.rewriteProperty('value', newValue);
+					modifiableOption.refreshHTML();
+				}
+			}
+			else if(object.getProperty('change') !== 'removed')
+			{
+				//если был создана новая опция и не была удалена при том
+				component.addOptions([{
+					value: "",
+				}]);
+			}
+
+		}
+
+		//options.getValue();
+	}
+
 	runEditor(component,runWindow = true)
 	{
 		if(runWindow)
@@ -143,10 +179,9 @@ export class ComponentEditor
 					}]
 				});
 			}
-
 		}
 
-		let questions = [];
+		/*let questions = [];
 		for(let i=0; i<componentStructure['options'].length; i++)
 		{
 			questions.push(this.buildFieldStructureForEditingOption(componentStructure['options'][i]));
@@ -154,7 +189,26 @@ export class ComponentEditor
 
 		options.addObjectsGroup({
 			questions,
-		},);
+		},);*/
+		let optionsStructure = component.getOptions();
+
+		for(let i=0; i<optionsStructure.length; i++)
+		{
+
+			if(optionsStructure[i].getProperty('change') !== 'removed')
+			{
+				let option = options.createComponent("SingleLineTextBox");
+				option.addProperty('modifiableOption',optionsStructure[i]);
+				option.build(
+				{
+					'options': [
+						{
+							value: optionsStructure[i].getProperty('value'),
+						},
+					],
+				});
+			}
+		}
 
 		if(type !== "Button" && type !== "Heading")
 		{
@@ -163,7 +217,15 @@ export class ComponentEditor
 				let add = otherSettings.createComponent("Button");
 				add.setStyle("plus-button");
 				add.onDown(function(){
-					options.createComponent("SingleLineTextBox");
+					let object = options.createComponent("SingleLineTextBox");
+					object.build(
+					{
+						'options': [
+							{
+								value: "",
+							},
+						],
+					});
 				});
 			}
 			otherSettings.addObjectsGroup({
@@ -184,17 +246,17 @@ export class ComponentEditor
 		let saveButton = otherSettings.createComponent("Button");
 		saveButton.build(
 			{
-				'ID': 2226,
-				'index': 6,
 				'options': [
 					{
-						index: 0,
-						ID: 121212,
+
 						value:BX.message("SAVE_FORM"),
 					},
 				],
 			});
-
+		let editor = this;
+		saveButton.onDown(function(){
+			editor.applyChanges(component,undefined,options);
+		});
 		//otherSettings.addObjectsGroup();
 
 		/*let configGallery = {

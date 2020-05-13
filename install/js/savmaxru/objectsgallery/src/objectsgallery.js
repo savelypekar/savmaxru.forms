@@ -5,6 +5,10 @@ export class ObjectsGallery extends ObjectGUI
 {
 	objects=[];
 
+	getObjects(){
+		return this.objects;
+	}
+
 	constructor(config = {
 		"galleryClassCSS": "standard-gallery",
 		"objectClassCSS" : "standard-object",
@@ -20,32 +24,6 @@ export class ObjectsGallery extends ObjectGUI
 		);
 		this.objectsFactory = config["objectsFactory"];
 		this.argumentsForResult = config["argumentsForResult"];
-	}
-
-	getResult()
-	{
-		let resultGallery=[];
-		let argumentsForResult = this.argumentsForResult;
-		for (let key in argumentsForResult)
-		{
-			resultGallery[key]= argumentsForResult[key];
-		}
-
-		let questions=[];
-		let objects = this.objects;
-		for(let i=0; i<objects.length; i++)
-		{
-			let object = objects[i];
-			let objectResult = object.getResult();
-			if(objectResult !== false)
-			{
-				questions.push(objectResult);
-			}
-		}
-
-		resultGallery["questions"] = questions;
-
-		return resultGallery;
 	}
 
 	getChanges()

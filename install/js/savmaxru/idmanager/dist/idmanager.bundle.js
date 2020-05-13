@@ -21,7 +21,13 @@
 	  }, {
 	    key: "getNextHighestId",
 	    value: function getNextHighestId() {
-	      return this.namespaceForID + '_' + this.currentID++;
+	      var separator = '_';
+
+	      if (this.namespaceForID === "") {
+	        separator = "";
+	      }
+
+	      return this.namespaceForID + separator + this.currentID++;
 	    }
 	  }]);
 	  return IDManager;

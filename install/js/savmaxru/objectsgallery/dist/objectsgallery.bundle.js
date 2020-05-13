@@ -12,6 +12,12 @@
 	}
 	var ObjectsGallery = /*#__PURE__*/function (_ObjectGUI) {
 	  babelHelpers.inherits(ObjectsGallery, _ObjectGUI);
+	  babelHelpers.createClass(ObjectsGallery, [{
+	    key: "getObjects",
+	    value: function getObjects() {
+	      return this.objects;
+	    }
+	  }]);
 
 	  function ObjectsGallery() {
 	    var _this;
@@ -36,31 +42,6 @@
 	  }
 
 	  babelHelpers.createClass(ObjectsGallery, [{
-	    key: "getResult",
-	    value: function getResult() {
-	      var resultGallery = [];
-	      var argumentsForResult = this.argumentsForResult;
-
-	      for (var key in argumentsForResult) {
-	        resultGallery[key] = argumentsForResult[key];
-	      }
-
-	      var questions = [];
-	      var objects = this.objects;
-
-	      for (var i = 0; i < objects.length; i++) {
-	        var object = objects[i];
-	        var objectResult = object.getResult();
-
-	        if (objectResult !== false) {
-	          questions.push(objectResult);
-	        }
-	      }
-
-	      resultGallery["questions"] = questions;
-	      return resultGallery;
-	    }
-	  }, {
 	    key: "getChanges",
 	    value: function getChanges() {}
 	  }, {

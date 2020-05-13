@@ -11,6 +11,7 @@ import {ComponentsGallery} from "savmaxru.componentsgallery";
 export class ViewForm extends ObjectGUI
 {
 	IDManager = new IDManager('myforms');
+
 	constructor()
 	{
 		super();
@@ -31,7 +32,7 @@ export class ViewForm extends ObjectGUI
 
 		let gallery = new ComponentsGallery(configGallery);
 		this.gallery = gallery;
-
+		gallery.enableEditMode();
 		this.includeInNode("viewform-wrapper", this.gallery.getHTMLObject());
 
 		componentEditor.setGallery(gallery);
@@ -210,9 +211,6 @@ export class ViewForm extends ObjectGUI
 
 			});
 		obj6.setStyle("plus-button");
-		obj6.onDown(function(){
-			console.log(gallery.getResult());
-		});
 
 		gallery.addObjectsGroup({
 			ID: 6829,
@@ -294,11 +292,29 @@ export class ViewForm extends ObjectGUI
 			});
 
 
-			//obj2.rewriteProperty("f",2);
+		let obj8 = gallery.createFactoryObject("Button");
+		obj8.build(
+			{
+				'ID': 2226,
+				'index': 6,
+				'options': [
+					{
+						index: 0,
+						ID: 121212,
+						value: "Add component",
+					},
+				],
+			});
 
-			//console.log(obj2.getChanges());
-			//console.log("уу");
-			//console.log(obj2.getStructure());
+		obj8.onDown(function(){
+			//console.log(gallery.getResult());
+			console.log(gallery.getChanges());
+		})
+		//obj2.rewriteProperty("f",2);
+
+		//console.log(obj2.getChanges());
+		//console.log("уу");
+		//console.log(obj2.getStructure());
 
 	}
 

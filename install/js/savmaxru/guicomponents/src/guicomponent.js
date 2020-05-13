@@ -57,7 +57,6 @@ export class GUIComponent extends ObjectGUI
 	remove()
 	{
 		this.removeHTMLObject();
-		this.rewriteProperty("change","removed");
 	}
 
 	addRemoveButton()
@@ -65,6 +64,7 @@ export class GUIComponent extends ObjectGUI
 		let object = Tag.render`<div class='remove'></div>`
 		let editObject = this;
 		object.onclick = function() {
+			editObject.rewriteProperty("change","removed");
 			editObject.hideAnimHTMLObject();
 		};
 		return object;
@@ -162,7 +162,7 @@ export class GUIComponent extends ObjectGUI
 		let options = this.getOptions();
 		let result = [];
 		result["ID"] = this.getProperty("ID");
-		result["index"] = this.getProperty("index");
+		//result["index"] = this.getProperty("index");
 		result["options"] = [];
 		for(let i = 0; i < options.length; i++)
 		{

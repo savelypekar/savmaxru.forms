@@ -105,6 +105,34 @@
 	      return option;
 	    }
 	  }, {
+	    key: "applyChanges",
+	    value: function applyChanges(component, description, optionsGallery, otherSettings) {
+	      var objects = optionsGallery.getObjects();
+
+	      for (var i = 0; i < objects.length; i++) {
+	        var object = objects[i];
+	        var newValue = object.getHTMLValue();
+	        var modifiableOption = object.getProperty('modifiableOption');
+
+	        if (modifiableOption !== undefined) {
+	          var savedValue = modifiableOption.getProperty('value');
+
+	          if (object.getProperty('change') === 'removed') {
+	            modifiableOption.remove();
+	          } else if (newValue !== savedValue) {
+	            modifiableOption.rewriteProperty('value', newValue);
+	            modifiableOption.refreshHTML();
+	          }
+	        } else if (object.getProperty('change') !== 'removed') {
+	          //если был создана новая опция и не была удалена при том
+	          component.addOptions([{
+	            value: ""
+	          }]);
+	        }
+	      } //options.getValue();
+
+	    }
+	  }, {
 	    key: "runEditor",
 	    value: function runEditor(component) {
 	      var runWindow = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
@@ -176,23 +204,41 @@
 	          });
 	        }
 	      }
-
-	      var questions = [];
-
-	      for (var i = 0; i < componentStructure['options'].length; i++) {
-	        questions.push(this.buildFieldStructureForEditingOption(componentStructure['options'][i]));
+	      /*let questions = [];
+	      for(let i=0; i<componentStructure['options'].length; i++)
+	      {
+	      	questions.push(this.buildFieldStructureForEditingOption(componentStructure['options'][i]));
 	      }
+	      	options.addObjectsGroup({
+	      	questions,
+	      },);*/
 
-	      options.addObjectsGroup({
-	        questions: questions
-	      });
+
+	      var optionsStructure = component.getOptions();
+
+	      for (var i = 0; i < optionsStructure.length; i++) {
+	        if (optionsStructure[i].getProperty('change') !== 'removed') {
+	          var option = options.createComponent("SingleLineTextBox");
+	          option.addProperty('modifiableOption', optionsStructure[i]);
+	          option.build({
+	            'options': [{
+	              value: optionsStructure[i].getProperty('value')
+	            }]
+	          });
+	        }
+	      }
 
 	      if (type !== "Button" && type !== "Heading") {
 	        if (type !== "SingleLineTextBox" && type !== "MultiLineTextBox") {
 	          var add = otherSettings.createComponent("Button");
 	          add.setStyle("plus-button");
 	          add.onDown(function () {
-	            options.createComponent("SingleLineTextBox");
+	            var object = options.createComponent("SingleLineTextBox");
+	            object.build({
+	              'options': [{
+	                value: ""
+	              }]
+	            });
 	          });
 	        }
 
@@ -210,13 +256,13 @@
 
 	      var saveButton = otherSettings.createComponent("Button");
 	      saveButton.build({
-	        'ID': 2226,
-	        'index': 6,
 	        'options': [{
-	          index: 0,
-	          ID: 121212,
 	          value: BX.message("SAVE_FORM")
 	        }]
+	      });
+	      var editor = this;
+	      saveButton.onDown(function () {
+	        editor.applyChanges(component, undefined, options);
 	      }); //otherSettings.addObjectsGroup();
 
 	      /*let configGallery = {

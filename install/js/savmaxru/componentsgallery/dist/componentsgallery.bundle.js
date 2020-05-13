@@ -1,4 +1,4 @@
-(function (exports,main_core,savmaxru_objectsgallery,savmaxru_guicomponents) {
+(function (exports,main_core,savmaxru_objectsgallery,savmaxru_guicomponents,savmaxru_idmanager) {
 	'use strict';
 
 	var ComponentsGallery = /*#__PURE__*/function (_ObjectsGallery) {
@@ -56,11 +56,56 @@
 	      object.enableEditMode(this.editMode);
 	      return object;
 	    }
+	  }, {
+	    key: "getResult",
+	    value: function getResult() {
+	      var resultGallery = [];
+	      var argumentsForResult = this.argumentsForResult;
+
+	      for (var key in argumentsForResult) {
+	        resultGallery[key] = argumentsForResult[key];
+	      }
+
+	      var questions = [];
+	      var objects = this.objects;
+
+	      for (var i = 0; i < objects.length; i++) {
+	        var object = objects[i];
+	        var objectResult = object.getResult();
+
+	        if (objectResult !== false) {
+	          questions.push(objectResult);
+	        }
+	      }
+
+	      resultGallery["questions"] = questions;
+	      return resultGallery;
+	    }
+	  }, {
+	    key: "getChanges",
+	    value: function getChanges() {
+	      var chacngesGallery = [];
+	      var questions = [];
+	      var objects = this.objects;
+	      console.log("getChanges");
+
+	      for (var i = 0; i < objects.length; i++) {
+	        var object = objects[i];
+	        var objectResult = object.getChanges();
+
+	        if (objectResult !== {}) {
+	          questions.push(objectResult);
+	        }
+	      }
+
+	      chacngesGallery["questions"] = questions;
+	      return chacngesGallery;
+	    }
 	  }]);
 	  return ComponentsGallery;
 	}(savmaxru_objectsgallery.ObjectsGallery);
 
 	exports.ComponentsGallery = ComponentsGallery;
 
-}((this.Savmaxru = this.Savmaxru || {}),BX,Savmaxru,Savmaxru));
+}((this.Savmaxru = this.Savmaxru || {}),BX,Savmaxru,Savmaxru,Savmaxru));
 //# sourceMappingURL=componentsgallery.bundle.js.map
