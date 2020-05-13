@@ -37,6 +37,7 @@ class QuestionTable extends DataManager
 		if ($result->isSuccess())
 		{
 			$id = $result->getId();
+			return $id;
 		}
 	}
 
@@ -61,18 +62,16 @@ class QuestionTable extends DataManager
 			if (!in_array($idQuestion['ID_QUESTION'], $setUniqueId))
 			{
 				array_push($setUniqueId, $idQuestion['ID_QUESTION']);
-				$result = QuestionTable::getList([
-					'select' => array('ID', 'TYPE', 'CONTENT', 'POSITION'),
-					'filter' => ['ID' => $idQuestion['ID_QUESTION']],
-				]);
-				$setQuestions = $result->fetchAll();
-				if (!empty($setQuestions)) {
-					array_push($questions, $setQuestions);
-				}
 			}
 		}
 
-		return $questions;
+		$result = QuestionTable::getList([
+			'select' => array('ID', 'TYPE', 'CONTENT', 'POSITION'),
+			'filter' => ['ID' => $setUniqueId],
+		]);
+		$setQuestions = $result->fetchAll();
+
+		return $setQuestions;
 	}
 
 	public function deleteRow($id)
@@ -82,6 +81,7 @@ class QuestionTable extends DataManager
 		if (!$result->isSuccess())
 		{
 			$error = $result->getErrorMessages();
+			return $error;
 		}
 	}
 
@@ -91,7 +91,7 @@ class QuestionTable extends DataManager
 
 		if ($result->isSuccess())
 		{
-
+			return true;
 		}
 	}
 
