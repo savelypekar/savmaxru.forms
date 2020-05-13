@@ -12,6 +12,12 @@
 	}
 	var ModalWindow = /*#__PURE__*/function (_Savmaxru$ObjectGUI) {
 	  babelHelpers.inherits(ModalWindow, _Savmaxru$ObjectGUI);
+	  babelHelpers.createClass(ModalWindow, [{
+	    key: "close",
+	    value: function close() {
+	      this.hideAnimHTMLObject();
+	    }
+	  }]);
 
 	  function ModalWindow() {
 	    var _this;
@@ -24,7 +30,7 @@
 	    _this.setRootNode(main_core.Tag.render(_templateObject(), closeButton, _this.addNode("body")));
 
 	    closeButton.onclick = function () {
-	      this.parent.hideAnimHTMLObject();
+	      this.parent.close();
 	    };
 
 	    return _this;

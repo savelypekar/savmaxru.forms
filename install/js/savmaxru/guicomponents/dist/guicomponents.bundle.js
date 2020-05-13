@@ -37,11 +37,6 @@
 	      this.index = index;
 	    }
 	  }, {
-	    key: "getHTMLValue",
-	    value: function getHTMLValue() {
-	      return this.getObjectHTML().getValue();
-	    }
-	  }, {
 	    key: "getStructure",
 	    value: function getStructure() {
 	      var result = this.getProperties();
@@ -444,14 +439,14 @@
 	  babelHelpers.inherits(Button, _GUIComponent);
 
 	  function Button() {
-	    var _this2;
+	    var _this;
 
 	    babelHelpers.classCallCheck(this, Button);
-	    _this2 = babelHelpers.possibleConstructorReturn(this, babelHelpers.getPrototypeOf(Button).call(this));
+	    _this = babelHelpers.possibleConstructorReturn(this, babelHelpers.getPrototypeOf(Button).call(this));
 
-	    _this2.setComponent(main_core.Tag.render(_templateObject$5(), _this2.addNode("button")));
+	    _this.setComponent(main_core.Tag.render(_templateObject$5(), _this.addNode("button")));
 
-	    return _this2;
+	    return _this;
 	  }
 
 	  babelHelpers.createClass(Button, [{
@@ -462,7 +457,16 @@
 	  }, {
 	    key: "addOption",
 	    value: function addOption(option) {
-	      this.includeInNode("button", main_core.Tag.render(_templateObject2$2(), option));
+	      var valueField = this.addNode("value", 'span');
+	      var objectHTML = main_core.Tag.render(_templateObject2$2(), valueField);
+	      this.includeInNode("button", objectHTML);
+
+	      objectHTML.setValue = function (value) {
+	        valueField.innerHTML = value;
+	      };
+
+	      objectHTML.setValue(option);
+	      return objectHTML;
 	    }
 	  }, {
 	    key: "onDown",
@@ -472,7 +476,7 @@
 	      htmlObject.dataStructure = this;
 	      this._function = _function;
 
-	      this.getHTMLObject().onclick = function (_this) {
+	      this.getHTMLObject().onclick = function () {
 	        htmlObject.dataStructure._function();
 	      };
 	    }
@@ -532,27 +536,12 @@
 	  return Heading;
 	}(GUIComponent);
 
-	function _templateObject$7() {
-	  var data = babelHelpers.taggedTemplateLiteral(["", ""]);
-
-	  _templateObject$7 = function _templateObject() {
-	    return data;
-	  };
-
-	  return data;
-	}
 	var TextBox = /*#__PURE__*/function (_GUIComponent) {
 	  babelHelpers.inherits(TextBox, _GUIComponent);
 
 	  function TextBox() {
-	    var _this;
-
 	    babelHelpers.classCallCheck(this, TextBox);
-	    _this = babelHelpers.possibleConstructorReturn(this, babelHelpers.getPrototypeOf(TextBox).call(this));
-
-	    _this.setComponent(main_core.Tag.render(_templateObject$7(), _this.addNode("textbox")));
-
-	    return _this;
+	    return babelHelpers.possibleConstructorReturn(this, babelHelpers.getPrototypeOf(TextBox).call(this)); //this.setComponent(Tag.render`${this.addNode("textbox")}`);
 	  }
 
 	  babelHelpers.createClass(TextBox, [{
@@ -569,31 +558,25 @@
 	      return result;
 	    }
 	  }, {
-	    key: "getHTMLValue",
-	    value: function getHTMLValue() {
-	      return this.getOptions()[0].getHTMLValue();
+	    key: "getValue",
+	    value: function getValue() {
+	      return this.inputHTML.value;
 	    }
 	  }, {
 	    key: "addOption",
 	    value: function addOption(option) {
-	      var items = this.getAllElementsOfTheNode('textbox');
-	      var objectHTML = items[0];
-	      objectHTML.value = option;
-
-	      objectHTML.getValue = function () {
-	        return this.value;
-	      };
-
-	      return objectHTML;
+	      var objectHTML = this.getNode('component');
+	      this.inputHTML.value = option;
+	      return this.inputHTML;
 	    }
 	  }]);
 	  return TextBox;
 	}(GUIComponent);
 
-	function _templateObject$8() {
+	function _templateObject$7() {
 	  var data = babelHelpers.taggedTemplateLiteral(["<input class=\"textbox-singleline\" type=\"text\">"]);
 
-	  _templateObject$8 = function _templateObject() {
+	  _templateObject$7 = function _templateObject() {
 	    return data;
 	  };
 
@@ -607,8 +590,9 @@
 
 	    babelHelpers.classCallCheck(this, Singlelinetextbox);
 	    _this = babelHelpers.possibleConstructorReturn(this, babelHelpers.getPrototypeOf(Singlelinetextbox).call(this));
+	    _this.inputHTML = main_core.Tag.render(_templateObject$7());
 
-	    _this.includeInNode("textbox", main_core.Tag.render(_templateObject$8()));
+	    _this.setComponent(_this.inputHTML);
 
 	    return _this;
 	  }
@@ -616,10 +600,10 @@
 	  return Singlelinetextbox;
 	}(TextBox);
 
-	function _templateObject$9() {
-	  var data = babelHelpers.taggedTemplateLiteral(["<textarea class=\"textbox-singleline\"></textarea>"]);
+	function _templateObject$8() {
+	  var data = babelHelpers.taggedTemplateLiteral(["<input class=\"textbox-singleline\" type=\"text\">"]);
 
-	  _templateObject$9 = function _templateObject() {
+	  _templateObject$8 = function _templateObject() {
 	    return data;
 	  };
 
@@ -634,7 +618,8 @@
 	    babelHelpers.classCallCheck(this, MultiLineTextBox);
 	    _this = babelHelpers.possibleConstructorReturn(this, babelHelpers.getPrototypeOf(MultiLineTextBox).call(this));
 
-	    _this.includeInNode("textbox", main_core.Tag.render(_templateObject$9()));
+	    _this.setComponent(main_core.Tag.render(_templateObject$8())); //this.includeInNode("textbox",Tag.render`<textarea class="textbox-singleline"></textarea>`);
+
 
 	    return _this;
 	  }

@@ -78,6 +78,11 @@
 	      this.parent.append(this.window.getHTMLObject());
 	    }
 	  }, {
+	    key: "closeWindow",
+	    value: function closeWindow() {
+	      this.window.close();
+	    }
+	  }, {
 	    key: "runCreator",
 	    value: function runCreator() {
 	      this.openWindow();
@@ -111,7 +116,7 @@
 
 	      for (var i = 0; i < objects.length; i++) {
 	        var object = objects[i];
-	        var newValue = object.getHTMLValue();
+	        var newValue = object.getValue();
 	        var modifiableOption = object.getProperty('modifiableOption');
 
 	        if (modifiableOption !== undefined) {
@@ -126,7 +131,7 @@
 	        } else if (object.getProperty('change') !== 'removed') {
 	          //если был создана новая опция и не была удалена при том
 	          component.addOptions([{
-	            value: ""
+	            value: newValue
 	          }]);
 	        }
 	      } //options.getValue();
@@ -152,9 +157,6 @@
 	      };
 	      var options = new savmaxru_componentsgallery.ComponentsGallery(configOption);
 	      this.window.setContent(options.getHTMLObject());
-	      options.enableEditMode({
-	        "remove": true
-	      });
 	      var configOtherSettings = {
 	        "galleryClassCSS": "editor-other-settings-gallery"
 	      };
@@ -214,6 +216,12 @@
 	      },);*/
 
 
+	      if (type === "DropDownList" || type === "CheckboxList" || type === "RadiobuttonList") {
+	        options.enableEditMode({
+	          "remove": true
+	        });
+	      }
+
 	      var optionsStructure = component.getOptions();
 
 	      for (var i = 0; i < optionsStructure.length; i++) {
@@ -262,7 +270,9 @@
 	      });
 	      var editor = this;
 	      saveButton.onDown(function () {
+	        //options.getHTMLObject().blur();
 	        editor.applyChanges(component, undefined, options);
+	        editor.closeWindow();
 	      }); //otherSettings.addObjectsGroup();
 
 	      /*let configGallery = {

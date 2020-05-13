@@ -30,6 +30,11 @@ export class ComponentEditor
 		this.parent.append(this.window.getHTMLObject());
 	}
 
+	closeWindow()
+	{
+		this.window.close();
+	}
+
 	runCreator()
 	{
 		this.openWindow();
@@ -66,7 +71,7 @@ export class ComponentEditor
 		{
 			let object = objects[i];
 
-			let newValue = object.getHTMLValue();
+			let newValue = object.getValue();
 			let modifiableOption = object.getProperty('modifiableOption');
 
 			if(modifiableOption !== undefined)
@@ -86,7 +91,7 @@ export class ComponentEditor
 			{
 				//если был создана новая опция и не была удалена при том
 				component.addOptions([{
-					value: "",
+					value: newValue,
 				}]);
 			}
 
@@ -114,9 +119,6 @@ export class ComponentEditor
 		};
 		let options = new ComponentsGallery(configOption);
 		this.window.setContent(options.getHTMLObject());
-		options.enableEditMode({
-			"remove":true
-		});
 
 		let configOtherSettings = {
 			"galleryClassCSS": "editor-other-settings-gallery",
@@ -190,6 +192,15 @@ export class ComponentEditor
 		options.addObjectsGroup({
 			questions,
 		},);*/
+
+		if(type === "DropDownList" || type === "CheckboxList" || type === "RadiobuttonList")
+		{
+			options.enableEditMode({
+				"remove":true
+			});
+
+		}
+
 		let optionsStructure = component.getOptions();
 
 		for(let i=0; i<optionsStructure.length; i++)
@@ -255,7 +266,9 @@ export class ComponentEditor
 			});
 		let editor = this;
 		saveButton.onDown(function(){
+			//options.getHTMLObject().blur();
 			editor.applyChanges(component,undefined,options);
+			editor.closeWindow()
 		});
 		//otherSettings.addObjectsGroup();
 

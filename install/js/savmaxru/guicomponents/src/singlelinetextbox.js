@@ -6,6 +6,7 @@ export class Singlelinetextbox extends TextBox
 	constructor()
 	{
 		super();
-		this.includeInNode("textbox",Tag.render`<input class="textbox-singleline" type="text">`);
+		this.inputHTML = Tag.render`<input class="textbox-singleline" type="text">`;
+		this.setComponent(this.inputHTML);
 	}
 }

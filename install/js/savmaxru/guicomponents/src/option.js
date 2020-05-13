@@ -36,11 +36,6 @@ export class Option
 		this.index = index;
 	}
 
-	getHTMLValue()
-	{
-		return this.getObjectHTML().getValue();
-	}
-
 	getStructure()
 	{
 		let result = this.getProperties();

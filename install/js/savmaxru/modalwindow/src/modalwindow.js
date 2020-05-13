@@ -5,6 +5,10 @@ import './css/style.css'
 
 export class ModalWindow extends Savmaxru.ObjectGUI
 {
+	close()
+	{
+		this.hideAnimHTMLObject();
+	}
 	constructor()
 	{
 		super();
@@ -24,7 +28,7 @@ export class ModalWindow extends Savmaxru.ObjectGUI
 		);
 		closeButton.onclick = function()
 		{
-			this.parent.hideAnimHTMLObject();
+			this.parent.close();
 		}
 	}
 
