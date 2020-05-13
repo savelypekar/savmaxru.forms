@@ -525,7 +525,16 @@
 	  babelHelpers.createClass(Heading, [{
 	    key: "addOption",
 	    value: function addOption(option) {
-	      this.includeInNode("heading", main_core.Tag.render(_templateObject2$3(), option));
+	      var valueField = this.addNode("value", 'span');
+	      var objectHTML = main_core.Tag.render(_templateObject2$3(), valueField);
+	      this.includeInNode("heading", objectHTML);
+
+	      objectHTML.setValue = function (value) {
+	        valueField.innerHTML = value;
+	      };
+
+	      objectHTML.setValue(option);
+	      return objectHTML;
 	    }
 	  }, {
 	    key: "getResult",
@@ -541,7 +550,7 @@
 
 	  function TextBox() {
 	    babelHelpers.classCallCheck(this, TextBox);
-	    return babelHelpers.possibleConstructorReturn(this, babelHelpers.getPrototypeOf(TextBox).call(this)); //this.setComponent(Tag.render`${this.addNode("textbox")}`);
+	    return babelHelpers.possibleConstructorReturn(this, babelHelpers.getPrototypeOf(TextBox).call(this));
 	  }
 
 	  babelHelpers.createClass(TextBox, [{
@@ -601,7 +610,7 @@
 	}(TextBox);
 
 	function _templateObject$8() {
-	  var data = babelHelpers.taggedTemplateLiteral(["<input class=\"textbox-singleline\" type=\"text\">"]);
+	  var data = babelHelpers.taggedTemplateLiteral(["<textarea class=\"textbox-singleline\"></textarea>"]);
 
 	  _templateObject$8 = function _templateObject() {
 	    return data;
@@ -617,9 +626,9 @@
 
 	    babelHelpers.classCallCheck(this, MultiLineTextBox);
 	    _this = babelHelpers.possibleConstructorReturn(this, babelHelpers.getPrototypeOf(MultiLineTextBox).call(this));
+	    _this.inputHTML = main_core.Tag.render(_templateObject$8());
 
-	    _this.setComponent(main_core.Tag.render(_templateObject$8())); //this.includeInNode("textbox",Tag.render`<textarea class="textbox-singleline"></textarea>`);
-
+	    _this.setComponent(_this.inputHTML);
 
 	    return _this;
 	  }

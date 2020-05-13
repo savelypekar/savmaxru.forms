@@ -233,7 +233,9 @@
 	        ID: 121212,
 	        index: 4,
 	        type: "MultiLineTextBox",
-	        options: []
+	        options: [{
+	          value: ''
+	        }]
 	      }]
 	    });
 	    var obj2 = gallery.createComponent("CheckboxList");

@@ -257,7 +257,11 @@ export class ViewForm extends ObjectGUI
 					ID: 121212,
 					index: 4,
 					type: "MultiLineTextBox",
-					options: [],
+					options: [
+						{
+							value: '',
+						}
+					]
 				}
 			]
 		});

@@ -9,4 +9,5 @@ export class Singlelinetextbox extends TextBox
 		this.inputHTML = Tag.render`<input class="textbox-singleline" type="text">`;
 		this.setComponent(this.inputHTML);
 	}
+
 }

@@ -205,7 +205,6 @@ export class ComponentEditor
 
 		for(let i=0; i<optionsStructure.length; i++)
 		{
-
 			if(optionsStructure[i].getProperty('change') !== 'removed')
 			{
 				let option = options.createComponent("SingleLineTextBox");
