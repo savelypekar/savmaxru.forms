@@ -101,7 +101,6 @@ class CSavmaxruFormsView extends CBitrixComponent implements Controllerable
 	}
 
 	//send interview structure by id
-	//not used now
 	public function sendInterviewStructureAction($idInterview)
 	{
 		$optionTable = new \Savmaxru\Forms\Model\OptionTable();
@@ -111,24 +110,24 @@ class CSavmaxruFormsView extends CBitrixComponent implements Controllerable
 		$interview = $interviewTable->getInterviewsById($idInterview);
 		$questions = $questionTable->getQuestionsForSetIdInterview($idInterview);
 		$result["ID"] = $interview[0]["ID"];
-		$countQuestion = 1;
+		$countQuestion = 0;
 		foreach ($questions as $question)
 		{
-			$result['question'][$countQuestion]['ID'] = $question[0]['ID'];
-			$result['question'][$countQuestion]['index'] = $question[0]['POSITION'];
-			$result['question'][$countQuestion]['type'] = $question[0]['TYPE'];
-			$result['question'][$countQuestion]['description'] = $question[0]['CONTENT'];
-			$result['question'][$countQuestion]['comment'] = '';
-			$result['question'][$countQuestion]['required'] = '';
-			$idQuestion = $question[0]['ID'];
+			$result['questions'][$countQuestion]['ID'] = $question['ID'];
+			$result['questions'][$countQuestion]['index'] = $question['POSITION'];
+			$result['questions'][$countQuestion]['type'] = $question['TYPE'];
+			$result['questions'][$countQuestion]['description'] = $question['CONTENT'];
+			$result['questions'][$countQuestion]['comment'] = '';
+			$result['questions'][$countQuestion]['required'] = '';
+			$idQuestion = $question['ID'];
 			$options = $optionTable->getOptionsForQuestion($idQuestion);
-			$countOption = 1;
+			$countOption = 0;
 			foreach ($options as $option)
 			{
-				$result['question'][$countQuestion]['options'][$countOption]["ID"] = $option["ID"];
-				$result['question'][$countQuestion]['options'][$countOption]["value"] = $option["CONTENT"];
-				$result['question'][$countQuestion]['options'][$countOption]["index"] = $option["POSITION"];
-				$result['question'][$countQuestion]['options'][$countOption]["idQuestion"] = $option["ID_QUESTION"];
+				$result['questions'][$countQuestion]['options'][$countOption]["ID"] = $option["ID"];
+				$result['questions'][$countQuestion]['options'][$countOption]["value"] = $option["CONTENT"];
+				$result['questions'][$countQuestion]['options'][$countOption]["index"] = $option["POSITION"];
+				$result['questions'][$countQuestion]['options'][$countOption]["idQuestion"] = $option["ID_QUESTION"];
 				$countOption = $countOption + 1;
 			}
 			$countQuestion = $countQuestion + 1;
