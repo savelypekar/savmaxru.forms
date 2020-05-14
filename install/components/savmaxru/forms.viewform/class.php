@@ -84,17 +84,17 @@ class CSavmaxruFormsView extends CBitrixComponent implements Controllerable
 		{
 			if ($question["ID"] > 0)
 			{
-				$answerToQuestionTable->saveAnswerToQuestion($question["ID"], $idResult);
-			}
-			if (array_key_exists('userValue', $question["options"]))
-			{
-				$answerOptionTable->saveOptionAnswer($question["ID"], 0, $question["options"]["userValue"]);
-			}
-			else
-			{
-				foreach ($question["options"] as $option)
+				$idAnswerToQuestion = $answerToQuestionTable->saveAnswerToQuestion($question["ID"], $idResult);
+				if (array_key_exists('userValue', $question["options"]))
 				{
-					$answerOptionTable->saveOptionAnswer($question["ID"], $option, '');
+					$answerOptionTable->saveOptionAnswer($idAnswerToQuestion, 0, $question["options"]["userValue"]);
+				}
+				else
+				{
+					foreach ($question["options"] as $option)
+					{
+						$answerOptionTable->saveOptionAnswer($idAnswerToQuestion, $option, '');
+					}
 				}
 			}
 		}
