@@ -1,4 +1,4 @@
-(function (exports,savmaxru_objectgui,savmaxru_componentsgallery,main_core) {
+(function (exports,savmaxru_objectgui,savmaxru_componentsgallery,main_core,savmaxru_idmanager) {
 	'use strict';
 
 	function _templateObject() {
@@ -18,6 +18,7 @@
 
 	    babelHelpers.classCallCheck(this, ViewForm);
 	    _this = babelHelpers.possibleConstructorReturn(this, babelHelpers.getPrototypeOf(ViewForm).call(this));
+	    babelHelpers.defineProperty(babelHelpers.assertThisInitialized(_this), "IDManager", new savmaxru_idmanager.IDManager("viewform"));
 
 	    _this.setRootNode(main_core.Tag.render(_templateObject(), _this.addNode("viewform-wrapper")));
 
@@ -27,7 +28,7 @@
 	        'ID': ID
 	      }
 	    };
-	    var gallery = new savmaxru_componentsgallery.ComponentsGallery(configGallery, babelHelpers.assertThisInitialized(_this));
+	    var gallery = new savmaxru_componentsgallery.ComponentsGallery(configGallery, babelHelpers.assertThisInitialized(_this), _this.IDManager);
 
 	    _this.includeInNode("viewform-wrapper", gallery.getHTMLObject());
 
@@ -58,5 +59,5 @@
 
 	exports.ViewForm = ViewForm;
 
-}((this.Savmaxru = this.Savmaxru || {}),Savmaxru,Savmaxru,BX));
+}((this.Savmaxru = this.Savmaxru || {}),Savmaxru,Savmaxru,BX,Savmaxru));
 //# sourceMappingURL=viewform.bundle.js.map

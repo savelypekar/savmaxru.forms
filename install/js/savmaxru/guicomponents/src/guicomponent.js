@@ -5,7 +5,7 @@ import {PropertyChangeManager} from "savmaxru.propertychangemanager";
 
 export class GUIComponent extends ObjectGUI
 {
-	constructor()
+	constructor(IDManager)
 	{
 		super();
 		this.setRootNode(
@@ -96,7 +96,10 @@ export class GUIComponent extends ObjectGUI
 
 	build(data)
 	{
-		this.IDManager = data['IDManager'];
+		if(data['IDManager']!== undefined)
+		{
+			this.IDManager = data['IDManager'];
+		}
 		this.setDescription(data['description']);
 		this.setComment(data['comment']);
 		this.addOptions(data['options']);

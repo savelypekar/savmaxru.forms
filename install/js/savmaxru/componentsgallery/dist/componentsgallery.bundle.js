@@ -13,13 +13,14 @@
 	var ComponentsGallery = /*#__PURE__*/function (_ObjectsGallery) {
 	  babelHelpers.inherits(ComponentsGallery, _ObjectsGallery);
 
-	  function ComponentsGallery(argument, parent) {
+	  function ComponentsGallery(argument, parent, IDManager) {
 	    var _this;
 
 	    babelHelpers.classCallCheck(this, ComponentsGallery);
 	    argument["objectsFactory"] = savmaxru_guicomponents.GUIComponents;
 	    _this = babelHelpers.possibleConstructorReturn(this, babelHelpers.getPrototypeOf(ComponentsGallery).call(this, argument));
 	    babelHelpers.defineProperty(babelHelpers.assertThisInitialized(_this), "editMode", []);
+	    _this.IDManager = IDManager;
 	    _this.componentEditor = argument['componentEditor'];
 
 	    _this.setParent(parent);
@@ -39,6 +40,7 @@
 	      var regime = arguments.length > 1 ? arguments[1] : undefined;
 	      var gallery = this;
 	      var type = question['type'];
+	      question['IDManager'] = this.IDManager;
 	      var component = this.createFactoryObject(type);
 	      component.build(question);
 
@@ -77,7 +79,8 @@
 	    value: function createComponent(type) {
 	      var object = this.createFactoryObject(type);
 	      object.build({
-	        'type': type
+	        'type': type,
+	        'IDManager': this.IDManager
 	      });
 	      object.enableEditMode(this.editMode);
 	      return object;

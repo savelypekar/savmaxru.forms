@@ -5,8 +5,8 @@
 Save structure interview with question and option
 -->
 <script>
-	//let editor = new Savmaxru.Editor("<?php echo $arResult['ID'] ?>");
-	//document.getElementById('savmaxru-forms').append(editor.getHTMLObject());
+	let editor = new Savmaxru.Editor("<?php echo $arResult['ID'] ?>");
+	document.getElementById('savmaxru-forms').append(editor.getHTMLObject());
 
 	let result = {
 		//ID: 811,
@@ -71,7 +71,7 @@ Save structure interview with question and option
 				{
 					ID: 121212,
 					index: 1,
-					type: "DropDownList",
+					type: "CheckboxList",
 					description: "Текст вопроса",
 					comment: "Пояснительный комметарий",
 					required: true,
@@ -81,6 +81,11 @@ Save structure interview with question and option
 							index: 1,
 							ID: 121212,
 							value: "Russia",
+						},
+						{
+							index: 2,
+							ID: 121212,
+							value: "Russiaaaa",
 						},
 					],
 

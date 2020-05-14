@@ -6,10 +6,11 @@ import './css/style.css'
 
 export class ComponentsGallery extends ObjectsGallery
 {
-	constructor(argument, parent)
+	constructor(argument, parent,IDManager)
 	{
 		argument["objectsFactory"] = GUIComponents;
 		super(argument);
+		this.IDManager = IDManager;
 		this.componentEditor = argument['componentEditor'];
 		this.setParent(parent);
 	}
@@ -23,6 +24,7 @@ export class ComponentsGallery extends ObjectsGallery
 	{
 		let gallery = this;
 		let type = question['type'];
+		question['IDManager'] = this.IDManager;
 		let component = this.createFactoryObject(type);
 		component.build(question);
 		if(type === 'Button' && regime === 'view')
@@ -68,6 +70,7 @@ export class ComponentsGallery extends ObjectsGallery
 		object.build(
 		{
 			'type':type,
+			'IDManager': this.IDManager,
 		});
 		object.enableEditMode(this.editMode);
 		return object;

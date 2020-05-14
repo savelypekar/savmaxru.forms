@@ -2,13 +2,15 @@ import './css/style.css'
 import {ObjectGUI} from "savmaxru.objectgui";
 import {ComponentsGallery} from "savmaxru.componentsgallery";
 import {Tag} from 'main.core';
+import {IDManager} from 'savmaxru.idmanager';
 
 export class ViewForm extends ObjectGUI
 {
+	IDManager = new IDManager("viewform");
+
 	constructor(ID)
 	{
 		super();
-
 		this.setRootNode(
 			Tag.render`
 			${this.addNode("viewform-wrapper")}`
@@ -21,7 +23,7 @@ export class ViewForm extends ObjectGUI
 			},
 		};
 
-		let gallery = new ComponentsGallery(configGallery, this);
+		let gallery = new ComponentsGallery(configGallery, this,this.IDManager);
 		this.includeInNode("viewform-wrapper", gallery.getHTMLObject());
 
 		BX.ajax.runComponentAction('savmaxru:forms.viewform', 'sendInterviewStructure', {

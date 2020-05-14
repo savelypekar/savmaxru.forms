@@ -78,7 +78,7 @@
 	var GUIComponent = /*#__PURE__*/function (_ObjectGUI) {
 	  babelHelpers.inherits(GUIComponent, _ObjectGUI);
 
-	  function GUIComponent() {
+	  function GUIComponent(IDManager) {
 	    var _this;
 
 	    babelHelpers.classCallCheck(this, GUIComponent);
@@ -166,7 +166,10 @@
 	  }, {
 	    key: "build",
 	    value: function build(data) {
-	      this.IDManager = data['IDManager'];
+	      if (data['IDManager'] !== undefined) {
+	        this.IDManager = data['IDManager'];
+	      }
+
 	      this.setDescription(data['description']);
 	      this.setComment(data['comment']);
 	      this.addOptions(data['options']);
