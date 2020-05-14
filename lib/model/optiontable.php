@@ -80,4 +80,14 @@ class OptionTable extends DataManager
 			return true;
 		}
 	}
+
+	public function getOptionsById($idOption)
+	{
+		$result = OptionTable::getList([
+			'select' => array('ID', 'ID_QUESTION', 'CONTENT', 'POSITION'),
+			'filter' =>['ID' => $idOption],
+		]);
+		$row = $result -> fetchAll();
+		return $row;
+	}
 }

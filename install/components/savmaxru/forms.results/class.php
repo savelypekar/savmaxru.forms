@@ -40,6 +40,7 @@ class CSavmaxruEditor extends CBitrixComponent implements Controllerable
 		$answerToQuestionTable = new \Savmaxru\Forms\Model\AnswerToQuestionTable();
 		$answerOptionTable = new \Savmaxru\Forms\Model\AnswerOptionTable();
 		$questionTable = new \Savmaxru\Forms\Model\QuestionTable();
+		$optionTable = new \Savmaxru\Forms\Model\OptionTable();
 
 		$result = [];
 		$answerResult = $answerResultTable->getResultByIdResult($idResult);
@@ -64,6 +65,12 @@ class CSavmaxruEditor extends CBitrixComponent implements Controllerable
 			foreach ($options as $option)
 			{
 				$result['answers'][$countAnswers]['options'][$countOptions] = $option;
+				if ($result['answers'][$countAnswers]['options'][$countOptions]['CONTENT'] == '')
+				{
+					$idOption = $result['answers'][$countAnswers]['options'][$countOptions]['ID_OPTION'];
+					$optionInfo = $optionTable->getOptionsById($idOption);
+					$result['answers'][$countAnswers]['options'][$countOptions]['CONTENT'] = $optionInfo[0]['CONTENT'];
+				}
 				$countOptions = $countOptions + 1;
 			}
 			$countAnswers = $countAnswers + 1;
