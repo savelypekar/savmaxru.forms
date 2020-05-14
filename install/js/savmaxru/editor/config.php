@@ -13,6 +13,7 @@ return [
 		'savmaxru.componenteditor',
 		'savmaxru.componentsgallery',
 		'savmaxru.guicomponents',
+		'savmaxru.idmanager',
 	],
 	'skip_core' => false,
 ];

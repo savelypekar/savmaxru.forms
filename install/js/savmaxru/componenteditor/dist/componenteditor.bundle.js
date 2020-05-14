@@ -150,17 +150,17 @@
 	      var configDescription = {
 	        "galleryClassCSS": "editor-description-gallery"
 	      };
-	      var description = new savmaxru_componentsgallery.ComponentsGallery(configDescription);
+	      var description = new savmaxru_componentsgallery.ComponentsGallery(configDescription, this, this.IDManager);
 	      this.window.setContent(description.getHTMLObject());
 	      var configOption = {
 	        "galleryClassCSS": "editor-options-gallery"
 	      };
-	      var options = new savmaxru_componentsgallery.ComponentsGallery(configOption);
+	      var options = new savmaxru_componentsgallery.ComponentsGallery(configOption, this, this.IDManager);
 	      this.window.setContent(options.getHTMLObject());
 	      var configOtherSettings = {
 	        "galleryClassCSS": "editor-other-settings-gallery"
 	      };
-	      var otherSettings = new savmaxru_componentsgallery.ComponentsGallery(configOtherSettings);
+	      var otherSettings = new savmaxru_componentsgallery.ComponentsGallery(configOtherSettings, this, this.IDManager);
 	      this.window.setContent(otherSettings.getHTMLObject());
 	      var type = componentStructure["type"];
 	      var titles = {
@@ -254,7 +254,6 @@
 	          questions: [{
 	            ID: "notAcceptUnanswered",
 	            type: "CheckboxList",
-	            'IDManager': this.IDManager,
 	            options: [{
 	              value: BX.message("NOT_ACCEPT_UNANSWERED")
 	            }]
@@ -373,8 +372,14 @@
 	  }, {
 	    key: "addComponent",
 	    value: function addComponent(type) {
-	      this.runEditor(this.objectsGallery.createComponent(type), false);
 	      this.selectingAComponentMenu.remove();
+	      var newComponent = this.objectsGallery.createComponent(type);
+	      newComponent.build({
+	        options: [{
+	          value: ''
+	        }]
+	      });
+	      this.runEditor(newComponent, false);
 	    }
 	  }]);
 	  return ComponentEditor;

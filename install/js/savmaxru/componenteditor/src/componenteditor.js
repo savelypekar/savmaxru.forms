@@ -39,7 +39,6 @@ export class ComponentEditor
 	{
 		this.openWindow();
 		let selectingAComponent = Tag.render`<div class="components-selection"></div>`;
-
 		for(let i=0; i<this.types.length; i++)
 		{
 			let button = new TypeButton(this.types[i],this);
@@ -111,19 +110,19 @@ export class ComponentEditor
 		let configDescription = {
 			"galleryClassCSS": "editor-description-gallery",
 		};
-		let description = new ComponentsGallery(configDescription);
+		let description = new ComponentsGallery(configDescription,this,this.IDManager);
 		this.window.setContent(description.getHTMLObject());
 
 		let configOption = {
 			"galleryClassCSS": "editor-options-gallery",
 		};
-		let options = new ComponentsGallery(configOption);
+		let options = new ComponentsGallery(configOption,this,this.IDManager);
 		this.window.setContent(options.getHTMLObject());
 
 		let configOtherSettings = {
 			"galleryClassCSS": "editor-other-settings-gallery",
 		};
-		let otherSettings = new ComponentsGallery(configOtherSettings);
+		let otherSettings = new ComponentsGallery(configOtherSettings,this,this.IDManager);
 		this.window.setContent(otherSettings.getHTMLObject());
 
 		let type = componentStructure["type"];
@@ -242,7 +241,6 @@ export class ComponentEditor
 				questions: [{
 					ID: "notAcceptUnanswered",
 					type: "CheckboxList",
-					'IDManager': this.IDManager,
 					options: [
 						{
 							value:BX.message("NOT_ACCEPT_UNANSWERED"),
@@ -258,7 +256,6 @@ export class ComponentEditor
 			{
 				'options': [
 					{
-
 						value:BX.message("SAVE_FORM"),
 					},
 				],
@@ -374,7 +371,15 @@ export class ComponentEditor
 
 	addComponent(type)
 	{
-		this.runEditor(this.objectsGallery.createComponent(type),false);
 		this.selectingAComponentMenu.remove();
+		let newComponent = this.objectsGallery.createComponent(type);
+		newComponent.build({
+			options: [
+				{
+					value: '',
+				},
+			],
+		})
+		this.runEditor(newComponent,false);
 	}
 }

@@ -4,9 +4,12 @@ import './css/style.css'
 import {ComponentEditor} from "savmaxru.componenteditor";
 import {ComponentsGallery} from "savmaxru.componentsgallery";
 import {GUIComponents} from "savmaxru.guicomponents";
+import {IDManager} from 'savmaxru.idmanager';
 
 export class Editor extends ObjectGUI
 {
+	IDManager = new IDManager("editform");
+
 	constructor(ID)
 	{
 		super();
@@ -31,7 +34,7 @@ export class Editor extends ObjectGUI
 				'ID': argumentID
 			},
 		};
-		let gallery = new ComponentsGallery(configGallery);
+		let gallery = new ComponentsGallery(configGallery, this, this.IDManager);
 		gallery.enableEditMode();
 		this.includeInNode("editor-wrapper", gallery.getHTMLObject());
 

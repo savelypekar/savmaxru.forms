@@ -46,6 +46,7 @@
 	  babelHelpers.createClass(ViewForm, [{
 	    key: "saveResult",
 	    value: function saveResult(result) {
+	      console.log(result);
 	      BX.ajax.runComponentAction('savmaxru:forms.viewform', 'saveResult', {
 	        mode: 'class',
 	        data: {

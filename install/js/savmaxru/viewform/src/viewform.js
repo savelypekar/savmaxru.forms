@@ -39,6 +39,7 @@ export class ViewForm extends ObjectGUI
 
 	saveResult(result)
 	{
+		console.log(result);
 		BX.ajax.runComponentAction('savmaxru:forms.viewform', 'saveResult', {
 			mode: 'class',
 			data: {

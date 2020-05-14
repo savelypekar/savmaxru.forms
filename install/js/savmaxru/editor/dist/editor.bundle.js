@@ -1,4 +1,4 @@
-(function (exports,savmaxru_objectgui,main_core,savmaxru_componenteditor,savmaxru_componentsgallery,savmaxru_guicomponents) {
+(function (exports,savmaxru_objectgui,main_core,savmaxru_componenteditor,savmaxru_componentsgallery,savmaxru_guicomponents,savmaxru_idmanager) {
 	'use strict';
 
 	function _templateObject2() {
@@ -28,6 +28,7 @@
 
 	    babelHelpers.classCallCheck(this, Editor);
 	    _this = babelHelpers.possibleConstructorReturn(this, babelHelpers.getPrototypeOf(Editor).call(this));
+	    babelHelpers.defineProperty(babelHelpers.assertThisInitialized(_this), "IDManager", new savmaxru_idmanager.IDManager("editform"));
 
 	    _this.setRootNode(main_core.Tag.render(_templateObject(), _this.addNode("editor-wrapper")));
 
@@ -40,7 +41,7 @@
 	        'ID': argumentID
 	      }
 	    };
-	    var gallery = new savmaxru_componentsgallery.ComponentsGallery(configGallery);
+	    var gallery = new savmaxru_componentsgallery.ComponentsGallery(configGallery, babelHelpers.assertThisInitialized(_this), _this.IDManager);
 	    gallery.enableEditMode();
 
 	    _this.includeInNode("editor-wrapper", gallery.getHTMLObject());
@@ -78,5 +79,5 @@
 
 	exports.Editor = Editor;
 
-}((this.Savmaxru = this.Savmaxru || {}),Savmaxru,BX,Savmaxru,Savmaxru,Savmaxru));
+}((this.Savmaxru = this.Savmaxru || {}),Savmaxru,BX,Savmaxru,Savmaxru,Savmaxru,Savmaxru));
 //# sourceMappingURL=editor.bundle.js.map

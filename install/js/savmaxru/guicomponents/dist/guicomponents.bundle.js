@@ -170,12 +170,29 @@
 	        this.IDManager = data['IDManager'];
 	      }
 
-	      this.setDescription(data['description']);
-	      this.setComment(data['comment']);
-	      this.addOptions(data['options']);
-	      this.addProperty('ID', data['ID']);
-	      this.addProperty('index', data['index']);
-	      this.addProperty('type', data['type']);
+	      if (data['description'] !== undefined) {
+	        this.setDescription(data['description']);
+	      }
+
+	      if (data['comment'] !== undefined) {
+	        this.setComment(data['comment']);
+	      }
+
+	      if (data['options'] !== undefined) {
+	        this.addOptions(data['options']);
+	      }
+
+	      if (data['ID'] !== undefined) {
+	        this.addProperty('ID', data['ID']);
+	      }
+
+	      if (data['index'] !== undefined) {
+	        this.addProperty('index', data['index']);
+	      }
+
+	      if (data['type'] !== undefined) {
+	        this.addProperty('type', data['type']);
+	      }
 
 	      if (data['required']) {
 	        this.setFieldAsRequired();

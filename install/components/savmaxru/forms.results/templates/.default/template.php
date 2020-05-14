@@ -6,7 +6,7 @@
 Send ONE result
 -->
 <script>
-	let idResult = '30';
+	let idResult = '10';
 	BX.ajax.runComponentAction('savmaxru:forms.results', 'sendSelectedResult', {
 		mode: 'class',
 		data: {
@@ -16,14 +16,16 @@ Send ONE result
 		console.log(response);
 	});
 </script>
+-->
 
-<!--
-Send results by amount
+<!--Send results by amount-->
+
 
 <script>
-	let idInterview = '123';
-	let quantity = '7';
-	let firstPosition = '0';
+	console.log(898989);
+	let idInterview = '14';
+	let quantity = '70';
+	let firstPosition = '1';
 	BX.ajax.runComponentAction('savmaxru:forms.results', 'sendResults', {
 		mode: 'class',
 		data: {
@@ -35,4 +37,3 @@ Send results by amount
 		console.log(response);
 	});
 </script>
--->
