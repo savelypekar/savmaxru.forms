@@ -20,18 +20,9 @@ class DateInfoTable extends DataManager
 				"primary" => true,
 				"autocomplete" => true
 			]),
-			new IntegerField("ID_OBJECT"),
 			new StringField("TYPE_OBJECT"),
-
-			new StringField("YEAR_CREATE"),
-			new StringField("MONTH_CREATE"),
-			new StringField("DAY_CREATE"),
-			new StringField("TIME_CREATE"),
-
-			new StringField("YEAR_CHANGE"),
-			new StringField("MONTH_CHANGE"),
-			new StringField("DAY_CHANGE"),
-			new StringField("TIME_CHANGE"),
+			new StringField("DATE_CREATE"),
+			new StringField("DATE_CHANGE"),
 		];
 	}
 
@@ -51,16 +42,6 @@ class DateInfoTable extends DataManager
 		$result = DateInfoTable::getList([
 			'select' => [
 				'ID',
-				'ID_OBJECT',
-				'TYPE_OBJECT',
-				'YEAR_CREATE',
-				'MONTH_CREATE',
-				'DAY_CREATE',
-				'TIME_CREATE',
-				'YEAR_CHANGE',
-				'MONTH_CHANGE',
-				'DAY_CHANGE',
-				'TIME_CHANGE',
 			],
 			'filter' => ['ID' => $idDate],
 		]);
@@ -75,7 +56,8 @@ class DateInfoTable extends DataManager
 
 		if ($result->isSuccess())
 		{
-			return true;
+			$id = $result->getId();
+			return $id;
 		}
 	}
 }

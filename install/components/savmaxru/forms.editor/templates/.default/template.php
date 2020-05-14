@@ -3,16 +3,16 @@
 ?>
 <!--
 Save structure interview with question and option
--->
+
 <script>
 	let editor = new Savmaxru.Editor("<?php echo $arResult['ID'] ?>");
 	document.getElementById('savmaxru-forms').append(editor.getHTMLObject());
 
 	let result = {
-		//ID: 811,
-		ID: 'NEW_FORM',
+		ID: 125,
+		//ID: 'NEW_FORM',
 		title: 'title new form ',
-		//change: "changed",
+		change: "changed",
 		visible: true,
 		questions: [
 			{
@@ -133,3 +133,4 @@ Save structure interview with question and option
 
 	console.log(result);
 </script>
+-->
