@@ -1,2 +1,2 @@
 <?
-$MESS["FORM_SEND_SUCCESSFULLY"] = "Форма успешна отправлена!";
+$MESS["FORM_SEND_SUCCESSFULLY"] = "Форма успешно отправлена!";
