@@ -114,4 +114,14 @@ class QuestionTable extends DataManager
 		$type = $result ->fetchAll();
 		return $type[0]['TYPE'];
 	}
+
+	public function getQuestionById($idQuestion)
+	{
+		$result = QuestionTable::getList([
+			'select' => ['ID', 'TYPE', 'CONTENT', 'POSITION'],
+			'filter' => ['ID' => $idQuestion],
+		]);
+		$row = $result ->fetchAll();
+		return $row;
+	}
 }
