@@ -72,18 +72,9 @@ CREATE TABLE savmaxru_forms_connection_interview_with_question
 CREATE TABLE savmaxru_forms_date_info
 (
     ID int not null auto_increment,
-    ID_OBJECT int not null,
     TYPE_OBJECT varchar(255) not null,
-
-    YEAR_CREATE varchar(255) not null,
-    MONTH_CREATE varchar(255) not null,
-    DAY_CREATE varchar(255) not null,
-    TIME_CREATE varchar(255) not null,
-
-    YEAR_CHANGE varchar(255) not null,
-    MONTH_CHANGE varchar(255) not null,
-    DAY_CHANGE varchar(255) not null,
-    TIME_CHANGE varchar(255) not null,
+    DATE_CREATE varchar(255) not null,
+    DATE_CHANGE varchar(255) not null,
 
     PRIMARY KEY(ID)
 );

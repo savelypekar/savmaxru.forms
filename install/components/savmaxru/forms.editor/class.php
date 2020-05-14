@@ -72,10 +72,7 @@ class CSavmaxruEditor extends CBitrixComponent implements Controllerable
 		{
 			$dateInfo = [
 				'TYPE_OBJECT' => 'InterviewStructure',
-				'YEAR_CREATE' => date('o'),
-				'MONTH_CREATE' => date('F'),
-				'DAY_CREATE' => date('j'),
-				'TIME_CREATE' => date('G:i:s'),
+				'DATE_CREATE' => date("Y-m-d H:i:s"),
 			];
 			$idDate = $dateInfoTable->saveDate($dateInfo);
 			$idInterview = $interviewTable->addInterview($idUser, $result["title"], $idDate, '', $result["visible"]);
@@ -98,13 +95,11 @@ class CSavmaxruEditor extends CBitrixComponent implements Controllerable
 		{
 			if ($result['change'] == 'changed')
 			{
+				$idDate = $interviewTable->getInterviewsById($result['ID']);
 				$dateInfo = [
-					'YEAR_CHANGE' => date('o'),
-					'MONTH_CHANGE' => date('F'),
-					'DAY_CHANGE' => date('j'),
-					'TIME_CHANGE' => date('G:i:s'),
+					'DATE_CHANGE' => date("Y-m-d H:i:s"),
 				];
-				$dateInfoTable->updateRow($result['dateCreate'], $dateInfo);
+				$dateInfoTable->updateRow($idDate[0]['DATE_CREATE'], $dateInfo);
 				foreach ($result['questions'] as $question)
 				{
 					if ($question['change'] == 'changed')

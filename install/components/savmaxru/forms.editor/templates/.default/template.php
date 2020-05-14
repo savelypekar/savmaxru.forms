@@ -6,10 +6,10 @@ Save structure interview with question and option
 -->
 <script>
 	let result = {
-		//ID: 811,
-		ID: 'NEW_FORM',
+		ID: 125,
+		//ID: 'NEW_FORM',
 		title: 'title new form ',
-		//change: "changed",
+		change: "changed",
 		visible: true,
 		questions: [
 			{
