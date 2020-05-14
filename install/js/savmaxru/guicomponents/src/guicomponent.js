@@ -162,7 +162,6 @@ export class GUIComponent extends ObjectGUI
 		let options = this.getOptions();
 		let result = [];
 		result["ID"] = this.getProperty("ID");
-		//result["index"] = this.getProperty("index");
 		result["options"] = [];
 		for(let i = 0; i < options.length; i++)
 		{

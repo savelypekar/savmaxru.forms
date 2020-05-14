@@ -8,10 +8,10 @@ return [
 	'css' => 'dist/componentsgallery.bundle.css',
 	'js' => 'dist/componentsgallery.bundle.js',
 	'rel' => [
-		'main.core',
 		'savmaxru.objectsgallery',
 		'savmaxru.guicomponents',
-		'savmaxru.idmanager',
+		'savmaxru.modalwindow',
+		'main.core',
 	],
 	'skip_core' => false,
 ];

@@ -10,8 +10,8 @@
 
 	  return data;
 	}
-	var ModalWindow = /*#__PURE__*/function (_Savmaxru$ObjectGUI) {
-	  babelHelpers.inherits(ModalWindow, _Savmaxru$ObjectGUI);
+	var ModalWindow = /*#__PURE__*/function (_ObjectGUI) {
+	  babelHelpers.inherits(ModalWindow, _ObjectGUI);
 	  babelHelpers.createClass(ModalWindow, [{
 	    key: "close",
 	    value: function close() {
@@ -43,7 +43,7 @@
 	    }
 	  }]);
 	  return ModalWindow;
-	}(Savmaxru.ObjectGUI);
+	}(savmaxru_objectgui.ObjectGUI);
 
 	exports.ModalWindow = ModalWindow;
 

@@ -14,7 +14,7 @@ $connectionInterviewWithQuestion = new \Savmaxru\Forms\Model\ConnectionInterview
 //echo $result41;
 ?>
 <script>
-	let viewform = new Savmaxru.ViewForm();
+	let viewform = new Savmaxru.ViewForm("<?php echo $arResult['ID'] ?>");
 	document.getElementById('savmaxru-forms').append(viewform.getHTMLObject());
 </script>
 

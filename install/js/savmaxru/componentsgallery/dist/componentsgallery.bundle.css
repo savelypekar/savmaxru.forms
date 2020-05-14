@@ -1,0 +1,18 @@
+.savmaxru-forms .success .success-ico{
+	background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg height='512pt' viewBox='-48 0 512 512' width='512pt' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M32 16h352c17.672 0 32 14.328 32 32v432c0 17.672-14.328 32-32 32H32c-17.672 0-32-14.328-32-32V48c0-17.672 14.328-32 32-32zm0 0' fill='%2377959e'/%3E%3Cpath d='M32 374.625V80c0-17.672 14.328-32 32-32h288c17.672 0 32 14.328 32 32v368c0 17.672-14.328 32-32 32H137.375zm0 0' fill='%23e4edfb'/%3E%3Cpath d='M137.375 406.625V480L32 374.625h73.375c17.676 0 32 14.324 32 32zm0 0' fill='%2348c8ef'/%3E%3Cpath d='M32 448h32v32H32zm0 0' fill='%23fff'/%3E%3Cpath d='M128 64V0h160v64c0 17.672-14.328 32-32 32h-96c-17.672 0-32-14.328-32-32zm0 0' fill='%2348c8ef'/%3E%3Cpath d='M175.281 293.902L128 246.625c-6.246-6.25-6.246-16.379 0-22.625s16.375-6.246 22.625 0l26.094 26.098 104.707-91.602c6.648-5.82 16.754-5.144 22.574 1.504 5.816 6.648 5.145 16.758-1.504 22.574zm0 0' fill='%236fbb2e'/%3E%3C/svg%3E");
+	width: 80px;
+	height: 80px;
+	margin:30px auto;
+	background-size: cover;
+}
+
+.savmaxru-forms .success {
+	padding-top: 20px;
+	padding-bottom: 50px;
+}
+
+.savmaxru-forms .success span{
+	text-align: center;
+	display: block;
+	font-size: 17px;
+}

@@ -223,8 +223,7 @@
 	    value: function getResult() {
 	      var options = this.getOptions();
 	      var result = [];
-	      result["ID"] = this.getProperty("ID"); //result["index"] = this.getProperty("index");
-
+	      result["ID"] = this.getProperty("ID");
 	      result["options"] = [];
 
 	      for (var i = 0; i < options.length; i++) {
@@ -556,14 +555,10 @@
 	  babelHelpers.createClass(TextBox, [{
 	    key: "getResult",
 	    value: function getResult() {
-	      var options = this.getOptions();
 	      var result = [];
-	      result["ID"] = this.getProperty("ID"); //result["index"] = this.getProperty("index");
-
+	      result["ID"] = this.getProperty("ID");
 	      result["options"] = [];
-	      var items = this.getAllElementsOfTheNode('textbox');
-	      var item = items[0];
-	      result["options"]["userValue"] = item.value;
+	      result["options"]["userValue"] = this.getValue();
 	      return result;
 	    }
 	  }, {

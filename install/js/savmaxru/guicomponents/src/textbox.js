@@ -10,16 +10,10 @@ export class TextBox extends GUIComponent
 
 	getResult()
 	{
-		let options = this.getOptions();
 		let result = [];
 		result["ID"] = this.getProperty("ID");
-		//result["index"] = this.getProperty("index");
 		result["options"] = [];
-
-		let items = this.getAllElementsOfTheNode('textbox');
-		let item = items[0];
-		result["options"]["userValue"] = item.value;
-
+		result["options"]["userValue"] = this.getValue();
 		return result;
 	}
 

@@ -5,8 +5,8 @@
 Save structure interview with question and option
 -->
 <script>
-	let editor = new Savmaxru.Editor("<?php echo $arResult['ID'] ?>");
-	document.getElementById('savmaxru-forms').append(editor.getHTMLObject());
+	//let editor = new Savmaxru.Editor("<?php echo $arResult['ID'] ?>");
+	//document.getElementById('savmaxru-forms').append(editor.getHTMLObject());
 
 	let result = {
 		//ID: 811,
@@ -18,7 +18,7 @@ Save structure interview with question and option
 			{
 				ID: 12,
 				index: 1,
-				type: "DropDownList1",
+				type: "DropDownList",
 				description: "text in description 000",
 				//comment: "comment",
 				//required: true,
@@ -59,11 +59,72 @@ Save structure interview with question and option
 			}
 		]
 	};
+
+
+	result =
+
+		result = {
+			ID: 'NEW_FORM',
+			title: 'tisdsds ',
+			visible: true,
+			questions: [
+				{
+					ID: 121212,
+					index: 1,
+					type: "DropDownList",
+					description: "Текст вопроса",
+					comment: "Пояснительный комметарий",
+					required: true,
+
+					options: [
+						{
+							index: 1,
+							ID: 121212,
+							value: "Russia",
+						},
+					],
+
+				},{
+					ID: 121212,
+					index: 2,
+					type: "Heading",
+					options: [
+						{
+							index: 1,
+							value: 'Такой вот опрос',
+							ID: 121212,
+						}
+					]
+				},{
+					ID: 121212,
+					index: 3,
+					type: "Button",
+					options: [
+						{
+							ID: 121212,
+							index: 1,
+							value: 'Отправить',
+						}
+					]
+				},{
+					ID: 121212,
+					index: 4,
+					type: "MultiLineTextBox",
+					options: [
+						{
+							value: '',
+						}
+					]
+				}
+			]
+		};
+
 	BX.ajax.runComponentAction('savmaxru:forms.editor', 'saveInterviewStructure', {
 		mode: 'class',
 		data: {
 			result: result,
 		}
 	});
+
 	console.log(result);
 </script>

@@ -1,10 +1,19 @@
-(function (exports,main_core,savmaxru_objectsgallery,savmaxru_guicomponents,savmaxru_idmanager) {
+(function (exports,savmaxru_objectsgallery,savmaxru_guicomponents,savmaxru_modalwindow,main_core) {
 	'use strict';
 
+	function _templateObject() {
+	  var data = babelHelpers.taggedTemplateLiteral(["<div class=\"success\">\n\t\t\t\t\t\t<div class=\"success-ico\"></div>\n\t\t\t\t\t\t<span>", "</span>\n\t\t\t\t\t</div>"]);
+
+	  _templateObject = function _templateObject() {
+	    return data;
+	  };
+
+	  return data;
+	}
 	var ComponentsGallery = /*#__PURE__*/function (_ObjectsGallery) {
 	  babelHelpers.inherits(ComponentsGallery, _ObjectsGallery);
 
-	  function ComponentsGallery(argument) {
+	  function ComponentsGallery(argument, parent) {
 	    var _this;
 
 	    babelHelpers.classCallCheck(this, ComponentsGallery);
@@ -12,6 +21,9 @@
 	    _this = babelHelpers.possibleConstructorReturn(this, babelHelpers.getPrototypeOf(ComponentsGallery).call(this, argument));
 	    babelHelpers.defineProperty(babelHelpers.assertThisInitialized(_this), "editMode", []);
 	    _this.componentEditor = argument['componentEditor'];
+
+	    _this.setParent(parent);
+
 	    return _this;
 	  }
 
@@ -24,8 +36,22 @@
 	    key: "addQuestions",
 	    value: function addQuestions() {
 	      var question = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-	      var component = this.createFactoryObject(question['type']);
+	      var regime = arguments.length > 1 ? arguments[1] : undefined;
+	      var gallery = this;
+	      var type = question['type'];
+	      var component = this.createFactoryObject(type);
 	      component.build(question);
+
+	      if (type === 'Button' && regime === 'view') {
+	        component.onDown(function () {
+	          gallery.getParent().saveResult(gallery.getResult());
+	          gallery.removeHTMLObject();
+	          var successDialog = new savmaxru_modalwindow.ModalWindow();
+	          successDialog.setContent(main_core.Tag.render(_templateObject(), BX.message('FORM_SEND_SUCCESSFULLY')));
+	          gallery.getParent().getHTMLObject().append(successDialog.getHTMLObject());
+	        });
+	      }
+
 	      component.enableEditMode(this.editMode);
 	    }
 	  }, {
@@ -39,11 +65,11 @@
 	    }
 	  }, {
 	    key: "addObjectsGroup",
-	    value: function addObjectsGroup(data) {
+	    value: function addObjectsGroup(data, regime) {
 	      var questions = data['questions'];
 
 	      for (var i = 0; i < questions.length; i++) {
-	        this.addQuestions(questions[i]);
+	        this.addQuestions(questions[i], regime);
 	      }
 	    }
 	  }, {
@@ -107,5 +133,5 @@
 
 	exports.ComponentsGallery = ComponentsGallery;
 
-}((this.Savmaxru = this.Savmaxru || {}),BX,Savmaxru,Savmaxru,Savmaxru));
+}((this.Savmaxru = this.Savmaxru || {}),Savmaxru,Savmaxru,Savmaxru,BX));
 //# sourceMappingURL=componentsgallery.bundle.js.map

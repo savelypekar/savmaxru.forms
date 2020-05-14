@@ -1,15 +1,17 @@
-import {Type} from 'main.core';
 import {ObjectsGallery} from "savmaxru.objectsgallery";
 import {GUIComponents} from 'savmaxru.guicomponents';
-import {IDManager} from 'savmaxru.idmanager';
+import {ModalWindow} from 'savmaxru.modalwindow';
+import {Tag} from 'main.core';
+import './css/style.css'
 
 export class ComponentsGallery extends ObjectsGallery
 {
-	constructor(argument)
+	constructor(argument, parent)
 	{
 		argument["objectsFactory"] = GUIComponents;
 		super(argument);
 		this.componentEditor = argument['componentEditor'];
+		this.setParent(parent);
 	}
 
 	editComponent(component)
@@ -17,10 +19,27 @@ export class ComponentsGallery extends ObjectsGallery
 		this.componentEditor.runEditor(component);
 	}
 
-	addQuestions(question ={})
+	addQuestions(question ={},regime)
 	{
-		let component = this.createFactoryObject(question['type']);
+		let gallery = this;
+		let type = question['type'];
+		let component = this.createFactoryObject(type);
 		component.build(question);
+		if(type === 'Button' && regime === 'view')
+		{
+			component.onDown(function(){
+				gallery.getParent().saveResult(gallery.getResult());
+				gallery.removeHTMLObject();
+				let successDialog = new ModalWindow();
+				successDialog.setContent(
+					Tag.render`<div class="success">
+						<div class="success-ico"></div>
+						<span>${BX.message('FORM_SEND_SUCCESSFULLY')}</span>
+					</div>`
+				);
+				gallery.getParent().getHTMLObject().append(successDialog.getHTMLObject());
+			});
+		}
 		component.enableEditMode(this.editMode);
 	}
 
@@ -33,13 +52,13 @@ export class ComponentsGallery extends ObjectsGallery
 		this.editMode = modes;
 	}
 
-	addObjectsGroup(data)
+	addObjectsGroup(data,regime)
 	{
 		let questions = data['questions'];
 
 		for(let i=0; i<questions.length; i++)
 		{
-			this.addQuestions(questions[i]);
+			this.addQuestions(questions[i],regime);
 		}
 	}
 
@@ -78,8 +97,8 @@ export class ComponentsGallery extends ObjectsGallery
 	}
 
 	getChanges()
-	{	let chacngesGallery=[];
-
+	{
+		let chacngesGallery=[];
 		let questions=[];
 		let objects = this.objects;
 		console.log("getChanges");
