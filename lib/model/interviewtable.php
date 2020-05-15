@@ -25,18 +25,16 @@ class InterviewTable extends DataManager
 			new StringField("ID_AUTHOR"),
 			new StringField("TITLE"),
 			new StringField("DATE_CREATE"),
-			new StringField("DATE_EDIT"),
 			new BooleanField("VISIBLE"),
 		];
 	}
 
-	public function addInterview($idAuthor, $title, $dateCreate, $dateEdit, $visible)
+	public function addInterview($idAuthor, $title, $dateCreate, $visible)
 	{
 		$result = InterviewTable::add([
 			'ID_AUTHOR' => $idAuthor,
 			'TITLE' => $title,
 			'DATE_CREATE' => $dateCreate,
-			'DATE_EDIT' => $dateEdit,
 			'VISIBLE' => $visible,
 		]);
 
@@ -50,7 +48,7 @@ class InterviewTable extends DataManager
 	public function getAllInterviews()
 	{
 		$result = InterviewTable::getList([
-			'select' => ['ID', 'ID_AUTHOR', 'TITLE', 'DATE_CREATE', 'DATE_EDIT', 'VISIBLE']
+			'select' => ['ID', 'ID_AUTHOR', 'TITLE', 'DATE_CREATE', 'VISIBLE']
 		]);
 		$row = $result ->fetchAll();
 		return $row;
@@ -59,7 +57,7 @@ class InterviewTable extends DataManager
 	public function getInterviewsByIdAuthor($idAuthor)
 	{
 		$result = InterviewTable::getList([
-			'select' => ['ID', 'ID_AUTHOR', 'TITLE', 'DATE_CREATE', 'DATE_EDIT', 'VISIBLE'],
+			'select' => ['ID', 'ID_AUTHOR', 'TITLE', 'DATE_CREATE', 'VISIBLE'],
 			'filter' => ['ID_AUTHOR' => $idAuthor],
 		]);
 		$row = $result ->fetchAll();
@@ -68,29 +66,41 @@ class InterviewTable extends DataManager
 
 	public function getInterviewsByAmount($quantity, $firstPosition)
 	{
+		$answerResultTable = new \Savmaxru\Forms\Model\AnswerResultTable();
 		$firstPosition = $firstPosition - 1;
 		$result = InterviewTable::getList([
-			'select' => ['ID', 'ID_AUTHOR', 'TITLE', 'DATE_CREATE', 'DATE_EDIT', 'VISIBLE'],
+			'select' => ['ID', 'ID_AUTHOR', 'TITLE', 'DATE_CREATE', 'VISIBLE'],
 			'limit' => $quantity,
 			'offset' => $firstPosition,
 		]);
-		$row = $result ->fetchAll();
-		return $row;
+		$rows = $result ->fetchAll();
+		foreach ($rows as &$row)
+		{
+			$count = $answerResultTable->getCountAnswersByIdInterview($row['ID']);
+			$row['COUNT_ANSWERS'] = $count;
+		}
+		return $rows;
 	}
 
 	public function getInterviewsCurrentUser($quantity, $firstPosition)
 	{
+		$answerResultTable = new \Savmaxru\Forms\Model\AnswerResultTable();
 		global $USER;
 		$firstPosition = $firstPosition - 1;
 		$idUser = $USER->GetID();
 		$result = InterviewTable::getList([
-			'select' => ['ID', 'ID_AUTHOR', 'TITLE', 'DATE_CREATE', 'DATE_EDIT', 'VISIBLE'],
+			'select' => ['ID', 'ID_AUTHOR', 'TITLE', 'DATE_CREATE', 'VISIBLE'],
 			'filter' => ['ID_AUTHOR' => $idUser],
 			'limit' => $quantity,
 			'offset' => $firstPosition,
 		]);
-		$row = $result ->fetchAll();
-		return $row;
+		$rows = $result ->fetchAll();
+		foreach ($rows as &$row)
+		{
+			$count = $answerResultTable->getCountAnswersByIdInterview($row['ID']);
+			$row['COUNT_ANSWERS'] = $count;
+		}
+		return $rows;
 	}
 
 	public function deleteRow($id)
@@ -126,7 +136,7 @@ class InterviewTable extends DataManager
 	public function getInterviewsById($id)
 	{
 		$result = InterviewTable::getList([
-			'select' => ['ID', 'ID_AUTHOR', 'TITLE', 'DATE_CREATE', 'DATE_EDIT', 'VISIBLE'],
+			'select' => ['ID', 'ID_AUTHOR', 'TITLE', 'DATE_CREATE', 'VISIBLE'],
 			'filter' => ['ID' => $id],
 		]);
 		$row = $result ->fetchAll();

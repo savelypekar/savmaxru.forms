@@ -21,7 +21,6 @@ class CSavmaxruFormsMyForms extends CBitrixComponent implements Controllerable
 		return array();
 	}
 
-	//not used
 	public function loadAllInterviewAction()
 	{
 		$interviewTable = new \Savmaxru\Forms\Model\InterviewTable();
@@ -32,7 +31,6 @@ class CSavmaxruFormsMyForms extends CBitrixComponent implements Controllerable
 		];
 	}
 
-	//not used
 	public function loadInterviewByAmountAction($quantity, $firstPosition)
 	{
 		$interviewTable = new \Savmaxru\Forms\Model\InterviewTable();
@@ -53,7 +51,6 @@ class CSavmaxruFormsMyForms extends CBitrixComponent implements Controllerable
 		];
 	}
 
-	//not used
 	public function saveInterviewAndQuestionAction($interview, $questions)
 	{
 		$interviewTable = new \Savmaxru\Forms\Model\InterviewTable();
@@ -66,7 +63,6 @@ class CSavmaxruFormsMyForms extends CBitrixComponent implements Controllerable
 		}
 	}
 
-	//not used now
 	public function saveAllDataAction($interviews, $questions, $options)
 	{
 		$interviewTable = new \Savmaxru\Forms\Model\InterviewTable();

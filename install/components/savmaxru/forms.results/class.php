@@ -41,6 +41,7 @@ class CSavmaxruEditor extends CBitrixComponent implements Controllerable
 		$answerOptionTable = new \Savmaxru\Forms\Model\AnswerOptionTable();
 		$questionTable = new \Savmaxru\Forms\Model\QuestionTable();
 		$optionTable = new \Savmaxru\Forms\Model\OptionTable();
+		$dateInfoTable = new \Savmaxru\Forms\Model\DateInfoTable();
 
 		$result = [];
 		$answerResult = $answerResultTable->getResultByIdResult($idResult);
@@ -48,6 +49,13 @@ class CSavmaxruEditor extends CBitrixComponent implements Controllerable
 		$result['ID_RESULT'] = $answerResult[0]['ID_RESULT'];
 		$result['ID_INTERVIEW'] = $answerResult[0]['ID_INTERVIEW'];
 		$result['ID_USER'] = $answerResult[0]['ID_USER'];
+		$result['NAME_USER'] = $answerResult[0]['NAME_USER'];
+		$idDate = $answerResult[0]['DATE'];
+		$dateInfo = $dateInfoTable->getDateById($idDate);
+		$dateInfo = $dateInfo[0]['DATE_CREATE'];
+		$result['DATE_DAY'] = substr($dateInfo, 8,2);
+		$result['DATE_MONTH'] = substr($dateInfo, 5,2);
+		$result['TIME'] = substr($dateInfo, 11,5);
 		$answers = $answerToQuestionTable->getResultByIdResult($idResult);
 		$countAnswers = 0;
 		foreach ($answers as $answer)

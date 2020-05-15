@@ -72,16 +72,33 @@ class CSavmaxruFormsView extends CBitrixComponent implements Controllerable
 		$answerResultTable = new \Savmaxru\Forms\Model\AnswerResultTable();
 		$answerToQuestionTable = new \Savmaxru\Forms\Model\AnswerToQuestionTable();
 		$answerOptionTable = new \Savmaxru\Forms\Model\AnswerOptionTable();
+		$dateInfoTable = new \Savmaxru\Forms\Model\DateInfoTable();
 
 		$result = $this->validationForSaveResult($result);
 
 		global $USER;
-		$idUser = $USER->GetID();
+		$authorizeUser = $USER->IsAuthorized();
+		if ($authorizeUser)
+		{
+			$idUser = $USER->GetID();
+			$nameUser = $USER->GetFullName();
+		}
+		else
+		{
+			$idUser = 0;
+			$nameUser = 'Guest';
+		}
 
 		$maxIdResult = $answerResultTable->getMaxIdResult();
 		$idResult = $maxIdResult + 1;
 
-		$answerResultTable->saveAnswerResult($idResult, $result["ID"], $idUser);
+		$dateInfo = [
+			'TYPE_OBJECT' => 'AnswerResult',
+			'DATE_CREATE' => date("Y-m-d H:i:s"),
+		];
+		$idDate = $dateInfoTable->saveDate($dateInfo);
+
+		$answerResultTable->saveAnswerResult($idResult, $result["ID"], $idUser, $nameUser,  $idDate);
 
 		foreach ($result["questions"] as $question)
 		{

@@ -42,6 +42,8 @@ class DateInfoTable extends DataManager
 		$result = DateInfoTable::getList([
 			'select' => [
 				'ID',
+				'TYPE_OBJECT',
+				'DATE_CREATE'
 			],
 			'filter' => ['ID' => $idDate],
 		]);

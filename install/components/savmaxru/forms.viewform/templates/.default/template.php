@@ -26,19 +26,19 @@ Save all result
 			ID: 125,
 			questions: [
 				{
-					ID: 11215,
+					ID: 71,
 					options: {
 						'userValue': "Kaliningrad" ,
 					}
 				},
 				{
-					ID: 11216,
+					ID: 72,
 					options: {
 						'userValue': "Paris" ,
 					}
 				},
 				{
-					ID: 11217,
+					ID: 73,
 					options: [
 						6787,2323,
 					]
@@ -51,7 +51,7 @@ Save all result
 			result: result,
 		}
 	});
-	//console.log(result);
+	console.log(result);
 </script>
 -->
 
