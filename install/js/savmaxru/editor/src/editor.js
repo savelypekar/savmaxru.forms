@@ -27,6 +27,8 @@ export class Editor extends ObjectGUI
 		</div>
 		`);
 
+		let componentEditor = new ComponentEditor(this.getNode("editor-wrapper"));
+
 		let configGallery = {
 			"galleryClassCSS": "editor-gallery",
 			"componentEditor": componentEditor,
@@ -34,12 +36,14 @@ export class Editor extends ObjectGUI
 				'ID': argumentID
 			},
 		};
-		let gallery = new ComponentsGallery(configGallery, this, this.IDManager);
-		gallery.enableEditMode();
-		this.includeInNode("editor-wrapper", gallery.getHTMLObject());
 
-		let componentEditor = new ComponentEditor(this.getNode("editor-wrapper"));
+		let gallery = new ComponentsGallery(configGallery, this, this.IDManager);
 		componentEditor.setGallery(gallery);
+		gallery.enableEditMode();
+
+		gallery.createComponentWithOption("Button");
+
+		this.includeInNode("editor-wrapper", gallery.getHTMLObject());
 
 		let argumentID = ID;
 		if(argumentID === 0)

@@ -9,8 +9,7 @@
 
 	    babelHelpers.classCallCheck(this, ResultDialog);
 	    _this = babelHelpers.possibleConstructorReturn(this, babelHelpers.getPrototypeOf(ResultDialog).call(this));
-	    var answers = structure['answers'];
-	    console.log(structure);
+	    var answers = structure['answers']; //console.log(structure);
 
 	    _this.addNode('answers');
 

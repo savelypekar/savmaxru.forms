@@ -298,13 +298,20 @@
 	  babelHelpers.createClass(DropDownList, [{
 	    key: "addOption",
 	    value: function addOption(option) {
-	      var objectHTML = main_core.Tag.render(_templateObject2$1(), option);
+	      var valueField = this.addNode("value", 'span');
+	      var objectHTML = main_core.Tag.render(_templateObject2$1(), valueField);
 
 	      objectHTML.getCondition = function () {
 	        return this.selected;
 	      };
 
 	      this.includeInNode("dropdownlist", objectHTML);
+
+	      objectHTML.setValue = function (value) {
+	        valueField.innerHTML = value;
+	      };
+
+	      objectHTML.setValue(option);
 	      return objectHTML;
 	    } //getSelected
 
@@ -422,7 +429,14 @@
 	      }
 
 	      var newItemID = this.getNextHighestId();
-	      var objectHTML = main_core.Tag.render(_templateObject$4(), newItemID, this.listName, newItemID, option);
+	      var valueField = this.addNode("value", 'span');
+	      var objectHTML = main_core.Tag.render(_templateObject$4(), newItemID, this.listName, newItemID, valueField);
+
+	      objectHTML.setValue = function (value) {
+	        valueField.innerHTML = value;
+	      };
+
+	      objectHTML.setValue(option);
 
 	      objectHTML.getCondition = function () {
 	        return this.children[0].checked;
@@ -589,9 +603,14 @@
 	  }, {
 	    key: "addOption",
 	    value: function addOption(option) {
-	      var objectHTML = this.getNode('component');
-	      this.inputHTML.value = option;
-	      return this.inputHTML;
+	      var objectHTML = this.inputHTML;
+
+	      this.inputHTML.setValue = function (value) {
+	        objectHTML.value = value;
+	      };
+
+	      objectHTML.setValue(option);
+	      return objectHTML;
 	    }
 	  }]);
 	  return TextBox;

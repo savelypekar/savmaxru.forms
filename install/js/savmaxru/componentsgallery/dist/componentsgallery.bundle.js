@@ -86,6 +86,17 @@
 	      return object;
 	    }
 	  }, {
+	    key: "createComponentWithOption",
+	    value: function createComponentWithOption(type) {
+	      var component = this.createComponent(type);
+	      component.build({
+	        'options': [{
+	          value: ""
+	        }]
+	      });
+	      return component;
+	    }
+	  }, {
 	    key: "getResult",
 	    value: function getResult() {
 	      var resultGallery = [];

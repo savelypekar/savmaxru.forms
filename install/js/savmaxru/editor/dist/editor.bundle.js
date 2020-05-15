@@ -34,6 +34,7 @@
 
 	    _this.includeInNode("editor-wrapper", main_core.Tag.render(_templateObject2(), ID, BX.message("RESULT"), ID, BX.message("FORM_PAGE")));
 
+	    var componentEditor = new savmaxru_componenteditor.ComponentEditor(_this.getNode("editor-wrapper"));
 	    var configGallery = {
 	      "galleryClassCSS": "editor-gallery",
 	      "componentEditor": componentEditor,
@@ -42,12 +43,12 @@
 	      }
 	    };
 	    var gallery = new savmaxru_componentsgallery.ComponentsGallery(configGallery, babelHelpers.assertThisInitialized(_this), _this.IDManager);
+	    componentEditor.setGallery(gallery);
 	    gallery.enableEditMode();
+	    gallery.createComponentWithOption("Button");
 
 	    _this.includeInNode("editor-wrapper", gallery.getHTMLObject());
 
-	    var componentEditor = new savmaxru_componenteditor.ComponentEditor(_this.getNode("editor-wrapper"));
-	    componentEditor.setGallery(gallery);
 	    var argumentID = ID;
 
 	    if (argumentID === 0) {

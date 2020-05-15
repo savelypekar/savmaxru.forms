@@ -241,12 +241,7 @@
 	          var add = otherSettings.createComponent("Button");
 	          add.setStyle("plus-button");
 	          add.onDown(function () {
-	            var object = options.createComponent("SingleLineTextBox");
-	            object.build({
-	              'options': [{
-	                value: ""
-	              }]
-	            });
+	            var object = options.createComponentWithOption("SingleLineTextBox");
 	          });
 	        }
 

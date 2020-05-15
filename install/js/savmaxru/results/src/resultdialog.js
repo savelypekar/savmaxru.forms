@@ -7,7 +7,7 @@ export class ResultDialog extends ModalWindow
 	{
 		super();
 		let answers = structure['answers'];
-		console.log(structure);
+		//console.log(structure);
 		this.addNode('answers');
 		for(let i=0; i<answers.length; i++)
 		{

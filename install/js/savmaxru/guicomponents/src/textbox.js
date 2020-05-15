@@ -24,8 +24,12 @@ export class TextBox extends GUIComponent
 
 	addOption(option)
 	{
-		let objectHTML = this.getNode('component');
-		this.inputHTML.value = option;
-		return this.inputHTML;
+		let objectHTML = this.inputHTML;
+		this.inputHTML.setValue = function(value)
+		{
+			objectHTML.value = value;
+		};
+		objectHTML.setValue(option);
+		return objectHTML;
 	}
 }

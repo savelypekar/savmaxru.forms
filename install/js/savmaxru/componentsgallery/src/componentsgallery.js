@@ -76,6 +76,20 @@ export class ComponentsGallery extends ObjectsGallery
 		return object;
 	}
 
+	createComponentWithOption(type)
+	{
+		let component = this.createComponent(type);
+		component.build(
+		{
+			'options': [
+				{
+					value: "",
+				},
+			],
+		});
+		return component;
+	}
+
 	getResult()
 	{
 		let resultGallery=[];

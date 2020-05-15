@@ -226,15 +226,7 @@ export class ComponentEditor
 				let add = otherSettings.createComponent("Button");
 				add.setStyle("plus-button");
 				add.onDown(function(){
-					let object = options.createComponent("SingleLineTextBox");
-					object.build(
-					{
-						'options': [
-							{
-								value: "",
-							},
-						],
-					});
+					let object = options.createComponentWithOption("SingleLineTextBox");
 				});
 			}
 			otherSettings.addObjectsGroup({
