@@ -58,6 +58,7 @@ export class Option
 			return false;
 		}
 		result["ID"] = this.getProperty("ID");
+		result["index"] = 1;
 		return result;
 	}
 }

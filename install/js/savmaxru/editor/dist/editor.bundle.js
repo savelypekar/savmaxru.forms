@@ -35,11 +35,18 @@
 	    _this.includeInNode("editor-wrapper", main_core.Tag.render(_templateObject2(), ID, BX.message("RESULT"), ID, BX.message("FORM_PAGE")));
 
 	    var componentEditor = new savmaxru_componenteditor.ComponentEditor(_this.getNode("editor-wrapper"));
+	    var argumentID = ID;
+
+	    if (argumentID === '0') {
+	      argumentID = "NEW_FORM";
+	    }
+
 	    var configGallery = {
 	      "galleryClassCSS": "editor-gallery",
 	      "componentEditor": componentEditor,
 	      "argumentsForResult": {
-	        'ID': argumentID
+	        'ID': argumentID,
+	        title: 'title new form '
 	      }
 	    };
 	    var gallery = new savmaxru_componentsgallery.ComponentsGallery(configGallery, babelHelpers.assertThisInitialized(_this), _this.IDManager);
@@ -48,12 +55,6 @@
 	    gallery.createComponentWithOption("Button");
 
 	    _this.includeInNode("editor-wrapper", gallery.getHTMLObject());
-
-	    var argumentID = ID;
-
-	    if (argumentID === 0) {
-	      argumentID = "NEW_FORM";
-	    }
 
 	    var addComponentButton = savmaxru_guicomponents.GUIComponents.attach("Button");
 	    addComponentButton.setStyle('plus-button');
@@ -70,7 +71,14 @@
 	    _this.includeInNode("editor-wrapper", saveButton.getHTMLObject());
 
 	    saveButton.onDown(function () {
-	      console.log(gallery.getChanges());
+	      var changes = gallery.getChanges();
+	      BX.ajax.runComponentAction('savmaxru:forms.editor', 'saveInterviewStructure', {
+	        mode: 'class',
+	        data: {
+	          result: changes
+	        }
+	      });
+	      console.log(changes);
 	    });
 	    addComponentButton.onDown(function () {
 	      componentEditor.runCreator();

@@ -59,6 +59,7 @@
 	      }
 
 	      result["ID"] = this.getProperty("ID");
+	      result["index"] = 1;
 	      return result;
 	    }
 	  }]);
@@ -191,6 +192,8 @@
 
 	      if (question !== false) {
 	        question["ID"] = this.getProperty("ID");
+	        question["type"] = this.getProperty("type");
+	        question["index"] = 1;
 	      }
 
 	      if (changedOptions.length !== 0) {

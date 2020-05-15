@@ -29,11 +29,18 @@ export class Editor extends ObjectGUI
 
 		let componentEditor = new ComponentEditor(this.getNode("editor-wrapper"));
 
+		let argumentID = ID;
+		if(argumentID === '0')
+		{
+			argumentID = "NEW_FORM";
+		}
+
 		let configGallery = {
 			"galleryClassCSS": "editor-gallery",
 			"componentEditor": componentEditor,
 			"argumentsForResult": {
-				'ID': argumentID
+				'ID': argumentID,
+				title: 'title new form ',
 			},
 		};
 
@@ -44,12 +51,6 @@ export class Editor extends ObjectGUI
 		gallery.createComponentWithOption("Button");
 
 		this.includeInNode("editor-wrapper", gallery.getHTMLObject());
-
-		let argumentID = ID;
-		if(argumentID === 0)
-		{
-			argumentID = "NEW_FORM";
-		}
 
 		let addComponentButton = GUIComponents.attach("Button");
 		addComponentButton.setStyle('plus-button');
@@ -67,7 +68,14 @@ export class Editor extends ObjectGUI
 		this.includeInNode("editor-wrapper", saveButton.getHTMLObject());
 
 		saveButton.onDown(function(){
-			console.log(gallery.getChanges());
+			let changes = gallery.getChanges();
+			BX.ajax.runComponentAction('savmaxru:forms.editor', 'saveInterviewStructure', {
+				mode: 'class',
+				data: {
+					result: changes,
+				}
+			});
+			console.log(changes);
 		});
 
 		addComponentButton.onDown(function(){

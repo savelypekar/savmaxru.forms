@@ -105,6 +105,8 @@ export class GUIComponent extends ObjectGUI
 		if(question !== false)
 		{
 			question["ID"] = this.getProperty("ID");
+			question["type"] = this.getProperty("type");
+			question["index"] = 1;
 		}
 
 		if(changedOptions.length !== 0)
