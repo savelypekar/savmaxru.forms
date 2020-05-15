@@ -4,9 +4,9 @@
 
 <!--
 Send ONE result
--->
+
 <script>
-	let idResult = '30';
+	let idResult = '2';
 	BX.ajax.runComponentAction('savmaxru:forms.results', 'sendSelectedResult', {
 		mode: 'class',
 		data: {
@@ -16,6 +16,7 @@ Send ONE result
 		console.log(response);
 	});
 </script>
+-->
 
 <!--
 Send results by amount
