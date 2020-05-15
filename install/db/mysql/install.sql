@@ -5,7 +5,6 @@ CREATE TABLE savmaxru_forms_interview
 	ID_AUTHOR int not null ,
 	TITLE varchar(255) not null,
 	DATE_CREATE varchar(255),
-	DATE_EDIT varchar(255),
 	VISIBLE boolean,
 
 	PRIMARY KEY(ID)
@@ -37,6 +36,8 @@ CREATE TABLE savmaxru_forms_answer_result
     ID_RESULT int not null,
     ID_INTERVIEW int not null ,
     ID_USER int not null,
+    NAME_USER varchar(255),
+    DATE varchar(255),
 
     PRIMARY KEY(ID)
 );

@@ -23,15 +23,19 @@ class AnswerResultTable extends DataManager
 			new IntegerField("ID_RESULT"),
 			new IntegerField("ID_INTERVIEW"),
 			new IntegerField("ID_USER"),
+			new StringField("NAME_USER"),
+			new StringField("DATE"),
 		];
 	}
 
-	public static function saveAnswerResult($idResult, $idInterview, $idUser)
+	public static function saveAnswerResult($idResult, $idInterview, $idUser, $nameUser, $date)
 	{
 		$result = AnswerResultTable::add([
 			'ID_RESULT' => $idResult,
 			'ID_INTERVIEW' => $idInterview,
 			'ID_USER' => $idUser,
+			'NAME_USER' => $nameUser,
+			'DATE' => $date,
 		]);
 
 		if ($result->isSuccess())
@@ -75,7 +79,7 @@ class AnswerResultTable extends DataManager
 	public function getResultByIdResult($idResult)
 	{
 		$result = AnswerResultTable::getList([
-			'select' => ['ID', 'ID_RESULT', 'ID_INTERVIEW', 'ID_USER'],
+			'select' => ['ID', 'ID_RESULT', 'ID_INTERVIEW', 'ID_USER', 'NAME_USER', 'DATE'],
 			'filter' => ['ID_RESULT' => $idResult],
 		]);
 		$rows = $result ->fetchAll();

@@ -45,6 +45,8 @@ class CSavmaxruEditor extends CBitrixComponent implements Controllerable
 		$result['ID_RESULT'] = $answerResult[0]['ID_RESULT'];
 		$result['ID_INTERVIEW'] = $answerResult[0]['ID_INTERVIEW'];
 		$result['ID_USER'] = $answerResult[0]['ID_USER'];
+		$result['NAME_USER'] = $answerResult[0]['NAME_USER'];
+		$result['DATE'] = $answerResult[0]['DATE'];
 		$answers = $answerToQuestionTable->getResultByIdResult($idResult);
 		$countAnswers = 0;
 		foreach ($answers as $answer)
