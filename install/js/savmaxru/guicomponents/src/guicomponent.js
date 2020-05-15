@@ -84,9 +84,35 @@ export class GUIComponent extends ObjectGUI
 
 	getChanges()
 	{
-		let result = this.getChangedProperties();
-		result["ID"] = this.getProperty("ID");
-		return result;
+		let question = this.getChangedProperties();
+		let changedOptions = [];
+		let options = this.getOptions();
+
+		for(let i=0; i< options.length; i++)
+		{
+			let changedOption = options[i].getChanges();
+			if(changedOption !== false)
+			{
+				changedOptions.push(changedOption);
+			}
+		}
+
+		if(question === false && changedOptions.length !== 0)
+		{
+			question = [];
+		}
+
+		if(question !== false)
+		{
+			question["ID"] = this.getProperty("ID");
+		}
+
+		if(changedOptions.length !== 0)
+		{
+			question['options'] = changedOptions;
+		}
+
+		return question;
 	}
 
 	getNextHighestId()
@@ -102,10 +128,12 @@ export class GUIComponent extends ObjectGUI
 		}
 		if(data['description']!== undefined)
 		{
+			this.addProperty('description', data['description']);
 			this.setDescription(data['description']);
 		}
 		if(data['comment']!== undefined)
 		{
+			this.addProperty('comment', data['comment']);
 			this.setComment(data['comment']);
 		}
 		if(data['options']!== undefined)
@@ -137,13 +165,13 @@ export class GUIComponent extends ObjectGUI
 		return this.options;
 	}
 
-	addOptions(options)
+	addOptions(options,createMode = 'load')
 	{
 		if(options !== undefined)
 		{
 			for(let i = 0; i<options.length; i++)
 			{
-				let option = new Option(options[i]);
+				let option = new Option(options[i],createMode);
 				option.setObjectHTML(this.addOption(option.getProperty("value")));
 				this.options.push(option);
 			}
@@ -159,7 +187,7 @@ export class GUIComponent extends ObjectGUI
 	{
 		if(description !== undefined)
 		{
-			this.includeInNode("description",description);
+			this.getNode("description").innerHTML = description;
 		}
 	}
 
@@ -167,7 +195,7 @@ export class GUIComponent extends ObjectGUI
 	{
 		if(comment !== undefined)
 		{
-			this.includeInNode("comment",comment);
+			this.getNode("comment").innerHTML = comment;
 		}
 	}
 

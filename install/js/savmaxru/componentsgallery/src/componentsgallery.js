@@ -115,21 +115,28 @@ export class ComponentsGallery extends ObjectsGallery
 
 	getChanges()
 	{
-		let chacngesGallery=[];
+		let changesGallery=[];
+		let argumentsForResult = this.argumentsForResult;
+		for (let key in argumentsForResult)
+		{
+			changesGallery[key]= argumentsForResult[key];
+		}
 		let questions=[];
 		let objects = this.objects;
-		console.log("getChanges");
 		for(let i=0; i<objects.length; i++)
 		{
 			let object = objects[i];
 			let objectResult = object.getChanges();
-			if(objectResult !== {})
+			if(objectResult !== false)
 			{
 				questions.push(objectResult);
 			}
 		}
-		chacngesGallery["questions"] = questions;
-		return chacngesGallery;
+		if(questions.length !== 0)
+		{
+			changesGallery["questions"] = questions;
+		}
+		return changesGallery;
 	}
 
 }

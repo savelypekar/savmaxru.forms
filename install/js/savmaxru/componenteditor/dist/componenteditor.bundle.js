@@ -132,7 +132,7 @@
 	          //если был создана новая опция и не была удалена при том
 	          component.addOptions([{
 	            value: newValue
-	          }]);
+	          }], 'create');
 	        }
 	      } //options.getValue();
 

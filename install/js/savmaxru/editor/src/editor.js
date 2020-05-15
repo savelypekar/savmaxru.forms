@@ -66,6 +66,10 @@ export class Editor extends ObjectGUI
 			});
 		this.includeInNode("editor-wrapper", saveButton.getHTMLObject());
 
+		saveButton.onDown(function(){
+			console.log(gallery.getChanges());
+		});
+
 		addComponentButton.onDown(function(){
 			componentEditor.runCreator();
 		});

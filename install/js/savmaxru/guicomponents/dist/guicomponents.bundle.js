@@ -3,11 +3,18 @@
 
 	var Option = /*#__PURE__*/function () {
 	  function Option(data) {
+	    var createMode = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'load';
 	    babelHelpers.classCallCheck(this, Option);
 	    savmaxru_propertychangemanager.PropertyChangeManager.connectObject(this);
-	    this.addProperty('value', data['value']);
 	    this.addProperty('ID', data['ID']);
-	    this.addProperty('index', data['index']);
+
+	    if (createMode === 'load') {
+	      this.addProperty('value', data['value']);
+	      this.addProperty('index', data['index']);
+	    } else {
+	      this.rewriteProperty('value', data['value']);
+	      this.rewriteProperty('index', data['index']);
+	    }
 	  }
 
 	  babelHelpers.createClass(Option, [{
@@ -40,6 +47,18 @@
 	    key: "getStructure",
 	    value: function getStructure() {
 	      var result = this.getProperties();
+	      return result;
+	    }
+	  }, {
+	    key: "getChanges",
+	    value: function getChanges() {
+	      var result = this.getChangedProperties();
+
+	      if (result === false) {
+	        return false;
+	      }
+
+	      result["ID"] = this.getProperty("ID");
 	      return result;
 	    }
 	  }]);
@@ -154,9 +173,31 @@
 	  }, {
 	    key: "getChanges",
 	    value: function getChanges() {
-	      var result = this.getChangedProperties();
-	      result["ID"] = this.getProperty("ID");
-	      return result;
+	      var question = this.getChangedProperties();
+	      var changedOptions = [];
+	      var options = this.getOptions();
+
+	      for (var i = 0; i < options.length; i++) {
+	        var changedOption = options[i].getChanges();
+
+	        if (changedOption !== false) {
+	          changedOptions.push(changedOption);
+	        }
+	      }
+
+	      if (question === false && changedOptions.length !== 0) {
+	        question = [];
+	      }
+
+	      if (question !== false) {
+	        question["ID"] = this.getProperty("ID");
+	      }
+
+	      if (changedOptions.length !== 0) {
+	        question['options'] = changedOptions;
+	      }
+
+	      return question;
 	    }
 	  }, {
 	    key: "getNextHighestId",
@@ -171,10 +212,12 @@
 	      }
 
 	      if (data['description'] !== undefined) {
+	        this.addProperty('description', data['description']);
 	        this.setDescription(data['description']);
 	      }
 
 	      if (data['comment'] !== undefined) {
+	        this.addProperty('comment', data['comment']);
 	        this.setComment(data['comment']);
 	      }
 
@@ -206,9 +249,11 @@
 	  }, {
 	    key: "addOptions",
 	    value: function addOptions(options) {
+	      var createMode = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'load';
+
 	      if (options !== undefined) {
 	        for (var i = 0; i < options.length; i++) {
-	          var option = new Option(options[i]);
+	          var option = new Option(options[i], createMode);
 	          option.setObjectHTML(this.addOption(option.getProperty("value")));
 	          this.options.push(option);
 	        }
@@ -223,14 +268,14 @@
 	    key: "setDescription",
 	    value: function setDescription(description) {
 	      if (description !== undefined) {
-	        this.includeInNode("description", description);
+	        this.getNode("description").innerHTML = description;
 	      }
 	    }
 	  }, {
 	    key: "setComment",
 	    value: function setComment(comment) {
 	      if (comment !== undefined) {
-	        this.includeInNode("comment", comment);
+	        this.getNode("comment").innerHTML = comment;
 	      }
 	    }
 	  }, {

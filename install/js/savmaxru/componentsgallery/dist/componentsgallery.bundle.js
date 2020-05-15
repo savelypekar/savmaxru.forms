@@ -124,22 +124,30 @@
 	  }, {
 	    key: "getChanges",
 	    value: function getChanges() {
-	      var chacngesGallery = [];
+	      var changesGallery = [];
+	      var argumentsForResult = this.argumentsForResult;
+
+	      for (var key in argumentsForResult) {
+	        changesGallery[key] = argumentsForResult[key];
+	      }
+
 	      var questions = [];
 	      var objects = this.objects;
-	      console.log("getChanges");
 
 	      for (var i = 0; i < objects.length; i++) {
 	        var object = objects[i];
 	        var objectResult = object.getChanges();
 
-	        if (objectResult !== {}) {
+	        if (objectResult !== false) {
 	          questions.push(objectResult);
 	        }
 	      }
 
-	      chacngesGallery["questions"] = questions;
-	      return chacngesGallery;
+	      if (questions.length !== 0) {
+	        changesGallery["questions"] = questions;
+	      }
+
+	      return changesGallery;
 	    }
 	  }]);
 	  return ComponentsGallery;

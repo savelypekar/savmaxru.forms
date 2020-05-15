@@ -2,12 +2,20 @@ import {PropertyChangeManager} from "savmaxru.propertychangemanager";
 
 export class Option
 {
-	constructor(data)
+	constructor(data,createMode = 'load')
 	{
 		PropertyChangeManager.connectObject(this);
-		this.addProperty('value',data['value']);
 		this.addProperty('ID',data['ID']);
-		this.addProperty('index',data['index']);
+		if(createMode === 'load')
+		{
+			this.addProperty('value',data['value']);
+			this.addProperty('index',data['index']);
+		}
+		else
+		{
+			this.rewriteProperty('value',data['value']);
+			this.rewriteProperty('index',data['index']);
+		}
 	}
 
 	remove()
@@ -39,6 +47,17 @@ export class Option
 	getStructure()
 	{
 		let result = this.getProperties();
+		return result;
+	}
+
+	getChanges()
+	{
+		let result = this.getChangedProperties();
+		if(result === false)
+		{
+			return false;
+		}
+		result["ID"] = this.getProperty("ID");
 		return result;
 	}
 }
