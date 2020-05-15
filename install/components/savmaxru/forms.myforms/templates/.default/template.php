@@ -11,8 +11,8 @@
 	BX.ajax.runComponentAction('savmaxru:forms.myforms', 'loadInterviewCurrentUser', {
 		mode: 'class',
 		data: {
-			quantity: '10',
-			firstPosition: '0'
+			quantity: '1',
+			firstPosition: '1'
 		}
 	}).then(function (response) {
 		console.log(response);

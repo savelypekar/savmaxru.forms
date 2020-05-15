@@ -135,4 +135,15 @@ class AnswerResultTable extends DataManager
 
 		return $rows;
 	}
+
+	public function getCountAnswersByIdInterview($idInterview)
+	{
+		$result = AnswerResultTable::getList([
+			'select' => ['ID'],
+			'filter' => ['ID_INTERVIEW' => $idInterview],
+		]);
+		$rows = $result ->fetchAll();
+		$count = count($rows);
+		return $count;
+	}
 }
