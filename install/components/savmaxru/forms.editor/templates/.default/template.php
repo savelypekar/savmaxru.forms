@@ -3,13 +3,13 @@
 ?>
 <!--
 Save structure interview with question and option
-
+-->
 <script>
 	let result = {
-		ID: 125,
-		//ID: 'NEW_FORM',
-		title: 'title new form ',
-		change: "changed",
+		//ID: 125,
+		ID: 'NEW_FORM',
+		title: 'title new form 4444',
+		//change: "changed",
 		visible: true,
 		questions: [
 			{
@@ -64,4 +64,3 @@ Save structure interview with question and option
 	});
 	console.log(result);
 </script>
--->
