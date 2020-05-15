@@ -1,22 +1,40 @@
-import {Type} from 'main.core';
+import './css/style.css'
+import {ObjectGUI} from "savmaxru.objectgui";
+import {ResultsGallery} from "savmaxru.resultsgallery";
+import {Tag} from 'main.core';
+import {ResultDialog} from "./resultdialog";
 
-export class Results
+export class Results extends ObjectGUI
 {
-	constructor(options = {name: 'Results'})
+	constructor()
 	{
-		this.name = options.name;
+		super();
+		this.setRootNode(
+			Tag.render`
+			${this.addNode("results-wrapper")}`
+		);
+
+		let configGallery = {
+			"galleryClassCSS": "results-gallery",
+		};
+
+		let gallery = new ResultsGallery(configGallery,this);
+		this.includeInNode("results-wrapper", gallery.getHTMLObject());
+		gallery.loadGroupObject();
 	}
 
-	setName(name)
+	openResultWindow(ID)
 	{
-		if (Type.isString(name))
-		{
-			this.name = name;
-		}
+		let page = this;
+		BX.ajax.runComponentAction('savmaxru:forms.results', 'sendSelectedResult', {
+			mode: 'class',
+			data: {
+				idResult: ID,
+			}
+		}).then(function (response) {
+			let window = new ResultDialog(response['data']['result'])
+			page.getRootNode().append(window.getHTMLObject());
+		});
 	}
 
-	getName()
-	{
-		return this.name;
-	}
 }

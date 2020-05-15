@@ -6,7 +6,7 @@ export class MenuItemsFormGallery extends ObjectsGallery
 {
 	constructor(config)
 	{
-		super();
+		super(config);
 	}
 
 	addGroupObject(itemsStructure)

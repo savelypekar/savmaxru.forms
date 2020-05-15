@@ -25,7 +25,6 @@
 	      "galleryClassCSS": "myforms-gallery"
 	    };
 	    var gallery = new savmaxru_menuitemsformgallery.MenuItemsFormGallery(configGallery);
-	    _this.gallery = gallery;
 	    var addButton = savmaxru_guicomponents.GUIComponents.attach("Button");
 	    addButton.setStyle('plus-button');
 	    gallery.push(addButton);

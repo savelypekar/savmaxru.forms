@@ -1,7 +1,7 @@
 <?php
 \Bitrix\Main\UI\Extension::load('savmaxru.editor');
 ?>
-<!--
+
 Save structure interview with question and option
 
 <script>
@@ -133,4 +133,3 @@ Save structure interview with question and option
 
 	console.log(result);
 </script>
--->

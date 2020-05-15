@@ -19,7 +19,6 @@ export class MyForms extends ObjectGUI
 		};
 
 		let gallery = new MenuItemsFormGallery(configGallery);
-		this.gallery = gallery;
 
 		let addButton = GUIComponents.attach("Button");
 		addButton.setStyle('plus-button')

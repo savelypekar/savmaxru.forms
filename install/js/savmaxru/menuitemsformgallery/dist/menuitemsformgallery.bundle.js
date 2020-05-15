@@ -7,7 +7,7 @@ this.BX = this.BX || {};
 
 	  function MenuItemsFormGallery(config) {
 	    babelHelpers.classCallCheck(this, MenuItemsFormGallery);
-	    return babelHelpers.possibleConstructorReturn(this, babelHelpers.getPrototypeOf(MenuItemsFormGallery).call(this));
+	    return babelHelpers.possibleConstructorReturn(this, babelHelpers.getPrototypeOf(MenuItemsFormGallery).call(this, config));
 	  }
 
 	  babelHelpers.createClass(MenuItemsFormGallery, [{
