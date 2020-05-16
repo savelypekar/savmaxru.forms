@@ -1,0 +1,21 @@
+.savmaxru-forms .results-form
+{
+	display: flex;
+	flex-direction:column;
+	font-size: 17px;
+	width: calc(100% - 2*60px);
+	padding: 60px;
+}
+
+.savmaxru-forms .results-form span
+{
+	font-size: 18px;
+	color: #e57373;
+}
+
+.savmaxru-forms .results-form .user-name
+{	margin-bottom: 10px;
+	font-size: 24px;
+	color: #0c5460;
+	text-align: center;
+}

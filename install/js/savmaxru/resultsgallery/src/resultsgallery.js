@@ -4,9 +4,10 @@ import {ResultItemForm} from "savmaxru.resultitemform";
 
 export class ResultsGallery extends ObjectsGallery
 {
-	constructor(config,parent)
+	constructor(config,parent,ID)
 	{
 		super(config);
+		this.ID = ID;
 		this.setParent(parent);
 	}
 
@@ -33,7 +34,7 @@ export class ResultsGallery extends ObjectsGallery
 	{
 		let gallery = this;
 
-		let idInterview = '14';
+		let idInterview = this.ID;
 		let quantity = '70';
 		let firstPosition = '1';
 		BX.ajax.runComponentAction('savmaxru:forms.results', 'sendResults', {

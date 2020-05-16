@@ -4,11 +4,12 @@
 	var ResultsGallery = /*#__PURE__*/function (_ObjectsGallery) {
 	  babelHelpers.inherits(ResultsGallery, _ObjectsGallery);
 
-	  function ResultsGallery(config, parent) {
+	  function ResultsGallery(config, parent, ID) {
 	    var _this;
 
 	    babelHelpers.classCallCheck(this, ResultsGallery);
 	    _this = babelHelpers.possibleConstructorReturn(this, babelHelpers.getPrototypeOf(ResultsGallery).call(this, config));
+	    _this.ID = ID;
 
 	    _this.setParent(parent);
 
@@ -36,7 +37,7 @@
 	    key: "loadGroupObject",
 	    value: function loadGroupObject() {
 	      var gallery = this;
-	      var idInterview = '14';
+	      var idInterview = this.ID;
 	      var quantity = '70';
 	      var firstPosition = '1';
 	      BX.ajax.runComponentAction('savmaxru:forms.results', 'sendResults', {
