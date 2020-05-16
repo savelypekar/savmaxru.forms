@@ -8,7 +8,6 @@ export class ResultDialog extends ModalWindow
 	{
 		super();
 		let answers = structure['answers'];
-		console.log(structure);
 		this.addNode('results-form');
 		this.includeInNode('results-form',Tag.render`<span class="user-name">${structure['NAME_USER']}</span>`);
 		for(let i=0; i<answers.length; i++)
@@ -17,10 +16,17 @@ export class ResultDialog extends ModalWindow
 			let answerNode = Tag.render`<ul></ul>`;
 			this.includeInNode('results-form',Tag.render`<span>${answer['CONTENT']}</span>`);
 			let options = answer['options'];
-			for(let j=0; j<options.length; j++)
+			if(options !== undefined)
 			{
-				let option = options[j];
-				answerNode.append(Tag.render`<li>${option["CONTENT"]}</li>`);
+				for(let j=0; j<options.length; j++)
+				{
+					let option = options[j];
+					answerNode.append(Tag.render`<li>${option["CONTENT"]}</li>`);
+				}
+			}
+			else
+			{
+				answerNode.append(Tag.render`<li>${'bez otveta'}</li>`);
 			}
 			this.includeInNode('results-form',answerNode);
 		}

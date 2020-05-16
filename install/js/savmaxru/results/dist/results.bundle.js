@@ -1,6 +1,16 @@
 (function (exports,savmaxru_objectgui,savmaxru_resultsgallery,savmaxru_modalwindow,main_core) {
 	'use strict';
 
+	function _templateObject5() {
+	  var data = babelHelpers.taggedTemplateLiteral(["<li>", "</li>"]);
+
+	  _templateObject5 = function _templateObject5() {
+	    return data;
+	  };
+
+	  return data;
+	}
+
 	function _templateObject4() {
 	  var data = babelHelpers.taggedTemplateLiteral(["<li>", "</li>"]);
 
@@ -49,7 +59,6 @@
 	    babelHelpers.classCallCheck(this, ResultDialog);
 	    _this = babelHelpers.possibleConstructorReturn(this, babelHelpers.getPrototypeOf(ResultDialog).call(this));
 	    var answers = structure['answers'];
-	    console.log(structure);
 
 	    _this.addNode('results-form');
 
@@ -63,9 +72,13 @@
 
 	      var options = answer['options'];
 
-	      for (var j = 0; j < options.length; j++) {
-	        var option = options[j];
-	        answerNode.append(main_core.Tag.render(_templateObject4(), option["CONTENT"]));
+	      if (options !== undefined) {
+	        for (var j = 0; j < options.length; j++) {
+	          var option = options[j];
+	          answerNode.append(main_core.Tag.render(_templateObject4(), option["CONTENT"]));
+	        }
+	      } else {
+	        answerNode.append(main_core.Tag.render(_templateObject5(), 'bez otveta'));
 	      }
 
 	      _this.includeInNode('results-form', answerNode);
