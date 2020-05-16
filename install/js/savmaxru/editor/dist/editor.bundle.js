@@ -54,9 +54,14 @@
 	    componentEditor.setGallery(gallery);
 	    gallery.enableEditMode();
 
+	    _this.includeInNode("editor-wrapper", gallery.getHTMLObject());
+
 	    if (ID === '0') {
 	      //заготовка для создания новой формы
 	      var button = gallery.createComponentWithOption("Button", 'Send form');
+
+	      _this.includeInNode("editor-wrapper", button.getHTMLObject()); //сюда
+
 	    } else {
 	      BX.ajax.runComponentAction('savmaxru:forms.viewform', 'sendInterviewStructure', {
 	        mode: 'class',
@@ -67,8 +72,6 @@
 	        gallery.addObjectsGroup(response['data']['result'], "edit");
 	      });
 	    }
-
-	    _this.includeInNode("editor-wrapper", gallery.getHTMLObject());
 
 	    var addComponentButton = savmaxru_guicomponents.GUIComponents.attach("Button");
 	    addComponentButton.setStyle('plus-button');

@@ -48,11 +48,14 @@ export class Editor extends ObjectGUI
 		let gallery = new ComponentsGallery(configGallery, this, this.IDManager);
 		componentEditor.setGallery(gallery);
 		gallery.enableEditMode();
+		this.includeInNode("editor-wrapper", gallery.getHTMLObject());
 
 		if(ID === '0')
 		{
 			//заготовка для создания новой формы
 			let button = gallery.createComponentWithOption("Button",'Send form');
+			this.includeInNode("editor-wrapper", button.getHTMLObject());
+			//сюда
 		}
 		else
 		{
@@ -65,8 +68,6 @@ export class Editor extends ObjectGUI
 				gallery.addObjectsGroup(response['data']['result'],"edit");
 			});
 		}
-
-		this.includeInNode("editor-wrapper", gallery.getHTMLObject());
 
 		let addComponentButton = GUIComponents.attach("Button");
 		addComponentButton.setStyle('plus-button');

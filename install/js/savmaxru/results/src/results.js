@@ -6,7 +6,7 @@ import {ResultDialog} from "./resultdialog";
 
 export class Results extends ObjectGUI
 {
-	constructor()
+	constructor(ID)
 	{
 		super();
 		this.setRootNode(
@@ -18,7 +18,7 @@ export class Results extends ObjectGUI
 			"galleryClassCSS": "results-gallery",
 		};
 
-		let gallery = new ResultsGallery(configGallery,this);
+		let gallery = new ResultsGallery(configGallery,this,ID);
 		this.includeInNode("results-wrapper", gallery.getHTMLObject());
 		gallery.loadGroupObject();
 	}
