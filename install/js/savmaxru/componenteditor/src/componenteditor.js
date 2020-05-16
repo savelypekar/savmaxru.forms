@@ -1,4 +1,3 @@
-import {Type} from 'main.core';
 import {ModalWindow} from 'savmaxru.modalwindow';
 import {Tag} from 'main.core';
 import './css/style.css'
@@ -26,15 +25,19 @@ export class ComponentEditor
 
 	openWindow()
 	{
-		this.window = new Savmaxru.ModalWindow();
+		this.window = new ModalWindow();
 		this.parent.append(this.window.getHTMLObject());
 	}
 
-	create()
+	closeWindow()
+	{
+		this.window.close();
+	}
+
+	runCreator()
 	{
 		this.openWindow();
 		let selectingAComponent = Tag.render`<div class="components-selection"></div>`;
-
 		for(let i=0; i<this.types.length; i++)
 		{
 			let button = new TypeButton(this.types[i],this);
@@ -59,30 +62,75 @@ export class ComponentEditor
 		return option;
 	}
 
-	runEditor(component)
+	applyChanges(component,description,optionsGallery,otherSettings)
 	{
-		this.openWindow();
+		let objects = optionsGallery.getObjects();
+		for(let i=0; i<objects.length; i++)
+		{
+			let object = objects[i];
+
+			let newValue = object.getValue();
+			let modifiableOption = object.getProperty('modifiableOption');
+
+			if(modifiableOption !== undefined)
+			{
+				let savedValue = modifiableOption.getProperty('value');
+				if(object.getProperty('change') === 'removed')
+				{
+					modifiableOption.remove();
+				}
+				else if(newValue !== savedValue)
+				{
+					modifiableOption.rewriteProperty('value', newValue);
+					modifiableOption.refreshHTML();
+				}
+			}
+			else if(object.getProperty('change') !== 'removed')
+			{
+				//если был создана новая опция и не была удалена при том
+				component.addOptions([{
+					value: newValue,
+				}],'create');
+			}
+		}
+
+		let descriptionOptions = description.getResult()['questions'];
+
+		if( descriptionOptions.length !== 0 )
+		{
+			let newQuestionText = descriptionOptions[0]['options']['userValue'];
+			let commentToTheQuestion = descriptionOptions[1]['options']['userValue'];
+			component.rewriteProperty('comment', commentToTheQuestion);
+			component.rewriteProperty('description', newQuestionText);
+			component.setComment(commentToTheQuestion);
+			component.setDescription(newQuestionText);
+		}
+	}
+
+	runEditor(component,runWindow = true)
+	{
+		if(runWindow)
+		{
+			this.openWindow();
+		}
 		let componentStructure = component.getStructure();
 
 		let configDescription = {
 			"galleryClassCSS": "editor-description-gallery",
 		};
-		let description = new ComponentsGallery(configDescription);
+		let description = new ComponentsGallery(configDescription,this,this.IDManager);
 		this.window.setContent(description.getHTMLObject());
 
 		let configOption = {
 			"galleryClassCSS": "editor-options-gallery",
 		};
-		let options = new ComponentsGallery(configOption);
+		let options = new ComponentsGallery(configOption,this,this.IDManager);
 		this.window.setContent(options.getHTMLObject());
-		options.enableEditMode({
-			"remove":true
-		});
 
 		let configOtherSettings = {
 			"galleryClassCSS": "editor-other-settings-gallery",
 		};
-		let otherSettings = new ComponentsGallery(configOtherSettings);
+		let otherSettings = new ComponentsGallery(configOtherSettings,this,this.IDManager);
 		this.window.setContent(otherSettings.getHTMLObject());
 
 		let type = componentStructure["type"];
@@ -113,16 +161,23 @@ export class ComponentEditor
 
 		if(type !== "Button" && type !== "Heading")
 		{
+
 			description.addObjectsGroup({
 				questions: [
 				{
 					ID: "questionText",
 					description:BX.message("QUESTION_TEXT"),
 					type: "MultiLineTextBox",
+					options:[{
+						value: component.getProperty('description'),
+					}],
 				},{
 					ID: "hintToTheQuestion",
 					description:BX.message("HINT_TO_THE_QUESTION"),
 					type: "MultiLineTextBox",
+					options:[{
+						value: component.getProperty('comment'),
+					}],
 				},],
 			},);
 
@@ -140,18 +195,34 @@ export class ComponentEditor
 					}]
 				});
 			}
-
 		}
 
-		let questions = [];
-		for(let i=0; i<componentStructure['options'].length; i++)
+		if(type === "DropDownList" || type === "CheckboxList" || type === "RadiobuttonList")
 		{
-			questions.push(this.buildFieldStructureForEditingOption(componentStructure['options'][i]));
+			options.enableEditMode({
+				"remove":true
+			});
+
 		}
 
-		options.addObjectsGroup({
-			questions,
-		},);
+		let optionsStructure = component.getOptions();
+
+		for(let i=0; i<optionsStructure.length; i++)
+		{
+			if(optionsStructure[i].getProperty('change') !== 'removed')
+			{
+				let option = options.createComponent("SingleLineTextBox");
+				option.addProperty('modifiableOption',optionsStructure[i]);
+				option.build(
+				{
+					'options': [
+						{
+							value: optionsStructure[i].getProperty('value'),
+						},
+					],
+				});
+			}
+		}
 
 		if(type !== "Button" && type !== "Heading")
 		{
@@ -160,14 +231,13 @@ export class ComponentEditor
 				let add = otherSettings.createComponent("Button");
 				add.setStyle("plus-button");
 				add.onDown(function(){
-					options.createComponent("SingleLineTextBox");
+					let object = options.createComponentWithOption("SingleLineTextBox");
 				});
 			}
 			otherSettings.addObjectsGroup({
 				questions: [{
 					ID: "notAcceptUnanswered",
 					type: "CheckboxList",
-					'IDManager': this.IDManager,
 					options: [
 						{
 							value:BX.message("NOT_ACCEPT_UNANSWERED"),
@@ -181,124 +251,33 @@ export class ComponentEditor
 		let saveButton = otherSettings.createComponent("Button");
 		saveButton.build(
 			{
-				'ID': 2226,
-				'index': 6,
 				'options': [
 					{
-						index: 0,
-						ID: 121212,
 						value:BX.message("SAVE_FORM"),
 					},
 				],
 			});
-
-		//otherSettings.addObjectsGroup();
-
-		/*let configGallery = {
-			"galleryClassCSS": "editor-gallery",
-		};
-		let gallery = new ComponentsGallery(configGallery);
-		gallery.addObjectsGroup({
-			ID: 6829,
-			questions: [
-			{
-					ID: 121212,
-					index: 2,
-					type: "Heading",
-					options: [
-						{
-							index: 1,
-							value: 'Редактирование поля',
-							ID: 121212,
-						}
-					]
-				},
-				{
-					ID: 121212,
-					description:'Текст вопроса:',
-					index: 4,
-					type: "MultiLineTextBox",
-					options: [],
-				},{
-					ID: 121212,
-					description:'Подсказка к вопросу',
-					index: 4,
-					type: "MultiLineTextBox",
-					options: [],
-				},
-				{
-					ID: 121212,
-					index: 1,
-					type: "CheckboxList",
-					required: true,
-					'IDManager': this.IDManager,
-					options: [
-						{
-							index: 1,
-							ID: 121212,
-							value: "НЕ принимать без ответа",
-						},
-					],
-
-				},
-			]
+		let editor = this;
+		saveButton.onDown(function(){
+			//options.getHTMLObject().blur();
+			editor.applyChanges(component,description,options);
+			editor.closeWindow()
 		});
-
-		let gallery2 = new ComponentsGallery(configGallery);
-		gallery2.addObjectsGroup({
-			ID: 6829,
-			questions: [
-				{
-					ID: 121212,
-					index: 2,
-					type: "Heading",
-					options: [
-						{
-							index: 1,
-							value: 'Редактирование поля',
-							ID: 121212,
-						}
-					]
-				},
-				{
-					ID: 121212,
-					description:'Текст вопроса:',
-					index: 4,
-					type: "MultiLineTextBox",
-					options: [],
-				},{
-					ID: 121212,
-					description:'Подсказка к вопросу',
-					index: 4,
-					type: "MultiLineTextBox",
-					options: [],
-				},
-				{
-					ID: 121212,
-					index: 1,
-					type: "CheckboxList",
-					required: true,
-					'IDManager': this.IDManager,
-					options: [
-						{
-							index: 1,
-							ID: 121212,
-							value: "НЕ принимать без ответа",
-						},
-					],
-
-				},
-			]
-		});
-
-
-	*/
 	}
 
-
-	addComponent(name)
+	addComponent(type)
 	{
-		this.objectsGallery.createComponent(name);
 		this.selectingAComponentMenu.remove();
+		let newComponent = this.objectsGallery.createComponent(type);
+		newComponent.build({
+			description: '',
+			comment: '',
+			options: [
+				{
+					value: '',
+				},
+			],
+		})
+		this.runEditor(newComponent,false);
 	}
 }

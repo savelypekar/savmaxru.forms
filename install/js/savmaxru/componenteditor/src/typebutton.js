@@ -24,7 +24,6 @@ export class TypeButton extends ObjectGUI
 	constructor(type, parent)
 	{
 		super();
-
 		this.setRootNode(
 			Tag.render`
 			<div class="btn-type-ico">
@@ -32,7 +31,7 @@ export class TypeButton extends ObjectGUI
 				<span>${BX.message(this.typesDescription[type])}</span>
 			</div>`
 		);
-		(this.getHTMLObject()).onclick = function(_this) {
+		(this.getHTMLObject()).onclick = function() {
 			parent.addComponent(type);
 		};
 	}

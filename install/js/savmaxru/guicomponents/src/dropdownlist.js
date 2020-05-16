@@ -12,12 +12,20 @@ export class DropDownList extends GUIComponent
 
 	addOption(option)
 	{
-		let objectHTML = Tag.render`<option>${option}</option>`;
+		let valueField = this.addNode("value",'span');
+		let objectHTML = Tag.render`<option>${valueField}</option>`;
+
 		objectHTML.getCondition = function()
 		{
 			return this.selected;
 		};
 		this.includeInNode("dropdownlist",objectHTML);
+		objectHTML.setValue = function(value)
+		{
+			valueField.innerHTML = value;
+		}
+		objectHTML.setValue(option);
+
 		return objectHTML;
 	}
 //getSelected

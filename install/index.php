@@ -40,7 +40,7 @@ Class savmaxru_forms extends CModule {
 		$siteId = \CSite::GetDefSite();
 		\Bitrix\Main\UrlRewriter::add($siteId, [
 			'CONDITION' => '#^/forms/(\\w+)/([0-9a-z]+)\\/?$#',
-			'RULE' => 'mode=$1&id=$2',
+			'RULE' => 'regime=$1&id=$2',
 			'ID' => 'savmaxru:forms',
 			'PATH' => '/forms/index.php',
 		]);

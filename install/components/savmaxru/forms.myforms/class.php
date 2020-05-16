@@ -11,7 +11,6 @@ use Bitrix\Main\Localization\Loc;
 
 class CSavmaxruFormsMyForms extends CBitrixComponent implements Controllerable
 {
-
 	public function executeComponent()
 	{
 		$this->includeComponentTemplate();

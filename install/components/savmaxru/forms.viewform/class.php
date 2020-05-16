@@ -13,6 +13,9 @@ class CSavmaxruFormsView extends CBitrixComponent implements Controllerable
 {
 	public function executeComponent()
 	{
+		$this->arResult = [
+			'ID' => $this->arParams['ID'],
+		];
 		$this->includeComponentTemplate();
 	}
 

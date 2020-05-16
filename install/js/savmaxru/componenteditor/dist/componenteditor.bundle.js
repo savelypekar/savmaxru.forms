@@ -14,11 +14,11 @@
 	  babelHelpers.inherits(TypeButton, _ObjectGUI);
 
 	  function TypeButton(type, parent) {
-	    var _this2;
+	    var _this;
 
 	    babelHelpers.classCallCheck(this, TypeButton);
-	    _this2 = babelHelpers.possibleConstructorReturn(this, babelHelpers.getPrototypeOf(TypeButton).call(this));
-	    babelHelpers.defineProperty(babelHelpers.assertThisInitialized(_this2), "typesDescription", {
+	    _this = babelHelpers.possibleConstructorReturn(this, babelHelpers.getPrototypeOf(TypeButton).call(this));
+	    babelHelpers.defineProperty(babelHelpers.assertThisInitialized(_this), "typesDescription", {
 	      "DropDownList": "DROPDOWN_LIST",
 	      "CheckboxList": "CHECKBOX_LIST",
 	      "RadiobuttonList": "RADIOBUTTON_LIST",
@@ -26,7 +26,7 @@
 	      "SingleLineTextBox": "SINGLELINE_TEXTBOX",
 	      "MultiLineTextBox": "MULTILINE_TEXTBOX"
 	    });
-	    babelHelpers.defineProperty(babelHelpers.assertThisInitialized(_this2), "typesIcon", {
+	    babelHelpers.defineProperty(babelHelpers.assertThisInitialized(_this), "typesIcon", {
 	      "DropDownList": "dropdownlist-ico",
 	      "CheckboxList": "checkboxlist-ico",
 	      "RadiobuttonList": "radiobuttonlist-ico",
@@ -35,13 +35,13 @@
 	      "MultiLineTextBox": "multilinetextbox-ico"
 	    });
 
-	    _this2.setRootNode(main_core.Tag.render(_templateObject(), _this2.typesIcon[type], BX.message(_this2.typesDescription[type])));
+	    _this.setRootNode(main_core.Tag.render(_templateObject(), _this.typesIcon[type], BX.message(_this.typesDescription[type])));
 
-	    _this2.getHTMLObject().onclick = function (_this) {
+	    _this.getHTMLObject().onclick = function () {
 	      parent.addComponent(type);
 	    };
 
-	    return _this2;
+	    return _this;
 	  }
 
 	  return TypeButton;
@@ -74,12 +74,17 @@
 	  }, {
 	    key: "openWindow",
 	    value: function openWindow() {
-	      this.window = new Savmaxru.ModalWindow();
+	      this.window = new savmaxru_modalwindow.ModalWindow();
 	      this.parent.append(this.window.getHTMLObject());
 	    }
 	  }, {
-	    key: "create",
-	    value: function create() {
+	    key: "closeWindow",
+	    value: function closeWindow() {
+	      this.window.close();
+	    }
+	  }, {
+	    key: "runCreator",
+	    value: function runCreator() {
 	      this.openWindow();
 	      var selectingAComponent = main_core.Tag.render(_templateObject$1());
 
@@ -105,27 +110,67 @@
 	      return option;
 	    }
 	  }, {
+	    key: "applyChanges",
+	    value: function applyChanges(component, description, optionsGallery, otherSettings) {
+	      var objects = optionsGallery.getObjects();
+
+	      for (var i = 0; i < objects.length; i++) {
+	        var object = objects[i];
+	        var newValue = object.getValue();
+	        var modifiableOption = object.getProperty('modifiableOption');
+
+	        if (modifiableOption !== undefined) {
+	          var savedValue = modifiableOption.getProperty('value');
+
+	          if (object.getProperty('change') === 'removed') {
+	            modifiableOption.remove();
+	          } else if (newValue !== savedValue) {
+	            modifiableOption.rewriteProperty('value', newValue);
+	            modifiableOption.refreshHTML();
+	          }
+	        } else if (object.getProperty('change') !== 'removed') {
+	          //если был создана новая опция и не была удалена при том
+	          component.addOptions([{
+	            value: newValue
+	          }], 'create');
+	        }
+	      }
+
+	      var descriptionOptions = description.getResult()['questions'];
+
+	      if (descriptionOptions.length !== 0) {
+	        var newQuestionText = descriptionOptions[0]['options']['userValue'];
+	        var commentToTheQuestion = descriptionOptions[1]['options']['userValue'];
+	        component.rewriteProperty('comment', commentToTheQuestion);
+	        component.rewriteProperty('description', newQuestionText);
+	        component.setComment(commentToTheQuestion);
+	        component.setDescription(newQuestionText);
+	      }
+	    }
+	  }, {
 	    key: "runEditor",
 	    value: function runEditor(component) {
-	      this.openWindow();
+	      var runWindow = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+
+	      if (runWindow) {
+	        this.openWindow();
+	      }
+
 	      var componentStructure = component.getStructure();
 	      var configDescription = {
 	        "galleryClassCSS": "editor-description-gallery"
 	      };
-	      var description = new savmaxru_componentsgallery.ComponentsGallery(configDescription);
+	      var description = new savmaxru_componentsgallery.ComponentsGallery(configDescription, this, this.IDManager);
 	      this.window.setContent(description.getHTMLObject());
 	      var configOption = {
 	        "galleryClassCSS": "editor-options-gallery"
 	      };
-	      var options = new savmaxru_componentsgallery.ComponentsGallery(configOption);
+	      var options = new savmaxru_componentsgallery.ComponentsGallery(configOption, this, this.IDManager);
 	      this.window.setContent(options.getHTMLObject());
-	      options.enableEditMode({
-	        "remove": true
-	      });
 	      var configOtherSettings = {
 	        "galleryClassCSS": "editor-other-settings-gallery"
 	      };
-	      var otherSettings = new savmaxru_componentsgallery.ComponentsGallery(configOtherSettings);
+	      var otherSettings = new savmaxru_componentsgallery.ComponentsGallery(configOtherSettings, this, this.IDManager);
 	      this.window.setContent(otherSettings.getHTMLObject());
 	      var type = componentStructure["type"];
 	      var titles = {
@@ -151,11 +196,17 @@
 	          questions: [{
 	            ID: "questionText",
 	            description: BX.message("QUESTION_TEXT"),
-	            type: "MultiLineTextBox"
+	            type: "MultiLineTextBox",
+	            options: [{
+	              value: component.getProperty('description')
+	            }]
 	          }, {
 	            ID: "hintToTheQuestion",
 	            description: BX.message("HINT_TO_THE_QUESTION"),
-	            type: "MultiLineTextBox"
+	            type: "MultiLineTextBox",
+	            options: [{
+	              value: component.getProperty('comment')
+	            }]
 	          }]
 	        });
 
@@ -172,22 +223,32 @@
 	        }
 	      }
 
-	      var questions = [];
-
-	      for (var i = 0; i < componentStructure['options'].length; i++) {
-	        questions.push(this.buildFieldStructureForEditingOption(componentStructure['options'][i]));
+	      if (type === "DropDownList" || type === "CheckboxList" || type === "RadiobuttonList") {
+	        options.enableEditMode({
+	          "remove": true
+	        });
 	      }
 
-	      options.addObjectsGroup({
-	        questions: questions
-	      });
+	      var optionsStructure = component.getOptions();
+
+	      for (var i = 0; i < optionsStructure.length; i++) {
+	        if (optionsStructure[i].getProperty('change') !== 'removed') {
+	          var option = options.createComponent("SingleLineTextBox");
+	          option.addProperty('modifiableOption', optionsStructure[i]);
+	          option.build({
+	            'options': [{
+	              value: optionsStructure[i].getProperty('value')
+	            }]
+	          });
+	        }
+	      }
 
 	      if (type !== "Button" && type !== "Heading") {
 	        if (type !== "SingleLineTextBox" && type !== "MultiLineTextBox") {
 	          var add = otherSettings.createComponent("Button");
 	          add.setStyle("plus-button");
 	          add.onDown(function () {
-	            options.createComponent("SingleLineTextBox");
+	            var object = options.createComponentWithOption("SingleLineTextBox");
 	          });
 	        }
 
@@ -195,7 +256,6 @@
 	          questions: [{
 	            ID: "notAcceptUnanswered",
 	            type: "CheckboxList",
-	            'IDManager': this.IDManager,
 	            options: [{
 	              value: BX.message("NOT_ACCEPT_UNANSWERED")
 	            }]
@@ -205,115 +265,30 @@
 
 	      var saveButton = otherSettings.createComponent("Button");
 	      saveButton.build({
-	        'ID': 2226,
-	        'index': 6,
 	        'options': [{
-	          index: 0,
-	          ID: 121212,
 	          value: BX.message("SAVE_FORM")
 	        }]
-	      }); //otherSettings.addObjectsGroup();
-
-	      /*let configGallery = {
-	      	"galleryClassCSS": "editor-gallery",
-	      };
-	      let gallery = new ComponentsGallery(configGallery);
-	      gallery.addObjectsGroup({
-	      	ID: 6829,
-	      	questions: [
-	      	{
-	      			ID: 121212,
-	      			index: 2,
-	      			type: "Heading",
-	      			options: [
-	      				{
-	      					index: 1,
-	      					value: 'Редактирование поля',
-	      					ID: 121212,
-	      				}
-	      			]
-	      		},
-	      		{
-	      			ID: 121212,
-	      			description:'Текст вопроса:',
-	      			index: 4,
-	      			type: "MultiLineTextBox",
-	      			options: [],
-	      		},{
-	      			ID: 121212,
-	      			description:'Подсказка к вопросу',
-	      			index: 4,
-	      			type: "MultiLineTextBox",
-	      			options: [],
-	      		},
-	      		{
-	      			ID: 121212,
-	      			index: 1,
-	      			type: "CheckboxList",
-	      			required: true,
-	      			'IDManager': this.IDManager,
-	      			options: [
-	      				{
-	      					index: 1,
-	      					ID: 121212,
-	      					value: "НЕ принимать без ответа",
-	      				},
-	      			],
-	      			},
-	      	]
 	      });
-	      	let gallery2 = new ComponentsGallery(configGallery);
-	      gallery2.addObjectsGroup({
-	      	ID: 6829,
-	      	questions: [
-	      		{
-	      			ID: 121212,
-	      			index: 2,
-	      			type: "Heading",
-	      			options: [
-	      				{
-	      					index: 1,
-	      					value: 'Редактирование поля',
-	      					ID: 121212,
-	      				}
-	      			]
-	      		},
-	      		{
-	      			ID: 121212,
-	      			description:'Текст вопроса:',
-	      			index: 4,
-	      			type: "MultiLineTextBox",
-	      			options: [],
-	      		},{
-	      			ID: 121212,
-	      			description:'Подсказка к вопросу',
-	      			index: 4,
-	      			type: "MultiLineTextBox",
-	      			options: [],
-	      		},
-	      		{
-	      			ID: 121212,
-	      			index: 1,
-	      			type: "CheckboxList",
-	      			required: true,
-	      			'IDManager': this.IDManager,
-	      			options: [
-	      				{
-	      					index: 1,
-	      					ID: 121212,
-	      					value: "НЕ принимать без ответа",
-	      				},
-	      			],
-	      			},
-	      	]
+	      var editor = this;
+	      saveButton.onDown(function () {
+	        //options.getHTMLObject().blur();
+	        editor.applyChanges(component, description, options);
+	        editor.closeWindow();
 	      });
-	      	*/
 	    }
 	  }, {
 	    key: "addComponent",
-	    value: function addComponent(name) {
-	      this.objectsGallery.createComponent(name);
+	    value: function addComponent(type) {
 	      this.selectingAComponentMenu.remove();
+	      var newComponent = this.objectsGallery.createComponent(type);
+	      newComponent.build({
+	        description: '',
+	        comment: '',
+	        options: [{
+	          value: ''
+	        }]
+	      });
+	      this.runEditor(newComponent, false);
 	    }
 	  }]);
 	  return ComponentEditor;

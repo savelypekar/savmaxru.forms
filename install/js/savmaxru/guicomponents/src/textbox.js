@@ -6,28 +6,30 @@ export class TextBox extends GUIComponent
 	constructor()
 	{
 		super();
-		this.setComponent(Tag.render`${this.addNode("textbox")}`);
 	}
 
 	getResult()
 	{
 		let result = [];
-		result["ID"] = this.getID();
-		result["index"] = this.getIndex();
+		result["ID"] = this.getProperty("ID");
 		result["options"] = [];
-
-		let items = this.getAllElementsOfTheNode('textbox');
-		let item = items[0];
-		result["options"]["userValue"] = item.value;
-
+		result["options"]["userValue"] = this.getValue();
 		return result;
+	}
+
+	getValue()
+	{
+		return this.inputHTML.value;
 	}
 
 	addOption(option)
 	{
-		let items = this.getAllElementsOfTheNode('textbox');
-		let item = items[0];
-		item.value = option;
+		let objectHTML = this.inputHTML;
+		this.inputHTML.setValue = function(value)
+		{
+			objectHTML.value = value;
+		};
+		objectHTML.setValue(option);
+		return objectHTML;
 	}
-
 }

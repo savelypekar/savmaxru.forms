@@ -1,0 +1,18 @@
+.savmaxru-forms .success .success-ico{
+	background-image: url("complete-ico.svg");
+	width: 80px;
+	height: 80px;
+	margin:30px auto;
+	background-size: cover;
+}
+
+.savmaxru-forms .success {
+	padding-top: 20px;
+	padding-bottom: 50px;
+}
+
+.savmaxru-forms .success span{
+	text-align: center;
+	display: block;
+	font-size: 17px;
+}

@@ -1,10 +1,14 @@
 import {ObjectGUI} from "savmaxru.objectgui";
 import {Tag} from 'main.core';
-
 import './css/style.css'
 
-export class ModalWindow extends Savmaxru.ObjectGUI
+export class ModalWindow extends ObjectGUI
 {
+	close()
+	{
+		this.hideAnimHTMLObject();
+	}
+
 	constructor()
 	{
 		super();
@@ -24,7 +28,7 @@ export class ModalWindow extends Savmaxru.ObjectGUI
 		);
 		closeButton.onclick = function()
 		{
-			this.parent.hideAnimHTMLObject();
+			this.parent.close();
 		}
 	}
 

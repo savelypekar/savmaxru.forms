@@ -15,7 +15,15 @@ export class Button extends GUIComponent {
 
 	addOption(option)
 	{
-		this.includeInNode("button",Tag.render`<span>${option}</span>`);
+		let valueField = this.addNode("value",'span');
+		let objectHTML = Tag.render`<span>${valueField}</span>`;
+		this.includeInNode("button",objectHTML);
+		objectHTML.setValue = function(value)
+		{
+			valueField.innerHTML = value;
+		}
+		objectHTML.setValue(option);
+		return objectHTML;
 	}
 
 	onDown(_function)
@@ -25,7 +33,7 @@ export class Button extends GUIComponent {
 		htmlObject.dataStructure = this;
 		this._function = _function;
 
-		(this.getHTMLObject()).onclick = function(_this) {
+		(this.getHTMLObject()).onclick = function() {
 			htmlObject.dataStructure._function();
 		};
 	}

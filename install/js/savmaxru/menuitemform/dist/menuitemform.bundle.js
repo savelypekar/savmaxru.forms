@@ -51,6 +51,12 @@
 
 	    _this.setRootNode(main_core.Tag.render(_templateObject(), _this.addNode("name"), _this.addNode("number-of-results"), _this.addNode("date-of-change")));
 
+	    var button = babelHelpers.assertThisInitialized(_this);
+
+	    _this.getHTMLObject().onclick = function () {
+	      window.location = "edit/" + button.getID();
+	    };
+
 	    return _this;
 	  }
 
@@ -58,6 +64,11 @@
 	    key: "setID",
 	    value: function setID(ID) {
 	      this.ID = ID;
+	    }
+	  }, {
+	    key: "getID",
+	    value: function getID() {
+	      return this.ID;
 	    }
 	  }, {
 	    key: "setName",

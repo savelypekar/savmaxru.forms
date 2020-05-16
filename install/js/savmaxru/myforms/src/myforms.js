@@ -1,13 +1,12 @@
 import {ObjectGUI} from "savmaxru.objectgui";
-import {ObjectsGallery} from "savmaxru.objectsgallery";
-import {MenuItemForm} from "savmaxru.menuitemform";
+import {MenuItemsFormGallery} from "savmaxru.menuitemsformgallery";
 import {Tag} from 'main.core';
+import {GUIComponents} from 'savmaxru.guicomponents';
 
 export class MyForms extends ObjectGUI
 {
 	constructor()
 	{
-
 		super();
 		this.setRootNode(
 			Tag.render`
@@ -18,16 +17,18 @@ export class MyForms extends ObjectGUI
 			"galleryClassCSS": "myforms-gallery",
 		};
 
-		let gallery = new ObjectsGallery(configGallery);
+		let gallery = new MenuItemsFormGallery(configGallery);
 
-		this.gallery = gallery;
-		this.includeInNode("myforms-wrapper", this.gallery.getHTMLObject());
+		let addButton = GUIComponents.attach("Button");
+		addButton.setStyle('plus-button');
+		gallery.push(addButton);
 
-		let ooo = new MenuItemForm();
-		ooo.setName('name');
-		ooo.setNumberOfResults('Нет ответов');
-		gallery.push(ooo);
-		ooo.dateOfChange('10 апреля');
+		addButton.onDown(function(){
+			window.location = "edit/0";
+		});
+
+		this.includeInNode("myforms-wrapper", gallery.getHTMLObject());
+		gallery.loadGroupObject();
 	}
 }
 

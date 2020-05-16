@@ -11,7 +11,15 @@ export class Heading extends GUIComponent
 
 	addOption(option)
 	{
-		this.includeInNode("heading", Tag.render`<div class="heading-item">${option}</div>`);
+		let valueField = this.addNode("value",'span');
+		let objectHTML = Tag.render`<div class="heading-item">${valueField}</div>`;
+		this.includeInNode("heading", objectHTML);
+		objectHTML.setValue = function(value)
+		{
+			valueField.innerHTML = value;
+		}
+		objectHTML.setValue(option);
+		return objectHTML;
 	}
 
 	getResult()

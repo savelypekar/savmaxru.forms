@@ -6,6 +6,7 @@ export class MultiLineTextBox extends TextBox
 	constructor()
 	{
 		super();
-		this.includeInNode("textbox",Tag.render`<textarea class="textbox-singleline"></textarea>`);
+		this.inputHTML = Tag.render`<textarea class="textbox-singleline"></textarea>`;
+		this.setComponent(this.inputHTML);
 	}
 }

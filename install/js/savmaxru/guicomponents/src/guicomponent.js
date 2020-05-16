@@ -5,7 +5,7 @@ import {PropertyChangeManager} from "savmaxru.propertychangemanager";
 
 export class GUIComponent extends ObjectGUI
 {
-	constructor()
+	constructor(IDManager)
 	{
 		super();
 		this.setRootNode(
@@ -57,7 +57,6 @@ export class GUIComponent extends ObjectGUI
 	remove()
 	{
 		this.removeHTMLObject();
-		this.rewriteProperty("change","removed");
 	}
 
 	addRemoveButton()
@@ -65,6 +64,7 @@ export class GUIComponent extends ObjectGUI
 		let object = Tag.render`<div class='remove'></div>`
 		let editObject = this;
 		object.onclick = function() {
+			editObject.rewriteProperty("change","removed");
 			editObject.hideAnimHTMLObject();
 		};
 		return object;
@@ -84,9 +84,47 @@ export class GUIComponent extends ObjectGUI
 
 	getChanges()
 	{
-		let result = this.getChangedProperties();
-		result["ID"] = this.getProperty("ID");
-		return result;
+		let question = this.getChangedProperties();
+		let changedOptions = [];
+		let options = this.getOptions();
+
+		for(let i=0; i< options.length; i++)
+		{
+			let changedOption = options[i].getChanges();
+			if(changedOption !== false)
+			{
+				changedOptions.push(changedOption);
+			}
+		}
+
+		if(question!== false && this.getProperty("ID") ===undefined && question['change'] === 'removed')
+		{
+			//удален но не содержится в бд.
+			return false;
+		}
+
+		if(question === false && changedOptions.length !== 0)
+		{
+			question = [];
+			if(question['change'] !== 'removed')
+			{
+				question['change'] = 'changed';
+			}
+		}
+
+		if(question !== false)
+		{
+			question["ID"] = this.getProperty("ID");
+			question["type"] = this.getProperty("type");
+			question["index"] = 1;
+		}
+
+		if(changedOptions.length !== 0)
+		{
+			question['options'] = changedOptions;
+		}
+
+		return question;
 	}
 
 	getNextHighestId()
@@ -96,15 +134,36 @@ export class GUIComponent extends ObjectGUI
 
 	build(data)
 	{
-		this.IDManager = data['IDManager'];
-		this.setDescription(data['description']);
-		this.setComment(data['comment']);
-		this.addOptions(data['options']);
-
-		this.addProperty('ID',data['ID']);
-		this.addProperty('index',data['index']);
-		this.addProperty('type',data['type']);
-		
+		if(data['IDManager']!== undefined)
+		{
+			this.IDManager = data['IDManager'];
+		}
+		if(data['description']!== undefined)
+		{
+			this.addProperty('description', data['description']);
+			this.setDescription(data['description']);
+		}
+		if(data['comment']!== undefined)
+		{
+			this.addProperty('comment', data['comment']);
+			this.setComment(data['comment']);
+		}
+		if(data['options']!== undefined)
+		{
+			this.addOptions(data['options']);
+		}
+		if(data['ID']!== undefined)
+		{
+			this.addProperty('ID', data['ID']);
+		}
+		if(data['index']!== undefined)
+		{
+			this.addProperty('index', data['index']);
+		}
+		if(data['type']!== undefined)
+		{
+			this.addProperty('type', data['type']);
+		}
 		if(data['required'])
 		{
 			this.setFieldAsRequired();
@@ -118,13 +177,13 @@ export class GUIComponent extends ObjectGUI
 		return this.options;
 	}
 
-	addOptions(options)
+	addOptions(options,createMode = 'load')
 	{
 		if(options !== undefined)
 		{
 			for(let i = 0; i<options.length; i++)
 			{
-				let option = new Option(options[i]);
+				let option = new Option(options[i],createMode);
 				option.setObjectHTML(this.addOption(option.getProperty("value")));
 				this.options.push(option);
 			}
@@ -140,7 +199,7 @@ export class GUIComponent extends ObjectGUI
 	{
 		if(description !== undefined)
 		{
-			this.includeInNode("description",description);
+			this.getNode("description").innerHTML = description;
 		}
 	}
 
@@ -148,7 +207,7 @@ export class GUIComponent extends ObjectGUI
 	{
 		if(comment !== undefined)
 		{
-			this.includeInNode("comment",comment);
+			this.getNode("comment").innerHTML = comment;
 		}
 	}
 
@@ -162,7 +221,6 @@ export class GUIComponent extends ObjectGUI
 		let options = this.getOptions();
 		let result = [];
 		result["ID"] = this.getProperty("ID");
-		result["index"] = this.getProperty("index");
 		result["options"] = [];
 		for(let i = 0; i < options.length; i++)
 		{

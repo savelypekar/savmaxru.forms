@@ -29,15 +29,24 @@ export class PropertyChangeManager
 
 		object.getChangedProperties = function()
 		{
+			let countChanges = 0;
 			let result = [];
 			for (let name in this.changes)
 			{
 				if(this.changes[name] === true)
 				{
 					result[name] = this.properties[name];
+					countChanges++;
 				}
 			}
-			return result;
+			if(countChanges !== 0 )
+			{
+				return result;
+			}
+			else
+			{
+				return false;
+			}
 		}
 
 		object.getProperties = function()

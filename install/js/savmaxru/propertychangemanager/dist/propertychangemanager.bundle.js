@@ -30,15 +30,21 @@
 	      };
 
 	      object.getChangedProperties = function () {
+	        var countChanges = 0;
 	        var result = [];
 
 	        for (var name in this.changes) {
 	          if (this.changes[name] === true) {
 	            result[name] = this.properties[name];
+	            countChanges++;
 	          }
 	        }
 
-	        return result;
+	        if (countChanges !== 0) {
+	          return result;
+	        } else {
+	          return false;
+	        }
 	      };
 
 	      object.getProperties = function () {

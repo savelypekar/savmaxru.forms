@@ -13,6 +13,9 @@ class CSavmaxruEditor extends CBitrixComponent implements Controllerable
 {
 	public function executeComponent()
 	{
+		$this->arResult = [
+			'ID' => $this->arParams['ID'],
+		];
 		$this->includeComponentTemplate();
 	}
 
@@ -29,7 +32,7 @@ class CSavmaxruEditor extends CBitrixComponent implements Controllerable
 			'Button',
 			'RadiobuttonList',
 			'Heading',
-			'Singlelinetextbox',
+			'SingleLineTextBox',
 			'MultiLineTextBox' ];
 
 		$result["title"] = strval($result["title"]);
@@ -107,9 +110,9 @@ class CSavmaxruEditor extends CBitrixComponent implements Controllerable
 				{
 					if ($question['change'] == 'changed')
 					{
-						if (isset($question['ID']))
+						if ($question['ID']!= undefined)
 						{
-							//тут собрать массив
+							//пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 							$dataQuestion['CONTENT'] = $question['description'];
 							$dataQuestion['POSITION'] = $question['index'];
 							$dataQuestion['TYPE'] = $question['type'];
@@ -118,9 +121,9 @@ class CSavmaxruEditor extends CBitrixComponent implements Controllerable
 							{
 								if ($option['change'] == 'changed')
 								{
-									if (isset($option['ID']))
+									if ($option['ID'] != undefined)
 									{
-										//тут собрать массив
+										//пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 										$dataOption['CONTENT'] = $option['value'];
 										$dataOption['POSITION'] = $option['index'];
 										$optionTable->updateRow($option['ID'], $dataOption);

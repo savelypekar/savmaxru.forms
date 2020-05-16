@@ -9,9 +9,9 @@ return [
 	'js' => 'dist/myforms.bundle.js',
 	'rel' => [
 		'savmaxru.objectgui',
-		'savmaxru.objectsgallery',
-		'savmaxru.menuitemform',
+		'savmaxru.menuitemsformgallery',
 		'main.core',
+		'savmaxru.guicomponents',
 	],
 	'skip_core' => false,
 ];

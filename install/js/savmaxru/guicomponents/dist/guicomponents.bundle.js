@@ -3,17 +3,35 @@
 
 	var Option = /*#__PURE__*/function () {
 	  function Option(data) {
+	    var createMode = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'load';
 	    babelHelpers.classCallCheck(this, Option);
 	    savmaxru_propertychangemanager.PropertyChangeManager.connectObject(this);
-	    this.addProperty('value', data['value']);
 	    this.addProperty('ID', data['ID']);
-	    this.addProperty('index', data['index']);
+
+	    if (createMode === 'load') {
+	      this.addProperty('value', data['value']);
+	      this.addProperty('index', data['index']);
+	    } else {
+	      this.rewriteProperty('value', data['value']);
+	      this.rewriteProperty('index', data['index']);
+	    }
 	  }
 
 	  babelHelpers.createClass(Option, [{
+	    key: "remove",
+	    value: function remove() {
+	      this.rewriteProperty('change', 'removed');
+	      this.getObjectHTML().remove();
+	    }
+	  }, {
 	    key: "setObjectHTML",
 	    value: function setObjectHTML(object) {
 	      this.object = object;
+	    }
+	  }, {
+	    key: "refreshHTML",
+	    value: function refreshHTML() {
+	      this.getObjectHTML().setValue(this.getProperty('value'));
 	    }
 	  }, {
 	    key: "getObjectHTML",
@@ -29,6 +47,19 @@
 	    key: "getStructure",
 	    value: function getStructure() {
 	      var result = this.getProperties();
+	      return result;
+	    }
+	  }, {
+	    key: "getChanges",
+	    value: function getChanges() {
+	      var result = this.getChangedProperties(); //если изменений нет не сохраняем или если он удален но при этом его нет в базе - тоже не сохраняем
+
+	      if (result === false || result['change'] === 'removed' && this.getProperty("ID") === undefined) {
+	        return false;
+	      }
+
+	      result["ID"] = this.getProperty("ID");
+	      result["index"] = 1;
 	      return result;
 	    }
 	  }]);
@@ -67,7 +98,7 @@
 	var GUIComponent = /*#__PURE__*/function (_ObjectGUI) {
 	  babelHelpers.inherits(GUIComponent, _ObjectGUI);
 
-	  function GUIComponent() {
+	  function GUIComponent(IDManager) {
 	    var _this;
 
 	    babelHelpers.classCallCheck(this, GUIComponent);
@@ -110,7 +141,6 @@
 	    key: "remove",
 	    value: function remove() {
 	      this.removeHTMLObject();
-	      this.rewriteProperty("change", "removed");
 	    }
 	  }, {
 	    key: "addRemoveButton",
@@ -119,6 +149,7 @@
 	      var editObject = this;
 
 	      object.onclick = function () {
+	        editObject.rewriteProperty("change", "removed");
 	        editObject.hideAnimHTMLObject();
 	      };
 
@@ -143,9 +174,42 @@
 	  }, {
 	    key: "getChanges",
 	    value: function getChanges() {
-	      var result = this.getChangedProperties();
-	      result["ID"] = this.getProperty("ID");
-	      return result;
+	      var question = this.getChangedProperties();
+	      var changedOptions = [];
+	      var options = this.getOptions();
+
+	      for (var i = 0; i < options.length; i++) {
+	        var changedOption = options[i].getChanges();
+
+	        if (changedOption !== false) {
+	          changedOptions.push(changedOption);
+	        }
+	      }
+
+	      if (question !== false && this.getProperty("ID") === undefined && question['change'] === 'removed') {
+	        //удален но не содержится в бд.
+	        return false;
+	      }
+
+	      if (question === false && changedOptions.length !== 0) {
+	        question = [];
+
+	        if (question['change'] !== 'removed') {
+	          question['change'] = 'changed';
+	        }
+	      }
+
+	      if (question !== false) {
+	        question["ID"] = this.getProperty("ID");
+	        question["type"] = this.getProperty("type");
+	        question["index"] = 1;
+	      }
+
+	      if (changedOptions.length !== 0) {
+	        question['options'] = changedOptions;
+	      }
+
+	      return question;
 	    }
 	  }, {
 	    key: "getNextHighestId",
@@ -155,13 +219,35 @@
 	  }, {
 	    key: "build",
 	    value: function build(data) {
-	      this.IDManager = data['IDManager'];
-	      this.setDescription(data['description']);
-	      this.setComment(data['comment']);
-	      this.addOptions(data['options']);
-	      this.addProperty('ID', data['ID']);
-	      this.addProperty('index', data['index']);
-	      this.addProperty('type', data['type']);
+	      if (data['IDManager'] !== undefined) {
+	        this.IDManager = data['IDManager'];
+	      }
+
+	      if (data['description'] !== undefined) {
+	        this.addProperty('description', data['description']);
+	        this.setDescription(data['description']);
+	      }
+
+	      if (data['comment'] !== undefined) {
+	        this.addProperty('comment', data['comment']);
+	        this.setComment(data['comment']);
+	      }
+
+	      if (data['options'] !== undefined) {
+	        this.addOptions(data['options']);
+	      }
+
+	      if (data['ID'] !== undefined) {
+	        this.addProperty('ID', data['ID']);
+	      }
+
+	      if (data['index'] !== undefined) {
+	        this.addProperty('index', data['index']);
+	      }
+
+	      if (data['type'] !== undefined) {
+	        this.addProperty('type', data['type']);
+	      }
 
 	      if (data['required']) {
 	        this.setFieldAsRequired();
@@ -175,9 +261,11 @@
 	  }, {
 	    key: "addOptions",
 	    value: function addOptions(options) {
+	      var createMode = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'load';
+
 	      if (options !== undefined) {
 	        for (var i = 0; i < options.length; i++) {
-	          var option = new Option(options[i]);
+	          var option = new Option(options[i], createMode);
 	          option.setObjectHTML(this.addOption(option.getProperty("value")));
 	          this.options.push(option);
 	        }
@@ -192,14 +280,14 @@
 	    key: "setDescription",
 	    value: function setDescription(description) {
 	      if (description !== undefined) {
-	        this.includeInNode("description", description);
+	        this.getNode("description").innerHTML = description;
 	      }
 	    }
 	  }, {
 	    key: "setComment",
 	    value: function setComment(comment) {
 	      if (comment !== undefined) {
-	        this.includeInNode("comment", comment);
+	        this.getNode("comment").innerHTML = comment;
 	      }
 	    }
 	  }, {
@@ -213,7 +301,6 @@
 	      var options = this.getOptions();
 	      var result = [];
 	      result["ID"] = this.getProperty("ID");
-	      result["index"] = this.getProperty("index");
 	      result["options"] = [];
 
 	      for (var i = 0; i < options.length; i++) {
@@ -268,13 +355,20 @@
 	  babelHelpers.createClass(DropDownList, [{
 	    key: "addOption",
 	    value: function addOption(option) {
-	      var objectHTML = main_core.Tag.render(_templateObject2$1(), option);
+	      var valueField = this.addNode("value", 'span');
+	      var objectHTML = main_core.Tag.render(_templateObject2$1(), valueField);
 
 	      objectHTML.getCondition = function () {
 	        return this.selected;
 	      };
 
 	      this.includeInNode("dropdownlist", objectHTML);
+
+	      objectHTML.setValue = function (value) {
+	        valueField.innerHTML = value;
+	      };
+
+	      objectHTML.setValue(option);
 	      return objectHTML;
 	    } //getSelected
 
@@ -328,7 +422,7 @@
 	}(GUIComponent);
 
 	function _templateObject$3() {
-	  var data = babelHelpers.taggedTemplateLiteral(["\n\t\t<div class=\"checkbox-item\">\n\t\t\t<input type=\"checkbox\" value=\"", "\" id=\"", "\" />\n\t\t\t<label class=\"checkbox-label\" for=\"", "\">", "</label>\n\t\t</div>"]);
+	  var data = babelHelpers.taggedTemplateLiteral(["\n\t\t<div class=\"checkbox-item\">\n\t\t\t<input type=\"checkbox\" id=\"", "\" />\n\t\t\t<label class=\"checkbox-label\" for=\"", "\">", "</label>\n\t\t</div>"]);
 
 	  _templateObject$3 = function _templateObject() {
 	    return data;
@@ -346,14 +440,20 @@
 
 	  babelHelpers.createClass(CheckboxList, [{
 	    key: "addOption",
-	    value: function addOption(option, index) {
+	    value: function addOption(option) {
 	      var newItemID = this.getNextHighestId();
-	      var objectHTML = main_core.Tag.render(_templateObject$3(), index, newItemID, newItemID, option);
+	      var valueField = this.addNode("value", 'span');
+	      var objectHTML = main_core.Tag.render(_templateObject$3(), newItemID, newItemID, valueField);
 
 	      objectHTML.getCondition = function () {
 	        return this.children[0].checked;
 	      };
 
+	      objectHTML.setValue = function (value) {
+	        valueField.innerHTML = value;
+	      };
+
+	      objectHTML.setValue(option);
 	      this.includeInNode("electiveitemslist", objectHTML);
 	      return objectHTML;
 	    }
@@ -386,7 +486,14 @@
 	      }
 
 	      var newItemID = this.getNextHighestId();
-	      var objectHTML = main_core.Tag.render(_templateObject$4(), newItemID, this.listName, newItemID, option);
+	      var valueField = this.addNode("value", 'span');
+	      var objectHTML = main_core.Tag.render(_templateObject$4(), newItemID, this.listName, newItemID, valueField);
+
+	      objectHTML.setValue = function (value) {
+	        valueField.innerHTML = value;
+	      };
+
+	      objectHTML.setValue(option);
 
 	      objectHTML.getCondition = function () {
 	        return this.children[0].checked;
@@ -422,14 +529,14 @@
 	  babelHelpers.inherits(Button, _GUIComponent);
 
 	  function Button() {
-	    var _this2;
+	    var _this;
 
 	    babelHelpers.classCallCheck(this, Button);
-	    _this2 = babelHelpers.possibleConstructorReturn(this, babelHelpers.getPrototypeOf(Button).call(this));
+	    _this = babelHelpers.possibleConstructorReturn(this, babelHelpers.getPrototypeOf(Button).call(this));
 
-	    _this2.setComponent(main_core.Tag.render(_templateObject$5(), _this2.addNode("button")));
+	    _this.setComponent(main_core.Tag.render(_templateObject$5(), _this.addNode("button")));
 
-	    return _this2;
+	    return _this;
 	  }
 
 	  babelHelpers.createClass(Button, [{
@@ -440,7 +547,16 @@
 	  }, {
 	    key: "addOption",
 	    value: function addOption(option) {
-	      this.includeInNode("button", main_core.Tag.render(_templateObject2$2(), option));
+	      var valueField = this.addNode("value", 'span');
+	      var objectHTML = main_core.Tag.render(_templateObject2$2(), valueField);
+	      this.includeInNode("button", objectHTML);
+
+	      objectHTML.setValue = function (value) {
+	        valueField.innerHTML = value;
+	      };
+
+	      objectHTML.setValue(option);
+	      return objectHTML;
 	    }
 	  }, {
 	    key: "onDown",
@@ -450,7 +566,7 @@
 	      htmlObject.dataStructure = this;
 	      this._function = _function;
 
-	      this.getHTMLObject().onclick = function (_this) {
+	      this.getHTMLObject().onclick = function () {
 	        htmlObject.dataStructure._function();
 	      };
 	    }
@@ -499,7 +615,16 @@
 	  babelHelpers.createClass(Heading, [{
 	    key: "addOption",
 	    value: function addOption(option) {
-	      this.includeInNode("heading", main_core.Tag.render(_templateObject2$3(), option));
+	      var valueField = this.addNode("value", 'span');
+	      var objectHTML = main_core.Tag.render(_templateObject2$3(), valueField);
+	      this.includeInNode("heading", objectHTML);
+
+	      objectHTML.setValue = function (value) {
+	        valueField.innerHTML = value;
+	      };
+
+	      objectHTML.setValue(option);
+	      return objectHTML;
 	    }
 	  }, {
 	    key: "getResult",
@@ -510,56 +635,48 @@
 	  return Heading;
 	}(GUIComponent);
 
-	function _templateObject$7() {
-	  var data = babelHelpers.taggedTemplateLiteral(["", ""]);
-
-	  _templateObject$7 = function _templateObject() {
-	    return data;
-	  };
-
-	  return data;
-	}
 	var TextBox = /*#__PURE__*/function (_GUIComponent) {
 	  babelHelpers.inherits(TextBox, _GUIComponent);
 
 	  function TextBox() {
-	    var _this;
-
 	    babelHelpers.classCallCheck(this, TextBox);
-	    _this = babelHelpers.possibleConstructorReturn(this, babelHelpers.getPrototypeOf(TextBox).call(this));
-
-	    _this.setComponent(main_core.Tag.render(_templateObject$7(), _this.addNode("textbox")));
-
-	    return _this;
+	    return babelHelpers.possibleConstructorReturn(this, babelHelpers.getPrototypeOf(TextBox).call(this));
 	  }
 
 	  babelHelpers.createClass(TextBox, [{
 	    key: "getResult",
 	    value: function getResult() {
 	      var result = [];
-	      result["ID"] = this.getID();
-	      result["index"] = this.getIndex();
+	      result["ID"] = this.getProperty("ID");
 	      result["options"] = [];
-	      var items = this.getAllElementsOfTheNode('textbox');
-	      var item = items[0];
-	      result["options"]["userValue"] = item.value;
+	      result["options"]["userValue"] = this.getValue();
 	      return result;
+	    }
+	  }, {
+	    key: "getValue",
+	    value: function getValue() {
+	      return this.inputHTML.value;
 	    }
 	  }, {
 	    key: "addOption",
 	    value: function addOption(option) {
-	      var items = this.getAllElementsOfTheNode('textbox');
-	      var item = items[0];
-	      item.value = option;
+	      var objectHTML = this.inputHTML;
+
+	      this.inputHTML.setValue = function (value) {
+	        objectHTML.value = value;
+	      };
+
+	      objectHTML.setValue(option);
+	      return objectHTML;
 	    }
 	  }]);
 	  return TextBox;
 	}(GUIComponent);
 
-	function _templateObject$8() {
+	function _templateObject$7() {
 	  var data = babelHelpers.taggedTemplateLiteral(["<input class=\"textbox-singleline\" type=\"text\">"]);
 
-	  _templateObject$8 = function _templateObject() {
+	  _templateObject$7 = function _templateObject() {
 	    return data;
 	  };
 
@@ -573,8 +690,9 @@
 
 	    babelHelpers.classCallCheck(this, Singlelinetextbox);
 	    _this = babelHelpers.possibleConstructorReturn(this, babelHelpers.getPrototypeOf(Singlelinetextbox).call(this));
+	    _this.inputHTML = main_core.Tag.render(_templateObject$7());
 
-	    _this.includeInNode("textbox", main_core.Tag.render(_templateObject$8()));
+	    _this.setComponent(_this.inputHTML);
 
 	    return _this;
 	  }
@@ -582,10 +700,10 @@
 	  return Singlelinetextbox;
 	}(TextBox);
 
-	function _templateObject$9() {
+	function _templateObject$8() {
 	  var data = babelHelpers.taggedTemplateLiteral(["<textarea class=\"textbox-singleline\"></textarea>"]);
 
-	  _templateObject$9 = function _templateObject() {
+	  _templateObject$8 = function _templateObject() {
 	    return data;
 	  };
 
@@ -599,8 +717,9 @@
 
 	    babelHelpers.classCallCheck(this, MultiLineTextBox);
 	    _this = babelHelpers.possibleConstructorReturn(this, babelHelpers.getPrototypeOf(MultiLineTextBox).call(this));
+	    _this.inputHTML = main_core.Tag.render(_templateObject$8());
 
-	    _this.includeInNode("textbox", main_core.Tag.render(_templateObject$9()));
+	    _this.setComponent(_this.inputHTML);
 
 	    return _this;
 	  }

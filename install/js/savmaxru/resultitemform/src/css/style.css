@@ -1,0 +1,27 @@
+.savmaxru-forms .results-wrapper .object-gui
+{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	border-top: 1px solid rgba(0,0,0,.1);
+	background-color: white;
+	cursor: pointer;
+	height: 64px;
+	padding-right: 30px;
+	padding-left: 30px;
+}
+
+.savmaxru-forms .results-wrapper .object-gui:hover
+{
+	background-color: #F2F2F2;
+}
+
+.savmaxru-forms .results-wrapper .object-gui:hover .name
+{
+	color: #f20800;
+}
+
+.savmaxru-forms .results-wrapper .object-gui .user-name
+{
+	color: #8a8a8a;
+}

@@ -20,7 +20,7 @@ class CSavmaxruFormsRouter extends CBitrixComponent
 
 	private function getModeName()
 	{
-		$modeName = $this->modeNames[$this->arParams['MODE']];
+		$modeName = $this->modeNames[\Bitrix\Main\Context::getCurrent()->getRequest()['regime']];
 		if($modeName === null)
 		{
 			$modeName = $this->modeNames[''];
@@ -29,13 +29,13 @@ class CSavmaxruFormsRouter extends CBitrixComponent
 		return $modeName;
 	}
 
+
 	public function executeComponent()
 	{
 		$this->arResult = [
-			'MODE' => $this->getModeName(),
-			'URL' => $this->arParams['URL'],
+			'REGIME' => $this->getModeName(),
+			'ID' => \Bitrix\Main\Context::getCurrent()->getRequest()['id'],
 		];
-
 		$this->includeComponentTemplate();
 	}
 }

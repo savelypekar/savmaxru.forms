@@ -1,4 +1,4 @@
-(function (exports,savmaxru_objectgui,savmaxru_objectsgallery,savmaxru_menuitemform,main_core) {
+(function (exports,savmaxru_objectgui,savmaxru_menuitemsformgallery,main_core,savmaxru_guicomponents) {
 	'use strict';
 
 	function _templateObject() {
@@ -24,16 +24,17 @@
 	    var configGallery = {
 	      "galleryClassCSS": "myforms-gallery"
 	    };
-	    var gallery = new savmaxru_objectsgallery.ObjectsGallery(configGallery);
-	    _this.gallery = gallery;
+	    var gallery = new savmaxru_menuitemsformgallery.MenuItemsFormGallery(configGallery);
+	    var addButton = savmaxru_guicomponents.GUIComponents.attach("Button");
+	    addButton.setStyle('plus-button');
+	    gallery.push(addButton);
+	    addButton.onDown(function () {
+	      window.location = "edit/0";
+	    });
 
-	    _this.includeInNode("myforms-wrapper", _this.gallery.getHTMLObject());
+	    _this.includeInNode("myforms-wrapper", gallery.getHTMLObject());
 
-	    var ooo = new savmaxru_menuitemform.MenuItemForm();
-	    ooo.setName('name');
-	    ooo.setNumberOfResults('Нет ответов');
-	    gallery.push(ooo);
-	    ooo.dateOfChange('10 апреля');
+	    gallery.loadGroupObject();
 	    return _this;
 	  }
 
@@ -42,5 +43,5 @@
 
 	exports.MyForms = MyForms;
 
-}((this.Savmaxru = this.Savmaxru || {}),Savmaxru,Savmaxru,Savmaxru,BX));
+}((this.Savmaxru = this.Savmaxru || {}),Savmaxru,BX.Savmaxru,BX,Savmaxru));
 //# sourceMappingURL=myforms.bundle.js.map

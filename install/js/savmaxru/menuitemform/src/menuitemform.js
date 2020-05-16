@@ -16,11 +16,20 @@ export class MenuItemForm extends ObjectGUI
 				${ this.addNode("date-of-change") }
 			</div>`
 		);
+		let button = this;
+		(this.getHTMLObject()).onclick = function() {
+			window.location = ("edit/"+button.getID());
+		};
 	}
 
 	setID(ID)
 	{
 		this.ID = ID;
+	}
+
+	getID()
+	{
+		return this.ID;
 	}
 
 	setName(name)

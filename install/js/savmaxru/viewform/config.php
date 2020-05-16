@@ -8,12 +8,10 @@ return [
 	'css' => 'dist/viewform.bundle.css',
 	'js' => 'dist/viewform.bundle.js',
 	'rel' => [
-		'main.core',
 		'savmaxru.objectgui',
-		'savmaxru.idmanager',
-		'savmaxru.modalwindow',
-		'savmaxru.componenteditor',
 		'savmaxru.componentsgallery',
+		'main.core',
+		'savmaxru.idmanager',
 	],
 	'skip_core' => false,
 ];

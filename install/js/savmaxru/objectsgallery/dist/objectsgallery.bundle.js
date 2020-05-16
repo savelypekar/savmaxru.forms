@@ -10,8 +10,14 @@
 
 	  return data;
 	}
-	var ObjectsGallery = /*#__PURE__*/function (_Savmaxru$ObjectGUI) {
-	  babelHelpers.inherits(ObjectsGallery, _Savmaxru$ObjectGUI);
+	var ObjectsGallery = /*#__PURE__*/function (_ObjectGUI) {
+	  babelHelpers.inherits(ObjectsGallery, _ObjectGUI);
+	  babelHelpers.createClass(ObjectsGallery, [{
+	    key: "getObjects",
+	    value: function getObjects() {
+	      return this.objects;
+	    }
+	  }]);
 
 	  function ObjectsGallery() {
 	    var _this;
@@ -36,31 +42,6 @@
 	  }
 
 	  babelHelpers.createClass(ObjectsGallery, [{
-	    key: "getResult",
-	    value: function getResult() {
-	      var resultGallery = [];
-	      var argumentsForResult = this.argumentsForResult;
-
-	      for (var key in argumentsForResult) {
-	        resultGallery[key] = argumentsForResult[key];
-	      }
-
-	      var questions = [];
-	      var objects = this.objects;
-
-	      for (var i = 0; i < objects.length; i++) {
-	        var object = objects[i];
-	        var objectResult = object.getResult();
-
-	        if (objectResult !== false) {
-	          questions.push(objectResult);
-	        }
-	      }
-
-	      resultGallery["questions"] = questions;
-	      return resultGallery;
-	    }
-	  }, {
 	    key: "getChanges",
 	    value: function getChanges() {}
 	  }, {
@@ -86,20 +67,10 @@
 	    value: function createObject() {}
 	  }, {
 	    key: "loadGroupObject",
-	    value: function loadGroupObject() {
-	      BX.ajax.runComponentAction('savmaxru:forms.myforms', 'loadInterviewByAmount', {
-	        mode: 'class',
-	        data: {
-	          quantity: '3',
-	          firstPosition: '5'
-	        }
-	      }).then(function (response) {
-	        console.log(response);
-	      });
-	    }
+	    value: function loadGroupObject() {}
 	  }]);
 	  return ObjectsGallery;
-	}(Savmaxru.ObjectGUI);
+	}(savmaxru_objectgui.ObjectGUI);
 
 	exports.ObjectsGallery = ObjectsGallery;
 
