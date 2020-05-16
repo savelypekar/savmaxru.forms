@@ -33,7 +33,7 @@ export class ResultsGallery extends ObjectsGallery
 	{
 		let gallery = this;
 
-		let idInterview = '1';
+		let idInterview = '14';
 		let quantity = '70';
 		let firstPosition = '1';
 		BX.ajax.runComponentAction('savmaxru:forms.results', 'sendResults', {

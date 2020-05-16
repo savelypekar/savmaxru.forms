@@ -41,6 +41,7 @@ export class Editor extends ObjectGUI
 			"argumentsForResult": {
 				'ID': argumentID,
 				title: 'title new form ',
+				change: 'changed',
 			},
 		};
 
@@ -48,7 +49,21 @@ export class Editor extends ObjectGUI
 		componentEditor.setGallery(gallery);
 		gallery.enableEditMode();
 
-		gallery.createComponentWithOption("Button");
+		if(ID === '0')
+		{
+			//заготовка для создания новой формы
+			gallery.createComponentWithOption("Button");
+		}else
+		{
+			BX.ajax.runComponentAction('savmaxru:forms.viewform', 'sendInterviewStructure', {
+				mode: 'class',
+				data: {
+					idInterview: ID,
+				}
+			}).then(function (response) {
+				gallery.addObjectsGroup(response['data']['result'],"view");
+			});
+		}
 
 		this.includeInNode("editor-wrapper", gallery.getHTMLObject());
 
@@ -70,7 +85,7 @@ export class Editor extends ObjectGUI
 		saveButton.onDown(function(){
 			let changes = gallery.getChanges();
 
-			changes = {
+			let changes2 = {
 					ID: 'NEW_FORM',
 					title: 'tisdsds ',
 					visible: true,

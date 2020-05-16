@@ -97,9 +97,19 @@ export class GUIComponent extends ObjectGUI
 			}
 		}
 
+		if(question!== false && this.getProperty("ID") ===undefined && question['change'] === 'removed')
+		{
+			//удален но не содержится в бд.
+			return false;
+		}
+
 		if(question === false && changedOptions.length !== 0)
 		{
 			question = [];
+			if(question['change'] !== 'removed')
+			{
+				question['change'] = 'changed';
+			}
 		}
 
 		if(question !== false)

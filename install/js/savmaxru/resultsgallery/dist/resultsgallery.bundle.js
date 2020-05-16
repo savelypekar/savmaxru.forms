@@ -36,7 +36,7 @@
 	    key: "loadGroupObject",
 	    value: function loadGroupObject() {
 	      var gallery = this;
-	      var idInterview = '1';
+	      var idInterview = '14';
 	      var quantity = '70';
 	      var firstPosition = '1';
 	      BX.ajax.runComponentAction('savmaxru:forms.results', 'sendResults', {

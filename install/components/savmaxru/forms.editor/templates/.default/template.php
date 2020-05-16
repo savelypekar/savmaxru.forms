@@ -6,7 +6,7 @@
 	let editor = new Savmaxru.Editor("<?php echo $arResult['ID'] ?>");
 	document.getElementById('savmaxru-forms').append(editor.getHTMLObject());
 
-	let result = {
+	/*let result = {
 		//ID: 125,
 		ID: 'NEW_FORM',
 		title: 'title new form 4444',
@@ -126,5 +126,5 @@
 		}
 	});
 
-	console.log(result);
+	console.log(result);*/
 </script>

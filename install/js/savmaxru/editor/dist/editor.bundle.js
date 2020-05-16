@@ -46,13 +46,27 @@
 	      "componentEditor": componentEditor,
 	      "argumentsForResult": {
 	        'ID': argumentID,
-	        title: 'title new form '
+	        title: 'title new form ',
+	        change: 'changed'
 	      }
 	    };
 	    var gallery = new savmaxru_componentsgallery.ComponentsGallery(configGallery, babelHelpers.assertThisInitialized(_this), _this.IDManager);
 	    componentEditor.setGallery(gallery);
 	    gallery.enableEditMode();
-	    gallery.createComponentWithOption("Button");
+
+	    if (ID === '0') {
+	      //заготовка для создания новой формы
+	      gallery.createComponentWithOption("Button");
+	    } else {
+	      BX.ajax.runComponentAction('savmaxru:forms.viewform', 'sendInterviewStructure', {
+	        mode: 'class',
+	        data: {
+	          idInterview: ID
+	        }
+	      }).then(function (response) {
+	        gallery.addObjectsGroup(response['data']['result'], "view");
+	      });
+	    }
 
 	    _this.includeInNode("editor-wrapper", gallery.getHTMLObject());
 
@@ -72,53 +86,6 @@
 
 	    saveButton.onDown(function () {
 	      var changes = gallery.getChanges();
-	      changes = {
-	        ID: 'NEW_FORM',
-	        title: 'tisdsds ',
-	        visible: true,
-	        questions: [{
-	          ID: 121212,
-	          index: 1,
-	          type: "CheckboxList",
-	          description: "Текст вопроса",
-	          comment: "Пояснительный комметарий",
-	          required: true,
-	          options: [{
-	            index: 1,
-	            ID: 121212,
-	            value: "Russia"
-	          }, {
-	            index: 2,
-	            ID: 121212,
-	            value: "Russiaaaa"
-	          }]
-	        }, {
-	          ID: 121212,
-	          index: 2,
-	          type: "Heading",
-	          options: [{
-	            index: 1,
-	            value: 'Такой вот опрос',
-	            ID: 121212
-	          }]
-	        }, {
-	          ID: 121212,
-	          index: 3,
-	          type: "Button",
-	          options: [{
-	            ID: 121212,
-	            index: 1,
-	            value: 'Отправить'
-	          }]
-	        }, {
-	          ID: 121212,
-	          index: 4,
-	          type: "MultiLineTextBox",
-	          options: [{
-	            value: ''
-	          }]
-	        }]
-	      };
 	      BX.ajax.runComponentAction('savmaxru:forms.editor', 'saveInterviewStructure', {
 	        mode: 'class',
 	        data: {
