@@ -74,7 +74,7 @@
 	  }, {
 	    key: "openWindow",
 	    value: function openWindow() {
-	      this.window = new Savmaxru.ModalWindow();
+	      this.window = new savmaxru_modalwindow.ModalWindow();
 	      this.parent.append(this.window.getHTMLObject());
 	    }
 	  }, {
@@ -134,8 +134,18 @@
 	            value: newValue
 	          }], 'create');
 	        }
-	      } //options.getValue();
+	      }
 
+	      var descriptionOptions = description.getResult()['questions'];
+
+	      if (descriptionOptions.length !== 0) {
+	        var newQuestionText = descriptionOptions[0]['options']['userValue'];
+	        var commentToTheQuestion = descriptionOptions[1]['options']['userValue'];
+	        component.rewriteProperty('comment', commentToTheQuestion);
+	        component.rewriteProperty('description', newQuestionText);
+	        component.setComment(commentToTheQuestion);
+	        component.setDescription(newQuestionText);
+	      }
 	    }
 	  }, {
 	    key: "runEditor",
@@ -186,11 +196,17 @@
 	          questions: [{
 	            ID: "questionText",
 	            description: BX.message("QUESTION_TEXT"),
-	            type: "MultiLineTextBox"
+	            type: "MultiLineTextBox",
+	            options: [{
+	              value: component.getProperty('description')
+	            }]
 	          }, {
 	            ID: "hintToTheQuestion",
 	            description: BX.message("HINT_TO_THE_QUESTION"),
-	            type: "MultiLineTextBox"
+	            type: "MultiLineTextBox",
+	            options: [{
+	              value: component.getProperty('comment')
+	            }]
 	          }]
 	        });
 
@@ -206,15 +222,6 @@
 	          });
 	        }
 	      }
-	      /*let questions = [];
-	      for(let i=0; i<componentStructure['options'].length; i++)
-	      {
-	      	questions.push(this.buildFieldStructureForEditingOption(componentStructure['options'][i]));
-	      }
-	      	options.addObjectsGroup({
-	      	questions,
-	      },);*/
-
 
 	      if (type === "DropDownList" || type === "CheckboxList" || type === "RadiobuttonList") {
 	        options.enableEditMode({
@@ -265,104 +272,9 @@
 	      var editor = this;
 	      saveButton.onDown(function () {
 	        //options.getHTMLObject().blur();
-	        editor.applyChanges(component, undefined, options);
+	        editor.applyChanges(component, description, options);
 	        editor.closeWindow();
-	      }); //otherSettings.addObjectsGroup();
-
-	      /*let configGallery = {
-	      	"galleryClassCSS": "editor-gallery",
-	      };
-	      let gallery = new ComponentsGallery(configGallery);
-	      gallery.addObjectsGroup({
-	      	ID: 6829,
-	      	questions: [
-	      	{
-	      			ID: 121212,
-	      			index: 2,
-	      			type: "Heading",
-	      			options: [
-	      				{
-	      					index: 1,
-	      					value: 'Редактирование поля',
-	      					ID: 121212,
-	      				}
-	      			]
-	      		},
-	      		{
-	      			ID: 121212,
-	      			description:'Текст вопроса:',
-	      			index: 4,
-	      			type: "MultiLineTextBox",
-	      			options: [],
-	      		},{
-	      			ID: 121212,
-	      			description:'Подсказка к вопросу',
-	      			index: 4,
-	      			type: "MultiLineTextBox",
-	      			options: [],
-	      		},
-	      		{
-	      			ID: 121212,
-	      			index: 1,
-	      			type: "CheckboxList",
-	      			required: true,
-	      			'IDManager': this.IDManager,
-	      			options: [
-	      				{
-	      					index: 1,
-	      					ID: 121212,
-	      					value: "НЕ принимать без ответа",
-	      				},
-	      			],
-	      			},
-	      	]
 	      });
-	      	let gallery2 = new ComponentsGallery(configGallery);
-	      gallery2.addObjectsGroup({
-	      	ID: 6829,
-	      	questions: [
-	      		{
-	      			ID: 121212,
-	      			index: 2,
-	      			type: "Heading",
-	      			options: [
-	      				{
-	      					index: 1,
-	      					value: 'Редактирование поля',
-	      					ID: 121212,
-	      				}
-	      			]
-	      		},
-	      		{
-	      			ID: 121212,
-	      			description:'Текст вопроса:',
-	      			index: 4,
-	      			type: "MultiLineTextBox",
-	      			options: [],
-	      		},{
-	      			ID: 121212,
-	      			description:'Подсказка к вопросу',
-	      			index: 4,
-	      			type: "MultiLineTextBox",
-	      			options: [],
-	      		},
-	      		{
-	      			ID: 121212,
-	      			index: 1,
-	      			type: "CheckboxList",
-	      			required: true,
-	      			'IDManager': this.IDManager,
-	      			options: [
-	      				{
-	      					index: 1,
-	      					ID: 121212,
-	      					value: "НЕ принимать без ответа",
-	      				},
-	      			],
-	      			},
-	      	]
-	      });
-	      	*/
 	    }
 	  }, {
 	    key: "addComponent",
@@ -370,6 +282,8 @@
 	      this.selectingAComponentMenu.remove();
 	      var newComponent = this.objectsGallery.createComponent(type);
 	      newComponent.build({
+	        description: '',
+	        comment: '',
 	        options: [{
 	          value: ''
 	        }]

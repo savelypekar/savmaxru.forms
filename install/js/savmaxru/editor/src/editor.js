@@ -21,7 +21,7 @@ export class Editor extends ObjectGUI
 		this.includeInNode("editor-wrapper", Tag.render`
 		<div class="navigation-bar">
 			<div class="a-wrapper">
-				<a href="/forms/result/${ID}" target="_blank">${BX.message("RESULT")}</a>
+				<a href="/forms/results/${ID}" target="_blank">${BX.message("RESULT")}</a>
 				<a href="/forms/view/${ID}" target="_blank">${BX.message("FORM_PAGE")}</a>
 			</div><br>
 		</div>
@@ -52,8 +52,9 @@ export class Editor extends ObjectGUI
 		if(ID === '0')
 		{
 			//заготовка для создания новой формы
-			gallery.createComponentWithOption("Button");
-		}else
+			let button = gallery.createComponentWithOption("Button",'Send form');
+		}
+		else
 		{
 			BX.ajax.runComponentAction('savmaxru:forms.viewform', 'sendInterviewStructure', {
 				mode: 'class',
@@ -61,7 +62,7 @@ export class Editor extends ObjectGUI
 					idInterview: ID,
 				}
 			}).then(function (response) {
-				gallery.addObjectsGroup(response['data']['result'],"view");
+				gallery.addObjectsGroup(response['data']['result'],"edit");
 			});
 		}
 
@@ -84,68 +85,6 @@ export class Editor extends ObjectGUI
 
 		saveButton.onDown(function(){
 			let changes = gallery.getChanges();
-
-			let changes2 = {
-					ID: 'NEW_FORM',
-					title: 'tisdsds ',
-					visible: true,
-					questions: [
-						{
-							ID: 121212,
-							index: 1,
-							type: "CheckboxList",
-							description: "Текст вопроса",
-							comment: "Пояснительный комметарий",
-							required: true,
-
-							options: [
-								{
-									index: 1,
-									ID: 121212,
-									value: "Russia",
-								},
-								{
-									index: 2,
-									ID: 121212,
-									value: "Russiaaaa",
-								},
-							],
-
-						},{
-							ID: 121212,
-							index: 2,
-							type: "Heading",
-							options: [
-								{
-									index: 1,
-									value: 'Такой вот опрос',
-									ID: 121212,
-								}
-							]
-						},{
-							ID: 121212,
-							index: 3,
-							type: "Button",
-							options: [
-								{
-									ID: 121212,
-									index: 1,
-									value: 'Отправить',
-								}
-							]
-						},{
-							ID: 121212,
-							index: 4,
-							type: "MultiLineTextBox",
-							options: [
-								{
-									value: '',
-								}
-							]
-						}
-					]
-				};
-
 			BX.ajax.runComponentAction('savmaxru:forms.editor', 'saveInterviewStructure', {
 				mode: 'class',
 				data: {

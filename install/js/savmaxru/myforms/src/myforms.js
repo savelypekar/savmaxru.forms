@@ -7,7 +7,6 @@ export class MyForms extends ObjectGUI
 {
 	constructor()
 	{
-
 		super();
 		this.setRootNode(
 			Tag.render`
@@ -21,7 +20,7 @@ export class MyForms extends ObjectGUI
 		let gallery = new MenuItemsFormGallery(configGallery);
 
 		let addButton = GUIComponents.attach("Button");
-		addButton.setStyle('plus-button')
+		addButton.setStyle('plus-button');
 		gallery.push(addButton);
 
 		addButton.onDown(function(){

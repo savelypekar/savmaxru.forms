@@ -34,10 +34,11 @@ this.BX = this.BX || {};
 	      BX.ajax.runComponentAction('savmaxru:forms.myforms', 'loadInterviewCurrentUser', {
 	        mode: 'class',
 	        data: {
-	          quantity: '10',
+	          quantity: '100',
 	          firstPosition: '1'
 	        }
 	      }).then(function (response) {
+	        console.log(response);
 	        gallery.addGroupObject(response['data']['result']);
 	      });
 	    }

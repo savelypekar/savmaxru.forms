@@ -88,10 +88,11 @@
 	  }, {
 	    key: "createComponentWithOption",
 	    value: function createComponentWithOption(type) {
+	      var value = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
 	      var component = this.createComponent(type);
 	      component.build({
 	        'options': [{
-	          value: ""
+	          value: value
 	        }]
 	      });
 	      return component;

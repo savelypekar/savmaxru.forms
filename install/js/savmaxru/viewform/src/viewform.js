@@ -32,6 +32,7 @@ export class ViewForm extends ObjectGUI
 				idInterview: ID,
 			}
 		}).then(function (response) {
+			console.log(response['data']['result']);
 			gallery.addObjectsGroup(response['data']['result'],"view");
 		});
 

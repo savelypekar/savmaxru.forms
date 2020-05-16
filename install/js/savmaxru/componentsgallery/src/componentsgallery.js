@@ -76,14 +76,14 @@ export class ComponentsGallery extends ObjectsGallery
 		return object;
 	}
 
-	createComponentWithOption(type)
+	createComponentWithOption(type,value = '')
 	{
 		let component = this.createComponent(type);
 		component.build(
 		{
 			'options': [
 				{
-					value: "",
+					value: value,
 				},
 			],
 		});

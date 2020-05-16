@@ -5,4 +5,3 @@
 	let myforms = new Savmaxru.MyForms();
 	document.getElementById('savmaxru-forms').append(myforms.getHTMLObject());
 </script>
-

@@ -2,7 +2,7 @@
 	'use strict';
 
 	function _templateObject2() {
-	  var data = babelHelpers.taggedTemplateLiteral(["\n\t\t<div class=\"navigation-bar\">\n\t\t\t<div class=\"a-wrapper\">\n\t\t\t\t<a href=\"/forms/result/", "\" target=\"_blank\">", "</a>\n\t\t\t\t<a href=\"/forms/view/", "\" target=\"_blank\">", "</a>\n\t\t\t</div><br>\n\t\t</div>\n\t\t"]);
+	  var data = babelHelpers.taggedTemplateLiteral(["\n\t\t<div class=\"navigation-bar\">\n\t\t\t<div class=\"a-wrapper\">\n\t\t\t\t<a href=\"/forms/results/", "\" target=\"_blank\">", "</a>\n\t\t\t\t<a href=\"/forms/view/", "\" target=\"_blank\">", "</a>\n\t\t\t</div><br>\n\t\t</div>\n\t\t"]);
 
 	  _templateObject2 = function _templateObject2() {
 	    return data;
@@ -56,7 +56,7 @@
 
 	    if (ID === '0') {
 	      //заготовка для создания новой формы
-	      gallery.createComponentWithOption("Button");
+	      var button = gallery.createComponentWithOption("Button", 'Send form');
 	    } else {
 	      BX.ajax.runComponentAction('savmaxru:forms.viewform', 'sendInterviewStructure', {
 	        mode: 'class',
@@ -64,7 +64,7 @@
 	          idInterview: ID
 	        }
 	      }).then(function (response) {
-	        gallery.addObjectsGroup(response['data']['result'], "view");
+	        gallery.addObjectsGroup(response['data']['result'], "edit");
 	      });
 	    }
 

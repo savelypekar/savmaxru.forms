@@ -32,7 +32,7 @@ class CSavmaxruEditor extends CBitrixComponent implements Controllerable
 			'Button',
 			'RadiobuttonList',
 			'Heading',
-			'Singlelinetextbox',
+			'SingleLineTextBox',
 			'MultiLineTextBox' ];
 
 		$result["title"] = strval($result["title"]);
