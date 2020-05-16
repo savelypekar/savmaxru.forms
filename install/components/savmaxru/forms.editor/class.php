@@ -43,6 +43,7 @@ class CSavmaxruEditor extends CBitrixComponent implements Controllerable
 			{
 				$question['index'] = intval($question['index']);
 				$question['description'] = strval($question['description']);
+				$question['comment'] = strval($question['comment']);
 				foreach ($question['options'] as &$option)
 				{
 					$option['index'] = intval($option['index']);
@@ -84,7 +85,7 @@ class CSavmaxruEditor extends CBitrixComponent implements Controllerable
 			{
 				if ($question['type'] != 'NotValid')
 				{
-					$questionTable->addQuestion($question['type'], $question['description'], $question['index']);
+					$questionTable->addQuestion($question['type'], $question['description'], $question['index'], $question['comment']);
 					$connectionInterviewWithQuestion->addRow($idInterview, $idQuestion);
 					foreach ($question['options'] as $option)
 					{
@@ -142,7 +143,7 @@ class CSavmaxruEditor extends CBitrixComponent implements Controllerable
 						else
 						{
 							$idQuestion = $questionTable->getMaxIDKey() + 1;
-							$questionTable->addQuestion($question['type'], $question['description'], $question['index']);
+							$questionTable->addQuestion($question['type'], $question['description'], $question['index'], $question['comment']);
 							$connectionInterviewWithQuestion->addRow($result['ID'], $idQuestion);
 							foreach ($question['options'] as $option)
 							{

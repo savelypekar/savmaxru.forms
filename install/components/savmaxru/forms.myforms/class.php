@@ -59,7 +59,7 @@ class CSavmaxruFormsMyForms extends CBitrixComponent implements Controllerable
 		$interviewTable->addInterview($interview[0], $interview[1], $interview[2], $interview[3], $interview[4]);
 		foreach ($questions as $questionItem)
 		{
-			$questionTable->addQuestion($questionItem[0], $questionItem[1], $questionItem[2]);
+		//	$questionTable->addQuestion($questionItem[0], $questionItem[1], $questionItem[2]);
 		}
 	}
 
@@ -76,7 +76,7 @@ class CSavmaxruFormsMyForms extends CBitrixComponent implements Controllerable
 		}
 		foreach ($questions as $questionItem)
 		{
-			$questionTable->addQuestion($questionItem[0], $questionItem[1], $questionItem[2]);
+			//$questionTable->addQuestion($questionItem[0], $questionItem[1], $questionItem[2]);
 		}
 		foreach ($options as $optionItem)
 		{

@@ -16,6 +16,7 @@ CREATE TABLE savmaxru_forms_question
     TYPE varchar(20) not null ,
     CONTENT varchar(255) not null,
     POSITION int not null ,
+    COMMENT varchar(255) not null,
 
     PRIMARY KEY(ID)
 );
