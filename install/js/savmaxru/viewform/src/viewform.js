@@ -17,7 +17,6 @@ export class ViewForm extends ObjectGUI
 		);
 
 		let configGallery = {
-			"galleryClassCSS": "viewform-gallery",
 			"argumentsForResult": {
 				'ID': ID
 			},
@@ -25,6 +24,7 @@ export class ViewForm extends ObjectGUI
 
 		let gallery = new ComponentsGallery(configGallery, this,this.IDManager);
 		this.includeInNode("viewform-wrapper", gallery.getHTMLObject());
+		this.includeInNode("viewform-wrapper", gallery.getSaveButton());
 
 		BX.ajax.runComponentAction('savmaxru:forms.viewform', 'sendInterviewStructure', {
 			mode: 'class',

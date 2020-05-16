@@ -68,6 +68,7 @@ export class Editor extends ObjectGUI
 				gallery.addObjectsGroup(response['data']['result'],"edit");
 			});
 		}
+		this.includeInNode("editor-wrapper", gallery.getSaveButton());
 
 		let addComponentButton = GUIComponents.attach("Button");
 		addComponentButton.setStyle('plus-button');

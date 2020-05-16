@@ -1,8 +1,18 @@
 (function (exports,savmaxru_objectsgallery,savmaxru_guicomponents,savmaxru_modalwindow,main_core) {
 	'use strict';
 
-	function _templateObject() {
+	function _templateObject2() {
 	  var data = babelHelpers.taggedTemplateLiteral(["<div class=\"success\">\n\t\t\t\t\t\t<div class=\"success-ico\"></div>\n\t\t\t\t\t\t<span>", "</span>\n\t\t\t\t\t</div>"]);
+
+	  _templateObject2 = function _templateObject2() {
+	    return data;
+	  };
+
+	  return data;
+	}
+
+	function _templateObject() {
+	  var data = babelHelpers.taggedTemplateLiteral(["<div></div>"]);
 
 	  _templateObject = function _templateObject() {
 	    return data;
@@ -19,6 +29,7 @@
 	    babelHelpers.classCallCheck(this, ComponentsGallery);
 	    argument["objectsFactory"] = savmaxru_guicomponents.GUIComponents;
 	    _this = babelHelpers.possibleConstructorReturn(this, babelHelpers.getPrototypeOf(ComponentsGallery).call(this, argument));
+	    babelHelpers.defineProperty(babelHelpers.assertThisInitialized(_this), "saveButton", main_core.Tag.render(_templateObject()));
 	    babelHelpers.defineProperty(babelHelpers.assertThisInitialized(_this), "editMode", []);
 	    _this.IDManager = IDManager;
 	    _this.componentEditor = argument['componentEditor'];
@@ -34,6 +45,11 @@
 	      this.componentEditor.runEditor(component);
 	    }
 	  }, {
+	    key: "getSaveButton",
+	    value: function getSaveButton() {
+	      return this.saveButton;
+	    }
+	  }, {
 	    key: "addQuestions",
 	    value: function addQuestions() {
 	      var question = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
@@ -44,12 +60,16 @@
 	      var component = this.createFactoryObject(type);
 	      component.build(question);
 
+	      if (type === 'Button') {
+	        this.saveButton.append(component.getHTMLObject());
+	      }
+
 	      if (type === 'Button' && regime === 'view') {
 	        component.onDown(function () {
 	          gallery.getParent().saveResult(gallery.getResult());
 	          gallery.removeHTMLObject();
 	          var successDialog = new savmaxru_modalwindow.ModalWindow();
-	          successDialog.setContent(main_core.Tag.render(_templateObject(), BX.message('FORM_SEND_SUCCESSFULLY')));
+	          successDialog.setContent(main_core.Tag.render(_templateObject2(), BX.message('FORM_SEND_SUCCESSFULLY')));
 	          gallery.getParent().getHTMLObject().append(successDialog.getHTMLObject());
 	        });
 	      }

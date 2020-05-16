@@ -20,6 +20,12 @@ export class ComponentsGallery extends ObjectsGallery
 		this.componentEditor.runEditor(component);
 	}
 
+	saveButton = Tag.render`<div></div>`;
+	getSaveButton()
+	{
+		return this.saveButton;
+	}
+
 	addQuestions(question ={},regime)
 	{
 		let gallery = this;
@@ -27,6 +33,10 @@ export class ComponentsGallery extends ObjectsGallery
 		question['IDManager'] = this.IDManager;
 		let component = this.createFactoryObject(type);
 		component.build(question);
+		if(type === 'Button')
+		{
+			this.saveButton.append(component.getHTMLObject());
+		}
 		if(type === 'Button' && regime === 'view')
 		{
 			component.onDown(function(){

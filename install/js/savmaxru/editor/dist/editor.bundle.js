@@ -73,6 +73,8 @@
 	      });
 	    }
 
+	    _this.includeInNode("editor-wrapper", gallery.getSaveButton());
+
 	    var addComponentButton = savmaxru_guicomponents.GUIComponents.attach("Button");
 	    addComponentButton.setStyle('plus-button');
 

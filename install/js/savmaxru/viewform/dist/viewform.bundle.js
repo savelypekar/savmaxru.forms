@@ -23,7 +23,6 @@
 	    _this.setRootNode(main_core.Tag.render(_templateObject(), _this.addNode("viewform-wrapper")));
 
 	    var configGallery = {
-	      "galleryClassCSS": "viewform-gallery",
 	      "argumentsForResult": {
 	        'ID': ID
 	      }
@@ -31,6 +30,8 @@
 	    var gallery = new savmaxru_componentsgallery.ComponentsGallery(configGallery, babelHelpers.assertThisInitialized(_this), _this.IDManager);
 
 	    _this.includeInNode("viewform-wrapper", gallery.getHTMLObject());
+
+	    _this.includeInNode("viewform-wrapper", gallery.getSaveButton());
 
 	    BX.ajax.runComponentAction('savmaxru:forms.viewform', 'sendInterviewStructure', {
 	      mode: 'class',
