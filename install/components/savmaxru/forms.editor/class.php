@@ -100,20 +100,30 @@ class CSavmaxruEditor extends CBitrixComponent implements Controllerable
 					'DATE_CHANGE' => date("Y-m-d H:i:s"),
 				];
 				$dateInfoTable->updateRow($idDate[0]['DATE_CREATE'], $dateInfo);
+				$dataInterview['TITLE'] = $result['title'];
+				$dataInterview['VISIBLE'] = $result['visible'];
+				$interviewTable->updateRow($result['ID'], $dataInterview);
 				foreach ($result['questions'] as $question)
 				{
 					if ($question['change'] == 'changed')
 					{
 						if (isset($question['ID']))
 						{
-							$questionTable->updateRow($question['ID'], $question);
+							//тут собрать массив
+							$dataQuestion['CONTENT'] = $question['description'];
+							$dataQuestion['POSITION'] = $question['index'];
+							$dataQuestion['TYPE'] = $question['type'];
+							$questionTable->updateRow($question['ID'], $dataQuestion);
 							foreach ($question['options'] as $option)
 							{
 								if ($option['change'] == 'changed')
 								{
 									if (isset($option['ID']))
 									{
-										$optionTable->updateRow($option['ID'], $option);
+										//тут собрать массив
+										$dataOption['CONTENT'] = $option['value'];
+										$dataOption['POSITION'] = $option['index'];
+										$optionTable->updateRow($option['ID'], $dataOption);
 									}
 									else
 									{

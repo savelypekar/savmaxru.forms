@@ -22,9 +22,9 @@ Send ONE result
 Send results by amount
 
 <script>
-	let idInterview = '123';
+	let idInterview = '1';
 	let quantity = '7';
-	let firstPosition = '0';
+	let firstPosition = '1';
 	BX.ajax.runComponentAction('savmaxru:forms.results', 'sendResults', {
 		mode: 'class',
 		data: {
