@@ -78,7 +78,7 @@ class CSavmaxruEditor extends CBitrixComponent implements Controllerable
 				'DATE_CREATE' => date("Y-m-d H:i:s"),
 			];
 			$idDate = $dateInfoTable->saveDate($dateInfo);
-			$idInterview = $interviewTable->addInterview($idUser, $result["title"], $idDate, '', $result["visible"]);
+			$idInterview = $interviewTable->addInterview($idUser, $result["title"], $idDate, $result["visible"]);
 			$idQuestion = $questionTable->getMaxIDKey() + 1;
 			foreach ($result['questions'] as $question)
 			{
