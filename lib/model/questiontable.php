@@ -23,15 +23,17 @@ class QuestionTable extends DataManager
 			new StringField("TYPE"),
 			new StringField("CONTENT"),
 			new IntegerField("POSITION"),
+			new StringField("COMMENT"),
 		];
 	}
 
-	public function addQuestion($type, $content, $position)
+	public function addQuestion($type, $content, $position, $comment)
 	{
 		$result = QuestionTable::add([
 			'TYPE' => $type,
 			'CONTENT' => $content,
 			'POSITION' => $position,
+			'COMMENT' => $comment,
 		]);
 
 		if ($result->isSuccess())

@@ -43,6 +43,7 @@ class CSavmaxruEditor extends CBitrixComponent implements Controllerable
 			{
 				$question['index'] = intval($question['index']);
 				$question['description'] = strval($question['description']);
+				$question['comment'] = strval($question['comment']);
 				foreach ($question['options'] as &$option)
 				{
 					$option['index'] = intval($option['index']);
@@ -67,6 +68,7 @@ class CSavmaxruEditor extends CBitrixComponent implements Controllerable
 		$dateInfoTable = new \Savmaxru\Forms\Model\DateInfoTable();
 
 		$result = $this->validationForSaveInterviewStructure($result);
+		//$response = [];
 
 		global $USER;
 		$idUser = $USER->GetID();
@@ -79,12 +81,13 @@ class CSavmaxruEditor extends CBitrixComponent implements Controllerable
 			];
 			$idDate = $dateInfoTable->saveDate($dateInfo);
 			$idInterview = $interviewTable->addInterview($idUser, $result["title"], $idDate, $result["visible"]);
+			//$response["IDInterview"] = $idInterview;
 			$idQuestion = $questionTable->getMaxIDKey() + 1;
 			foreach ($result['questions'] as $question)
 			{
 				if ($question['type'] != 'NotValid')
 				{
-					$questionTable->addQuestion($question['type'], $question['description'], $question['index']);
+					$questionTable->addQuestion($question['type'], $question['description'], $question['index'], $question['comment']);
 					$connectionInterviewWithQuestion->addRow($idInterview, $idQuestion);
 					foreach ($question['options'] as $option)
 					{
@@ -112,7 +115,6 @@ class CSavmaxruEditor extends CBitrixComponent implements Controllerable
 					{
 						if ($question['ID']!= undefined)
 						{
-							//��� ������� ������
 							$dataQuestion['CONTENT'] = $question['description'];
 							$dataQuestion['POSITION'] = $question['index'];
 							$dataQuestion['TYPE'] = $question['type'];
@@ -123,7 +125,6 @@ class CSavmaxruEditor extends CBitrixComponent implements Controllerable
 								{
 									if ($option['ID'] != undefined)
 									{
-										//��� ������� ������
 										$dataOption['CONTENT'] = $option['value'];
 										$dataOption['POSITION'] = $option['index'];
 										$optionTable->updateRow($option['ID'], $dataOption);
@@ -142,7 +143,7 @@ class CSavmaxruEditor extends CBitrixComponent implements Controllerable
 						else
 						{
 							$idQuestion = $questionTable->getMaxIDKey() + 1;
-							$questionTable->addQuestion($question['type'], $question['description'], $question['index']);
+							$questionTable->addQuestion($question['type'], $question['description'], $question['index'], $question['comment']);
 							$connectionInterviewWithQuestion->addRow($result['ID'], $idQuestion);
 							foreach ($question['options'] as $option)
 							{
@@ -161,5 +162,6 @@ class CSavmaxruEditor extends CBitrixComponent implements Controllerable
 				$interviewTable->deleteRow($result["ID"]);
 			}
 		}
+		//return $response;
 	}
 }
