@@ -166,4 +166,11 @@ class CSavmaxruEditor extends CBitrixComponent implements Controllerable
 		}
 		return $response;
 	}
+
+	public function DeleteInterviewAction($idInterview)
+	{
+		$interviewTable = new \Savmaxru\Forms\Model\InterviewTable();
+
+		$interviewTable->deleteRow($idInterview);
+	}
 }
