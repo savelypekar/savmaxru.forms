@@ -27,8 +27,19 @@ class CSavmaxruEditor extends CBitrixComponent implements Controllerable
 	public function sendResultsAction($idInterview, $quantity, $firstPosition)
 	{
 		$answerResultTable = new \Savmaxru\Forms\Model\AnswerResultTable();
+		$dateInfoTable = new \Savmaxru\Forms\Model\DateInfoTable();
 
 		$result = $answerResultTable->getResultByIdInterviewWithAmount($idInterview, $quantity, $firstPosition);
+		foreach ($result as &$oneResult)
+		{
+			$idDate = $oneResult['DATE'];
+			$dateInfo = $dateInfoTable->getDateById($idDate);
+			$dateInfo = $dateInfo[0]['DATE_CREATE'];
+			$oneResult['DATE_DAY'] = substr($dateInfo, 8,2);
+			$monthNumber = substr($dateInfo, 5,2);
+			$oneResult['DATE_MONTH'] = $dateInfoTable->monthToText($monthNumber);
+			$oneResult['TIME'] = substr($dateInfo, 11,5);
+		}
 		return [
 			'result' => $result,
 		];

@@ -126,7 +126,7 @@ class AnswerResultTable extends DataManager
 	{
 		$firstPosition = $firstPosition - 1;
 		$result = AnswerResultTable::getList([
-			'select' => ['ID', 'ID_RESULT', 'ID_INTERVIEW', 'ID_USER'],
+			'select' => ['ID', 'ID_RESULT', 'ID_INTERVIEW', 'ID_USER', 'NAME_USER', 'DATE'],
 			'filter' => ['ID_INTERVIEW' => $idInterview],
 			'limit' => $quantity,
 			'offset' => $firstPosition,
