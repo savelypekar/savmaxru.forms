@@ -54,7 +54,9 @@ class CSavmaxruEditor extends CBitrixComponent implements Controllerable
 		$dateInfo = $dateInfoTable->getDateById($idDate);
 		$dateInfo = $dateInfo[0]['DATE_CREATE'];
 		$result['DATE_DAY'] = substr($dateInfo, 8,2);
-		$result['DATE_MONTH'] = substr($dateInfo, 5,2);
+		$monthNumber = substr($dateInfo, 5,2);
+		$result['DATE_MONTH'] = $dateInfoTable->monthToText($monthNumber);
+
 		$result['TIME'] = substr($dateInfo, 11,5);
 		$answers = $answerToQuestionTable->getResultByIdResult($idResult);
 		$countAnswers = 0;
