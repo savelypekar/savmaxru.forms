@@ -1,5 +1,5 @@
 <?
 
 $MESS["SAVE_FORM"] = "Сохранить";
-$MESS["RESULT"] = "Результат";
+$MESS["RESULTS"] = "Результаты";
 $MESS["FORM_PAGE"] = "Страница опроса";

@@ -22,7 +22,9 @@ export class ViewForm extends ObjectGUI
 			},
 		};
 
+
 		let gallery = new ComponentsGallery(configGallery, this,this.IDManager);
+		this.gallery=gallery;
 		this.includeInNode("viewform-wrapper", gallery.getHTMLObject());
 		this.includeInNode("viewform-wrapper", gallery.getSaveButton());
 
@@ -40,6 +42,7 @@ export class ViewForm extends ObjectGUI
 
 	saveResult(result)
 	{
+		this.gallery.getSaveButton().remove();
 		console.log(result);
 		BX.ajax.runComponentAction('savmaxru:forms.viewform', 'saveResult', {
 			mode: 'class',

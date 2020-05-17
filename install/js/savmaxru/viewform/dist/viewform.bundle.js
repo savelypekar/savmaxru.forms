@@ -28,6 +28,7 @@
 	      }
 	    };
 	    var gallery = new savmaxru_componentsgallery.ComponentsGallery(configGallery, babelHelpers.assertThisInitialized(_this), _this.IDManager);
+	    _this.gallery = gallery;
 
 	    _this.includeInNode("viewform-wrapper", gallery.getHTMLObject());
 
@@ -48,6 +49,7 @@
 	  babelHelpers.createClass(ViewForm, [{
 	    key: "saveResult",
 	    value: function saveResult(result) {
+	      this.gallery.getSaveButton().remove();
 	      console.log(result);
 	      BX.ajax.runComponentAction('savmaxru:forms.viewform', 'saveResult', {
 	        mode: 'class',

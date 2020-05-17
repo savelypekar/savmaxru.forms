@@ -23,3 +23,17 @@
 	display: flex;
 	margin-left: 12px;
 }
+
+.savmaxru-forms .saving-button-text
+{
+	padding-top: 20px;
+	color: #ff7f50;
+	text-align: center;
+	font-size: 18px;
+	font-weight: 600;
+}
+
+.savmaxru-forms .nav-hide0
+{
+	display:none;
+}

@@ -14,12 +14,14 @@
 
 .savmaxru-forms .results-form span
 {
+	padding-top: 20px;
 	font-size: 18px;
 	color: #e57373;
 }
 
 .savmaxru-forms .results-form .user-name
-{	margin-bottom: 10px;
+{
+	margin-bottom: 10px;
 	font-size: 24px;
 	color: #0c5460;
 	text-align: center;

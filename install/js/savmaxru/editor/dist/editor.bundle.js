@@ -2,7 +2,7 @@
 	'use strict';
 
 	function _templateObject2() {
-	  var data = babelHelpers.taggedTemplateLiteral(["\n\t\t<div class=\"navigation-bar\">\n\t\t\t<div class=\"a-wrapper\">\n\t\t\t\t<a href=\"/forms/results/", "\" target=\"_blank\">", "</a>\n\t\t\t\t<a href=\"/forms/view/", "\" target=\"_blank\">", "</a>\n\t\t\t</div><br>\n\t\t</div>\n\t\t"]);
+	  var data = babelHelpers.taggedTemplateLiteral(["\n\t\t<div class=\"navigation-bar\">\n\t\t\t<div class=\"a-wrapper\">\n\t\t\t\t<a class= 'nav-hide", "' href=\"/forms/results/", "\" target=\"_blank\">", "</a>\n\t\t\t\t<a class= 'nav-hide", "' href=\"/forms/view/", "\" target=\"_blank\">", "</a>\n\t\t\t</div><br>\n\t\t</div>\n\t\t"]);
 
 	  _templateObject2 = function _templateObject2() {
 	    return data;
@@ -32,7 +32,7 @@
 
 	    _this.setRootNode(main_core.Tag.render(_templateObject(), _this.addNode("editor-wrapper")));
 
-	    _this.includeInNode("editor-wrapper", main_core.Tag.render(_templateObject2(), ID, BX.message("RESULT"), ID, BX.message("FORM_PAGE")));
+	    _this.includeInNode("editor-wrapper", main_core.Tag.render(_templateObject2(), ID, ID, BX.message("RESULTS"), ID, ID, BX.message("FORM_PAGE")));
 
 	    var componentEditor = new savmaxru_componenteditor.ComponentEditor(_this.getNode("editor-wrapper"));
 	    var argumentID = ID;
@@ -46,19 +46,25 @@
 	      "componentEditor": componentEditor,
 	      "argumentsForResult": {
 	        'ID': argumentID,
-	        title: 'title new form ',
 	        change: 'changed'
 	      }
 	    };
+	    var titleForm = savmaxru_guicomponents.GUIComponents.attach("SingleLineTextBox");
+
+	    _this.includeInNode("editor-wrapper", titleForm.getHTMLObject());
+
 	    var gallery = new savmaxru_componentsgallery.ComponentsGallery(configGallery, babelHelpers.assertThisInitialized(_this), _this.IDManager);
 	    componentEditor.setGallery(gallery);
 	    gallery.enableEditMode();
 
 	    _this.includeInNode("editor-wrapper", gallery.getHTMLObject());
 
+	    var title;
+
 	    if (ID === '0') {
 	      //заготовка для создания новой формы
 	      var button = gallery.createComponentWithOption("Button", 'Send form');
+	      title = gallery.createComponentWithOption("Heading", 'New form');
 
 	      _this.includeInNode("editor-wrapper", button.getHTMLObject()); //сюда
 
@@ -69,7 +75,9 @@
 	          idInterview: ID
 	        }
 	      }).then(function (response) {
-	        gallery.addObjectsGroup(response['data']['result'], "edit");
+	        var formStructure = response['data']['result'];
+	        titleForm.setValue(formStructure['title']);
+	        gallery.addObjectsGroup(formStructure, "edit");
 	      });
 	    }
 
@@ -90,12 +98,16 @@
 	    _this.includeInNode("editor-wrapper", saveButton.getHTMLObject());
 
 	    saveButton.onDown(function () {
+	      this.getHTMLObject().innerHTML = '<div class="saving-button-text">Сохраняем ...</div>';
 	      var changes = gallery.getChanges();
+	      changes['title'] = titleForm.getValue();
 	      BX.ajax.runComponentAction('savmaxru:forms.editor', 'saveInterviewStructure', {
 	        mode: 'class',
 	        data: {
 	          result: changes
 	        }
+	      }).then(function (response) {
+	        window.location = "" + response['data']['IDInterview'];
 	      });
 	      console.log(changes);
 	    });

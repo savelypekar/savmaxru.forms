@@ -653,6 +653,11 @@
 	      return result;
 	    }
 	  }, {
+	    key: "setValue",
+	    value: function setValue(value) {
+	      this.inputHTML.value = value;
+	    }
+	  }, {
 	    key: "getValue",
 	    value: function getValue() {
 	      return this.inputHTML.value;
