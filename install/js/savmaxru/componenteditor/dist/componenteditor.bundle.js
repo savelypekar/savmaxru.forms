@@ -140,11 +140,16 @@
 
 	      if (descriptionOptions.length !== 0) {
 	        var newQuestionText = descriptionOptions[0]['options']['userValue'];
-	        var commentToTheQuestion = descriptionOptions[1]['options']['userValue'];
+	        var commentToTheQuestion = descriptionOptions[1]['options']['userValue']; //if(component.getProperty('comment')!==commentToTheQuestion)
+	        //{
+
 	        component.rewriteProperty('comment', commentToTheQuestion);
+	        component.setComment(commentToTheQuestion); //}
+	        //if(component.getProperty('description')!==newQuestionText)
+	        //{
+
 	        component.rewriteProperty('description', newQuestionText);
-	        component.setComment(commentToTheQuestion);
-	        component.setDescription(newQuestionText);
+	        component.setDescription(newQuestionText); //}
 	      }
 	    }
 	  }, {

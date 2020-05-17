@@ -17,6 +17,11 @@ export class TextBox extends GUIComponent
 		return result;
 	}
 
+	setValue(value)
+	{
+		this.inputHTML.value = value;
+	}
+
 	getValue()
 	{
 		return this.inputHTML.value;

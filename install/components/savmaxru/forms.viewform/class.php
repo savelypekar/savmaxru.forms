@@ -130,6 +130,7 @@ class CSavmaxruFormsView extends CBitrixComponent implements Controllerable
 		$interview = $interviewTable->getInterviewsById($idInterview);
 		$questions = $questionTable->getQuestionsForSetIdInterview($idInterview);
 		$result["ID"] = $interview[0]["ID"];
+		$result["title"] = $interview[0]["TITLE"];
 		$countQuestion = 0;
 		foreach ($questions as $question)
 		{
@@ -137,7 +138,7 @@ class CSavmaxruFormsView extends CBitrixComponent implements Controllerable
 			$result['questions'][$countQuestion]['index'] = $question['POSITION'];
 			$result['questions'][$countQuestion]['type'] = $question['TYPE'];
 			$result['questions'][$countQuestion]['description'] = $question['CONTENT'];
-			$result['questions'][$countQuestion]['comment'] = '';
+			$result['questions'][$countQuestion]['comment'] = $question['COMMENT'];
 			$result['questions'][$countQuestion]['required'] = '';
 			$idQuestion = $question['ID'];
 			$options = $optionTable->getOptionsForQuestion($idQuestion);

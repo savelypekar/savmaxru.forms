@@ -68,7 +68,7 @@ class CSavmaxruEditor extends CBitrixComponent implements Controllerable
 		$dateInfoTable = new \Savmaxru\Forms\Model\DateInfoTable();
 
 		$result = $this->validationForSaveInterviewStructure($result);
-		//$response = [];
+		$response = [];
 
 		global $USER;
 		$idUser = $USER->GetID();
@@ -81,7 +81,7 @@ class CSavmaxruEditor extends CBitrixComponent implements Controllerable
 			];
 			$idDate = $dateInfoTable->saveDate($dateInfo);
 			$idInterview = $interviewTable->addInterview($idUser, $result["title"], $idDate, $result["visible"]);
-			//$response["IDInterview"] = $idInterview;
+			$response["IDInterview"] = $idInterview;
 			$idQuestion = $questionTable->getMaxIDKey() + 1;
 			foreach ($result['questions'] as $question)
 			{
@@ -101,6 +101,7 @@ class CSavmaxruEditor extends CBitrixComponent implements Controllerable
 		{
 			if ($result['change'] == 'changed')
 			{
+				$response["IDInterview"] = $result['ID'];
 				$idDate = $interviewTable->getInterviewsById($result['ID']);
 				$dateInfo = [
 					'DATE_CHANGE' => date("Y-m-d H:i:s"),
@@ -116,6 +117,7 @@ class CSavmaxruEditor extends CBitrixComponent implements Controllerable
 						if ($question['ID']!= undefined)
 						{
 							$dataQuestion['CONTENT'] = $question['description'];
+							$dataQuestion['COMMENT'] = $question['comment'];
 							$dataQuestion['POSITION'] = $question['index'];
 							$dataQuestion['TYPE'] = $question['type'];
 							$questionTable->updateRow($question['ID'], $dataQuestion);
@@ -162,6 +164,6 @@ class CSavmaxruEditor extends CBitrixComponent implements Controllerable
 				$interviewTable->deleteRow($result["ID"]);
 			}
 		}
-		//return $response;
+		return $response;
 	}
 }

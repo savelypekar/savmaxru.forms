@@ -68,7 +68,7 @@ class QuestionTable extends DataManager
 		}
 
 		$result = QuestionTable::getList([
-			'select' => array('ID', 'TYPE', 'CONTENT', 'POSITION'),
+			'select' => array('ID', 'TYPE', 'CONTENT', 'COMMENT', 'POSITION'),
 			'filter' => ['ID' => $setUniqueId],
 		]);
 		$setQuestions = $result->fetchAll();
