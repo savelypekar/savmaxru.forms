@@ -20,10 +20,11 @@ this.BX = this.BX || {};
 	  }, {
 	    key: "addItems",
 	    value: function addItems(itemStructure) {
+	      console.log(itemStructure);
 	      var item = new savmaxru_menuitemform.MenuItemForm();
 	      item.setName(itemStructure['TITLE']);
 	      item.setID(itemStructure['ID']);
-	      item.setNumberOfResults('Нет ответов');
+	      item.setNumberOfResults('Ответов: ' + itemStructure['COUNT_ANSWERS']);
 	      item.dateOfChange(itemStructure['DATE_CREATE']);
 	      this.push(item);
 	    }

@@ -1,6 +1,7 @@
 import {Type} from 'main.core';
 import {ObjectsGallery} from 'savmaxru.objectsgallery';
 import {MenuItemForm} from "savmaxru.menuitemform";
+import 'css/style.css';
 
 export class MenuItemsFormGallery extends ObjectsGallery
 {
@@ -19,10 +20,11 @@ export class MenuItemsFormGallery extends ObjectsGallery
 
 	addItems(itemStructure)
 	{
+		console.log(itemStructure);
 		let item = new MenuItemForm();
 		item.setName(itemStructure['TITLE']);
 		item.setID(itemStructure['ID']);
-		item.setNumberOfResults('Нет ответов');
+		item.setNumberOfResults('Ответов: ' + itemStructure['COUNT_ANSWERS']);
 		item.dateOfChange(itemStructure['DATE_CREATE']);
 		this.push(item);
 	}

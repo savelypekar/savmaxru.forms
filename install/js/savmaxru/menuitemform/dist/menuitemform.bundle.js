@@ -1,16 +1,6 @@
 (function (exports,main_core,savmaxru_objectgui) {
 	'use strict';
 
-	function _templateObject4() {
-	  var data = babelHelpers.taggedTemplateLiteral(["<span>", "</span>"]);
-
-	  _templateObject4 = function _templateObject4() {
-	    return data;
-	  };
-
-	  return data;
-	}
-
 	function _templateObject3() {
 	  var data = babelHelpers.taggedTemplateLiteral(["<span>", "</span>"]);
 
@@ -49,7 +39,7 @@
 	    babelHelpers.classCallCheck(this, MenuItemForm);
 	    _this = babelHelpers.possibleConstructorReturn(this, babelHelpers.getPrototypeOf(MenuItemForm).call(this));
 
-	    _this.setRootNode(main_core.Tag.render(_templateObject(), _this.addNode("name"), _this.addNode("number-of-results"), _this.addNode("date-of-change")));
+	    _this.setRootNode(main_core.Tag.render(_templateObject(), _this.addNode("name-form"), _this.addNode("number-of-results"), _this.addNode("date-of-change")));
 
 	    var button = babelHelpers.assertThisInitialized(_this);
 
@@ -73,17 +63,16 @@
 	  }, {
 	    key: "setName",
 	    value: function setName(name) {
-	      this.includeInNode("name", main_core.Tag.render(_templateObject2(), name));
+	      this.includeInNode("name-form", main_core.Tag.render(_templateObject2(), name));
 	    }
 	  }, {
 	    key: "dateOfChange",
-	    value: function dateOfChange(value) {
-	      this.includeInNode("date-of-change", main_core.Tag.render(_templateObject3(), value));
+	    value: function dateOfChange(value) {//this.includeInNode("date-of-change",Tag.render`<span>${value}</span>`);
 	    }
 	  }, {
 	    key: "setNumberOfResults",
 	    value: function setNumberOfResults(value) {
-	      this.includeInNode("number-of-results", main_core.Tag.render(_templateObject4(), value));
+	      this.includeInNode("number-of-results", main_core.Tag.render(_templateObject3(), value));
 	    }
 	  }]);
 	  return MenuItemForm;

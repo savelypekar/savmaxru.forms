@@ -21,12 +21,13 @@ export class ResultsGallery extends ObjectsGallery
 
 	addItems(itemStructure)
 	{
+		console.log(itemStructure);
 		let item = new ResultItemForm(this.getParent());
 		this.push(item);
-		item.setName('подстрижка собак');
+		item.setName(itemStructure['NAME_USER']);
 		item.setID(itemStructure['ID']);
-		item.setUserName('Савелий');
-		item.setDate('10 июня. 10:00');
+		item.setUserName(itemStructure['TIME']);
+		item.setDate(BX.message(itemStructure['DATE_MONTH'])+' '+itemStructure['DATE_DAY']);
 
 	}
 
