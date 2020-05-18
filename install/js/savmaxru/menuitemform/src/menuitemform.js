@@ -11,7 +11,7 @@ export class MenuItemForm extends ObjectGUI
 		this.setRootNode(
 			Tag.render`
 			<div class="object-gui">
-				${ this.addNode("name") }
+				${ this.addNode("name-form") }
 				${ this.addNode("number-of-results") }
 				${ this.addNode("date-of-change") }
 			</div>`
@@ -20,7 +20,7 @@ export class MenuItemForm extends ObjectGUI
 		(this.getHTMLObject()).onclick = function() {
 			window.location = ("edit/"+button.getID());
 		};
-	}
+	};
 
 	setID(ID)
 	{
@@ -34,12 +34,12 @@ export class MenuItemForm extends ObjectGUI
 
 	setName(name)
 	{
-		this.includeInNode("name",Tag.render`<span>${name}</span>`);
+		this.includeInNode("name-form",Tag.render`<span>${name}</span>`);
 	}
 
 	dateOfChange(value)
 	{
-		this.includeInNode("date-of-change",Tag.render`<span>${value}</span>`);
+		//this.includeInNode("date-of-change",Tag.render`<span>${value}</span>`);
 	}
 
 	setNumberOfResults(value)
