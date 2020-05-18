@@ -62,4 +62,50 @@ class DateInfoTable extends DataManager
 			return $id;
 		}
 	}
+
+	public function monthToText($numberMonth)
+	{
+		$numberMonth = intval($numberMonth);
+		switch ($numberMonth) {
+			case 1:
+				$textMonth = 'JANUARY';
+				break;
+			case 2:
+				$textMonth = 'FEBRUARY';
+				break;
+			case 3:
+				$textMonth = 'MARCH';
+				break;
+			case 4:
+				$textMonth = 'APRIL';
+				break;
+			case 5:
+				$textMonth = 'MAY';
+				break;
+			case 6:
+				$textMonth = 'JUNE';
+				break;
+			case 7:
+				$textMonth = 'JULY';
+				break;
+			case 8:
+				$textMonth = 'AUGUST';
+				break;
+			case 9:
+				$textMonth = 'SEPTEMBER';
+				break;
+			case 10:
+				$textMonth = 'OCTOBER';
+				break;
+			case 11:
+				$textMonth = 'NOVEMBER';
+				break;
+			case 12:
+				$textMonth = 'DECEMBER';
+				break;
+			default:
+				$textMonth = 'INVALID MONTH';
+		}
+		return $textMonth;
+	}
 }

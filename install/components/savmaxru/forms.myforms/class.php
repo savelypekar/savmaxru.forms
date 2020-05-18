@@ -44,8 +44,19 @@ class CSavmaxruFormsMyForms extends CBitrixComponent implements Controllerable
 	public function loadInterviewCurrentUserAction($quantity, $firstPosition)
 	{
 		$interviewTable = new \Savmaxru\Forms\Model\InterviewTable();
-		$interviews = $interviewTable->getInterviewsCurrentUser($quantity, $firstPosition);
+		$dateInfoTable = new \Savmaxru\Forms\Model\DateInfoTable();
 
+		$interviews = $interviewTable->getInterviewsCurrentUser($quantity, $firstPosition);
+		foreach ($interviews as &$oneInterview)
+		{
+			$idDate = $oneInterview['DATE_CREATE'];
+			$dateInfo = $dateInfoTable->getDateById($idDate);
+			$dateInfo = $dateInfo[0]['DATE_CREATE'];
+			$oneInterview['DATE_DAY'] = substr($dateInfo, 8,2);
+			$monthNumber = substr($dateInfo, 5,2);
+			$oneInterview['DATE_MONTH'] = $dateInfoTable->monthToText($monthNumber);
+			$oneInterview['TIME'] = substr($dateInfo, 11,5);
+		}
 		return [
 			'result' => $interviews,
 		];
